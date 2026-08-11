@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getPageBySlug } from "../lib/microcms";
+
+const page = await getPageBySlug("benefit");
+---
+
+<Layout title={page?.title ?? "優遇制度"}>
+	<div class="container prose" set:html={page?.content ?? ""} />
+</Layout>
+
+<style>
+	.container {
+		padding-top: 1rem;
+		padding-bottom: 3rem;
+	}
+</style>

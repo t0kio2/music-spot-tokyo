@@ -1,0 +1,97 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getPageBySlug, getFaqList } from "../lib/microcms";
+
+const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
+---
+
+<Layout title={page?.title ?? "よくある質問"}>
+	<h1 class="prose-title">{page?.title ?? "よくある質問"}</h1>
+
+	<section class="section">
+		<div class="container">
+			<div class="faq-list">
+				{
+					faqs.map((f, i) => (
+						<details class="faq-item" open={i === 0}>
+							<summary>
+								<span class="q-mark">Q{i + 1}</span>
+								{f.question}
+							</summary>
+							<p>{f.answer}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.prose-title {
+		text-align: center;
+		font-size: 1.9rem;
+		margin: 1rem 0 2rem;
+	}
+
+	.faq-list {
+		max-width: 800px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 0.9rem;
+	}
+
+	.faq-item {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius);
+		padding: 1.1rem 1.5rem;
+	}
+
+	.faq-item summary {
+		cursor: pointer;
+		font-weight: 600;
+		display: flex;
+		align-items: baseline;
+		gap: 0.75rem;
+		list-style: none;
+	}
+
+	.faq-item summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq-item summary::after {
+		content: "+";
+		margin-left: auto;
+		color: var(--color-accent);
+		font-size: 1.2rem;
+	}
+
+	.faq-item[open] summary::after {
+		content: "−";
+	}
+
+	.q-mark {
+		font-weight: 700;
+		color: var(--color-accent);
+		flex-shrink: 0;
+	}
+
+	.faq-item p {
+		margin-top: 0.9rem;
+		padding-top: 0.9rem;
+		border-top: 1px dashed var(--color-border);
+		color: var(--color-ink-soft);
+		font-size: 0.92rem;
+		line-height: 1.8;
+		white-space: pre-line;
+	}
+
+	@media (max-width: 640px) {
+		.prose-title {
+			font-size: 1.4rem;
+		}
+	}
+</style>

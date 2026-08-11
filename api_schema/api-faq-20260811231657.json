@@ -1,0 +1,1 @@
+{"apiFields":[{"fieldId":"question","name":"質問内容","kind":"textArea","description":null,"required":false,"textSizeLimitValidation":null,"patternMatchValidation":null,"initialValue":null},{"fieldId":"answer","name":"回答","kind":"textArea","description":null,"required":false,"textSizeLimitValidation":null,"patternMatchValidation":null,"initialValue":null}],"customFields":[]}

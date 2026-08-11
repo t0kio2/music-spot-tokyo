@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getPageBySlug } from "../lib/microcms";
+
+const page = await getPageBySlug("home");
+---
+
+<Layout>
+	<div class="container home prose" set:html={page?.content ?? ""} />
+</Layout>
+
+<style>
+	.home {
+		padding-top: 1rem;
+	}
+</style>
