@@ -47,6 +47,22 @@ const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 		border: 1px solid var(--color-border);
 		border-radius: var(--radius);
 		padding: 1.1rem 1.5rem;
+		interpolate-size: allow-keywords;
+	}
+
+	.faq-item::details-content {
+		block-size: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition:
+			block-size 0.3s ease,
+			opacity 0.2s ease,
+			content-visibility 0.3s allow-discrete;
+	}
+
+	.faq-item[open]::details-content {
+		block-size: auto;
+		opacity: 1;
 	}
 
 	.faq-item summary {
@@ -92,6 +108,12 @@ const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 	@media (max-width: 640px) {
 		.prose-title {
 			font-size: 1.4rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.faq-item::details-content {
+			transition: none;
 		}
 	}
 </style>

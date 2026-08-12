@@ -13,4 +13,16 @@ const page = await getPageBySlug("home");
 	.home {
 		padding-top: 1rem;
 	}
+
+	.home :global(figure) {
+		max-width: none;
+	}
+
+	.home :global(figure img) {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: calc(100svh - 8rem);
+		margin-inline: auto;
+	}
 </style>

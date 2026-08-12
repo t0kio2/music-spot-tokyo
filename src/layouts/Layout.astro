@@ -22,8 +22,9 @@ const pageTitle =
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{pageTitle}</title>
@@ -33,34 +34,31 @@ const pageTitle =
 			<Header />
 			<main class="content">
 				<slot />
+				<Footer />
 			</main>
 		</div>
-		<Footer />
 	</body>
 </html>
 
 <style>
 	.site {
-		display: grid;
-		grid-template-columns: var(--sidebar-width) 1fr;
-		grid-template-rows: auto 1fr;
-		min-height: 100vh;
+		--topbar-height: 4.25rem;
+		height: 100svh;
+		overflow: hidden;
 	}
 
 	.content {
-		grid-column: 2;
-		grid-row: 2;
+		position: fixed;
+		inset: var(--topbar-height) 0 0 var(--sidebar-width);
 		min-width: 0;
 		padding: 1.5rem 2.5rem 4rem;
+		overflow-y: auto;
+		overscroll-behavior: contain;
 	}
 
 	@media (max-width: 960px) {
-		.site {
-			grid-template-columns: 1fr;
-		}
-
 		.content {
-			grid-column: 1;
+			inset-inline-start: 0;
 			padding: 1.5rem 1.25rem 3rem;
 		}
 	}

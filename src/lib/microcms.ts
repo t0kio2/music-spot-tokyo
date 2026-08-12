@@ -45,6 +45,14 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
 	return res.contents[0] ?? null;
 }
 
+export async function getPageList(): Promise<Page[]> {
+	const res = await client.getList<Page>({
+		endpoint: "pages",
+		queries: { limit: 100 },
+	});
+	return res.contents;
+}
+
 export async function getFaqList(): Promise<Faq[]> {
 	const res = await client.getList<Faq>({
 		endpoint: "faq",
