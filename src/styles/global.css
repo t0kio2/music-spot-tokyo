@@ -190,6 +190,10 @@ table th {
 }
 
 /* microCMS rich text (richEditorV2) content */
+.prose {
+  white-space: pre-line;
+}
+
 .prose h1 {
   text-align: center;
   font-size: 1.9rem;
@@ -210,6 +214,10 @@ table th {
 
 .prose p {
   margin-bottom: 0.9rem;
+}
+
+.prose p:empty {
+  min-height: 1lh;
 }
 
 .prose hr {
