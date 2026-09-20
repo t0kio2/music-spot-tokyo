@@ -7,9 +7,9 @@ const source = await readFile(
 	"utf8",
 );
 
-test("スケジュールは先頭を開いたアコーディオンとして表示する", () => {
-	assert.match(source, /upcoming\.map\(\(ev, i\) => \(/);
-	assert.match(source, /<details class="schedule-item" open=\{i === 0\}>/);
+test("スケジュールはすべて閉じたアコーディオンとして表示する", () => {
+	assert.match(source, /upcoming\.map\(\(ev\) => \(/);
+	assert.match(source, /<details class="schedule-item">/);
 	assert.match(source, /<summary>\{ev\.title\}<\/summary>/);
 	assert.match(source, /<div class="prose schedule-content" set:html=\{ev\.content\} \/>/);
 });

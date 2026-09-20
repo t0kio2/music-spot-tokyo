@@ -1,6 +1,7 @@
 ---
 import { getPageList } from "../lib/microcms";
 import { pageSlugToPath } from "../lib/page";
+import Footer from "./Footer.astro";
 
 const pages = await getPageList();
 
@@ -81,6 +82,7 @@ const socials = [
 			))
 		}
 	</div>
+	<Footer sidebar />
 </aside>
 
 <style>

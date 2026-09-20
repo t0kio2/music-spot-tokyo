@@ -6,7 +6,10 @@ const page = await getPageBySlug("application");
 
 ---
 
-<Layout title={page?.title ?? "募集状況・申込み"}>
+<Layout
+	title={page?.title ?? "募集状況・申込み"}
+	description="社会人軽音サークルMuST（マスト）の募集状況・参加申込みのご案内です。東京都内で音楽仲間を探している方は、募集内容をご確認のうえ、こちらからお申し込みください。"
+>
 	<section class="section">
 		<div class="container prose" set:html={page?.content ?? ""} />
 	</section>

@@ -5,7 +5,7 @@ import { getPageBySlug } from "../lib/microcms";
 const page = await getPageBySlug("home");
 ---
 
-<Layout>
+<Layout description="MuST（マスト）は東京都内の社会人軽音サークルです。お一人での参加・初心者も歓迎。気の合う仲間とライブハウスで演奏を楽しみませんか。活動概要やスケジュール、募集状況をご案内します。">
 	<div class="container home prose" set:html={page?.content ?? ""} />
 </Layout>
 

@@ -5,7 +5,10 @@ import { getPageBySlug } from "../lib/microcms";
 const page = await getPageBySlug("benefit");
 ---
 
-<Layout title={page?.title ?? "優遇制度"}>
+<Layout
+	title={page?.title ?? "優遇制度"}
+	description="東京都内の社会人軽音サークルMuST（マスト）の優遇制度をご案内します。制度の内容をご確認いただき、サークルへの参加を検討する際にお役立てください。"
+>
 	<div class="container prose" set:html={page?.content ?? ""} />
 </Layout>
 

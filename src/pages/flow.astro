@@ -5,7 +5,10 @@ import { getPageBySlug } from "../lib/microcms";
 const page = await getPageBySlug("flow");
 ---
 
-<Layout title={page?.title ?? "参加までの流れ"}>
+<Layout
+	title={page?.title ?? "参加までの流れ"}
+	description="東京都内の社会人軽音サークルMuST（マスト）への参加までの流れをご案内します。初めて参加を検討している方に向けて、参加に必要な手順をご紹介します。"
+>
 	<div class="container prose" set:html={page?.content ?? ""} />
 </Layout>
 

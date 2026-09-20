@@ -5,7 +5,10 @@ import { getPageBySlug } from "../lib/microcms";
 const page = await getPageBySlug("precautions");
 ---
 
-<Layout title={page?.title ?? "注意事項"}>
+<Layout
+	title={page?.title ?? "注意事項"}
+	description="社会人軽音サークルMuST（マスト）に参加する際の注意事項をご案内します。みなさんで気持ちよく音楽を楽しむために、参加前にルールやお願いをご確認ください。"
+>
 	<div class="container prose" set:html={page?.content ?? ""} />
 </Layout>
 
