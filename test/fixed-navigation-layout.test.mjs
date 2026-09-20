@@ -16,7 +16,7 @@ test("サイトは画面高に固定され本文だけがスクロールする",
 	assert.match(layoutSource, /\.content\s*{[\s\S]*?position:\s*fixed;[\s\S]*?overflow-y:\s*auto;/);
 });
 
-test("フッターは本文スクロール領域の末尾に表示する", () => {
+test("スマートフォン用フッターは本文スクロール領域の末尾に配置する", () => {
 	assert.match(layoutSource, /<main class="content">[\s\S]*?<slot \/>[\s\S]*?<Footer \/>[\s\S]*?<\/main>/);
 	assert.doesNotMatch(layoutSource, /<\/div>\s*<Footer \/>/);
 });

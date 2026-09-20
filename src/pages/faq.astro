@@ -5,7 +5,10 @@ import { getPageBySlug, getFaqList } from "../lib/microcms";
 const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 ---
 
-<Layout title={page?.title ?? "よくある質問"}>
+<Layout
+	title={page?.title ?? "よくある質問"}
+	description="社会人軽音サークルMuST（マスト）によく寄せられる質問と回答をまとめています。活動や参加についての疑問がある方は、お申込み前にこちらをご確認ください。"
+>
 	<h1 class="prose-title">{page?.title ?? "よくある質問"}</h1>
 
 	<section class="section">
@@ -13,7 +16,7 @@ const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 			<div class="faq-list">
 				{
 					faqs.map((f, i) => (
-						<details class="faq-item" open={i === 0}>
+						<details class="faq-item">
 							<summary>
 								<span class="q-mark">Q{i + 1}</span>
 								{f.question}

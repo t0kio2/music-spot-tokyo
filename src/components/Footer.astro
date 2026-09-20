@@ -1,20 +1,45 @@
 ---
+interface Props {
+	sidebar?: boolean;
+}
+
+const { sidebar = false } = Astro.props;
 const year = 2022;
 ---
 
-<footer class="site-footer">
+<footer class:list={["site-footer", { "site-footer--sidebar": sidebar }]}>
 	<p class="copyright">&copy;{year} MuST-Music Spot Tokyo-</p>
 </footer>
 
 <style>
 	.site-footer {
+		display: none;
 		border-top: 1px solid var(--color-border);
 		padding: 1.75rem 1.5rem;
 		text-align: center;
 	}
 
+	.site-footer--sidebar {
+		display: block;
+		border-top: none;
+		width: 100%;
+		margin-top: 1.5rem;
+		padding: 1rem 0 0;
+	}
+
 	.copyright {
 		font-size: 0.8rem;
 		color: var(--color-muted);
+	}
+
+	@media (max-width: 960px) {
+		.site-footer {
+			display: block;
+			padding: 0.75rem 0;
+		}
+
+		.site-footer--sidebar {
+			display: none;
+		}
 	}
 </style>

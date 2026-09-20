@@ -10,14 +10,17 @@ const upcoming = data.schedules
 	.sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
 ---
 
-<Layout title={page?.title ?? "スケジュール"}>
+<Layout
+	title={page?.title ?? "スケジュール"}
+	description="東京都内の社会人軽音サークルMuST（マスト）の今後のスケジュールをご案内します。開催予定のイベント情報や詳細を確認し、参加の予定にお役立てください。"
+>
 	<h1 class="prose-title">{page?.title ?? "スケジュール"}</h1>
 
 	<section class="section">
 		<div class="container event-list">
 			{
-				upcoming.map((ev, i) => (
-					<details class="schedule-item" open={i === 0}>
+				upcoming.map((ev) => (
+					<details class="schedule-item">
 						<summary>{ev.title}</summary>
 						<div class="prose schedule-content" set:html={ev.content} />
 					</details>

@@ -9,12 +9,14 @@ interface Props {
 }
 
 const {
-	title = "MuST-Music Spot Tokyo-",
+	title,
 	description = "MuST（マスト）は、「気軽」に「気の合う仲間」とライブハウスで演奏できる、東京都内の社会人軽音サークルです。",
 } = Astro.props;
 
 const pageTitle =
-	title === "MuST-Music Spot Tokyo-" ? title : `${title} | MuST-Music Spot Tokyo-`;
+	!title
+		? "東京都内の社会人軽音サークル MuST（マスト）| お一人・初心者歓迎"
+		: title === "MuST-Music Spot Tokyo-" ? title : `${title} | MuST-Music Spot Tokyo-`;
 ---
 
 <!doctype html>
@@ -33,14 +35,32 @@ const pageTitle =
 		<div class="site">
 			<Header />
 			<main class="content">
-				<slot />
-				<Footer />
+				<div class="content-body">
+					<div class="page-content">
+						<slot />
+					</div>
+					<div class="mobile-footer">
+						<Footer />
+					</div>
+				</div>
 			</main>
 		</div>
 	</body>
 </html>
 
 <style>
+	.content-body {
+		display: contents;
+	}
+
+	.page-content {
+		display: contents;
+	}
+
+	.mobile-footer {
+		display: none;
+	}
+
 	.site {
 		--topbar-height: 4.25rem;
 		height: 100svh;
@@ -57,9 +77,25 @@ const pageTitle =
 	}
 
 	@media (max-width: 960px) {
+		.content-body {
+			display: grid;
+			grid-template-rows: 1fr auto;
+			min-height: calc(100svh - var(--topbar-height) - 2.25rem - env(safe-area-inset-bottom, 0px));
+			row-gap: 6rem;
+		}
+
+		.page-content {
+			display: block;
+			min-width: 0;
+		}
+
+		.mobile-footer {
+			display: block;
+		}
+
 		.content {
 			inset-inline-start: 0;
-			padding: 1.5rem 1.25rem 3rem;
+			padding: 1.5rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
 		}
 	}
 </style>
