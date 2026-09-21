@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://must-music-spot-tokyo.com/sitemap-index.xml
