@@ -33,7 +33,7 @@ const past = data.schedules
 			{
 				past.map((ev) => (
 					<details class="live-item">
-						<summary>{ev.title}</summary>
+						<summary><span class="live-title">{ev.title}</span></summary>
 						<div class="prose live-content" set:html={ev.content} />
 					</details>
 				))
@@ -100,7 +100,12 @@ const past = data.schedules
 		font-weight: 600;
 		display: flex;
 		align-items: baseline;
+		gap: 0.5rem;
 		list-style: none;
+	}
+
+	.live-title {
+		min-width: 0;
 	}
 
 	.live-item summary::-webkit-details-marker {
@@ -110,6 +115,8 @@ const past = data.schedules
 	.live-item summary::after {
 		content: "+";
 		margin-left: auto;
+		flex: 0 0 1.2rem;
+		text-align: center;
 		color: var(--color-accent);
 		font-size: 1.2rem;
 	}
