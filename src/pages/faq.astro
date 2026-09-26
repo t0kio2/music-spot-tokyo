@@ -21,7 +21,7 @@ const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 								<span class="q-mark">Q{i + 1}</span>
 								{f.question}
 							</summary>
-							<p>{f.answer}</p>
+							<div class="faq-answer" set:html={f.answer} />
 						</details>
 					))
 				}
@@ -98,14 +98,23 @@ const [page, faqs] = await Promise.all([getPageBySlug("faq"), getFaqList()]);
 		flex-shrink: 0;
 	}
 
-	.faq-item p {
+	.faq-answer {
 		margin-top: 0.9rem;
 		padding-top: 0.9rem;
 		border-top: 1px dashed var(--color-border);
 		color: var(--color-ink-soft);
 		font-size: 0.92rem;
 		line-height: 1.8;
-		white-space: pre-line;
+	}
+
+	.faq-answer :global(p) {
+		margin: 0;
+	}
+
+	.faq-answer :global(p + p),
+	.faq-answer :global(ul),
+	.faq-answer :global(ol) {
+		margin-top: 0.75rem;
 	}
 
 	@media (max-width: 640px) {
