@@ -17,6 +17,8 @@ const pageTitle =
 	!title
 		? "東京都内の社会人軽音サークル MuST（マスト）| お一人・初心者歓迎"
 		: title === "MuST-Music Spot Tokyo-" ? title : `${title} | MuST-Music Spot Tokyo-`;
+
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -30,6 +32,25 @@ const pageTitle =
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{pageTitle}</title>
+		{
+			gaMeasurementId && (
+				<>
+					<script
+						async
+						src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
+						is:inline
+					></script>
+					<script is:inline define:vars={{ gaMeasurementId }}>
+						window.dataLayer = window.dataLayer || [];
+						function gtag() {
+							dataLayer.push(arguments);
+						}
+						gtag("js", new Date());
+						gtag("config", gaMeasurementId);
+					</script>
+				</>
+			)
+		}
 	</head>
 	<body>
 		<div class="site">

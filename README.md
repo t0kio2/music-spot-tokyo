@@ -43,4 +43,8 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Google Analytics 4
+
+Cloudflare Pages の環境変数に `PUBLIC_GA_MEASUREMENT_ID` を設定すると、GA4 タグを出力します。値には GA4 の測定 ID（例: `G-XXXXXXXXXX`）を設定してください。Production と Preview は必要に応じて個別に設定します。
 # music-spot-tokyo
