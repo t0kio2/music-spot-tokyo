@@ -8,11 +8,27 @@ const now = new Date();
 const upcoming = data.schedules
 	.filter((s) => new Date(s.event_date) >= now)
 	.sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
+
+const eventStructuredData = upcoming.map((event) => ({
+	"@type": "Event",
+	name: event.title,
+	startDate: event.event_date,
+	description: event.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim(),
+	eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+	eventStatus: "https://schema.org/EventScheduled",
+	organizer: {
+		"@type": "Organization",
+		name: "MuST-Music Spot Tokyo-",
+		url: "https://must-music-spot-tokyo.com/",
+	},
+	url: "https://must-music-spot-tokyo.com/schedule/",
+}));
 ---
 
 <Layout
 	title={page?.title ?? "スケジュール"}
 	description="東京都内の社会人軽音サークルMuST（マスト）の今後のスケジュールをご案内します。開催予定のイベント情報や詳細を確認し、参加の予定にお役立てください。"
+	structuredData={eventStructuredData}
 >
 	<h1 class="prose-title">{page?.title ?? "スケジュール"}</h1>
 

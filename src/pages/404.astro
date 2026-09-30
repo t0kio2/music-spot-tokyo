@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="ページが見つかりません">
+	<section class="not-found" aria-labelledby="not-found-title">
+		<p class="not-found__code" aria-hidden="true">404</p>
+		<h1 id="not-found-title">ページが見つかりません</h1>
+		<p>お探しのページは、移動または削除された可能性があります。</p>
+		<p><a href="/">トップページへ戻る</a></p>
+	</section>
+</Layout>
+
+<style>
+	.not-found {
+		display: grid;
+		place-items: center;
+		min-height: min(32rem, calc(100svh - 10rem));
+		text-align: center;
+	}
+
+	.not-found__code {
+		margin: 0;
+		font-size: clamp(4rem, 14vw, 8rem);
+		font-weight: 700;
+		line-height: 1;
+	}
+</style>
