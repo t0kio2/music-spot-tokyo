@@ -7,7 +7,7 @@ const [page, data] = await Promise.all([getPageBySlug("setlist"), getScheduleAnd
 const now = new Date();
 const past = data.schedules
 	.filter((s) => new Date(s.event_date) < now)
-	.sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
+	.sort((a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime());
 ---
 
 <Layout
