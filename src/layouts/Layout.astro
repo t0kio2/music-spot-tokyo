@@ -109,25 +109,57 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 		<meta name="twitter:image:alt" content="MuST-Music Spot Tokyo- ロゴ" />
 		<script type="application/ld+json" set:html={jsonLd}></script>
 		<title>{pageTitle}</title>
+		<script is:inline>
+			const isGaDisabled = new URLSearchParams(window.location.search).has("no_ga");
+
+			if (isGaDisabled) {
+				const preserveNoGa = (anchor) => {
+					const href = anchor.getAttribute("href");
+					if (!href || href.startsWith("#")) return;
+
+					const destination = new URL(href, window.location.href);
+					if (
+						destination.origin !== window.location.origin ||
+						destination.searchParams.has("no_ga")
+					) {
+						return;
+					}
+
+					destination.search += `${destination.search ? "&" : "?"}no_ga`;
+					anchor.href = destination.href;
+				};
+
+				document.addEventListener("click", (event) => {
+					if (!(event.target instanceof Element)) return;
+					const anchor = event.target.closest("a[href]");
+					if (anchor) preserveNoGa(anchor);
+				});
+				document.addEventListener("auxclick", (event) => {
+					if (!(event.target instanceof Element)) return;
+					const anchor = event.target.closest("a[href]");
+					if (anchor) preserveNoGa(anchor);
+				});
+			}
+		</script>
 		{
 			gaMeasurementId && (
-				<>
-					<script
-						async
-						src={`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`}
-						is:inline
-					></script>
-					<script is:inline define:vars={{ gaMeasurementId }}>
+				<script is:inline define:vars={{ gaMeasurementId }}>
+					if (!new URLSearchParams(window.location.search).has("no_ga")) {
 						window.dataLayer = window.dataLayer || [];
 						function gtag() {
 							dataLayer.push(arguments);
 						}
 						gtag("js", new Date());
 						gtag("config", gaMeasurementId);
+
+						const script = document.createElement("script");
+						script.async = true;
+						script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+						document.head.append(script);
+					}
 					</script>
-				</>
-			)
-		}
+				)
+			}
 	</head>
 	<body>
 		<div class="site">
