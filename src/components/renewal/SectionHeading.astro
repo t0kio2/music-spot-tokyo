@@ -1,0 +1,13 @@
+---
+interface Props {
+	title: string;
+	subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<div class="renewal-section-heading">
+	<div><p>{subtitle ?? "MuST"}</p><h2>{title}</h2></div>
+	<span aria-hidden="true">♫</span>
+</div>

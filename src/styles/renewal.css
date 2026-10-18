@@ -1,0 +1,523 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kaisei+Decol:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Zen+Old+Mincho:wght@500;600;700&display=swap");
+
+@font-face {
+	font-family: "Anzu Moji 2020";
+	src: url("../../あんずもじ2020/AP.ttf") format("truetype");
+	font-display: swap;
+}
+
+.renewal-site {
+	--renewal-bg: #010711;
+	--renewal-bg-deep: #00050b;
+	--renewal-panel: #010811;
+	--renewal-panel-soft: #020f1c;
+	--renewal-cyan: #00c7d5;
+	--renewal-pink: #ff4fd8;
+	--renewal-gold: #ffc486;
+	--renewal-text: #f5f8ff;
+	--renewal-muted: #b8d3e1;
+	--renewal-border: rgba(0, 174, 191, 0.42);
+	/* Renewal design tokens: color, surface, geometry, and icon rhythm. */
+	--renewal-surface-0: #00050b;
+	--renewal-surface-1: #010a14;
+	--renewal-surface-2: #020f1c;
+	--renewal-line: rgba(0, 234, 255, .5);
+	--renewal-line-soft: rgba(0, 234, 255, .25);
+	--renewal-radius-sm: .45rem;
+	--renewal-radius-md: .7rem;
+	--renewal-icon-box: 2.25rem;
+	--renewal-icon-size: 2rem;
+	--renewal-panel-fill: linear-gradient(135deg, #020d18f7, #00060cf7);
+	--renewal-panel-edge: linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670);
+	--renewal-panel-glow: 0 0 0 1px #00baca1a, 0 0 8px #00baca22, 0 0 18px #087bb012;
+	--renewal-surface-card: linear-gradient(135deg, #010b14f7, #00060cf7);
+	--renewal-surface-card-soft: linear-gradient(120deg, #020f1c, #010711);
+	--renewal-content-gutter: clamp(1rem, 4.6vw, 4rem);
+	--renewal-sidebar: 150px;
+	margin: 0;
+	background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--renewal-bg);
+	color: var(--renewal-text);
+	font-family: "Noto Sans JP", sans-serif;
+	line-height: 1.8;
+}
+
+.renewal-site *, .renewal-site *::before, .renewal-site *::after { box-sizing: border-box; }
+.renewal-site a { color: inherit; text-decoration: none; }
+.renewal-site img { display: block; max-width: 100%; }
+.renewal-site h1, .renewal-site h2, .renewal-site h3, .renewal-site p { margin: 0; }
+.renewal-shell { min-height: 100vh; }
+
+.renewal-header { position: fixed; inset: 0 auto 0 0; z-index: 20; display: flex; flex-direction: column; align-items: stretch; width: var(--renewal-sidebar); padding: 0; border-right: 1px solid var(--renewal-border); background: linear-gradient(180deg, #01060e 0%, #010a15 68%, var(--renewal-surface-0) 100%); }
+.renewal-brand { display: grid; place-items: center; height: 131px; margin: 0; background: radial-gradient(circle, #00cbff1f, transparent 67%); }
+.renewal-brand img { width: 91px; height: 91px; object-fit: cover; border: 2px solid var(--renewal-cyan); border-radius: 50%; box-shadow: 0 0 12px #00eaff66; }
+.renewal-brand small { display: block; color: var(--renewal-muted); font: .48rem "Noto Sans JP", sans-serif; letter-spacing: .08em; }
+.renewal-brand__note { color: var(--renewal-cyan); font-size: 2.2rem; text-shadow: 0 0 12px var(--renewal-cyan); }
+.renewal-nav { display: grid; gap: 0; }
+.renewal-nav a { display: flex; align-items: center; min-height: 44px; padding: .55rem .5rem .55rem .8rem; border-left: 0; color: var(--renewal-muted); font-size: .75rem; white-space: nowrap; }
+.renewal-nav a span { display: inline-block; color: var(--renewal-cyan); }
+.renewal-nav__icon { display: grid !important; place-items: center; width: 2.05rem; margin-right: .2rem; line-height: 1; }
+.renewal-nav__icon svg { width: 1.55rem; height: 1.55rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-nav a:first-child .renewal-nav__icon svg { width: 1.75rem; height: 1.75rem; }
+.renewal-nav a.active { border-left: 0; background: linear-gradient(90deg, #00c7ff45, #0073aa1c); color: white; }
+.renewal-sidebar-meta { position: relative; display: flex; flex: 1; flex-direction: column; justify-content: end; align-items: center; gap: .7rem; padding: 1rem .4rem 2.35rem; color: var(--renewal-muted); text-align: center; }
+.renewal-sidebar-meta small { position: absolute; right: .2rem; bottom: .65rem; left: .2rem; font-size: .5rem; letter-spacing: -.04em; line-height: 1.3; text-align: center; white-space: nowrap; }
+.renewal-menu-toggle, .renewal-menu-button, .renewal-menu-scrim { display: none; }
+
+.renewal-main { min-height: 100vh; margin-left: var(--renewal-sidebar); }
+.renewal-hero { position: relative; min-height: 270px; overflow: hidden; padding: 2.1rem clamp(1.5rem, 5vw, 5rem) 2.5rem; border-bottom: 1px solid var(--renewal-border); background: linear-gradient(90deg, #010b14f2, #010b1480 55%, #010b1422), radial-gradient(circle at 80% 25%, #ed3aa855, transparent 25%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center / cover; }
+.renewal-breadcrumb { display: flex; gap: .7rem; width: fit-content; margin-bottom: 1.6rem; padding-bottom: .25rem; border-bottom: 1px solid var(--renewal-border); color: var(--renewal-muted); font-size: .75rem; }
+.renewal-breadcrumb a, .renewal-breadcrumb > span { display: inline-flex; align-items: center; gap: .35rem; }
+.renewal-breadcrumb__home-icon { width: 1.15rem; height: 1.15rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-breadcrumb a { color: var(--renewal-muted); }
+.renewal-breadcrumb > span:last-child { color: var(--renewal-text); font-weight: 600; }
+.renewal-eyebrow { margin-bottom: .35rem; color: var(--renewal-cyan); font-size: .72rem; letter-spacing: .18em; }
+.renewal-hero h1 { font: 600 clamp(2.5rem, 5vw, 4.6rem)/1.2 "Zen Old Mincho", serif; letter-spacing: .06em; }
+.renewal-hero h1 em { margin-left: .8rem; color: var(--renewal-pink); font: 400 .48em "Caveat", cursive; letter-spacing: 0; }
+.renewal-hero__description { max-width: 42rem; margin-top: .8rem; color: var(--renewal-muted); }
+.renewal-hero__script { position: absolute; right: 8%; bottom: 1.8rem; color: var(--renewal-cyan); font: italic 2.1rem/.9 "Caveat", cursive; transform: rotate(-10deg); text-shadow: 0 0 12px #00cfff; }
+.renewal-container, .renewal-content { width: min(100% - 3rem, 1080px); margin-inline: auto; }
+.renewal-content { padding-block: 2.5rem 4rem; }
+.renewal-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.2rem; }
+.renewal-section-heading p { color: var(--renewal-pink); font: 1.2rem "Caveat", cursive; }
+.renewal-section-heading h2 { font: 600 clamp(1.5rem, 3vw, 2.2rem) "Zen Old Mincho", serif; }
+.renewal-section-heading > span { color: var(--renewal-cyan); font-size: 2.5rem; }
+.renewal-prose { color: var(--renewal-muted); }
+.renewal-prose h1, .renewal-prose h2, .renewal-prose h3 { margin: 2rem 0 .7rem; color: var(--renewal-text); }
+.renewal-prose h2 { color: var(--renewal-cyan); }
+.renewal-prose p { margin: .7rem 0; }
+.renewal-prose a { color: var(--renewal-gold); text-decoration: underline; text-underline-offset: .2em; }
+.renewal-prose ul, .renewal-prose ol { padding-left: 1.4rem; }
+.renewal-prose img { border: 1px solid var(--renewal-border); border-radius: .6rem; }
+.renewal-event-list { display: grid; gap: 1rem; }
+.renewal-event-card { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.5rem; padding: 1.25rem; border: 1px solid var(--renewal-border); border-radius: .8rem; background: var(--renewal-surface-card-soft); }
+.renewal-event-card__date { display: grid; place-items: center; min-height: 7rem; border: 2px solid var(--renewal-cyan); border-radius: .7rem; color: var(--renewal-cyan); font: 600 1.4rem/1.2 "Zen Old Mincho", serif; text-align: center; }
+.renewal-event-card h3 { margin-bottom: .5rem; color: var(--renewal-text); font: 600 1.3rem "Zen Old Mincho", serif; }
+.renewal-home-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(16rem, .7fr); gap: 2rem; align-items: stretch; }
+.renewal-home-copy { min-width: 0; padding: 1.5rem; border: 1px solid var(--renewal-border); border-radius: .8rem; background: var(--renewal-surface-card); }
+.renewal-home-cta { display: flex; flex-direction: column; justify-content: end; min-height: 15rem; padding: 1.5rem; border: 1px solid var(--renewal-pink); border-radius: .8rem; background: radial-gradient(circle at 80% 20%, #ed3aa855, transparent 35%), var(--renewal-panel); }
+.renewal-home-cta p { color: var(--renewal-pink); font: italic 1.8rem "Caveat", cursive; }
+.renewal-home-cta h2 { margin: .5rem 0 1.5rem; font: 600 1.45rem "Zen Old Mincho", serif; }
+.renewal-button { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; width: fit-content; padding: .7rem 1.2rem; border: 1px solid var(--renewal-cyan); border-radius: 999px; color: var(--renewal-cyan); font-weight: 700; }
+.renewal-button span { font-size: 1.2em; }
+.renewal-button--warm { border-color: var(--renewal-gold); background: var(--renewal-gold); color: #111820; }
+.renewal-site .renewal-button--warm, .renewal-site .renewal-home__pill--warm { color: #111820; }
+.renewal-site .renewal-button--warm span, .renewal-site .renewal-home__pill--warm span { color: #111820; }
+.renewal-home-events { margin-top: 3.5rem; }
+.renewal-empty { padding: 2rem; border: 1px dashed var(--renewal-border); color: var(--renewal-muted); text-align: center; }
+.renewal-link-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 3rem; }
+.renewal-feature-link { display: flex; flex-direction: column; gap: .35rem; padding: 1.5rem; border: 1px solid var(--renewal-border); border-radius: .8rem; background: var(--renewal-panel); }
+.renewal-feature-link strong { color: var(--renewal-cyan); font: 600 1.4rem "Zen Old Mincho", serif; }
+.renewal-feature-link span { color: var(--renewal-muted); font-size: .85rem; }
+.renewal-application-cta { display: flex; justify-content: center; padding-top: 0; }
+.renewal-faq-list { display: grid; gap: .8rem; }
+.renewal-faq-list details { border: 1px solid var(--renewal-border); border-radius: .7rem; background: var(--renewal-panel); }
+.renewal-faq-list summary { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; cursor: pointer; list-style: none; font-weight: 700; }
+.renewal-faq-list summary::-webkit-details-marker { display: none; }
+.renewal-faq-list summary span { color: var(--renewal-cyan); }
+.renewal-faq-list summary b { margin-left: auto; color: var(--renewal-pink); font-size: 1.25rem; }
+.renewal-faq-list details[open] summary b { transform: rotate(45deg); }
+.renewal-faq-list details > div { padding: 0 1.2rem 1.2rem 3.3rem; border-top: 1px solid #00eaff33; }
+.renewal-footer { display: flex; align-items: center; gap: 1rem; min-height: 5rem; padding: 1rem 2rem; border-top: 1px solid var(--renewal-border); margin-left: var(--renewal-sidebar); color: var(--renewal-muted); }
+.renewal-footer__brand { color: var(--renewal-pink); font: 700 1.6rem "Caveat", cursive; white-space: nowrap; }
+.renewal-footer__brand small { margin-left: .4rem; color: var(--renewal-muted); font: .65rem "Noto Sans JP", sans-serif; }
+.renewal-footer p { margin-right: auto; font-size: .8rem; }
+.renewal-to-top { color: var(--renewal-gold); font-size: 1.4rem; }
+
+@media (max-width: 760px) {
+	.renewal-header { position: sticky; inset: 0 0 auto; display: flex; flex-direction: row; align-items: center; width: auto; min-height: 4.5rem; padding: .7rem 1rem; border-right: 0; border-bottom: 1px solid var(--renewal-border); }
+	.renewal-brand { width: 3rem; height: 3rem; margin: 0; border: 0; background: none; }
+	.renewal-brand img { width: 3rem; height: 3rem; border-width: 1px; }
+	.renewal-menu-button { display: grid; gap: 4px; margin-left: auto; padding: .5rem; cursor: pointer; }
+	.renewal-menu-button span { display: block; width: 1.4rem; height: 2px; background: var(--renewal-cyan); }
+	.renewal-nav { position: fixed; inset: 0 0 0 auto; z-index: 2; width: min(18rem, 82vw); padding: 6rem 1.4rem 2rem; transform: translateX(100%); transition: transform .25s ease; background: #010b14; }
+	.renewal-nav a { padding: .8rem .5rem; font-size: .85rem; }
+	.renewal-menu-scrim { position: fixed; inset: 0; z-index: 1; display: none; background: #0008; }
+	.renewal-menu-toggle:checked ~ .renewal-nav { transform: translateX(0); }
+	.renewal-menu-toggle:checked ~ .renewal-menu-scrim { display: block; }
+	.renewal-main { margin-left: 0; }
+	.renewal-hero { min-height: 17rem; padding: 1.2rem 1rem 2rem; }
+	.renewal-breadcrumb { margin-bottom: 1.2rem; font-size: .65rem; }
+	.renewal-eyebrow { font-size: .6rem; }
+	.renewal-hero h1 { font-size: clamp(2rem, 11vw, 3rem); }
+	.renewal-hero h1 em { display: block; margin: .25rem 0 0; font-size: .7em; }
+	.renewal-hero__description { font-size: .8rem; }
+	.renewal-hero__script { right: 1rem; bottom: 1rem; font-size: 1.6rem; }
+	.renewal-container, .renewal-content { width: min(100% - 2rem, 40rem); }
+	.renewal-content { padding-block: 1.5rem 2.5rem; }
+	.renewal-event-card { grid-template-columns: 1fr; gap: .7rem; padding: .9rem; }
+	.renewal-event-card__date { min-height: 3rem; justify-content: start; padding-inline: 1rem; border-width: 1px; border-radius: .4rem; font-size: 1rem; }
+	.renewal-event-card h3 { font-size: 1.05rem; }
+	.renewal-home-grid, .renewal-link-grid { grid-template-columns: 1fr; gap: 1rem; }
+	.renewal-home-cta { min-height: 12rem; }
+	.renewal-home-events { margin-top: 2.5rem; }
+	.renewal-footer { flex-wrap: wrap; margin-left: 0; padding: 1rem; }
+	.renewal-footer p { order: 3; flex-basis: 100%; font-size: .7rem; }
+	.renewal-sidebar-meta { display: none; }
+}
+
+/* 演奏曲ページ: renewal/03_演奏曲について.html の構成 */
+.renewal-setlist { --renewal-setlist-line: #087aa4; --renewal-setlist-line-strong: #00c7d5; min-height: 100vh; background: #010811; color: var(--renewal-text); }
+.renewal-setlist__breadcrumb { display: flex; gap: .7rem; margin-bottom: 1.55rem; color: var(--renewal-muted); font-size: .8rem; }
+.renewal-setlist__breadcrumb a { color: var(--renewal-muted); }
+.renewal-setlist__hero { position: relative; min-height: 15rem; overflow: hidden; padding: 2.1rem clamp(1rem, 5vw, 4rem) 2rem; border-bottom: 1px solid var(--renewal-border); background: linear-gradient(90deg, #010912dc, #01091270 48%, #01091218), linear-gradient(0deg, #010912a6, transparent 75%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center 54% / cover; }
+.renewal-setlist__hero h1 { margin: 0; font: 700 clamp(2.4rem, 5vw, 4rem)/1.2 "Zen Old Mincho", serif; letter-spacing: .03em; }
+.renewal-setlist__hero h1 span { color: inherit; }
+.renewal-setlist__hero p { max-width: 43rem; margin-top: .8rem; font-size: .95rem; font-weight: 600; line-height: 1.8; }
+.renewal-setlist__content { width: calc(100% - (2 * var(--renewal-content-gutter))); max-width: none; margin-inline: auto; padding: 2rem 0 4rem; }
+.renewal-setlist__genres { display: grid; grid-template-columns: minmax(14rem, 1.7fr) repeat(3, minmax(8rem, .85fr)); gap: 1rem; align-items: stretch; margin-bottom: 1rem; }
+.renewal-setlist__intro h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .7rem; font-size: 1.8rem; }
+.renewal-setlist__intro h2::before { content: ""; width: .4rem; height: 2.2rem; border-radius: .2rem; background: linear-gradient(var(--renewal-cyan), var(--renewal-pink)); }
+.renewal-setlist__intro p { font-size: .8rem; line-height: 1.9; }
+.renewal-setlist__genres article { min-height: 9rem; padding: .7rem; border: 1px solid #07517a; border-radius: .7rem; background: var(--renewal-surface-card); text-align: center; }
+.renewal-setlist__genres article > span { display: grid; place-items: center; width: 4.2rem; height: 4.2rem; margin: -.9rem auto .1rem; border: 2px solid currentColor; border-radius: 50%; background: #06152a; font-size: 2.2rem; text-shadow: 0 0 12px currentColor; }
+.renewal-setlist__genres article > span svg { width: 2.2rem; height: 2.2rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-setlist__genres article:nth-child(2) > span { color: var(--renewal-pink); }
+.renewal-setlist__genres article:nth-child(3) > span { color: #249eff; }
+.renewal-setlist__genres article:nth-child(4) > span { color: #13d5d1; }
+.renewal-setlist__genres h3 { margin: 0; font-size: 1rem; }
+.renewal-setlist__genres article p { margin: .2rem 0 0; color: #d7e7f1; font-size: .68rem; line-height: 1.6; }
+.renewal-setlist__selection { display: grid; grid-template-columns: 1.05fr .95fr 1.18fr; gap: 1.5rem; align-items: center; padding: 1.25rem 1.6rem; border: 1px solid var(--renewal-setlist-line-strong); border-radius: .7rem; background: var(--renewal-surface-card-soft); }
+.renewal-setlist__selection-copy h2 { margin: 0 0 .7rem; color: var(--renewal-text); font-size: 1.45rem; }
+.renewal-setlist__selection-copy p { font-size: .82rem; line-height: 1.9; }
+.renewal-setlist__note { margin-top: 1rem; color: var(--renewal-gold); font-size: .7rem !important; }
+.renewal-setlist__donut { position: relative; width: min(15vw, 13rem); aspect-ratio: 1; margin-inline: auto; border-radius: 50%; background: conic-gradient(var(--renewal-pink) 0 50%, #249eff 50% 67%, #9264ff 67% 75%, #13d5d1 75% 92%, var(--renewal-gold) 92% 100%); }
+.renewal-setlist__donut::after { content: ""; position: absolute; inset: 26%; border-radius: 50%; background: #031522; }
+.renewal-setlist__donut strong { position: absolute; z-index: 1; inset: 26%; display: grid; place-content: center; text-align: center; font-size: .7rem; font-weight: 400; }
+.renewal-setlist__donut em { display: block; font-size: 1.2rem; font-style: normal; font-weight: 700; }
+.renewal-setlist__donut b { position: absolute; z-index: 2; font-size: .8rem; text-shadow: 0 1px 4px #000; }
+.renewal-setlist__donut .p50 { top: 47%; right: 3%; }.renewal-setlist__donut .p17 { bottom: 11%; left: 28%; }.renewal-setlist__donut .p8 { top: 59%; left: 9%; }.renewal-setlist__donut .p17b { top: 27%; left: 8%; }
+.renewal-setlist__legend { display: grid; }
+.renewal-setlist__legend > div { display: grid; grid-template-columns: 1.5rem 1fr auto; align-items: start; gap: .6rem; padding: .4rem 0; border-bottom: 1px solid #00eaff32; font-size: .82rem; }
+.renewal-setlist__legend i { width: 1.35rem; height: 1.35rem; border-radius: 50%; background: var(--renewal-pink); }.renewal-setlist__legend > div:nth-child(2) i { background: #249eff; }.renewal-setlist__legend > div:nth-child(3) i { background: var(--renewal-gold); }.renewal-setlist__legend > div:nth-child(4) i { background: #13d5d1; }
+.renewal-setlist__legend small { display: block; color: var(--renewal-muted); font-size: .62rem; line-height: 1.6; }.renewal-setlist__legend b { font-size: .75rem; }
+.renewal-setlist__bottom { display: grid; grid-template-columns: 1fr 1.08fr; gap: 1rem; margin-top: 1rem; }
+.renewal-setlist__info { min-height: 10rem; padding: 1.1rem 1.4rem; border: 1px solid var(--renewal-setlist-line-strong); border-radius: .7rem; background: var(--renewal-surface-card-soft); }
+.renewal-setlist__info--past { border-color: #3069ff; }.renewal-setlist__info h2 { margin: 0 0 .6rem; font-size: 1.2rem; }.renewal-setlist__info p { margin: 0 0 .6rem; color: var(--renewal-muted); font-size: .75rem; line-height: 1.85; }.renewal-setlist__info a { color: var(--renewal-gold); font-size: .75rem; text-decoration: underline; text-underline-offset: .2em; }
+.renewal-setlist__archive { margin-top: 2rem; }.renewal-setlist__archive-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: .8rem; }.renewal-setlist__archive-heading h2 { font: 600 1.8rem "Zen Old Mincho", serif; }.renewal-setlist__archive-heading a { color: var(--renewal-gold); font-size: .75rem; }.renewal-setlist__archive-list { display: grid; gap: .6rem; }.renewal-setlist__archive-list details { border: 1px solid var(--renewal-border); border-radius: .6rem; background: var(--renewal-panel); }.renewal-setlist__archive-list summary { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem 1rem; cursor: pointer; list-style: none; font-weight: 700; }.renewal-setlist__archive-list summary::-webkit-details-marker { display: none; }.renewal-setlist__archive-list summary span { color: var(--renewal-cyan); font-size: .75rem; }.renewal-setlist__archive-list > details > div { padding: 0 1rem 1rem; border-top: 1px solid #00eaff33; }
+
+/* 活動実績: renewal/org_html/04_活動実績.html の構成 */
+.renewal-activity { min-height: 100vh; background: radial-gradient(ellipse at 72% 0%, #00345418, transparent 42%), var(--renewal-bg); }
+.renewal-activity__hero { position: relative; min-height: 280px; overflow: hidden; padding: 1.7rem var(--renewal-content-gutter) 2rem; background: linear-gradient(90deg, #010a13ed, #010a1388 45%, #010a1322), linear-gradient(0deg, #010a13c4, transparent 62%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center 52% / cover; }
+.renewal-activity__hero::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 34%; pointer-events: none; background: linear-gradient(0deg, var(--renewal-bg), transparent); }.renewal-activity__hero > * { position: relative; z-index: 1; }.renewal-activity__hero h1 { margin: 0; font: 600 clamp(2.6rem, 5vw, 4.1rem)/1.2 "Zen Old Mincho", serif; }.renewal-activity__hero h2 { margin-top: .8rem; color: #fff; font: 600 clamp(1.05rem, 2vw, 1.45rem)/1.55 "Zen Old Mincho", serif; }.renewal-activity__hero p { margin-top: .35rem; color: #d4e6ef; font-size: .82rem; line-height: 1.8; }
+.renewal-activity__stats, .renewal-activity__timeline, .renewal-activity__next { width: calc(100% - (2 * var(--renewal-content-gutter))); margin-inline: auto; }.renewal-activity__stats { display: grid; grid-template-columns: 1fr 1fr .7fr; gap: 1rem; margin-top: 1rem; }.renewal-activity__stat { display: flex; align-items: center; gap: 1rem; min-height: 6.5rem; padding: .8rem 1.3rem; border: 1px solid var(--renewal-line); border-radius: var(--renewal-radius-sm); background: var(--renewal-surface-card); }.renewal-activity__stat:first-child { border-color: #b66eb8; }.renewal-activity__stat:nth-child(2) { border-color: #586aa8; }.renewal-activity__stat > span { display: grid; place-items: center; flex: 0 0 3.5rem; width: 3.5rem; height: 3.5rem; border: 1.5px solid var(--renewal-cyan); border-radius: 50%; color: var(--renewal-cyan); text-shadow: 0 0 10px currentColor; }.renewal-activity__stat:first-child > span { color: var(--renewal-pink); }.renewal-activity__stat > span svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }.renewal-activity__stat b, .renewal-activity__stat strong, .renewal-activity__stat em { display: block; }.renewal-activity__stat b { color: var(--renewal-cyan); font-size: .72rem; }.renewal-activity__stat strong { color: #58e6ff; font-size: 2rem; line-height: 1.1; }.renewal-activity__stat strong small { margin-left: .2rem; font-size: .85rem; font-weight: 500; }.renewal-activity__stat em { color: var(--renewal-muted); font-size: .62rem; font-style: normal; }.renewal-activity__note { align-self: center; color: var(--renewal-text); font: italic 1.15rem/1.35 "Caveat", cursive; text-align: center; transform: rotate(-8deg); }
+.renewal-activity__timeline { margin-top: 1rem; padding-bottom: 1rem; }.renewal-activity__timeline > h2 { display: flex; align-items: center; gap: 1rem; margin-bottom: .8rem; font: 600 1.7rem "Zen Old Mincho", serif; }.renewal-activity__timeline > h2::after { content: ""; width: 5rem; height: 1px; background: linear-gradient(90deg, var(--renewal-cyan), transparent); }.renewal-activity__years { display: grid; gap: .6rem; }.renewal-activity__year { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) 15rem; min-height: 5.8rem; overflow: hidden; border: 1px solid #12516a; border-radius: var(--renewal-radius-sm); background: var(--renewal-surface-card); }.renewal-activity__year-label { position: relative; padding: .7rem .8rem; border-right: 1px solid #58727d; }.renewal-activity__year-label::after { content: ""; position: absolute; top: 1.2rem; right: -.25rem; width: .5rem; height: .5rem; border-radius: 50%; background: #ff9e88; box-shadow: 0 0 7px #ff9e8888; }.renewal-activity__year-label strong { display: block; color: #ff9d82; font: 600 1.7rem/1.2 "Zen Old Mincho", serif; }.renewal-activity__year-label span { color: #d4e5ee; font-size: .68rem; }.renewal-activity__year-copy { padding: .6rem 1rem; font-size: .68rem; line-height: 1.65; }.renewal-activity__year-copy > b { color: var(--renewal-cyan); font-size: .78rem; }.renewal-activity__year-copy ul { margin: .1rem 0; padding-left: 1rem; }.renewal-activity__year-copy p { margin: 0; }.renewal-activity__year-copy p strong { color: #55e6ff; font-size: .8rem; }.renewal-activity__year-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .25rem; align-items: center; padding: .7rem 1rem .7rem 0; }.renewal-activity__year-photos img { width: 100%; height: 3.8rem; border: 1px solid #3b5965; border-radius: .35rem; object-fit: cover; opacity: .9; }.renewal-activity__next { display: grid; grid-template-columns: 9rem 1fr auto; align-items: center; gap: 1rem; min-height: 5.8rem; margin-bottom: 1rem; padding: .8rem 1rem; border: 1px solid #15506a; border-radius: var(--renewal-radius-sm); background: linear-gradient(90deg, #00050ddd, #00070db8), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80") center / cover; }.renewal-activity__next > strong { color: var(--renewal-pink); font: italic 2rem "Caveat", cursive; transform: rotate(-8deg); }.renewal-activity__next p { font-size: .75rem; line-height: 1.7; }.renewal-activity__next a { padding: .65rem 1rem; border-radius: .4rem; color: #151216; background: var(--renewal-gold); font-size: .7rem; font-weight: 700; white-space: nowrap; }
+
+@media (max-width: 760px) {
+	.renewal-activity__hero { min-height: 25rem; padding: 1.2rem var(--renewal-content-gutter) 2rem; }.renewal-activity__hero h1 { font-size: clamp(2.2rem, 11vw, 3rem); }.renewal-activity__hero h2 { font-size: 1rem; }.renewal-activity__hero p { font-size: .72rem; }
+	.renewal-activity__stats { grid-template-columns: 1fr 1fr; gap: .6rem; }.renewal-activity__stat { min-height: 5rem; gap: .5rem; padding: .6rem; }.renewal-activity__stat > span { flex-basis: 2.5rem; width: 2.5rem; height: 2.5rem; }.renewal-activity__stat > span svg { width: 1.5rem; height: 1.5rem; }.renewal-activity__stat b { font-size: .58rem; }.renewal-activity__stat strong { font-size: 1.45rem; }.renewal-activity__stat em { font-size: .5rem; }.renewal-activity__note { display: none; }
+	.renewal-activity__timeline { margin-top: .8rem; }.renewal-activity__timeline > h2 { font-size: 1.35rem; }.renewal-activity__year { grid-template-columns: 4.5rem minmax(0, 1fr) 4.5rem; min-height: 5.7rem; }.renewal-activity__year-label { padding: .6rem .4rem; }.renewal-activity__year-label strong { font-size: 1.2rem; }.renewal-activity__year-label span { font-size: .5rem; white-space: normal; }.renewal-activity__year-copy { padding: .5rem .4rem; font-size: .5rem; line-height: 1.5; }.renewal-activity__year-copy > b { font-size: .58rem; }.renewal-activity__year-copy p strong { font-size: .62rem; }.renewal-activity__year-photos { display: block; padding: .6rem .4rem .6rem 0; }.renewal-activity__year-photos img { display: none; height: 4.5rem; }.renewal-activity__year-photos img:last-child { display: block; }
+	.renewal-activity__next { grid-template-columns: 5rem 1fr; gap: .5rem; min-height: 5rem; padding: .6rem; }.renewal-activity__next > strong { font-size: 1.35rem; }.renewal-activity__next p { font-size: .58rem; }.renewal-activity__next a { grid-column: 2; justify-self: end; padding: .45rem .6rem; font-size: .58rem; }
+}
+
+@media (max-width: 900px) {
+	.renewal-setlist__genres { grid-template-columns: repeat(3, 1fr); }.renewal-setlist__intro { grid-column: 1 / -1; }.renewal-setlist__selection { grid-template-columns: 1fr 1fr; }.renewal-setlist__selection-copy { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+	.renewal-setlist__hero { min-height: 16rem; padding: 1.5rem 1rem 2rem; }.renewal-setlist__hero h1 { font-size: clamp(2rem, 10vw, 3rem); }.renewal-setlist__hero p { font-size: .75rem; }.renewal-setlist__content { width: calc(100% - (2 * var(--renewal-content-gutter))); padding-top: 1rem; }.renewal-setlist__genres { grid-template-columns: repeat(3, 1fr); gap: .45rem; }.renewal-setlist__intro h2 { font-size: 1.4rem; }.renewal-setlist__intro p { font-size: .7rem; }.renewal-setlist__genres article { min-height: 8rem; padding: .35rem; }.renewal-setlist__genres article > span { width: 3rem; height: 3rem; margin-top: -.2rem; font-size: 1.5rem; }.renewal-setlist__genres article > span svg { width: 1.5rem; height: 1.5rem; }.renewal-setlist__genres h3 { font-size: .75rem; }.renewal-setlist__genres article p { font-size: .56rem; }.renewal-setlist__selection { grid-template-columns: 1fr; gap: 1rem; padding: 1rem; }.renewal-setlist__selection-copy { grid-column: auto; }.renewal-setlist__selection-copy p { font-size: .7rem; }.renewal-setlist__donut { width: min(14rem, 68vw); }.renewal-setlist__legend > div { font-size: .7rem; }.renewal-setlist__legend small { display: none; }.renewal-setlist__bottom { grid-template-columns: 1fr; }.renewal-setlist__info { min-height: 0; }.renewal-setlist__archive-heading { align-items: start; flex-direction: column; gap: .4rem; }.renewal-setlist__archive-heading h2 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.renewal-site *, .renewal-site *::before, .renewal-site *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+
+/* ホームは renewal/01_ホーム.html の構成を、同じDOMのままレスポンシブ化する。 */
+.renewal-shell--home { --renewal-sidebar: 150px; --renewal-cyan: #00c7d5; --renewal-border: rgba(0, 174, 191, .42); --renewal-panel: #010a14; }
+.renewal-shell--home .renewal-header { width: var(--renewal-sidebar); padding: 0; background: linear-gradient(180deg, #01060e 0%, #010a15 68%, #00050b 100%); }
+.renewal-shell--home .renewal-brand { height: 131px; margin: 0; }
+.renewal-shell--home .renewal-brand img { width: 91px; height: 91px; }
+.renewal-shell--home .renewal-nav { gap: 0; }
+.renewal-shell--home .renewal-nav a { min-height: 44px; padding: .55rem .5rem .55rem .8rem; border-left: 0; font-size: .75rem; }
+.renewal-shell--home .renewal-nav a .renewal-nav__icon { width: 2rem; }
+.renewal-shell--home .renewal-nav a:first-child .renewal-nav__icon svg { width: 1.85rem; height: 1.85rem; }
+.renewal-shell--home .renewal-nav a.active { border-left: 0; background: linear-gradient(90deg, #00c7ff57, #0073aa26); color: white; }
+.renewal-shell--home .renewal-main { margin-right: 0; }
+.renewal-home { min-height: 100vh; color: var(--renewal-text); background: radial-gradient(ellipse at 70% 0%, #00345418, transparent 42%), #010711; font-family: "Noto Sans JP", sans-serif; }
+.renewal-home__hero { position: relative; min-height: 375px; overflow: hidden; background: linear-gradient(90deg, #01060fe8, #010811b8 39%, #01081130 73%, #01081178), linear-gradient(0deg, #01060fd9, transparent 46%), url("../../renewal/top_header.jpg") center 48% / cover; }
+.renewal-home__hero-actions { display: flex; justify-content: flex-end; padding: 1.1rem 1.1rem 0; }
+.renewal-home__hero-copy { max-width: 650px; padding: .5rem 0 1.7rem 4.2%; }
+.renewal-home__hero h1 { max-width: 610px; margin-bottom: 3.15rem; color: var(--renewal-text); font: 400 clamp(1.8rem, 3vw, 2.75rem)/1.14 "Anzu Moji 2020", "Kaisei Decol", cursive; letter-spacing: .025em; transform: rotate(-4deg); text-shadow: 0 2px 12px #000a; }
+.renewal-home__hero-copy p { max-width: 440px; margin-bottom: .75rem; font-size: .88rem; font-weight: 500; text-shadow: 0 2px 5px #000; }
+.renewal-home__pill { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 2.45rem; padding: .5rem 1.3rem; border: 1.5px solid var(--renewal-cyan); border-radius: 99px; color: white; background: #000c17b8; font-size: .75rem; font-weight: 600; line-height: 1.3; transition: .2s; }
+.renewal-home__pill:hover { background: #00d3ff26; box-shadow: 0 0 12px #00eaff59; transform: translateY(-1px); }
+.renewal-home__pill span { color: var(--renewal-cyan); font-size: 1.1rem; }
+.renewal-home__person-icon { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-home__pill--primary { min-width: 300px; font-size: .88rem; }
+.renewal-home__pill--warm { border: 0; border-radius: 9px; color: #1b1110; background: var(--renewal-gold); }
+.renewal-home__pill--warm span { color: #1b1110; }
+.renewal-home__pill--pink { border-color: var(--renewal-pink); }
+.renewal-home__pill--pink span { color: var(--renewal-pink); }
+.renewal-home__content { padding: .6rem 1rem 1.1rem 1.25rem; }
+.renewal-home__feature-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: .7rem; }
+.renewal-home__panel { position: relative; overflow: hidden; border: 1px solid transparent; border-radius: var(--renewal-radius-sm); background: var(--renewal-panel-fill) padding-box, var(--renewal-panel-edge) border-box; box-shadow: var(--renewal-panel-glow); }
+.renewal-home__feature { min-height: 248px; padding: 1.25rem 1.6rem 1rem; }
+.renewal-home__feature::before { content: ""; position: absolute; inset: 0; opacity: .82; filter: brightness(1.15) saturate(1.25); pointer-events: none; background-position: center; background-size: cover; }
+.renewal-home__feature--song::before { background-image: linear-gradient(90deg, #010811e8 2%, #010811b8 42%, #01081108), url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=80"); }
+.renewal-home__feature--activity::before { background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), url("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1100&q=80"); }
+.renewal-home__panel-content { position: relative; z-index: 1; }
+.renewal-home__feature h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.3; font-weight: 600; }
+.renewal-home__feature h2 span { display: inline-grid; place-items: center; width: 2.25rem; color: var(--renewal-pink); }
+.renewal-home__feature h2 span svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-home__feature--activity h2 span { color: var(--renewal-cyan); }
+.renewal-home__feature p { margin: 0 0 .9rem; font-size: .88rem; line-height: 1.8; }
+.renewal-home__actions { display: flex; flex-wrap: wrap; gap: .55rem; }
+.renewal-home__actions .renewal-home__pill { min-height: 2.25rem; padding: .45rem .75rem; }
+.renewal-home__schedule { display: grid; grid-template-columns: 1.08fr 2.72fr .8fr; gap: 0; margin-top: 1rem; }
+.renewal-home__schedule-intro { padding: 1.05rem .8rem .95rem; border-right: 1px solid #00eaff40; }
+.renewal-home__schedule-intro h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; font: 600 clamp(1.15rem, 1.7vw, 1.5rem)/1.3 "Noto Sans JP", sans-serif; }
+.renewal-home__next h2 { margin: 0 0 .65rem; font: 600 1rem/1.1 "Caveat", "Kaisei Decol", cursive; }
+.renewal-home__schedule-intro p { margin: .75rem 0 .85rem; font-size: .72rem; line-height: 1.7; }
+.renewal-home__schedule-intro .renewal-home__pill { min-height: 2rem; padding: .35rem .7rem; font-size: .63rem; }
+.renewal-home__schedule-main { display: flex; flex-direction: column; padding: .65rem .7rem .7rem; }
+.renewal-home__schedule-main > h2 { margin: 0 0 .5rem; color: #62f4ff; font-size: .95rem; }
+.renewal-home__schedule-cards { display: grid; flex: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; align-items: stretch; }
+.renewal-home__schedule-cards article { height: 100%; padding: .6rem .55rem .5rem; border: 1px solid rgba(0, 174, 191, .62); border-radius: 9px; background: linear-gradient(135deg, #000b14e8, #00060cf7); box-shadow: inset 0 0 0 1px #00baca12, 0 0 7px #00baca1c; }
+.renewal-home__schedule-cards header { display: flex; align-items: center; gap: .5rem; padding-bottom: .45rem; border-bottom: 1px solid var(--renewal-cyan); }
+.renewal-home__schedule-cards header > span { color: var(--renewal-cyan); font-size: 1.65rem; line-height: 1; }
+.renewal-home__schedule-cards article:nth-child(2) header { border-color: var(--renewal-gold); }
+.renewal-home__schedule-cards article:nth-child(2) header > span, .renewal-home__schedule-cards article:nth-child(2) b { color: var(--renewal-gold); }
+.renewal-home__schedule-cards article:nth-child(3) header { border-color: var(--renewal-pink); }
+.renewal-home__schedule-cards article:nth-child(3) header > span, .renewal-home__schedule-cards article:nth-child(3) b { color: var(--renewal-pink); }
+.renewal-home__schedule-cards b, .renewal-home__schedule-cards strong { display: block; }
+.renewal-home__schedule-cards b { color: #62f4ff; font-size: .86rem; }
+.renewal-home__schedule-cards strong { font-size: .75rem; }
+.renewal-home__schedule-cards p { margin: .5rem 0 0; font-size: .64rem; line-height: 1.8; }
+.renewal-home__next { padding: .65rem .75rem; border-left: 1px solid #00eaff40; }
+.renewal-home__next h2 { color: var(--renewal-gold); font-size: 1rem; transform: none; }
+.renewal-home__next img { width: 100%; height: 4.75rem; object-fit: cover; border: 1px solid #00eaff80; border-radius: 5px; }
+.renewal-home__next h3 { margin: .4rem 0 .2rem; font-size: .9rem; line-height: 1.5; }
+.renewal-home__next p { margin-bottom: .55rem; font-size: .64rem; line-height: 1.6; }
+.renewal-home__next .renewal-home__pill { width: 100%; min-height: 2rem; padding: .3rem .5rem; font-size: .62rem; }
+.renewal-home__cta { display: grid; grid-template-columns: 1fr 1.45fr auto; align-items: center; gap: 1.1rem; min-height: 6.5rem; margin-top: .65rem; padding: .9rem 1.6rem; border: 1px solid transparent; box-shadow: 0 0 0 1px #00baca1a, 0 0 8px #00baca22, 0 0 18px #087bb012; background: linear-gradient(90deg, #00050ddd, #00070db8), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80") center 52% / cover padding-box, linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box; }
+.renewal-home__cta p { grid-column: 2; font-size: .8rem; font-weight: 600; line-height: 1.7; text-shadow: 0 2px 4px #000; }
+.renewal-home__cta .renewal-home__pill { grid-column: 3; white-space: nowrap; }
+
+/* ヒーロー下部の区切り線は表示しない。 */
+.renewal-hero, .renewal-setlist__hero, .renewal-overview__hero, .renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { border-bottom: 0; }
+
+@media (max-width: 1000px) and (min-width: 761px) {
+	.renewal-shell--home { --renewal-sidebar: 116px; }
+	.renewal-shell--home .renewal-brand { height: 112px; }
+	.renewal-shell--home .renewal-brand__note { width: 76px; height: 76px; }
+	.renewal-home__schedule { grid-template-columns: 1fr 2fr; }
+	.renewal-home__next { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.3fr auto; gap: .75rem; align-items: center; border-top: 1px solid #00eaff40; border-left: 0; }
+	.renewal-home__next h2 { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+	.renewal-shell--home .renewal-header { width: auto; padding: .7rem 1rem; }
+	.renewal-shell--home .renewal-brand { width: 3rem; height: 3rem; border: 0; background: none; }
+	.renewal-shell--home .renewal-brand img { width: 3rem; height: 3rem; }
+	.renewal-shell--home .renewal-nav { padding-top: 6rem; }
+	.renewal-home__hero { min-height: 25rem; }
+	.renewal-home__hero-actions { padding: .8rem .8rem 0; }
+	.renewal-home__hero-copy { padding: 3.5rem 1rem 1.5rem; }
+	.renewal-home__hero h1 { font-size: clamp(2rem, 10vw, 3rem); }
+	.renewal-home__hero h1 { margin-bottom: 1.7rem; }
+	.renewal-home__hero-copy p { font-size: .78rem; }
+	.renewal-home__pill--primary { min-width: 0; width: 100%; font-size: .75rem; }
+	.renewal-home__content { padding: .6rem .7rem 1rem; }
+	.renewal-home__feature-grid { grid-template-columns: 1fr; gap: .65rem; }
+	.renewal-home__feature { min-height: 13rem; padding: 1.1rem; }
+	.renewal-home__feature p { font-size: .72rem; }
+	.renewal-home__schedule { grid-template-columns: 1fr; }
+	.renewal-home__schedule-intro { border-right: 0; border-bottom: 1px solid #00eaff40; }
+	.renewal-home__schedule-main { display: block; padding: .9rem .7rem; }
+	.renewal-home__schedule-cards { grid-template-columns: 1fr; }
+	.renewal-home__schedule-cards article { display: grid; height: auto; grid-template-columns: 9rem 1fr; gap: .6rem; }
+	.renewal-home__schedule-cards header { border-bottom: 0; border-right: 1px solid var(--renewal-cyan); padding: 0 .5rem 0 0; }
+	.renewal-home__schedule-cards article:nth-child(2) header { border-right-color: var(--renewal-gold); }
+	.renewal-home__schedule-cards article:nth-child(3) header { border-right-color: var(--renewal-pink); }
+	.renewal-home__schedule-cards p { margin: 0; align-self: center; font-size: .62rem; }
+	.renewal-home__next { display: grid; grid-template-columns: 1fr 1.2fr; gap: .6rem; align-items: center; border-left: 0; border-top: 1px solid #00eaff40; }
+	.renewal-home__next h2 { grid-column: 1 / -1; margin-top: .7rem; }
+	.renewal-home__next .renewal-home__pill { grid-column: 2; }
+	.renewal-home__cta { grid-template-columns: 1fr; gap: .7rem; text-align: center; padding: 1.3rem 1rem; }
+	.renewal-home__cta p, .renewal-home__cta .renewal-home__pill { grid-column: auto; }
+	.renewal-home__cta .renewal-home__pill { justify-self: center; }
+}
+
+/* ホームのコンテンツ領域も、他のrenewalページと同じ左右基準に揃える。 */
+.renewal-home__content { width: calc(100% - (2 * var(--renewal-content-gutter))); margin-inline: auto; padding-right: 0; padding-left: 0; }
+
+/* MuSTについて: renewal/02_MuSTについて.html のデスクトップ構成を、同じDOMでレスポンシブ化する。 */
+.renewal-overview { min-height: 100vh; overflow: hidden; background: radial-gradient(ellipse at 70% 0%, #00345418, transparent 42%), #010711; }
+.renewal-overview__hero { position: relative; min-height: 338px; overflow: hidden; padding: 1.8rem clamp(1.2rem, 5vw, 4.5rem) 2.2rem; border-bottom: 1px solid #00eaffad; background: linear-gradient(90deg, #010a13e8, #010a1388 48%, #010a1320), linear-gradient(0deg, #010a13c4, transparent 60%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center / cover; }
+.renewal-overview__breadcrumb { display: flex; gap: .65rem; margin-bottom: 1.25rem; color: var(--renewal-muted); font-size: .8rem; }
+.renewal-overview__breadcrumb a { color: var(--renewal-muted); }
+.renewal-overview__eyebrow { margin-bottom: .2rem; color: var(--renewal-cyan); font-size: .7rem; letter-spacing: .2em; }
+.renewal-overview__hero h1 { color: var(--renewal-text); font: 600 clamp(2.3rem, 4.5vw, 4rem)/1.15 "Zen Old Mincho", serif; letter-spacing: .06em; }
+.renewal-overview__hero h2 { max-width: 40rem; margin-top: .9rem; color: #fff; font: 600 clamp(1.1rem, 2vw, 1.55rem)/1.65 "Zen Old Mincho", serif; }
+.renewal-overview__lead { max-width: 43rem; margin-top: .65rem; color: #d4e6ef; font-size: .82rem; line-height: 1.9; }
+.renewal-overview__slogan { position: absolute; right: 7%; bottom: 2rem; color: #70dfff; font: italic clamp(2rem, 4vw, 3.2rem)/.85 "Caveat", cursive; text-align: center; transform: rotate(-10deg); text-shadow: 0 0 12px #00baff; }
+.renewal-overview__slogan::after { content: ""; display: block; width: 86%; height: 2px; margin: .55rem auto; background: var(--renewal-cyan); transform: rotate(-10deg); }
+.renewal-overview__stats { display: grid; grid-template-columns: 1fr 1.25fr; width: min(100% - 3rem, 1120px); margin: 1rem auto 0; overflow: hidden; border: 1px solid var(--renewal-line); border-radius: var(--renewal-radius-sm); background: linear-gradient(120deg, var(--renewal-panel-soft), var(--renewal-bg)); }
+.renewal-overview__stat { position: relative; display: flex; align-items: center; gap: 1rem; min-height: 6.4rem; padding: 1rem 1.4rem; }
+.renewal-overview__stat + .renewal-overview__stat { border-left: 1px solid #00eaff66; }
+.renewal-overview__stat-icon { display: grid; place-items: center; flex: 0 0 3.2rem; width: 3.2rem; height: 3.2rem; border: 1px solid var(--renewal-cyan); border-radius: 50%; color: var(--renewal-cyan); text-shadow: 0 0 12px var(--renewal-cyan); }
+.renewal-overview__stat-icon svg { width: 1.9rem; height: 1.9rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-overview__stat > div > span { display: block; color: var(--renewal-cyan); font-size: .7rem; }
+.renewal-overview__stat strong { display: block; color: #fff; font-size: 1.35rem; }
+.renewal-overview__stat:nth-child(2) strong { color: #fff; font-size: 2rem; line-height: 1.1; }
+.renewal-overview__stat strong small { margin-left: .35rem; color: var(--renewal-muted); font-size: .65rem; font-weight: 400; }
+.renewal-overview__stat time { align-self: end; margin-left: auto; color: var(--renewal-muted); font-size: .6rem; white-space: nowrap; }
+.renewal-overview__content { width: min(100% - 3rem, 1120px); margin: 0 auto; padding: 1rem 0 2.5rem; }
+.renewal-overview__feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.renewal-overview__feature { position: relative; min-height: 15rem; overflow: hidden; padding: 1.15rem 1.35rem; border: 1px solid var(--renewal-line); border-radius: var(--renewal-radius-sm); background: var(--renewal-surface-card); }
+.renewal-overview__feature::before { content: ""; position: absolute; inset: 0; opacity: .82; filter: brightness(1.15) saturate(1.25); pointer-events: none; background: var(--feature-photo) right top / 72% auto no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 100%); }
+.renewal-overview__feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #010b14f7 8%, #010811d9 48%, #01060c22), linear-gradient(135deg, #00cfff1c, transparent 48%); pointer-events: none; }
+.renewal-overview__feature--one { --feature-photo: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature--two { --feature-photo: url("https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature--three { --feature-photo: url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature--four { --feature-photo: url("https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature--five { --feature-photo: url("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature--six { --feature-photo: url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=700&q=80"); }
+.renewal-overview__feature > * { position: relative; z-index: 1; }
+.renewal-overview__feature-top { display: flex; align-items: center; justify-content: flex-start; gap: .7rem; margin-bottom: .65rem; }
+.renewal-overview__feature-top span { display: grid; place-items: center; width: var(--renewal-icon-box); height: var(--renewal-icon-box); border: 1px solid var(--renewal-cyan); border-radius: 50%; color: var(--renewal-text); font: 600 .9rem/1 "Noto Sans JP", sans-serif; }
+.renewal-overview__feature-top b { display: grid; place-items: center; flex: 0 0 var(--renewal-icon-box); width: var(--renewal-icon-box); height: var(--renewal-icon-box); color: var(--renewal-cyan); font-size: 1.8rem; line-height: 1; text-shadow: 0 0 10px currentColor; }
+.renewal-overview__feature-top b svg { width: var(--renewal-icon-size); height: var(--renewal-icon-size); fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.renewal-overview__feature-top b svg.renewal-line-icon text { fill: currentColor; stroke: none; }
+.renewal-overview__feature h3 { min-height: 3.2rem; color: #fff; font-size: 1rem; line-height: 1.55; }
+.renewal-overview__feature p { margin-top: .65rem; color: #d1e2eb; font-size: .69rem; line-height: 1.85; }
+.renewal-overview__video-link { display: inline-block; margin-top: .55rem; color: var(--renewal-gold); font-size: .7rem; text-decoration: underline; text-underline-offset: .2em; }
+.renewal-overview__video-link span { margin-left: .35rem; }
+.renewal-overview__recruit { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 6rem; padding: 1rem clamp(1.2rem, 5vw, 4.5rem); background: linear-gradient(90deg, #010a13cc, #010a1385), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80") center / cover; }
+.renewal-overview__recruit p { color: #fff; font-size: .85rem; font-weight: 600; line-height: 1.7; }
+.renewal-overview__recruit a { display: inline-flex; align-items: center; gap: .7rem; padding: .7rem 1.25rem; border-radius: .45rem; color: #1b1110; background: var(--renewal-gold); font-size: .75rem; font-weight: 700; white-space: nowrap; }
+.renewal-overview__recruit a span { font-size: 1.2rem; }
+
+@media (max-width: 900px) {
+	.renewal-overview__feature-grid { grid-template-columns: repeat(2, 1fr); }
+	.renewal-overview__feature { min-height: 14rem; }
+}
+@media (max-width: 760px) {
+	.renewal-overview__hero { min-height: 29rem; padding: 1.2rem 1rem 2rem; }
+	.renewal-overview__breadcrumb { margin-bottom: 1.1rem; font-size: .75rem; }
+	.renewal-overview__hero h1 { font-size: clamp(2rem, 11vw, 3rem); }
+	.renewal-overview__hero h2 { margin-top: .8rem; font-size: 1rem; }
+	.renewal-overview__lead { font-size: .72rem; }
+	.renewal-overview__slogan { right: 1rem; bottom: 1.4rem; font-size: 1.9rem; }
+	.renewal-overview__stats { grid-template-columns: 1fr; width: calc(100% - 1.4rem); margin-top: .7rem; }
+	.renewal-overview__stat { min-height: 5.2rem; padding: .75rem 1rem; }
+	.renewal-overview__stat + .renewal-overview__stat { border-top: 1px solid #00eaff66; border-left: 0; }
+	.renewal-overview__stat-icon { font-size: 2rem; }
+	.renewal-overview__stat strong { font-size: 1.1rem; }
+	.renewal-overview__stat:nth-child(2) strong { font-size: 1.65rem; }
+	.renewal-overview__content { width: calc(100% - 1.4rem); padding: 1rem 0 2rem; }
+	.renewal-overview__feature-grid { grid-template-columns: 1fr; gap: .6rem; }
+	.renewal-overview__feature { min-height: 0; padding: 1rem; }
+	.renewal-overview__feature h3 { min-height: 0; font-size: .95rem; }
+	.renewal-overview__feature p { font-size: .69rem; }
+	.renewal-overview__recruit { align-items: stretch; flex-direction: column; padding: 1.2rem 1rem; }
+	.renewal-overview__recruit a { justify-content: center; }
+}
+
+/* 残りのrenewalページも、元HTMLのPC構成を同一DOMのままレスポンシブ化する。 */
+.renewal-flow, .renewal-faq-page, .renewal-precautions, .renewal-application, .renewal-schedule { min-height: 100vh; background: radial-gradient(ellipse at 76% 20%, #00345418, transparent 38%), linear-gradient(140deg, #00050b, #010d18 65%, #00050b); }
+.renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { position: relative; min-height: 12.5rem; overflow: hidden; padding: 1.3rem clamp(1rem, 4.6vw, 4rem) 2rem; border-bottom: 1px solid var(--renewal-border); background: linear-gradient(90deg, #010811ed 0%, #01081170 55%, #01081112 100%), linear-gradient(0deg, #010811aa, transparent 45%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center / cover; }
+.renewal-flow__breadcrumb, .renewal-faq-page__breadcrumb, .renewal-precautions__breadcrumb, .renewal-application__breadcrumb, .renewal-schedule__breadcrumb { display: flex; gap: .7rem; margin-bottom: 1.55rem; color: var(--renewal-muted); font-size: .8rem; }
+.renewal-flow__breadcrumb a, .renewal-faq-page__breadcrumb a, .renewal-precautions__breadcrumb a, .renewal-application__breadcrumb a, .renewal-schedule__breadcrumb a { color: var(--renewal-muted); }
+.renewal-flow__hero h1, .renewal-faq-page__hero h1, .renewal-precautions__hero h1, .renewal-application__hero h1, .renewal-schedule__hero h1 { color: #f5f8ff; font: 700 clamp(2rem, 4vw, 3.35rem)/1.2 "Zen Old Mincho", serif; letter-spacing: .04em; }
+.renewal-flow__hero p, .renewal-faq-page__hero p, .renewal-precautions__hero p, .renewal-application__hero p, .renewal-schedule__hero p { margin-top: .35rem; font-size: .86rem; font-weight: 500; }
+.renewal-flow__steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; padding: 1.65rem clamp(1rem, 2.2vw, 2rem) .9rem; }
+.renewal-flow__step { position: relative; min-height: 18rem; padding: .8rem .9rem; border: 2px solid var(--renewal-cyan); border-radius: .8rem; background: var(--renewal-surface-card); box-shadow: inset 0 0 18px #00cbe31a; }
+.renewal-flow__step:nth-child(even) { border-color: var(--renewal-pink); box-shadow: inset 0 0 18px #e52be21a; }
+.renewal-flow__step header { display: flex; align-items: center; gap: .65rem; min-height: 3.2rem; padding-bottom: .55rem; border-bottom: 1px solid #15516a; }
+.renewal-flow__step header > span { display: grid; place-items: center; flex: 0 0 2.65rem; width: 2.65rem; height: 2.65rem; border-radius: 50%; color: #00131d; background: linear-gradient(140deg, #14e7f3, #00a9df); font-size: 1.45rem; font-weight: 700; }
+.renewal-flow__step:nth-child(even) header > span { color: #170524; background: linear-gradient(140deg, #f765e5, #c94bff); }
+.renewal-flow__step h2 { font: 700 clamp(.85rem, 1.35vw, 1.15rem)/1.45 "Zen Old Mincho", serif; }
+.renewal-flow__step h2 small { display: block; color: var(--renewal-cyan); font: 600 .58rem "Noto Sans JP", sans-serif; }
+.renewal-flow__icon { display: grid; place-items: center; height: 5.5rem; color: var(--renewal-cyan); font-size: 2.8rem; line-height: 1; text-shadow: 0 0 13px #04d8ff55; }
+.renewal-flow__step:nth-child(even) .renewal-flow__icon { color: var(--renewal-pink); }
+.renewal-flow__step p { color: #edf5ff; font-size: .72rem; line-height: 1.8; }
+.renewal-flow__step aside { margin-top: .55rem; padding: .45rem .55rem; border: 1px solid #0a829b; border-radius: .45rem; color: #bcecf5; font-size: .64rem; line-height: 1.6; }
+.renewal-flow__cta, .renewal-schedule__apply { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: .7rem 1rem 1.2rem; padding: 1rem 1.35rem; border: 1px solid var(--renewal-cyan); border-radius: .75rem; background: var(--renewal-surface-card-soft); }
+.renewal-flow__cta p, .renewal-schedule__apply p { font-size: .8rem; }
+.renewal-flow__cta a, .renewal-schedule__apply a { padding: .65rem 1rem; border-radius: .4rem; color: #151216; background: var(--renewal-gold); font-size: .75rem; font-weight: 700; white-space: nowrap; }
+.renewal-flow__cta a span, .renewal-schedule__apply a span { margin-left: .5rem; }
+
+.renewal-faq-page__content, .renewal-precautions__content, .renewal-schedule__content { width: min(100% - 3rem, 1080px); margin: 0 auto; padding: 1.5rem 0 2.5rem; }
+.renewal-faq-page__list { display: grid; gap: .65rem; }
+.renewal-faq-page__list details { overflow: hidden; border: 1px solid var(--renewal-cyan); border-radius: .8rem; background: var(--renewal-surface-card); }
+.renewal-faq-page__list details:nth-child(3n) { border-color: var(--renewal-pink); }
+.renewal-faq-page__list summary { display: flex; align-items: center; gap: 1rem; padding: .85rem 1.15rem; cursor: pointer; list-style: none; }
+.renewal-faq-page__list summary::-webkit-details-marker { display: none; }
+.renewal-faq-page__list summary > span { display: grid; place-items: center; flex: 0 0 2.5rem; height: 1.7rem; border-radius: .4rem; color: #00101a; background: linear-gradient(110deg, #00c7e8, #00eaff); font-weight: 800; }
+.renewal-faq-page__list details:nth-child(3n) summary > span { color: #170524; background: linear-gradient(110deg, #ff65d7, #e13cd0); }
+.renewal-faq-page__list summary b { flex: 1; font-size: .86rem; }
+.renewal-faq-page__list summary i { display: grid; place-items: center; width: 1.4rem; height: 1.4rem; border: 1px solid var(--renewal-cyan); border-radius: 50%; color: var(--renewal-cyan); font-style: normal; transition: transform .2s; }
+.renewal-faq-page__list details[open] summary i { transform: rotate(45deg); }
+.renewal-faq-page__list details > div { padding: .8rem 1.2rem 1rem 4.7rem; border-top: 1px solid #00eaff2e; color: #c5e2ed; font-size: .75rem; line-height: 1.9; }
+.renewal-faq-page__list details > div p { margin: 0; }
+.renewal-faq-page__apply, .renewal-precautions__apply { display: block; width: fit-content; margin: 1.2rem 0 0 auto; padding: .65rem 1rem; border: 1px solid var(--renewal-gold); border-radius: .4rem; color: var(--renewal-gold); font-size: .75rem; font-weight: 700; }
+.renewal-faq-page__apply span, .renewal-precautions__apply span { margin-left: .6rem; }
+
+.renewal-precautions__content { display: grid; grid-template-columns: 1.08fr .92fr; gap: 1rem; }
+.renewal-precautions__panel { align-self: start; overflow: hidden; border: 1px solid var(--renewal-cyan); border-radius: .8rem; background: var(--renewal-surface-card-soft); }
+.renewal-precautions__panel--pink { border-color: var(--renewal-pink); }
+.renewal-precautions__panel summary { display: flex; align-items: center; gap: .7rem; padding: .85rem 1rem; cursor: pointer; list-style: none; }
+.renewal-precautions__panel summary::-webkit-details-marker { display: none; }
+.renewal-precautions__panel summary > span { color: var(--renewal-cyan); font-size: 1.7rem; }
+.renewal-precautions__panel--pink summary > span { color: var(--renewal-pink); }
+.renewal-precautions__panel summary h2 { flex: 1; font-size: 1rem; }
+.renewal-precautions__panel summary small { color: var(--renewal-muted); font-size: .62rem; font-weight: 400; }
+.renewal-precautions__panel summary i { color: var(--renewal-cyan); font-size: 1.35rem; font-style: normal; }
+.renewal-precautions__panel[open] summary i { transform: rotate(45deg); }
+.renewal-precautions__panel ol { display: grid; gap: .55rem; margin: 0; padding: 1rem 1rem 1.1rem 2.8rem; border-top: 1px solid #00eaff33; }
+.renewal-precautions__panel li { padding-left: .2rem; color: #d6e8ef; font-size: .73rem; line-height: 1.75; }
+.renewal-precautions__panel li::marker { color: var(--renewal-cyan); font-weight: 700; }
+.renewal-precautions__fee { margin: 0 1rem 1rem; padding: .65rem .8rem; border: 1px solid #0a829b; border-radius: .45rem; color: #bcecf5; font-size: .66rem; line-height: 1.7; }
+.renewal-precautions__apply { grid-column: 1 / -1; }
+
+.renewal-application__events { display: grid; gap: .75rem; padding: 1.1rem clamp(.7rem, 2vw, 1.5rem); }
+.renewal-application__event { display: grid; grid-template-columns: 11rem minmax(18rem, 1fr) minmax(14rem, .8fr) minmax(12rem, .8fr); gap: 1rem; padding: .85rem; border: 1px solid var(--renewal-cyan); border-radius: .8rem; background: var(--renewal-surface-card); }
+.renewal-application__event:nth-child(2) { border-color: var(--renewal-gold); }
+.renewal-application__event:nth-child(3) { border-color: #3069ff; }
+.renewal-application__poster { min-height: 10rem; border-radius: .5rem; background: radial-gradient(circle at 60% 25%, #ff5bd777, transparent 18%), linear-gradient(160deg, #081d70, #13134f 40%, #ee267c 100%); }
+.renewal-application__poster--orange { background: radial-gradient(circle at 70% 28%, #ffd88caa, transparent 16%), linear-gradient(160deg, #8b3611, #ee7133 48%, #f4b050 100%); }
+.renewal-application__title { display: grid; grid-template-columns: 4.4rem 1fr; gap: .7rem; align-items: start; }
+.renewal-application__title time { display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border: 1px solid var(--renewal-cyan); border-radius: .45rem; color: var(--renewal-cyan); }
+.renewal-application__title time span { font-size: .7rem; }.renewal-application__title time b { font-size: 1.25rem; }
+.renewal-application__title small { display: inline-block; padding: .15rem .5rem; border-radius: .25rem; color: var(--renewal-cyan); background: #00eaff20; font-size: .63rem; }
+.renewal-application__title h2 { margin-top: .4rem; font-size: 1rem; line-height: 1.5; }
+.renewal-application__info dl { display: grid; gap: .4rem; margin: .8rem 0 0; font-size: .7rem; }
+.renewal-application__info dl > div { display: grid; grid-template-columns: 1.2rem 2.5rem 1fr; gap: .3rem; }.renewal-application__info dt { color: var(--renewal-cyan); }.renewal-application__info dd { display: contents; margin: 0; }.renewal-application__info dd b { color: var(--renewal-muted); }
+.renewal-application__details { color: #d6e8ef; font-size: .7rem; line-height: 1.7; }.renewal-application__details h3 { margin-bottom: .45rem; color: var(--renewal-gold); font-size: .75rem; }.renewal-application__details ul { display: grid; gap: .2rem; margin: 0; padding-left: 1.1rem; }.renewal-application__details li::marker { color: var(--renewal-cyan); }
+.renewal-application__status { align-self: center; padding: .85rem; border: 1px solid var(--renewal-gold); border-radius: .55rem; background: #ffbd7510; }.renewal-application__status--closed { border-color: #6c8290; background: #00131a; }.renewal-application__status h3 { color: var(--renewal-gold); font-size: .82rem; }.renewal-application__status--closed h3 { color: var(--renewal-muted); }.renewal-application__status p { margin: .45rem 0 .7rem; color: #d6e8ef; font-size: .68rem; line-height: 1.7; }.renewal-application__status a { display: block; padding: .45rem; border: 1px solid var(--renewal-gold); border-radius: .35rem; color: var(--renewal-gold); font-size: .68rem; text-align: center; }
+.renewal-application__apply { display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 1rem; margin: 0 1.5rem 1.5rem; padding: .9rem 1.2rem; border: 1px solid var(--renewal-cyan); border-radius: .75rem; background: #001824; }.renewal-application__apply > span { color: var(--renewal-cyan); font-size: 2rem; }.renewal-application__apply h2 { font: 600 1.2rem "Zen Old Mincho", serif; }.renewal-application__apply p { color: var(--renewal-muted); font-size: .72rem; }.renewal-application__apply a { padding: .65rem 1rem; border-radius: .35rem; color: #111820; background: var(--renewal-gold); font-size: .72rem; font-weight: 700; white-space: nowrap; }
+
+.renewal-schedule__heading { display: flex; align-items: end; gap: 1rem; margin-bottom: 1rem; }.renewal-schedule__heading p { color: var(--renewal-pink); font: 1.4rem "Caveat", cursive; }.renewal-schedule__heading h2 { font: 600 1.8rem "Zen Old Mincho", serif; }.renewal-schedule__list { display: grid; gap: .75rem; }.renewal-schedule__list article { display: grid; grid-template-columns: 9rem 1fr auto; gap: 1rem; align-items: center; padding: 1rem; border: 1px solid var(--renewal-cyan); border-radius: .7rem; background: var(--renewal-surface-card-soft); }.renewal-schedule__list article > time { display: grid; place-items: center; min-height: 5rem; border: 1px solid var(--renewal-cyan); border-radius: .45rem; color: var(--renewal-cyan); font-size: .85rem; text-align: center; }.renewal-schedule__list h3 { margin-bottom: .3rem; font: 600 1.1rem "Zen Old Mincho", serif; }.renewal-schedule__body { color: var(--renewal-muted); font-size: .75rem; }.renewal-schedule__list article > a { color: var(--renewal-gold); font-size: .72rem; white-space: nowrap; }.renewal-empty { padding: 1.5rem; border: 1px dashed var(--renewal-border); color: var(--renewal-muted); text-align: center; }
+
+@media (max-width: 1000px) and (min-width: 761px) { .renewal-application__event { grid-template-columns: 8rem 1fr 1fr; }.renewal-application__poster { display: none; }.renewal-application__status { grid-column: 1 / -1; }.renewal-flow__steps { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) {
+	.renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { min-height: 9.5rem; padding: 1rem; }
+	.renewal-flow__breadcrumb, .renewal-faq-page__breadcrumb, .renewal-precautions__breadcrumb, .renewal-application__breadcrumb, .renewal-schedule__breadcrumb { margin-bottom: 1.1rem; font-size: .75rem; }
+	.renewal-flow__hero h1, .renewal-faq-page__hero h1, .renewal-precautions__hero h1, .renewal-application__hero h1, .renewal-schedule__hero h1 { font-size: 2rem; }.renewal-flow__hero p, .renewal-faq-page__hero p, .renewal-precautions__hero p, .renewal-application__hero p, .renewal-schedule__hero p { font-size: .7rem; }
+	.renewal-flow__steps { grid-template-columns: 1fr; gap: .6rem; padding: .8rem .7rem; }.renewal-flow__step { min-height: 0; padding: .7rem .8rem; }.renewal-flow__step header { min-height: 2.8rem; }.renewal-flow__step header > span { flex-basis: 2.2rem; width: 2.2rem; height: 2.2rem; font-size: 1.15rem; }.renewal-flow__icon { display: inline-grid; width: 4rem; height: 3rem; font-size: 2rem; vertical-align: middle; }.renewal-flow__step p { display: inline; font-size: .7rem; }.renewal-flow__step aside { margin-top: .5rem; font-size: .62rem; }.renewal-flow__cta, .renewal-schedule__apply { align-items: stretch; flex-direction: column; margin: .5rem .7rem 1rem; padding: .9rem; }.renewal-flow__cta a, .renewal-schedule__apply a { text-align: center; }
+	.renewal-faq-page__content, .renewal-precautions__content, .renewal-schedule__content { width: calc(100% - 1.4rem); padding: 1rem 0 1.5rem; }.renewal-faq-page__list summary { gap: .55rem; padding: .7rem .65rem; }.renewal-faq-page__list summary > span { flex-basis: 2.1rem; height: 1.45rem; font-size: .75rem; }.renewal-faq-page__list summary b { font-size: .72rem; }.renewal-faq-page__list details > div { padding: .65rem .75rem .8rem 3.3rem; font-size: .68rem; }.renewal-faq-page__apply, .renewal-precautions__apply { width: 100%; text-align: center; }
+	.renewal-precautions__content { display: grid; grid-template-columns: 1fr; gap: .6rem; }.renewal-precautions__panel summary { padding: .7rem .8rem; }.renewal-precautions__panel summary h2 { font-size: .85rem; }.renewal-precautions__panel ol { padding-left: 2.3rem; }.renewal-precautions__panel li { font-size: .68rem; }.renewal-precautions__apply { grid-column: auto; }
+	.renewal-application__events { padding: .7rem; }.renewal-application__event { grid-template-columns: 1fr; gap: .7rem; padding: .7rem; }.renewal-application__poster { display: block; min-height: 5rem; }.renewal-application__title h2 { font-size: .9rem; }.renewal-application__details { padding-top: .6rem; border-top: 1px solid #00eaff33; }.renewal-application__status { align-self: auto; }.renewal-application__apply { grid-template-columns: 2rem 1fr; gap: .4rem .7rem; margin: 0 .7rem 1rem; padding: .8rem; }.renewal-application__apply > span { grid-row: span 2; }.renewal-application__apply h2 { font-size: 1rem; }.renewal-application__apply p { grid-column: 2; font-size: .66rem; }.renewal-application__apply a { grid-column: 1 / -1; text-align: center; }
+	.renewal-schedule__heading { align-items: start; flex-direction: column; gap: .1rem; }.renewal-schedule__heading h2 { font-size: 1.45rem; }.renewal-schedule__list article { grid-template-columns: 1fr; gap: .6rem; padding: .75rem; }.renewal-schedule__list article > time { min-height: 2.5rem; justify-content: start; padding: 0 .7rem; }.renewal-schedule__list h3 { font-size: 1rem; }.renewal-schedule__list article > a { text-align: right; }
+}
+
+/* ヒーロー下部のボーダーは全画面で表示しない。 */
+.renewal-overview__hero, .renewal-setlist__hero, .renewal-hero, .renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { border-bottom: 0; }
+.renewal-overview__hero::after, .renewal-setlist__hero::after, .renewal-hero::after, .renewal-flow__hero::after, .renewal-faq-page__hero::after, .renewal-precautions__hero::after, .renewal-application__hero::after, .renewal-schedule__hero::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; z-index: 0; height: 34%; pointer-events: none; background: linear-gradient(0deg, #010711, transparent); }
+.renewal-overview__hero > *, .renewal-setlist__hero > *, .renewal-hero > *, .renewal-flow__hero > *, .renewal-faq-page__hero > *, .renewal-precautions__hero > *, .renewal-application__hero > *, .renewal-schedule__hero > * { position: relative; z-index: 1; }
+
+@media (min-width: 761px) {
+	.renewal-hero, .renewal-overview__hero, .renewal-setlist__hero, .renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { padding-right: var(--renewal-content-gutter); padding-left: var(--renewal-content-gutter); }
+	.renewal-container, .renewal-content, .renewal-setlist__content, .renewal-overview__stats, .renewal-overview__content, .renewal-faq-page__content, .renewal-precautions__content, .renewal-schedule__content { width: calc(100% - (2 * var(--renewal-content-gutter))); max-width: none; }
+}
+
+@media (max-width: 760px) {
+	.renewal-hero, .renewal-overview__hero, .renewal-setlist__hero, .renewal-flow__hero, .renewal-faq-page__hero, .renewal-precautions__hero, .renewal-application__hero, .renewal-schedule__hero { padding-right: var(--renewal-content-gutter); padding-left: var(--renewal-content-gutter); }
+	.renewal-content, .renewal-setlist__content, .renewal-overview__stats, .renewal-overview__content, .renewal-faq-page__content, .renewal-precautions__content, .renewal-schedule__content { width: calc(100% - (2 * var(--renewal-content-gutter))); }
+}
+
+/* 過去のライブ: renewal/org_html/05_過去のライブ.html の構成 */
+.renewal-archive { min-height: 100vh; background: radial-gradient(ellipse at 72% 0%, #00345418, transparent 42%), var(--renewal-bg); }
+.renewal-archive__hero { position: relative; min-height: 11.5rem; overflow: hidden; padding: 1.35rem var(--renewal-content-gutter) 1.8rem; background: linear-gradient(90deg, #010a11f2, #010a1199 38%, #010a1110 76%), linear-gradient(0deg, #010a1144, transparent 60%), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center / cover; }.renewal-archive__hero::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 30%; pointer-events: none; background: linear-gradient(0deg, var(--renewal-bg), transparent); }.renewal-archive__hero > * { position: relative; z-index: 1; }.renewal-archive__hero h1 { margin: 0; font: 600 clamp(2.4rem, 5vw, 4rem)/1.2 "Zen Old Mincho", serif; }.renewal-archive__hero p { margin-top: .35rem; font-size: .85rem; }
+.renewal-archive__filters { display: flex; align-items: center; gap: 1.1rem; width: calc(100% - (2 * var(--renewal-content-gutter))); margin: 0 auto; padding: .7rem 0; border-bottom: 1px solid var(--renewal-line-soft); }.renewal-archive__filters button { position: relative; padding: .25rem .45rem .5rem; border: 0; color: var(--renewal-muted); background: transparent; font: inherit; font-size: .7rem; cursor: pointer; }.renewal-archive__filters button.active { color: var(--renewal-text); }.renewal-archive__filters button.active::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--renewal-gold); }
+.renewal-archive__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; width: calc(100% - (2 * var(--renewal-content-gutter))); margin: .7rem auto 0; }.renewal-archive__card { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: .8rem; min-width: 0; min-height: 14rem; padding: .7rem; overflow: hidden; border: 1px solid #155a70; border-radius: var(--renewal-radius-sm); background: var(--renewal-surface-card); box-shadow: inset 0 0 15px #002b3c22; }.renewal-archive__card[hidden] { display: none; }.renewal-archive__card > img { width: 100%; height: 12.4rem; object-fit: cover; border: 1px solid #22576b; border-radius: .3rem; }.renewal-archive__details { display: flex; min-width: 0; flex-direction: column; }.renewal-archive__meta { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; color: #ff9d82; font-size: .65rem; font-weight: 700; }.renewal-archive__meta b { padding: .05rem .45rem; border: 1px solid var(--renewal-cyan); border-radius: 99px; color: var(--renewal-cyan); font-size: .58rem; white-space: nowrap; }.renewal-archive__meta b.pink { border-color: var(--renewal-pink); color: #ff90db; }.renewal-archive__card h2 { margin: .25rem 0 .4rem; font-size: .95rem; line-height: 1.45; }.renewal-archive__subtitle { margin: -.25rem 0 .25rem; color: var(--renewal-muted); font-size: .62rem; line-height: 1.5; }.renewal-archive__line { display: flex; align-items: center; gap: .4rem; margin: .1rem 0; overflow: hidden; font-size: .65rem; line-height: 1.7; text-overflow: ellipsis; white-space: nowrap; }.renewal-archive__line svg { flex: 0 0 1rem; width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }.renewal-archive__numbers { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: auto; border-top: 1px solid #185267; border-bottom: 1px solid #185267; }.renewal-archive__numbers span { padding: .3rem .05rem; border-right: 1px solid #174b5e; color: #d7e6ee; font-size: .5rem; text-align: center; }.renewal-archive__numbers span:last-child { border-right: 0; }.renewal-archive__numbers strong { display: block; color: var(--renewal-text); font: 500 1rem/1.3 "Zen Old Mincho", serif; }.renewal-archive__numbers .rate { color: var(--renewal-gold); font-weight: 700; }.renewal-archive__numbers .rate strong { color: #ffbd83; }.renewal-archive__video { display: flex; align-items: center; gap: .4rem; padding-top: .4rem; color: #e1edf5; font-size: .58rem; }.renewal-archive__video > span { display: grid; place-items: center; width: 1rem; height: .75rem; border-radius: .2rem; color: #1a1820; background: var(--renewal-gold); font-size: .5rem; }.renewal-archive__video b { margin-left: auto; font-size: 1rem; font-weight: 400; }.renewal-archive__more { display: block; min-width: 18rem; margin: 1rem auto 1.5rem; padding: .65rem 1rem; border: 1px solid var(--renewal-muted); border-radius: .35rem; color: var(--renewal-text); background: transparent; font: inherit; font-size: .7rem; cursor: pointer; }.renewal-archive__more span { margin-left: .8rem; }
+@media (max-width: 760px) { .renewal-archive__hero { min-height: 11rem; padding: 1.2rem var(--renewal-content-gutter) 2rem; }.renewal-archive__hero h1 { font-size: clamp(2rem, 10vw, 3rem); }.renewal-archive__hero p { font-size: .7rem; }.renewal-archive__filters { gap: .4rem; width: calc(100% - (2 * var(--renewal-content-gutter))); overflow-x: auto; }.renewal-archive__filters button { font-size: .62rem; white-space: nowrap; }.renewal-archive__grid { grid-template-columns: 1fr; width: calc(100% - (2 * var(--renewal-content-gutter))); gap: .55rem; margin-top: .55rem; }.renewal-archive__card { grid-template-columns: 6.8rem minmax(0, 1fr); gap: .6rem; min-height: 10.8rem; padding: .55rem; }.renewal-archive__card > img { height: 9.4rem; }.renewal-archive__card h2 { font-size: .75rem; }.renewal-archive__meta { font-size: .55rem; gap: .3rem; }.renewal-archive__meta b { font-size: .48rem; }.renewal-archive__line { font-size: .52rem; }.renewal-archive__numbers span { font-size: .42rem; }.renewal-archive__numbers strong { font-size: .82rem; }.renewal-archive__video { font-size: .48rem; }.renewal-archive__more { width: calc(100% - (2 * var(--renewal-content-gutter))); min-width: 0; margin-top: .8rem; } }

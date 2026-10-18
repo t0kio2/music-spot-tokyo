@@ -1,0 +1,48 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+
+const lives = [
+	{ year: "2026", month: "2026年9月", type: "定期ライブ", title: "MuST Live Vol.15 -秋場所-", date: "2026年9月12日(土)　10:00-16:00", place: "大塚ウェルカムバック", people: ["46名", "11名", "57名"], image: "photo-1506157786151-b8491531f063" },
+	{ year: "2026", month: "2026年6月", type: "企画ライブ", title: "MuST Live Vol.14", subtitle: "-ヨルシカ・星街すいせい・UNISON SQUARE GARDEN Session-", date: "2026年6月20日(土)　10:00-16:00", place: "大久保ホットショット", people: ["43名", "4名", "47名"], image: "photo-1470229722913-7c0e2dbbafd3" },
+	{ year: "2026", month: "2026年3月", type: "定期ライブ", title: "MuST Live Vol.13 -春場所-", date: "2026年3月7日(土)　10:00-16:00", place: "大塚ウェルカムバック", people: ["49名", "11名", "60名"], image: "photo-1459749411175-04bf5292ceea" },
+	{ year: "2025", month: "2025年12月", type: "対バンライブ", title: "MuST Live Vol.12 -対バン巡業-", date: "2025年12月20日(土)　9:00-14:30", place: "新宿ナインスパイス", people: ["24名", "15名", "39名"], image: "photo-1501386761578-eac5c94b800a", pink: true },
+	{ year: "2025", month: "2025年9月", type: "定期ライブ", title: "MuST Live Vol.11 -秋場所-", date: "2025年9月20日(土)　10:00-16:00", place: "大塚ウェルカムバック", people: ["46名", "7名", "53名"], image: "photo-1506157786151-b8491531f063" },
+	{ year: "2025", month: "2025年6月", type: "企画ライブ", title: "MuST Live Vol.10", subtitle: "-ずとまよ＆King Gnu Session-", date: "2025年6月14日(土)　9:00-15:00", place: "高円寺ルーツ", people: ["44名", "5名", "49名"], image: "photo-1459749411175-04bf5292ceea", pink: true },
+	{ year: "2024", month: "2024年12月", type: "定期ライブ", title: "MuST Live Vol.8 -対バン巡業-", date: "2024年12月14日(土)", place: "新宿ナインスパイス", people: ["31名", "12名", "43名"], image: "photo-1501386761578-eac5c94b800a", extra: true },
+	{ year: "2024", month: "2024年9月", type: "定期ライブ", title: "MuST Live Vol.7 -秋場所-", date: "2024年9月14日(土)", place: "大塚ウェルカムバック", people: ["35名", "6名", "41名"], image: "photo-1506157786151-b8491531f063", extra: true },
+	{ year: "2023", month: "2023年12月", type: "定期ライブ", title: "MuST Live Vol.4 -冬ライブ-", date: "2023年12月16日(土)", place: "大塚ウェルカムバック", people: ["28名", "7名", "35名"], image: "photo-1459749411175-04bf5292ceea", extra: true },
+];
+---
+
+<RenewalLayout title="過去のライブ" description="これまで開催したライブの記録をご紹介します。">
+	<div class="renewal-archive">
+		<section class="renewal-archive__hero" aria-labelledby="archive-title">
+			<RenewalBreadcrumb title="過去のライブ" className="renewal-archive__breadcrumb" />
+			<h1 id="archive-title">過去のライブ</h1>
+			<p>これまで開催したライブの記録をご紹介します。</p>
+		</section>
+		<nav class="renewal-archive__filters" aria-label="ライブ開催年で絞り込み">
+			{["all", "2026", "2025", "2024", "2023"].map((year, index) => <button type="button" class:list={{ active: index === 0 }} data-year={year} aria-pressed={index === 0 ? "true" : "false"}>{year === "all" ? "すべて" : year}</button>)}
+		</nav>
+		<section class="renewal-archive__grid" aria-label="過去のライブ一覧">
+			{lives.map((live) => <article class:list={{ "renewal-archive__card": true, "renewal-archive__card--extra": live.extra }} data-year={live.year}><img src={`https://images.unsplash.com/${live.image}?auto=format&fit=crop&w=500&q=85`} alt={`${live.title}のライブ写真`} /><div class="renewal-archive__details"><div class="renewal-archive__meta"><span>{live.month}</span><b class:list={{ pink: live.pink }}>{live.type}</b></div><h2>{live.title}</h2>{live.subtitle && <p class="renewal-archive__subtitle">{live.subtitle}</p>}<p class="renewal-archive__line"><RenewalIcon name="calendar" />{live.date}</p><p class="renewal-archive__line"><RenewalIcon name="pin" />{live.place}</p><div class="renewal-archive__numbers">{["出演者", "観覧者", "合計"].map((label, index) => <span>{label}<strong>{live.people[index]}</strong></span>)}</div><a class="renewal-archive__video" href="#video"><span>▶</span>演奏動画をみる（YouTube）<b>→</b></a></div></article>)}
+		</section>
+		<button class="renewal-archive__more" type="button">さらに過去のライブを見る <span>→</span></button>
+	</div>
+</RenewalLayout>
+
+<script>
+	const filters = document.querySelectorAll<HTMLButtonElement>(".renewal-archive__filters button");
+	const cards = document.querySelectorAll<HTMLElement>(".renewal-archive__card");
+	filters.forEach((filter) => filter.addEventListener("click", () => {
+		const year = filter.dataset.year;
+		filters.forEach((button) => { const active = button === filter; button.classList.toggle("active", active); button.setAttribute("aria-pressed", String(active)); });
+		cards.forEach((card) => { card.hidden = card.classList.contains("renewal-archive__card--extra") || (year !== "all" && card.dataset.year !== year); });
+	}));
+	document.querySelector<HTMLButtonElement>(".renewal-archive__more")?.addEventListener("click", (event) => {
+		document.querySelectorAll<HTMLElement>(".renewal-archive__card--extra").forEach((card) => { card.hidden = false; });
+		(event.currentTarget as HTMLButtonElement).hidden = true;
+	});
+</script>

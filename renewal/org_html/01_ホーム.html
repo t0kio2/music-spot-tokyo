@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020d17">
+  <title>MuST | Music Spot Tokyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020b14;
+      --bg-deep: #01070e;
+      --panel: #031522;
+      --panel-soft: #061b2a;
+      --cyan: #00eaff;
+      --cyan-soft: #62f4ff;
+      --pink: #ff35d0;
+      --orange: #ffc17c;
+      --text: #f5f8ff;
+      --muted: #b8d1df;
+      --line: rgba(0, 234, 255, .68);
+      --sidebar-width: 150px;
+      --phone-width: 360px;
+      --font-body: "Noto Sans JP", sans-serif;
+      --font-hand: "Caveat", "Kaisei Decol", cursive;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 70% 0%, rgba(0, 95, 145, .14), transparent 42%),
+        var(--bg);
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    img { max-width: 100%; display: block; }
+    .site-shell { min-height: 100vh; }
+
+    /* Desktop navigation */
+    .sidebar {
+      position: fixed;
+      z-index: 20;
+      inset: 0 auto 0 0;
+      width: var(--sidebar-width);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background: linear-gradient(180deg, #03111e 0%, #041724 68%, #010a12 100%);
+      border-right: 1px solid rgba(0, 234, 255, .48);
+      overflow: hidden;
+    }
+    .brand {
+      height: 131px;
+      display: grid;
+      place-items: center;
+      border-bottom: 1px solid rgba(0, 234, 255, .24);
+      background: radial-gradient(circle, rgba(0, 203, 255, .12), transparent 67%);
+    }
+    .brand-mark {
+      width: 91px;
+      height: 91px;
+      border: 2px solid var(--cyan);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      color: var(--pink);
+      font-family: var(--font-hand);
+      font-size: 19px;
+      line-height: 1.05;
+      text-align: center;
+      box-shadow: 0 0 9px var(--cyan), inset 0 0 15px rgba(0, 234, 255, .18);
+      transform: rotate(-8deg);
+    }
+    .brand-mark .music-symbol { color: var(--cyan); font-size: 27px; text-shadow: 0 0 10px var(--cyan); }
+    .brand-mark small { color: var(--pink); font-size: 12px; }
+    .side-nav { padding-top: 0; }
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 8px 13px 8px 18px;
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(0, 234, 255, .06);
+      transition: background .2s ease, color .2s ease;
+    }
+    .side-nav a:hover, .side-nav a.active { background: linear-gradient(90deg, rgba(0, 199, 255, .34), rgba(0, 115, 170, .15)); color: white; }
+    .nav-icon { width: 22px; flex: 0 0 22px; color: var(--cyan-soft); font-size: 22px; text-align: center; line-height: 1; }
+    .nav-number { color: #6cdfff; font-size: 9px; }
+    .sidebar-note {
+      margin: auto 13px 0;
+      padding-bottom: 16px;
+      color: #fff;
+      font-family: var(--font-hand);
+      font-size: 19px;
+      line-height: 1.3;
+      transform: rotate(-9deg);
+      text-shadow: 0 0 8px rgba(255,255,255,.35);
+    }
+    .sidebar-note::after {
+      content: "";
+      display: block;
+      width: 95px;
+      height: 2px;
+      margin: 5px 0 0 7px;
+      background: var(--pink);
+      transform: rotate(-17deg);
+      box-shadow: 0 0 8px var(--pink);
+    }
+    .cityline {
+      height: 135px;
+      margin-top: 18px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      color: #c9eaff;
+      font-size: 48px;
+      opacity: .85;
+      text-shadow: 0 0 9px rgba(0, 234, 255, .4);
+    }
+    .copyright { padding: 6px 5px 12px; text-align: center; font-size: 8px; white-space: nowrap; }
+
+    /* Main layout */
+    .main-layout {
+      margin-left: var(--sidebar-width);
+      margin-right: calc(var(--phone-width) + 26px);
+      min-width: 0;
+    }
+    .hero {
+      min-height: 375px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #03111e;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(1, 10, 19, .87) 0%, rgba(1, 10, 19, .55) 39%, rgba(1, 10, 19, .05) 73%, rgba(1, 10, 19, .32) 100%),
+        linear-gradient(0deg, rgba(1, 10, 19, .75), transparent 46%),
+        url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1800&q=85") center 48% / cover;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: radial-gradient(ellipse at 75% 0%, rgba(0, 98, 255, .15), transparent 45%);
+      pointer-events: none;
+    }
+    .hero-topline { display: flex; justify-content: flex-end; padding: 18px 18px 0; }
+    .hero-copy { max-width: 650px; padding: 8px 0 27px 4.2%; }
+    .hero h1 {
+      margin: 0;
+      max-width: 610px;
+      font-family: var(--font-hand);
+      font-size: clamp(29px, 3vw, 44px);
+      font-weight: 600;
+      line-height: 1.14;
+      letter-spacing: .025em;
+      transform: rotate(-4deg);
+      text-shadow: 0 2px 12px rgba(0,0,0,.65);
+    }
+    .pink-stroke {
+      width: min(430px, 80%);
+      height: 4px;
+      margin: 14px 0 14px -16px;
+      background: var(--pink);
+      border-radius: 100%;
+      transform: rotate(-13deg);
+      box-shadow: 0 0 10px rgba(255, 53, 208, .75);
+    }
+    .hero-copy p { max-width: 440px; margin: 0 0 12px; font-size: 14px; font-weight: 500; text-shadow: 0 2px 5px #000; }
+    .hero-slogan {
+      position: absolute;
+      right: 4%;
+      bottom: 25px;
+      color: #70dfff;
+      font-family: var(--font-hand);
+      font-size: clamp(27px, 3vw, 40px);
+      line-height: .9;
+      text-align: center;
+      transform: rotate(-12deg);
+      text-shadow: 0 0 9px #00baff;
+    }
+    .hero-slogan::after { content: ""; display: block; width: 85%; height: 2px; margin: 7px auto; background: var(--cyan); transform: rotate(-13deg); }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-height: 39px;
+      padding: 8px 21px;
+      border: 1.5px solid var(--cyan);
+      border-radius: 99px;
+      color: white;
+      background: rgba(0, 12, 23, .72);
+      box-shadow: inset 0 0 10px rgba(0, 234, 255, .04);
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.3;
+      transition: background .2s, box-shadow .2s, transform .2s;
+    }
+    .pill:hover { background: rgba(0, 211, 255, .15); box-shadow: 0 0 12px rgba(0,234,255,.35); transform: translateY(-1px); }
+    .pill .arrow { color: var(--cyan); font-size: 17px; line-height: 1; }
+    .pill-primary { min-width: 300px; font-size: 14px; }
+    .pill-warm { border: 0; border-radius: 9px; color: #1b1110; background: var(--orange); box-shadow: 0 0 12px rgba(255, 193, 124, .2); }
+    .pill-pink { border-color: var(--pink); }
+    .pill-pink .arrow { color: var(--pink); }
+
+    .content { padding: 10px 16px 18px 20px; }
+    .feature-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: 11px; }
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: linear-gradient(135deg, rgba(5, 28, 44, .97), rgba(1, 12, 23, .96));
+    }
+    .feature-card { min-height: 248px; padding: 20px 26px 16px; }
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      opacity: .35;
+      pointer-events: none;
+    }
+    .song-card::before {
+      background-image: linear-gradient(90deg, #03111e 2%, rgba(3,17,30,.88) 42%, rgba(3,17,30,.1)), url("https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=900&q=80");
+      background-position: center;
+    }
+    .achievement-card::before {
+      background-image: linear-gradient(90deg, #03111e 0%, rgba(3,17,30,.82) 48%, rgba(3,17,30,.15)), url("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=1100&q=80");
+    }
+    .panel-content { position: relative; z-index: 1; }
+    .section-heading { display: flex; align-items: center; gap: 13px; margin: 0 0 13px; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3; font-weight: 600; }
+    .heading-icon { color: var(--pink); font-size: 36px; line-height: 1; text-shadow: 0 0 12px rgba(255,53,208,.45); }
+    .achievement-card .heading-icon, .schedule-heading .heading-icon { color: var(--cyan); }
+    .heading-underline { width: 160px; max-width: 75%; height: 2px; margin: -5px 0 13px 51px; background: var(--pink); transform: rotate(-2deg); }
+    .panel p { margin: 0 0 14px; font-size: 13px; line-height: 1.8; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .card-actions .pill { min-height: 36px; }
+    .achievement-card { padding-right: 23px; }
+    .achievement-card p { max-width: 390px; }
+
+    /* Schedule */
+    .schedule-board {
+      display: grid;
+      grid-template-columns: 1.12fr 2.65fr .8fr;
+      gap: 0;
+      margin-top: 16px;
+      padding: 0;
+    }
+    .schedule-intro { padding: 17px 13px 15px; border-right: 1px solid rgba(0,234,255,.25); }
+    .hand-title { margin: 0 0 10px; font-family: var(--font-hand); font-size: clamp(28px, 2.8vw, 39px); line-height: 1.1; font-weight: 600; transform: rotate(-4deg); }
+    .hand-title::after { content: ""; display: block; width: 78%; height: 2px; margin: 6px 0 0 3px; background: var(--pink); transform: rotate(-8deg); }
+    .schedule-intro p { margin: 12px 0 14px; font-size: 10px; line-height: 1.7; }
+    .schedule-intro .card-actions { gap: 6px; }
+    .schedule-intro .pill { min-height: 32px; padding: 6px 11px; font-size: 10px; }
+    .schedule-main { padding: 10px 11px 11px; }
+    .subheading { margin: 0 0 8px; color: var(--cyan-soft); font-size: 15px; font-weight: 700; }
+    .schedule-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; height: calc(100% - 30px); }
+    .schedule-item { padding: 10px 9px 8px; border: 1px solid rgba(0,234,255,.58); border-radius: 9px; background: rgba(1, 11, 20, .75); }
+    .schedule-item header { display: flex; align-items: center; gap: 8px; padding-bottom: 7px; border-bottom: 1px solid var(--cyan); }
+    .schedule-item .item-icon { font-size: 27px; line-height: 1; color: var(--cyan); }
+    .schedule-item:nth-child(2) .item-icon, .schedule-item:nth-child(2) .item-month { color: var(--orange); }
+    .schedule-item:nth-child(2) header { border-color: var(--orange); }
+    .schedule-item:nth-child(3) .item-icon, .schedule-item:nth-child(3) .item-month { color: var(--pink); }
+    .schedule-item:nth-child(3) header { border-color: var(--pink); }
+    .item-month { display: block; color: var(--cyan-soft); font-size: 13px; font-weight: 700; }
+    .item-name { display: block; font-size: 11px; font-weight: 600; }
+    .schedule-item p { margin: 8px 0 0; font-size: 9px; line-height: 1.8; }
+    .next-live { padding: 10px 12px; border-left: 1px solid rgba(0,234,255,.25); }
+    .next-live .subheading { color: var(--orange); }
+    .next-live img { width: 100%; height: 76px; object-fit: cover; border: 1px solid rgba(0,234,255,.5); border-radius: 5px; }
+    .next-live h3 { margin: 7px 0 3px; font-size: 13px; line-height: 1.5; }
+    .next-live p { font-size: 9px; line-height: 1.6; margin-bottom: 9px; }
+    .next-live .pill { min-height: 31px; width: 100%; padding: 5px 8px; font-size: 10px; }
+
+    /* Bottom CTA */
+    .bottom-cta {
+      min-height: 104px;
+      display: grid;
+      grid-template-columns: 1fr 1.45fr auto;
+      align-items: center;
+      gap: 18px;
+      margin-top: 10px;
+      padding: 14px 26px;
+      background:
+        linear-gradient(90deg, rgba(1,10,19,.78), rgba(1,10,19,.55)),
+        url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80") center 52% / cover;
+    }
+    .cta-script { color: #ff91e9; font-family: var(--font-hand); font-size: clamp(26px, 3vw, 39px); line-height: 1; font-style: italic; text-shadow: 0 0 12px rgba(255,53,208,.7); transform: rotate(-5deg); }
+    .cta-script::after { content: ""; display: block; width: 90%; height: 2px; margin-top: 7px; background: var(--pink); transform: rotate(-8deg); }
+    .bottom-cta p { margin: 0; font-size: 13px; font-weight: 600; line-height: 1.7; text-shadow: 0 2px 4px #000; }
+    .bottom-cta .pill { white-space: nowrap; }
+
+    /* Right-side phone preview */
+    .phone-stage {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: calc(var(--phone-width) + 26px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px 12px 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.12), rgba(0,0,0,.45));
+      border-left: 1px solid rgba(0,234,255,.14);
+    }
+    .phone {
+      position: relative;
+      width: min(100%, var(--phone-width));
+      height: min(98vh, 1000px);
+      min-height: 580px;
+      padding: 8px;
+      border: 3px solid #727b82;
+      border-radius: 48px;
+      background: #05070b;
+      box-shadow: 0 0 0 2px #151a20, inset 0 0 0 2px #20252b, 0 0 22px rgba(0,0,0,.85);
+    }
+    .phone::before {
+      content: "";
+      position: absolute;
+      z-index: 3;
+      top: 8px;
+      left: 50%;
+      width: 128px;
+      height: 25px;
+      transform: translateX(-50%);
+      background: #020306;
+      border-radius: 0 0 16px 16px;
+    }
+    .phone-screen {
+      height: 100%;
+      overflow: auto;
+      scrollbar-width: none;
+      border-radius: 39px;
+      background: #020d18;
+      border: 1px solid #172c3a;
+    }
+    .phone-screen::-webkit-scrollbar { display: none; }
+    .phone-status { display: flex; justify-content: space-between; align-items: center; height: 38px; padding: 9px 24px 0; font-size: 11px; font-weight: 700; }
+    .status-icons { letter-spacing: 1px; }
+    .mobile-header { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px 10px; border-bottom: 1px solid rgba(0,234,255,.22); }
+    .mobile-logo { font-family: var(--font-hand); font-size: 27px; font-weight: 700; line-height: 1; }
+    .mobile-logo small { font-family: var(--font-body); font-size: 9px; font-weight: 400; }
+    .hamburger { font-size: 24px; line-height: 1; }
+    .mobile-hero {
+      position: relative;
+      padding: 21px 12px 15px;
+      background:
+        linear-gradient(90deg, rgba(1,9,17,.84), rgba(1,9,17,.2)),
+        linear-gradient(0deg, #020d18, transparent 70%),
+        url("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=700&q=80") center / cover;
+    }
+    .mobile-hero h2 { margin: 0; font-family: var(--font-hand); font-size: 22px; line-height: 1.08; font-weight: 600; transform: rotate(-3deg); }
+    .mobile-hero .pink-stroke { width: 78%; margin: 8px 0 9px -4px; height: 2px; }
+    .mobile-hero p { margin: 0 0 9px; font-size: 9px; line-height: 1.7; }
+    .mobile-hero .pill { min-height: 31px; width: 72%; padding: 6px 8px; font-size: 9px; }
+    .mobile-slogan { position: absolute; right: 9px; bottom: 14px; color: var(--cyan-soft); font: italic 18px/.9 var(--font-hand); transform: rotate(-12deg); }
+    .phone-content { padding: 0 8px 8px; }
+    .mobile-card { position: relative; overflow: hidden; margin-top: 10px; padding: 10px 10px 9px; border: 1px solid rgba(0,234,255,.68); border-radius: 8px; background: linear-gradient(120deg, rgba(3,22,36,.98), rgba(1,12,23,.91)); }
+    .mobile-card.with-photo::after { content: ""; position: absolute; inset: 0 0 0 50%; z-index: 0; background: linear-gradient(90deg, #031522, rgba(3,21,34,.12)), var(--card-image) center / cover; opacity: .72; }
+    .mobile-card > * { position: relative; z-index: 1; }
+    .mobile-card h3 { margin: 0 0 4px; font-size: 13px; line-height: 1.4; }
+    .mobile-card h3 .heading-icon { font-size: 25px; vertical-align: middle; margin-right: 5px; }
+    .mobile-card p { margin: 0 0 7px; font-size: 9px; line-height: 1.65; }
+    .mobile-card .pill { min-height: 28px; padding: 5px 10px; font-size: 9px; }
+    .mobile-card .card-actions { gap: 5px; }
+    .mobile-card .card-actions .pill { flex: 1; padding: 5px 4px; font-size: 8px; }
+    .mobile-schedule { padding: 9px 4px 0; }
+    .mobile-schedule .subheading { font-size: 12px; margin-bottom: 5px; }
+    .mobile-schedule-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; margin-top: 3px; border: 1px solid rgba(0,234,255,.65); border-radius: 7px; background: #041522; font-size: 9px; }
+    .mobile-schedule-row .item-icon { width: 20px; font-size: 18px; color: var(--pink); text-align: center; }
+    .mobile-schedule-row:nth-child(3) .item-icon { color: var(--orange); }
+    .mobile-schedule-row:nth-child(4) .item-icon { color: var(--cyan); }
+    .mobile-schedule-row strong { color: var(--cyan-soft); margin-right: 6px; }
+    .mobile-schedule-row .chevron { margin-left: auto; color: var(--cyan); font-size: 17px; }
+    .mobile-next { display: grid; grid-template-columns: 1fr 1.2fr; gap: 8px; align-items: center; }
+    .mobile-next img { width: 100%; height: 65px; object-fit: cover; border-radius: 5px; border: 1px solid rgba(0,234,255,.45); }
+    .mobile-next h4 { margin: 0 0 4px; font-size: 10px; color: var(--orange); }
+    .mobile-next p { font-size: 8px; }
+    .mobile-footer { padding: 10px; text-align: center; background: linear-gradient(0deg, #061827, transparent); }
+    .mobile-footer .cta-script { display: block; font-size: 20px; }
+    .mobile-footer .mobile-logo { font-size: 18px; margin-top: 4px; }
+
+    @media (min-width: 1500px) {
+      :root { --sidebar-width: 150px; --phone-width: 360px; }
+      .hero { min-height: 375px; }
+      .content { padding-right: 16px; }
+    }
+    @media (max-width: 1250px) {
+      :root { --sidebar-width: 116px; --phone-width: 300px; }
+      .brand { height: 112px; }
+      .brand-mark { width: 76px; height: 76px; font-size: 16px; }
+      .side-nav a { padding-left: 10px; gap: 5px; font-size: 9px; }
+      .nav-icon { width: 19px; flex-basis: 19px; font-size: 19px; }
+      .phone-stage { width: calc(var(--phone-width) + 18px); padding-right: 10px; }
+      .phone { border-radius: 39px; }
+      .phone-screen { border-radius: 31px; }
+      .hero-copy { padding-left: 4%; }
+      .feature-card { padding: 16px; }
+      .schedule-board { grid-template-columns: 1fr 2.1fr .85fr; }
+      .schedule-item { padding: 8px 6px; }
+      .schedule-item p { font-size: 8px; }
+      .bottom-cta { padding: 12px 16px; gap: 12px; }
+    }
+    @media (max-width: 1000px) {
+      .phone-stage { display: none; }
+      .main-layout { margin-right: 0; }
+      .hero { min-height: 390px; }
+      .hero-copy { max-width: 610px; padding-top: 20px; }
+      .feature-grid { grid-template-columns: 1fr 1.35fr; }
+      .schedule-board { grid-template-columns: 1fr 2fr; }
+      .next-live { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.3fr auto; gap: 12px; align-items: center; border-left: 0; border-top: 1px solid rgba(0,234,255,.25); }
+      .next-live .subheading { grid-column: 1 / -1; margin-bottom: -4px; }
+      .next-live img { height: 78px; }
+      .next-live h3 { margin-top: 0; }
+      .next-live .pill { width: auto; }
+    }
+    @media (max-width: 700px) {
+      :root { --sidebar-width: 0px; }
+      body { font-size: 13px; }
+      .sidebar { display: none; }
+      .main-layout { margin: 0; }
+      .hero { min-height: 455px; }
+      .hero-topline { padding: 12px 12px 0; }
+      .hero-topline .pill { min-height: 32px; padding: 6px 12px; font-size: 10px; }
+      .hero-copy { padding: 27px 18px 30px; }
+      .hero h1 { font-size: clamp(31px, 8vw, 42px); line-height: 1.12; }
+      .pink-stroke { margin-top: 14px; }
+      .hero-copy p { max-width: 350px; font-size: 12px; }
+      .hero-slogan { right: 18px; bottom: 14px; font-size: 29px; }
+      .content { padding: 12px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 12px; }
+      .feature-card { min-height: auto; padding: 20px 18px; }
+      .section-heading { font-size: 22px; }
+      .panel p { font-size: 12px; }
+      .achievement-card p { max-width: 80%; }
+      .schedule-board { grid-template-columns: 1fr; }
+      .schedule-intro { border-right: 0; border-bottom: 1px solid rgba(0,234,255,.25); padding: 20px; }
+      .schedule-intro p { font-size: 11px; }
+      .hand-title { font-size: 37px; }
+      .schedule-main { padding: 13px; }
+      .schedule-cards { grid-template-columns: 1fr; gap: 9px; height: auto; }
+      .schedule-item { padding: 12px; }
+      .schedule-item p { font-size: 10px; }
+      .schedule-item header { padding-bottom: 9px; }
+      .next-live { grid-column: auto; display: block; padding: 14px; border-top: 1px solid rgba(0,234,255,.25); }
+      .next-live .subheading { margin-bottom: 8px; }
+      .next-live img { height: 145px; }
+      .next-live h3 { margin-top: 8px; }
+      .next-live p { font-size: 10px; }
+      .next-live .pill { width: auto; min-width: 145px; }
+      .bottom-cta { grid-template-columns: 1fr; gap: 15px; padding: 22px 18px; text-align: center; }
+      .cta-script { justify-self: center; font-size: 34px; }
+      .bottom-cta p { font-size: 12px; }
+      .bottom-cta .pill { justify-self: center; min-width: 220px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <aside class="sidebar" aria-label="サイトナビゲーション">
+      <a class="brand" href="#home" aria-label="MuST ホーム">
+        <span class="brand-mark">MuST<span class="music-symbol">♫</span><small>Music Spot Tokyo</small></span>
+      </a>
+      <nav class="side-nav">
+        <a class="active" href="#home"><span class="nav-icon">⌂</span><span><span class="nav-number">01</span> ホーム</span></a>
+        <a href="#about"><span class="nav-icon">♧</span><span><span class="nav-number">02</span> MuSTについて</span></a>
+        <a href="#music"><span class="nav-icon">♫</span><span><span class="nav-number">03</span> 演奏曲について</span></a>
+        <a href="#activities"><span class="nav-icon">♧</span><span><span class="nav-number">04</span> 活動実績</span></a>
+        <a href="#live"><span class="nav-icon">▷</span><span><span class="nav-number">05</span> 過去のライブ</span></a>
+        <a href="#schedule"><span class="nav-icon">⚙</span><span><span class="nav-number">06</span> 参加までの流れ</span></a>
+        <a href="#faq"><span class="nav-icon">ⓘ</span><span><span class="nav-number">07</span> よくある質問</span></a>
+        <a href="#notes"><span class="nav-icon">△</span><span><span class="nav-number">08</span> 注意事項</span></a>
+        <a href="#entry"><span class="nav-icon">▤</span><span><span class="nav-number">09</span> 募集状況・申込み</span></a>
+      </nav>
+      <p class="sidebar-note">音楽でつながる、<br>新しい仲間たち。</p>
+      <div class="cityline" aria-hidden="true">♜♙♜</div>
+      <small class="copyright">© 2026 MuST · Music Spot Tokyo</small>
+    </aside>
+
+    <div class="main-layout">
+      <main>
+        <section class="hero" id="home" aria-labelledby="hero-title">
+          <div class="hero-topline">
+            <a class="pill pill-warm" href="#entry">♟　募集状況・申込み <span class="arrow">→</span></a>
+          </div>
+          <div class="hero-copy">
+            <h1 id="hero-title">何歳になっても、<br>気の知れた仲間と、<br>気軽にライブハウスで演奏を。</h1>
+            <div class="pink-stroke" aria-hidden="true"></div>
+            <p>MuSTは、そんな“居場所”を作りたくて始めた<br>社会人軽音サークルです。</p>
+            <a class="pill pill-primary" href="#about">MuSTについて詳しく見る <span class="arrow">→</span></a>
+          </div>
+          <div class="hero-slogan" aria-hidden="true">Music<br>Connects Us.</div>
+        </section>
+
+        <div class="content">
+          <div class="feature-grid">
+            <section class="panel feature-card song-card" id="music">
+              <div class="panel-content">
+                <h2 class="section-heading"><span class="heading-icon">♫</span> 演奏曲について</h2>
+                <div class="heading-underline" aria-hidden="true"></div>
+                <p>2017年以降のJ-POP・邦ロックを中心に、<br>話題のアーティストやフェスで盛り上がる<br>人気の曲を演奏します。</p>
+                <a class="pill" href="#music-details">演奏曲について詳しく見る <span class="arrow">→</span></a>
+              </div>
+            </section>
+
+            <section class="panel feature-card achievement-card" id="activities">
+              <div class="panel-content">
+                <h2 class="section-heading"><span class="heading-icon">▥</span> 活動実績・過去のライブ</h2>
+                <p>好きな音楽を、気の合う人たちと。<br>2023年の立ち上げから、ライブやセッションを<br>重ねてきました。<br>いつもの友人たちと、新しい出会いとともに。<br>10年後も、20年後も、その先も。<br>音楽を楽しむ時間を大切にしていきます。</p>
+                <div class="card-actions">
+                  <a class="pill" href="#activities-details">活動実績を見る <span class="arrow">→</span></a>
+                  <a class="pill" href="#live">過去のライブを見る <span class="arrow">→</span></a>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel schedule-board" id="schedule" aria-labelledby="schedule-title">
+            <div class="schedule-intro">
+              <h2 class="hand-title">MuST のライブ</h2>
+              <p>3ヵ月ごとに、異なる形式でライブを開催しています。<br>それぞれ違う楽しさがある4つのライブを楽しめます。</p>
+              <div class="card-actions">
+                <a class="pill" href="#flow">参加までの流れ <span class="arrow">→</span></a>
+                <a class="pill" href="#entry">募集状況・申込み <span class="arrow">→</span></a>
+              </div>
+            </div>
+            <div class="schedule-main">
+              <h2 class="subheading" id="schedule-title">今後のスケジュール</h2>
+              <div class="schedule-cards">
+                <article class="schedule-item">
+                  <header><span class="item-icon">♧</span><span><span class="item-month">3月・6月</span><span class="item-name">定期セッションライブ</span></span></header>
+                  <p>・曲ごとにメンバーが替わるセッション形式で演奏。<br>・リクエストをもとに24曲ほど選定。<br>・初参加の方も安心。（詳細は会員向け）</p>
+                </article>
+                <article class="schedule-item">
+                  <header><span class="item-icon">✪</span><span><span class="item-month">6月</span><span class="item-name">企画ライブ</span></span></header>
+                  <p>アーティストやリテーマを決めたライブ。ジャンルは企画ごとに変わり、これまでにKing Gnu、ずっと真夜中でいいのに。、ミスチルなどのアーティスト縛りで開催。単発のテーマライブです。</p>
+                </article>
+                <article class="schedule-item">
+                  <header><span class="item-icon">▦</span><span><span class="item-month">12月</span><span class="item-name">対バンライブ</span></span></header>
+                  <p>定期セッションライブのメンバーを中心に、バンドを組んで出演。メンバーの組み合わせや曲目は様々。1回限りのバンドもあり、気軽に参加できるライブです。</p>
+                </article>
+              </div>
+            </div>
+            <aside class="next-live" id="live">
+              <h2 class="subheading">次回のライブ</h2>
+              <img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80" alt="照明に彩られたライブステージ">
+              <h3>2026.12<br>対バンライブ</h3>
+              <p>主にサークルメンバーで組まれたバンドを中心にライブハウスで演奏します。</p>
+              <a class="pill pill-pink" href="#live-details">詳細を見る <span class="arrow">→</span></a>
+            </aside>
+          </section>
+
+          <section class="panel bottom-cta" id="entry">
+            <div class="cta-script">Let’s Play Together!</div>
+            <p>一緒に音楽を楽しむ仲間を探しています。<br>あなたの「やってみたい」を、私たちと一緒に。</p>
+            <a class="pill pill-warm" href="#entry-details">募集状況・申込み <span class="arrow">→</span></a>
+          </section>
+        </div>
+      </main>
+      <footer style="padding: 0 20px 16px; color: #7d9bac; font-size: 10px;">
+        <span>© 2026 MuST - Music Spot Tokyo.</span>
+      </footer>
+    </div>
+
+    <!-- PCでは右側にスマートフォンのサイト表示例を配置。狭い画面では非表示。 -->
+    <aside class="phone-stage" aria-label="スマートフォン表示プレビュー">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-status"><span>9:41</span><span class="status-icons">▂ ▄ ▆ ▰</span></div>
+          <header class="mobile-header">
+            <a class="mobile-logo" href="#home">MuST<small>　Music Spot Tokyo</small></a>
+            <span class="hamburger" aria-hidden="true">☰</span>
+          </header>
+          <section class="mobile-hero">
+            <h2>何歳になっても、<br>気の知れた仲間と、<br>気軽にライブハウスで演奏を。</h2>
+            <div class="pink-stroke" aria-hidden="true"></div>
+            <p>MuSTは、そんな“居場所”を作りたくて始めた<br>社会人軽音サークルです。</p>
+            <a class="pill" href="#about">MuSTについて詳しく見る <span class="arrow">→</span></a>
+            <span class="mobile-slogan">Music<br>Connects Us.</span>
+          </section>
+          <div class="phone-content">
+            <section class="mobile-card with-photo" style="--card-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=500&q=80')" id="music-details">
+              <h3><span class="heading-icon">♫</span> 演奏曲について</h3>
+              <p>2017年以降のJ-POP・邦ロックを中心に、話題のアーティストやフェスで盛り上がる人気の曲を演奏します。</p>
+              <a class="pill" href="#music">演奏曲について詳しく見る <span class="arrow">→</span></a>
+            </section>
+            <section class="mobile-card with-photo" style="--card-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=80')" id="activities-details">
+              <h3><span class="heading-icon" style="color:var(--cyan)">▥</span> 活動実績・過去のライブ</h3>
+              <p>好きな音楽を、気の合う人たちと。<br>2023年の立ち上げから、ライブやセッションを重ねてきました。<br>10年後も、20年後も、その先も。<br>音楽を楽しむ時間を大切にしていきます。</p>
+              <div class="card-actions">
+                <a class="pill" href="#activities">活動実績を見る <span class="arrow">→</span></a>
+                <a class="pill" href="#live">過去のライブを見る <span class="arrow">→</span></a>
+              </div>
+            </section>
+            <section class="mobile-card">
+              <h3><span class="heading-icon" style="color:var(--cyan)">▦</span> MuSTのライブ</h3>
+              <p>3ヵ月ごとに、異なる形式でライブを開催しています。それぞれ違う楽しさがある4つのライブを楽しめます。</p>
+              <div class="card-actions">
+                <a class="pill" href="#flow">◇　参加までの流れ <span class="arrow">→</span></a>
+                <a class="pill pill-warm" href="#entry">♟　募集状況・申込み <span class="arrow">→</span></a>
+              </div>
+            </section>
+            <section class="mobile-schedule">
+              <h3 class="subheading">今後のスケジュール</h3>
+              <a class="mobile-schedule-row" href="#schedule"><span class="item-icon">♧</span><span><strong>3月・6月</strong> 定期セッションライブ</span><span class="chevron">›</span></a>
+              <a class="mobile-schedule-row" href="#schedule"><span class="item-icon">✪</span><span><strong style="color:var(--orange)">6月</strong> 企画ライブ</span><span class="chevron">›</span></a>
+              <a class="mobile-schedule-row" href="#schedule"><span class="item-icon">▦</span><span><strong style="color:var(--pink)">12月</strong> 対バンライブ</span><span class="chevron">›</span></a>
+            </section>
+            <section class="mobile-card" id="live-details">
+              <h3>次回のライブ</h3>
+              <div class="mobile-next">
+                <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=450&q=80" alt="ライブ会場の様子">
+                <div><h4>2026.12<br>対バンライブ</h4><p>主にサークルメンバーで組まれたバンドを中心にライブハウスで演奏します。</p><a class="pill pill-pink" href="#live">詳細を見る <span class="arrow">→</span></a></div>
+              </div>
+            </section>
+            <footer class="mobile-footer">
+              <span class="cta-script">Let’s Play Together!</span>
+              <div class="mobile-logo">MuST <small>Music Spot Tokyo</small></div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

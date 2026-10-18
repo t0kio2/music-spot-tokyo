@@ -1,0 +1,34 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+---
+
+<RenewalLayout title="MuSTについて" description="MuSTの活動内容や特徴をご紹介します。">
+	<div class="renewal-overview">
+		<section class="renewal-overview__hero" id="about" aria-labelledby="overview-title">
+			<RenewalBreadcrumb title="MuSTについて" className="renewal-overview__breadcrumb" />
+			<h1 id="overview-title">MuSTについて</h1>
+			<h2>何歳になっても、気の知れた仲間と、<br />気軽にライブハウスで演奏を。</h2>
+			<p class="renewal-overview__lead">MuSTは、そんな“居場所”をつくりたくて始めた社会人軽音サークルです。<br />楽しむことを一番に、本番に向けてしっかり音を合わせます。</p>
+		</section>
+
+		<section class="renewal-overview__stats" aria-label="MuSTの概要">
+			<div class="renewal-overview__stat"><span class="renewal-overview__stat-icon"><RenewalIcon name="pin" /></span><div><span>活動場所</span><strong>東京都23区内</strong></div></div>
+			<div class="renewal-overview__stat"><span class="renewal-overview__stat-icon"><RenewalIcon name="users" /></span><div><span>参加人数</span><strong>58<small>名（女性20名・男性38名）</small></strong></div><time datetime="2026-10-01">2026年10月1日時点</time></div>
+		</section>
+
+		<section class="renewal-overview__content" id="activities" aria-label="MuSTの特徴">
+			<div class="renewal-overview__feature-grid">
+				<article class="renewal-overview__feature renewal-overview__feature--one"><div class="renewal-overview__feature-top"><span>01</span><b aria-hidden="true"><RenewalIcon name="users" /></b></div><h3>一曲ごとにメンバーが替わる<br />セッション形式</h3><p>固定バンドではないので、バンドを組む手間や、メンバーに縛られる心配がありません。<br />ライフスタイルが変わっても、無理なく続けられます。</p></article>
+				<article class="renewal-overview__feature renewal-overview__feature--two"><div class="renewal-overview__feature-top"><span>02</span><b aria-hidden="true"><RenewalIcon name="calendar" /></b></div><h3>本番前に、2回の練習会を実施</h3><p>都内のスタジオで事前に音を合わせられます。<br />久しぶりの方も、ライブ初挑戦の方も、安心してステージに立てます。</p></article>
+				<article class="renewal-overview__feature renewal-overview__feature--three"><div class="renewal-overview__feature-top"><span>03</span><b aria-hidden="true"><RenewalIcon name="users" /></b></div><h3>同世代（1987〜1999年生まれ）が中心</h3><p>趣味や価値観が近く、音楽を通じて自然と友達になれます。<br />10年後、20年後も一緒に演奏できる仲間づくりを大切にしています。</p></article>
+				<article class="renewal-overview__feature renewal-overview__feature--four"><div class="renewal-overview__feature-top"><span>04</span><b aria-hidden="true"><RenewalIcon name="line" className="renewal-line-icon" /></b></div><h3>連絡は、ライブごとのLINEグループで</h3><p>LINEグループは、ライブごとに作成します。そのライブに参加するメンバーだけが入るので、必要な連絡だけが届きます。参加しなくなったあとも通知が届き続けたり、グループを抜けづらくなったりする心配がありません。</p></article>
+				<article class="renewal-overview__feature renewal-overview__feature--five"><div class="renewal-overview__feature-top"><span>05</span><b aria-hidden="true"><RenewalIcon name="music" /></b></div><h3>ライブハウスで、本格的に演奏</h3><p>演奏の舞台はライブハウスです。<br />照明と音響の整ったステージで演奏できます。<br />演奏の様子はYouTubeでもご覧いただけます。</p><a href="/renewal/" class="renewal-overview__video-link">▶ 演奏の様子を見る <span>↗</span></a></article>
+				<article class="renewal-overview__feature renewal-overview__feature--six" id="members"><div class="renewal-overview__feature-top"><span>06</span><b aria-hidden="true">♧</b></div><h3>お一人での参加・初心者も歓迎</h3><p>お一人でのご参加も、初心者・ライブ未経験の方も歓迎です。「ライブハウスのステージに立ってみたい」という気持ちがあれば、お気軽にご参加ください。</p></article>
+			</div>
+		</section>
+
+		<section class="renewal-overview__recruit" id="entry" aria-label="メンバー募集"><p>現在、2027年3月13日の定期セッションライブの<br />メンバーを募集中です。</p><a href="/renewal/application/">募集状況・申込みへ <span>→</span></a></section>
+	</div>
+</RenewalLayout>

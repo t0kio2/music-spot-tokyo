@@ -1,0 +1,18 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+const events = [
+	{ year: "2026", month: "12月", type: "対バンライブ", title: "MuST Live Vol.16 -対バン巡業-", date: "12/12(土)　10:00〜16:00", place: "飯田橋 SPACE WITH", fee: "1,500円（1D別）", status: "観覧者のみの募集です。出演者の募集は行なっておりません。", closed: true, songs: ["Aoooコピー", "Official髭男dism・藤井風コピー", "ゲスの極み乙女。コピー", "Deco*27コピー", "星野源コピー"] },
+	{ year: "2027", month: "3月", type: "定期ライブ", title: "MuST Live Vol.17 -春場所-", date: "3/13(土)　10:00〜16:00", place: "大塚 welcome back", fee: "2,600円前後（1D別）", status: "パートごとの募集状況", songs: ["ボーカル　募集中", "ギター　募集中", "ベース　キャンセル待ち", "ドラム　募集中", "キーボード　募集中", "トランペット　募集中", "トロンボーン　募集中", "サックス　キャンセル待ち"] },
+	{ year: "2027", month: "6月", type: "企画セッション", title: "MuST Live Vol.18", date: "日程・内容は未定です。", place: "", fee: "", status: "内容が未定のため、まだ募集していません。", songs: [], closed: true },
+];
+---
+<RenewalLayout title="募集状況・申込み" description="ライブの詳細や募集状況をご確認いただけます。">
+	<div class="renewal-application">
+		<section class="renewal-application__hero"><RenewalBreadcrumb title="募集状況・申込み" className="renewal-application__breadcrumb" /><h1>募集状況・申込み</h1><p>ライブの詳細や募集状況を確認して、ぜひご参加ください。</p></section>
+		<section class="renewal-application__events" aria-label="募集中のライブイベント">
+			{events.map((event, index) => <article class="renewal-application__event"><div class:list={["renewal-application__poster", { "renewal-application__poster--orange": index === 1 }]} aria-hidden="true"></div><div class="renewal-application__info"><div class="renewal-application__title"><time><span>{event.year}</span><b>{event.month}</b></time><div><small>{event.type}</small><h2>{event.title}</h2></div></div><dl><div><dt>▦</dt><dd><b>日時</b>{event.date}</dd></div>{event.place && <div><dt>●</dt><dd><b>会場</b>{event.place}</dd></div>}{event.fee && <div><dt>¥</dt><dd><b>費用</b>{event.fee}</dd></div>}</dl></div><div class="renewal-application__details">{event.songs.length > 0 && <><h3>{index === 0 ? "出演（演奏順は未定）" : "募集パート"}</h3><ul>{event.songs.map((song) => <li>{song}</li>)}</ul></>}</div><aside class:list={["renewal-application__status", { "renewal-application__status--closed": event.closed }]}><h3>♙ 募集状況</h3><p>{event.status}</p><a href="#apply">詳細を見る　→</a></aside></article>)}
+		</section>
+		<section class="renewal-application__apply" id="apply"><span aria-hidden="true">♙</span><h2>参加申込</h2><p>上記の各ライブへの参加をご希望の方は、こちらのフォームからお申し込みください。</p><a href="#apply">申込みフォームへ <span>→</span></a></section>
+	</div>
+</RenewalLayout>

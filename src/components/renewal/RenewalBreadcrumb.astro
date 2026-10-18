@@ -1,0 +1,15 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+
+interface Props {
+	title: string;
+	className?: string;
+	home?: boolean;
+}
+
+const { title, className = "renewal-breadcrumb", home = false } = Astro.props;
+---
+
+<nav class={`renewal-breadcrumb ${className}`} aria-label="パンくずリスト">
+	{home ? <span><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />{title}</span> : <><a href="/renewal/"><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />ホーム</a><span>›</span><span>{title}</span></>}
+</nav>

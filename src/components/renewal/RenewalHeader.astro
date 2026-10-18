@@ -1,0 +1,42 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+
+const navItems = [
+	["/renewal/", "ホーム", "home"],
+	["/renewal/overview/", "MuSTについて", "users"],
+	["/renewal/setlist/", "演奏曲について", "music"],
+	["/renewal/activity/", "活動実績", "chart"],
+	["/renewal/archive/", "過去のライブ", "play"],
+	["/renewal/flow/", "参加までの流れ", "nodes"],
+	["/renewal/faq/", "よくある質問", "question"],
+	["/renewal/precautions/", "注意事項", "warning"],
+	["/renewal/application/", "募集・申込み", "document"],
+] as const;
+
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) =>
+	href === "/renewal/" ? currentPath === href : currentPath.startsWith(href);
+---
+
+<header class="renewal-header">
+	<a class="renewal-brand" href="/renewal/" aria-label="MuST ホーム">
+		<img src="/favicon-source.png" alt="" />
+	</a>
+	<input class="renewal-menu-toggle" type="checkbox" id="renewal-menu-toggle" />
+	<label class="renewal-menu-button" for="renewal-menu-toggle" aria-label="メニューを開く">
+		<span></span><span></span><span></span>
+	</label>
+	<nav class="renewal-nav" aria-label="新デザインのメインナビゲーション">
+		{navItems.map(([href, label, icon]) => (
+			<a href={href} class:list={{ active: isActive(href) }}>
+				<span class="renewal-nav__icon" aria-hidden="true">
+					<RenewalIcon name={icon} />
+				</span>{label}
+			</a>
+		))}
+	</nav>
+	<label class="renewal-menu-scrim" for="renewal-menu-toggle"></label>
+	<div class="renewal-sidebar-meta">
+		<small>© 2026 MuST - Music Spot Tokyo -</small>
+	</div>
+</header>

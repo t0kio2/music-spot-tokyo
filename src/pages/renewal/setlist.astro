@@ -1,0 +1,39 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import { getScheduleAndArchive } from "../../lib/microcms";
+
+const data = await getScheduleAndArchive();
+---
+
+<RenewalLayout title="演奏曲について">
+	<div class="renewal-setlist">
+		<section class="renewal-setlist__hero" aria-labelledby="setlist-title">
+			<RenewalBreadcrumb title="演奏曲について" className="renewal-setlist__breadcrumb" />
+			<h1 id="setlist-title">どんな曲を<span>演奏</span>するの？</h1>
+			<p>J-POP・邦ロックを中心に、<br />サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。</p>
+		</section>
+
+		<section class="renewal-setlist__content">
+			<div class="renewal-setlist__genres">
+				<div class="renewal-setlist__intro"><h2>演奏ジャンル</h2><p>J-POP・邦ロックを中心に、話題のアーティストやフェスで盛り上がる人気の曲を演奏します。</p></div>
+				<article><span>♫</span><h3>J-POP</h3><p>最新のヒット曲・<br />話題のアーティスト</p></article>
+				<article><span><RenewalIcon name="guitar" /></span><h3>邦ロック</h3><p>フェスで盛り上がる<br />人気アーティスト</p></article>
+				<article><span>☆</span><h3>演奏例</h3><p>King Gnu<br />ずっと真夜中でいいのに。<br />Mr.Children</p></article>
+			</div>
+
+			<section class="renewal-setlist__selection" aria-labelledby="selection-title">
+				<div class="renewal-setlist__selection-copy"><h2 id="selection-title">♫　選曲の目安</h2><p>ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。</p><p class="renewal-setlist__note">ただし、あくまで目安です。状況に応じて増減します。<br />※目安を満たしたリクエスト曲が少ない場合、運営者セレクトの曲が選出される可能性もございます。</p></div>
+				<div class="renewal-setlist__donut" role="img" aria-label="選曲の目安：2017年以降50%、2006年以前から2016年17%、期待枠8%、管楽器枠17%"><strong>全体<em>24曲</em>（目安）</strong><b class="p50">50%</b><b class="p17">17%</b><b class="p8">8%</b><b class="p17b">17%</b></div>
+				<div class="renewal-setlist__legend"><div><i></i><span>2017年〜（12曲程度）<small>YouTube再生数を参考にした人気曲</small></span><b>50%</b></div><div><i></i><span>2006年以前〜2016年（4曲程度）<small>国民的ヒット曲</small></span><b>17%</b></div><div><i></i><span>期待枠（2曲程度）<small>今後、活躍が期待されるアーティスト</small></span><b>8%</b></div><div><i></i><span>管楽器枠（4曲程度）<small>主に管楽器パートメンバーで話し合い決定</small></span><b>17%</b></div></div>
+			</section>
+
+			<div class="renewal-setlist__bottom">
+				<section class="renewal-setlist__info"><h2>☆　期待枠について</h2><p>全体の約2曲を「期待枠」から採用します。<br />リストアップされたアーティストの「代表曲」を中心に参照します。</p></section>
+				<section class="renewal-setlist__info renewal-setlist__info--past"><h2>⌕　過去の演奏曲について</h2><p>過去3年以内に演奏した曲はリクエストできません。<br />過去演奏曲一覧・検索でご確認ください。</p><a href={data.past_songs_url} target="_blank" rel="noopener noreferrer">過去の演奏曲一覧を見る →</a></section>
+			</div>
+
+		</section>
+	</div>
+</RenewalLayout>

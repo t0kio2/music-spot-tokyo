@@ -1,0 +1,17 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import { getFaqList } from "../../lib/microcms";
+const faqs = await getFaqList();
+---
+<RenewalLayout title="よくある質問" description="参加前によくいただくご質問をまとめました。">
+	<div class="renewal-faq-page">
+		<section class="renewal-faq-page__hero"><RenewalBreadcrumb title="よくある質問" className="renewal-faq-page__breadcrumb" /><h1>よくある質問</h1><p>みなさまからのよくあるご質問をまとめました。</p></section>
+		<section class="renewal-faq-page__content" aria-label="よくある質問一覧">
+			<div class="renewal-faq-page__list">
+				{faqs.map((faq, index) => <details><summary><span>Q{index + 1}</span><b>{faq.question}</b><i>＋</i></summary><div set:html={faq.answer} /> </details>)}
+			</div>
+			<a class="renewal-faq-page__apply" href="/renewal/application/">募集状況・申込み <span>→</span></a>
+		</section>
+	</div>
+</RenewalLayout>
