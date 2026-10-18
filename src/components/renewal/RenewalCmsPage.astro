@@ -1,0 +1,17 @@
+---
+import PageHero from "./PageHero.astro";
+import type { Page } from "../../lib/microcms";
+
+interface Props {
+	page: Page | null;
+	title: string;
+	description?: string;
+}
+
+const { page, title, description } = Astro.props;
+---
+
+<PageHero title={page?.title ?? title} description={description} />
+<section class="renewal-content renewal-prose">
+	<div class="renewal-container" set:html={page?.content ?? ""} />
+</section>

@@ -1,0 +1,17 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import { getScheduleAndArchive } from "../../lib/microcms";
+const { schedules } = await getScheduleAndArchive();
+const upcoming = schedules.filter((event) => new Date(event.event_date) >= new Date()).sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
+---
+<RenewalLayout title="スケジュール" description="開催予定のライブ情報をご案内します。">
+	<div class="renewal-schedule">
+		<section class="renewal-schedule__hero"><RenewalBreadcrumb title="スケジュール" className="renewal-schedule__breadcrumb" /><h1>スケジュール</h1><p>開催予定のライブ情報をご案内します。</p></section>
+		<section class="renewal-schedule__content" aria-label="開催予定のライブ">
+			<div class="renewal-schedule__heading"><p>Upcoming Live</p><h2>これからのライブ</h2></div>
+			<div class="renewal-schedule__list">{upcoming.map((event) => <article><time datetime={event.event_date}>{new Date(event.event_date).toLocaleDateString("ja-JP")}</time><div><h3>{event.title}</h3><div class="renewal-schedule__body" set:html={event.content} /></div><a href="/renewal/application/">募集状況を見る →</a></article>)}{upcoming.length === 0 && <p class="renewal-empty">現在予定されているスケジュールはありません。</p>}</div>
+		</section>
+		<section class="renewal-schedule__apply"><p>参加するライブが決まったら、募集状況をご確認ください。</p><a href="/renewal/application/">募集状況・申込み <span>→</span></a></section>
+	</div>
+</RenewalLayout>

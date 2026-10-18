@@ -1,0 +1,19 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+const sections = [
+	{ icon: "♧", title: "サークル全般について", items: ["参加者間でトラブルが発生した際は当事者同士での解決をお願いします。", "練習会、ライブ本番における貴重品や機材等の管理は各自でお願いします。", "ライブ・練習会の様子を撮影し、各種SNSやYouTubeにアップさせていただきますのでご容赦ください。", "応募いただいた内容に虚偽があった場合や、他の参加者を不快にさせる言動が多い方、運営上支障があると判断した方は、参加をお断りすることがございます。", "曲のエントリー後に出演を辞退される場合は、以下のキャンセル料金が発生しますのでご注意ください。", "招待されたLINEグループでは、返信、投稿をしないでください。ご質問等がある場合は、運営者の個人LINEにご連絡お願いします。"] },
+	{ icon: "♙", title: "練習会について", note: "（3月・9月の定期ライブのみ）", items: ["練習会には極力参加くださるようお願いします。欠席された場合は次回参加の際、制限事項がございます。", "第1回、第2回ともに同じ時間割となります。各自、スケジュールの調整をお願いします。", "スタジオ代は参加者の割り勘となります。1,000円〜1,500円程度です。", "やむを得ず欠席する場合は練習会の14日前までにご連絡をお願いいたします。", "ご自身の演奏曲が始まる10分前までには到着しているようお願いします。", "演奏機材は、すぐにスタジオに入れるよう事前準備をお願いします。"] },
+	{ icon: "⊘", title: "勧誘行為の禁止", items: ["他サークル、他イベントへの勧誘行為", "主催者に無断でサークル内のメンバーとバンドを結成すること", "退会したメンバーからの勧誘を受け、他サークルや他イベントへ参加すること。"] },
+	{ icon: "♬", title: "ライブについて", items: ["ライブ直前や当日のドタキャンはしないようお願いします。", "本番直前で欠員が出てしまった場合、欠員パート無しでの演奏か、出演代行を依頼するか、曲の中止となる場合がございます。", "ボーカルの方について、スマホや楽譜を見ながら歌うのはご遠慮ください。（代行出演の方は除く。）"] },
+];
+---
+<RenewalLayout title="注意事項" description="みんなで長く楽しく活動するための注意事項です。">
+	<div class="renewal-precautions">
+		<section class="renewal-precautions__hero"><RenewalBreadcrumb title="注意事項" className="renewal-precautions__breadcrumb" /><h1>注意事項</h1><p>みんなで長く楽しく活動していくために、必ずご確認ください。</p></section>
+		<section class="renewal-precautions__content" id="notice" aria-label="サークルの注意事項">
+			{sections.map((section, index) => <details class:list={["renewal-precautions__panel", { "renewal-precautions__panel--pink": index === 2 }]} open={index !== 2}><summary><span>{section.icon}</span><h2>{section.title}<small>{section.note}</small></h2><i>＋</i></summary><ol>{section.items.map((item) => <li><b>{item}</b></li>)}</ol>{index === 0 && <div class="renewal-precautions__fee">キャンセル料金：本番2か月以内は出演料の50%、1か月以内は出演料の100%（100円未満切り上げ）</div>}</details>)}
+			<a class="renewal-precautions__apply" href="/renewal/application/">募集状況・申込み <span>→</span></a>
+		</section>
+	</div>
+</RenewalLayout>

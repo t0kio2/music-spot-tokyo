@@ -1,0 +1,17 @@
+---
+interface Props {
+	title: string;
+	date: string;
+	content: string;
+}
+
+const { title, date, content } = Astro.props;
+---
+
+<article class="renewal-event-card">
+	<div class="renewal-event-card__date">{date}</div>
+	<div class="renewal-event-card__body">
+		<h3>{title}</h3>
+		<div class="renewal-prose" set:html={content} />
+	</div>
+</article>

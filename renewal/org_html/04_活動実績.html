@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#020d16">
+<title>活動実績 | MuST Music Spot Tokyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#020c15;--panel:#031724;--panel2:#061b2a;--cyan:#28e5ff;--cyan2:#00b9e8;
+ --pink:#f45abf;--violet:#9a75ff;--blue:#239eff;--orange:#ff9d82;--gold:#ffc58d;
+ --text:#f4f8ff;--muted:#c3d8e6;--line:rgba(0,208,244,.52);
+ --sans:"Noto Sans JP",sans-serif;--serif:"Noto Serif JP",serif;--script:"Caveat",cursive;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#010810;color:var(--text);font:13px/1.7 var(--sans)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.site-shell{margin-right:405px;min-height:100vh;background:var(--bg);border-right:1px solid #1d4351}
+.sidebar{position:fixed;inset:0 auto 0 0;width:173px;padding:24px 18px 12px;background:linear-gradient(180deg,#03111b,#010a12);border-right:1px solid #23505e;display:flex;flex-direction:column;align-items:stretch;z-index:5}
+.logo{width:114px;height:114px;align-self:center;border:2px solid #56dcff;border-radius:50%;display:grid;place-items:center;position:relative;color:#fff;font:italic 700 23px var(--script);box-shadow:0 0 13px #00bfff66,inset 0 0 12px #00bfff44;background:radial-gradient(circle,#06304a,#020b14 70%);margin:5px 0 20px}
+.logo:before{content:"♫";font-size:39px;color:#11e8ff;text-shadow:0 0 8px #00bfff;position:absolute;top:29px}.logo:after{content:"Music Spot Tokyo";position:absolute;bottom:12px;font:italic 13px var(--script);color:#ff69cb;transform:rotate(-28deg)}
+.logo span{position:absolute;top:3px;color:#ff68c9;font-size:17px}
+.side-nav{display:grid;gap:2px}.side-nav a{height:29px;display:flex;align-items:center;gap:12px;padding:0 8px;font-size:11px;white-space:nowrap}.side-nav a.active{color:var(--gold);font-weight:700}.side-nav a.active:before{content:"";position:absolute;left:0;width:12px;height:30px;background:var(--gold)}
+.side-nav .num{font-variant-numeric:tabular-nums;color:#fff}.social{display:flex;justify-content:space-around;margin:14px 0 30px;padding-top:13px;border-top:1px solid #24414c;font-size:21px}
+.side-note{font:italic 20px/1.2 var(--script);transform:rotate(-11deg);margin:5px 0 0 3px;color:#f3f5ff}.side-note span{display:block;margin-left:15px}
+.city{margin-top:auto;text-align:center;color:#bcd0de;font-size:8px}.city svg{width:100%;height:116px;stroke:#c5d9e7;stroke-width:1;fill:none}.city small{display:block;white-space:nowrap}
+main{margin-left:173px}
+.hero{min-height:280px;padding:25px 4% 22px;position:relative;isolation:isolate;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,10,17,.94) 0%,rgba(1,10,17,.67) 36%,rgba(1,10,17,.1) 72%,rgba(1,10,17,.3)),linear-gradient(0deg,rgba(1,10,17,.55),transparent 60%),url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85") center 52%/cover}
+.breadcrumb{display:flex;gap:9px;align-items:center;font-size:9px;color:#e1edf5;margin-bottom:17px}.breadcrumb span{color:var(--orange)}
+.hero h1{margin:0 0 9px;font:700 clamp(38px,4vw,51px)/1.2 var(--serif);letter-spacing:.06em}
+.lead{font:600 18px/1.55 var(--serif);margin:0 0 7px}.hero-copy{font-size:12px;line-height:1.75;margin:0;max-width:620px}
+.script-tag{position:absolute;right:4%;bottom:35px;font:italic 31px/.9 var(--script);color:#ff75ca;transform:rotate(-12deg);text-shadow:0 0 9px #f45abf88}.script-tag span{display:block;color:#7bdcff;padding-left:21px}
+.stats{display:grid;grid-template-columns:1fr 1fr 0.62fr;gap:15px;align-items:center;padding:15px 3% 16px;border-bottom:1px solid #174050}
+.stat-card{min-height:110px;border:1px solid #177c94;border-radius:9px;background:linear-gradient(130deg,#061522cc,#03121f);display:flex;align-items:center;gap:22px;padding:12px 24px;position:relative;overflow:hidden}
+.stat-card:first-child{border-color:#9a639a}.stat-card:nth-child(2){border-color:#5964a5}
+.stat-icon{width:76px;height:76px;flex:none;display:grid;place-items:center;border:1.5px solid var(--cyan);border-radius:50%;font-size:36px;color:#5cecff;text-shadow:0 0 10px #00dfff}.stat-card:first-child .stat-icon{border-color:#ed70d5}.stat-label{font-size:12px;color:#65dff8;font-weight:700}.stat-value{font-size:34px;line-height:1.2;color:#58e6ff;font-weight:600}.stat-value small{font-size:17px}.stat-date{font-size:10px;color:#93d8ee}
+.stat-scribble{font:italic 21px/1.2 var(--script);color:#e7e9f5;transform:rotate(-10deg);justify-self:center}.stat-scribble span{display:block;margin-left:18px}.stat-scribble:after{content:"";display:block;width:54px;height:1px;background:var(--orange);transform:rotate(-17deg);margin:12px 0 0 60px}
+.timeline-section{padding:10px 2.7% 0}
+.section-heading{display:flex;align-items:center;gap:13px;font:700 23px var(--serif);margin:0 0 10px}.section-heading:after{content:"";width:85px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.timeline{display:grid;gap:9px}
+.year-card{display:grid;grid-template-columns:107px minmax(0,1fr) 245px;align-items:stretch;min-height:90px;border:1px solid #12516a;border-radius:6px;background:linear-gradient(105deg,#03121d,#02101b);overflow:hidden}
+.year{position:relative;padding:11px 10px;color:var(--orange);font:600 25px/1.4 var(--serif);border-right:1px solid #67828d}
+.year:after{content:"";position:absolute;right:-4px;top:19px;width:7px;height:7px;border-radius:50%;background:#ff9e88;box-shadow:0 0 7px #ff9e8888}
+.year small{display:block;color:#d4e5ee;font:500 11px/1.7 var(--sans);white-space:nowrap}
+.year-content{padding:9px 15px 8px 24px;font-size:10px;line-height:1.7;min-width:0}
+.year-content strong{font-size:12px;color:#65dff8;font-weight:600}.year-content ul{margin:2px 0 3px;padding-left:13px}.year-content li{padding-left:0}.attendees{font-size:11px}.attendees b{color:#55e6ff;font-size:13px}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:13px 25px 12px 0;align-items:center;position:relative}
+.photos img{width:100%;height:60px;object-fit:cover;border-radius:6px;border:1px solid #3b5965}
+.photos:after{content:"›";position:absolute;right:9px;top:50%;transform:translateY(-50%);font-size:24px;color:#e4f3fa}
+.next-live{margin:16px 2% 19px;min-height:94px;border:1px solid #15506a;border-radius:6px;display:grid;grid-template-columns:140px 1fr auto;align-items:center;gap:14px;padding:12px 25px;background:linear-gradient(90deg,rgba(2,14,23,.95),rgba(2,14,23,.55)),url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=80") center 65%/cover}
+.next-script{font:italic 31px var(--script);color:#ff70cc;transform:rotate(-10deg);white-space:nowrap}.next-copy{font-size:12px}.next-copy strong{font-weight:600}.next-copy p{margin:2px 0}.apply-button{background:linear-gradient(100deg,#ffc995,#ff9d83);color:#111a22;border-radius:6px;padding:11px 24px;font-size:10px;font-weight:800;white-space:nowrap}
+footer{padding:14px 22px 22px;border-top:1px solid #183e4d;display:flex;justify-content:space-between;align-items:center;font-size:9px;color:#c6d9e5}footer .foot-brand{font:italic 700 25px var(--script);color:#fff}
+.phone-stage{position:fixed;inset:0 0 0 auto;width:405px;padding:10px 12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#0002,#0007);z-index:10}
+.phone{height:min(98vh,1020px);min-height:570px;width:100%;padding:8px;border:3px solid #68747b;border-radius:53px;background:#05070a;box-shadow:0 0 0 2px #272d31,0 0 25px #000,inset 0 0 0 2px #12191f;position:relative}
+.phone:before{content:"";position:absolute;z-index:5;top:7px;left:50%;transform:translateX(-50%);width:135px;height:24px;border-radius:0 0 17px 17px;background:#020305}
+.phone-screen{height:100%;overflow:auto;scrollbar-width:none;border-radius:42px;border:1px solid #153443;background:#020c15}.phone-screen::-webkit-scrollbar{display:none}
+.status{height:37px;padding:7px 24px 0;display:flex;justify-content:space-between;font-size:11px;font-weight:700}
+.mobile-header{display:flex;align-items:center;gap:11px;padding:7px 13px 9px;border-bottom:1px solid #0c3547;background:#020c15}.mobile-logo{width:42px;height:42px;border:1px solid #31dfff;border-radius:50%;display:grid;place-items:center;color:#ff6bc9;font:italic 700 14px var(--script);background:radial-gradient(circle,#06405b,#020b13);box-shadow:0 0 8px #00dfff55}.mobile-brand{font:500 16px var(--serif)}.mobile-brand small{display:block;font:9px var(--sans)}.hamburger{margin-left:auto;font-size:22px}
+.mobile-hero{padding:12px 13px 15px;position:relative;background:linear-gradient(90deg,#020c15dc,#020c1550),linear-gradient(0deg,#020c15,transparent 70%),url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=700&q=80") center/cover}
+.mobile-hero .breadcrumb{font-size:8px;margin-bottom:8px}.mobile-hero h1{font:700 27px/1.25 var(--serif);margin:0 0 4px}.mobile-hero .lead{font-size:13px;line-height:1.5;margin-bottom:5px}.mobile-hero .hero-copy{font-size:9px;line-height:1.7}.mobile-hero .script-tag{position:relative;right:auto;bottom:auto;width:max-content;margin:8px 0 0 auto;font-size:22px}
+.mobile-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px 10px 10px}.mobile-stat{border:1px solid #23738b;border-radius:7px;padding:8px 6px;display:flex;align-items:center;gap:8px;min-width:0;background:linear-gradient(135deg,#061725,#020d16)}.mobile-stat .stat-icon{width:40px;height:40px;font-size:22px}.mobile-stat .stat-label{font-size:8px}.mobile-stat .stat-value{font-size:24px}.mobile-stat .stat-value small{font-size:12px}.mobile-stat .stat-date{font-size:7px;white-space:nowrap}
+.mobile-scribble{font:italic 16px/1.2 var(--script);text-align:right;padding:0 22px 5px;transform:rotate(-7deg)}
+.mobile-timeline{padding:7px 8px 0}.mobile-timeline .section-heading{font-size:16px;gap:7px;margin-bottom:8px}.mobile-timeline .section-heading:after{flex:1}
+.mobile-timeline .year-card{grid-template-columns:80px minmax(0,1fr) 65px;min-height:91px}.mobile-timeline .year{font-size:20px;padding:10px 6px}.mobile-timeline .year small{font-size:8px;white-space:normal}.mobile-timeline .year-content{padding:8px 5px 7px 13px;font-size:8px;line-height:1.55}.mobile-timeline .year-content strong{font-size:9px}.mobile-timeline .year-content ul{padding-left:9px;margin:2px 0}.mobile-timeline .attendees{font-size:8px}.mobile-timeline .attendees b{font-size:9px}.mobile-timeline .photos{display:block;padding:12px 12px 12px 0}.mobile-timeline .photos img{display:none}.mobile-timeline .photos img:last-of-type{display:block;width:100%;height:48px}.mobile-timeline .photos:after{display:none}
+.mobile-next{margin:9px 8px 10px;grid-template-columns:75px 1fr;gap:8px;padding:8px 9px;min-height:64px}.mobile-next .next-script{font-size:21px;white-space:normal}.mobile-next .next-copy{font-size:8px}.mobile-next .apply-button{grid-column:2;padding:6px 9px;font-size:8px;justify-self:end}
+.mobile-footer{padding:10px 12px 14px;font-size:7px}.mobile-footer .foot-brand{font-size:20px}
+@media(max-width:1250px){.site-shell{margin-right:340px}.phone-stage{width:340px;padding:8px}.sidebar{width:145px;padding-left:12px;padding-right:12px}.logo{width:96px;height:96px}.logo:before{top:24px}.logo:after{font-size:11px}.site-shell main{margin-left:145px}.year-card{grid-template-columns:88px minmax(0,1fr) 190px}.photos{padding-right:22px}.photos img{height:54px}.stat-card{gap:13px;padding:10px 15px}.stat-icon{width:64px;height:64px}.stats{grid-template-columns:1fr 1fr .5fr}.stat-scribble{font-size:17px}}
+@media(max-width:980px){.site-shell{margin-right:0}.phone-stage{display:none}.sidebar{width:145px}.site-shell main{margin-left:145px}.hero{min-height:260px}.year-card{grid-template-columns:88px minmax(0,1fr) 190px}.next-live{grid-template-columns:120px 1fr auto;padding:12px}.stats{grid-template-columns:1fr 1fr}.stat-scribble{display:none}}
+@media(max-width:700px){body{font-size:12px}.site-shell{border:0}.sidebar{display:none}.site-shell main{margin-left:0}.hero{min-height:285px;padding:20px 18px 18px}.breadcrumb{margin-bottom:14px}.hero h1{font-size:38px}.lead{font-size:16px}.hero-copy{font-size:11px}.script-tag{position:relative;right:auto;bottom:auto;width:max-content;margin:12px 0 0 auto;font-size:27px}.stats{grid-template-columns:1fr 1fr;gap:8px;padding:12px}.stat-card{min-height:90px;gap:9px;padding:9px}.stat-icon{width:48px;height:48px;font-size:26px}.stat-label{font-size:10px}.stat-value{font-size:27px}.stat-date{font-size:8px}.timeline-section{padding:12px 10px 0}.section-heading{font-size:21px}.year-card{grid-template-columns:74px minmax(0,1fr) 66px;min-height:90px}.year{font-size:20px;padding:10px 6px}.year small{font-size:9px;white-space:normal}.year-content{font-size:8px;padding:8px 5px 7px 12px}.year-content strong{font-size:9px}.year-content ul{padding-left:10px}.attendees{font-size:8px}.attendees b{font-size:9px}.photos{display:block;padding:12px 12px 12px 0}.photos img{display:none}.photos img:last-of-type{display:block;height:48px}.photos:after{display:none}.next-live{grid-template-columns:85px 1fr;gap:9px;margin:12px 10px;padding:10px;min-height:80px}.next-script{font-size:23px;white-space:normal}.next-copy{font-size:10px}.apply-button{grid-column:2;justify-self:end;padding:7px 10px;font-size:9px}footer{padding:12px;font-size:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="site-shell" id="top">
+<aside class="sidebar" aria-label="サイドナビゲーション">
+<a href="#top" class="logo" aria-label="MuST ホーム"><span>MuST</span></a>
+<nav class="side-nav">
+<a href="#top"><span class="num">01</span> ホーム</a><a href="#about"><span class="num">02</span> サークルについて</a><a class="active" href="#activity"><span class="num">03</span> 活動実績</a><a href="#schedule"><span class="num">04</span> スケジュール</a><a href="#members"><span class="num">05</span> メンバー</a><a href="#flow"><span class="num">06</span> 参加までの流れ</a><a href="#entry"><span class="num">07</span> 募集・申込み</a><a href="#faq"><span class="num">08</span> 注意事項</a>
+</nav>
+<div class="social" aria-label="ソーシャルリンク"><a href="#instagram" aria-label="Instagram">◎</a><a href="#youtube" aria-label="YouTube">▶</a><a href="#x" aria-label="X">𝕏</a></div>
+<div class="side-note">音楽でつながる、<span>新しい仲間たち。</span></div>
+<div class="city"><svg viewBox="0 0 150 125" aria-hidden="true"><path d="M4 118H146M14 118V79h8v39M18 79l5-12 5 12v39M30 118V56h12v62M36 56V42l3 14M47 118V83h9v35M60 118V65h12v53M66 65V49l3-12 3 12v16M77 118V91h8v27M90 118V73h12v45M96 73V60l3-8 3 8v13M110 118V84h10v34M115 84V71l4 13M127 118V96h8v22M2 118l12-9M136 118l10-9"/></svg><small>© 2026 MuST · Music Spot Tokyo</small></div>
+</aside>
+<main>
+<section class="hero" id="activity" aria-labelledby="page-title">
+<div class="breadcrumb"><span>‹</span> ホーム <span>›</span> 活動実績</div>
+<h1 id="page-title">活動実績</h1>
+<p class="lead">これまでのライブで、<br>たくさんの仲間と音を重ねてきました。</p>
+<p class="hero-copy">MuSTは、2023年の立ち上げから現在まで、<br>さまざまな形式のライブを開催してきました。<br>これからも、音楽を通じて、もっと多くの人とつながっていきます。</p>
+<div class="script-tag">Music<span>Connects Us.</span></div>
+</section>
+<section class="stats" aria-label="活動実績の数字">
+<article class="stat-card"><span class="stat-icon">♫</span><div><div class="stat-label">開催ライブ</div><div class="stat-value">15<small> 回</small></div><div class="stat-date">（2026年9月まで）</div></div></article>
+<article class="stat-card"><span class="stat-icon">♧</span><div><div class="stat-label">出演者延べ人数</div><div class="stat-value">540<small> 名</small></div><div class="stat-date">（2026年9月まで）</div></div></article>
+<div class="stat-scribble">音楽があるから、<span>もっと楽しくなる。</span></div>
+</section>
+<section class="timeline-section" id="schedule" aria-labelledby="timeline-title">
+<h2 class="section-heading" id="timeline-title">これまでの活動</h2>
+<div class="timeline">
+<article class="year-card"><div class="year">2023<small>活動開始期</small></div><div class="year-content"><strong>MuST Live Vol.1 ～ 4 を開催</strong><ul><li>春場所 ・ 対バン選集 ・ 秋場所 ・ King Gnu Session</li></ul><div class="attendees">出演者延べ人数 <b>110名</b></div></div><div class="photos" aria-label="2023年のライブ写真"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80" alt="ライブ会場"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80" alt="ステージ"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80" alt="観客"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80" alt="ライブ照明"></div></article>
+<article class="year-card"><div class="year">2024<small>さらなる成長</small></div><div class="year-content"><strong>MuST Live Vol.5 ～ 8 を開催</strong><ul><li>春場所 ・ ヨルシカ＆マカえん Session ・ 秋場所（新体制を迎えた初ライブ）</li><li>Acoustic Session Vol.1（定期ライブ参加者限定） ・ 対バン選集</li></ul><div class="attendees">出演者延べ人数 <b>250名</b></div></div><div class="photos" aria-label="2024年のライブ写真"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80" alt="ライブ会場"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80" alt="ステージ"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80" alt="観客"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80" alt="ライブ照明"></div></article>
+<article class="year-card"><div class="year">2025<small>活動の拡大</small></div><div class="year-content"><strong>MuST Live Vol.9 ～ 12 を開催</strong><ul><li>春場所 ・ Studio Session Vol.1（定期ライブ参加者限定）</li><li>ずっとまよ＆King Gnu Session ・ 秋場所 ・ Acoustic Session Vol.2（定期ライブ参加者限定）</li><li>対バン選集</li></ul><div class="attendees">出演者延べ人数 <b>410名</b></div></div><div class="photos" aria-label="2025年のライブ写真"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80" alt="ライブ会場"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80" alt="ステージ"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80" alt="観客"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80" alt="ライブ照明"></div></article>
+<article class="year-card"><div class="year">2026<small>さらなる未来へ</small></div><div class="year-content"><strong>MuST Live Vol.13 ～ 15 を開催</strong><ul><li>春場所 ・ ヨルシカ・UNISON SQUARE GARDEN ・ 星街すいせい Session ・ 秋場所</li></ul><div class="attendees">出演者延べ人数 <b>540名</b></div></div><div class="photos" aria-label="2026年のライブ写真"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80" alt="ライブ会場"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80" alt="ステージ"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80" alt="観客"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80" alt="ライブ照明"></div></article>
+</div>
+</section>
+<section class="next-live" id="entry" aria-label="次回ライブの募集"><div class="next-script">Next Live</div><div class="next-copy"><strong>2027年3月13日　定期セッションライブ</strong><p>メンバーを募集中です。</p></div><a class="apply-button" href="#entry">募集状況・申込みへ　 →</a></section>
+<footer><span class="foot-brand">MuST</span><span>Music Spot Tokyo</span><span>プライバシーポリシー　｜　お問い合わせ</span></footer>
+</main>
+</div>
+<aside class="phone-stage" aria-label="スマートフォン版プレビュー"><div class="phone"><div class="phone-screen">
+<div class="status"><span>9:41</span><span>▂ ▄ ▆ ▰</span></div>
+<header class="mobile-header"><span class="mobile-logo">MuST</span><span class="mobile-brand">MuST<small>Music Spot Tokyo</small></span><span class="hamburger">☰</span></header>
+<section class="mobile-hero"><div class="breadcrumb"><span>‹</span> ホーム <span>›</span> 活動実績</div><h1>活動実績</h1><p class="lead">これまでのライブで、<br>たくさんの仲間と音を重ねてきました。</p><p class="hero-copy">MuSTは、2023年の立ち上げから現在まで、さまざまな形式のライブを開催してきました。これからも、音楽を通じて、もっと多くの人とつながっていきます。</p><div class="script-tag">Music<span>Connects Us.</span></div></section>
+<section class="mobile-stats"><article class="mobile-stat"><span class="stat-icon">♫</span><div><div class="stat-label">開催ライブ</div><div class="stat-value">15<small> 回</small></div><div class="stat-date">（2026年9月まで）</div></div></article><article class="mobile-stat"><span class="stat-icon">♧</span><div><div class="stat-label">出演者延べ人数</div><div class="stat-value">540<small> 名</small></div><div class="stat-date">（2026年9月まで）</div></div></article></section>
+<div class="mobile-scribble">音楽があるから、<br>もっと楽しくなる。</div>
+<section class="mobile-timeline"><h2 class="section-heading">これまでの活動</h2>
+<div class="timeline">
+<article class="year-card"><div class="year">2023<small>活動開始期</small></div><div class="year-content"><strong>MuST Live Vol.1 ～ 4 を開催</strong><ul><li>春場所 ・ 対バン選集 ・ 秋場所 ・ King Gnu Session</li></ul><div class="attendees">出演者延べ人数 <b>110名</b></div></div><div class="photos"><img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80" alt="2023年ライブ"></div></article>
+<article class="year-card"><div class="year">2024<small>さらなる成長</small></div><div class="year-content"><strong>MuST Live Vol.5 ～ 8 を開催</strong><ul><li>ヨルシカ＆マカえん Session</li><li>Acoustic Session Vol.1 ・ 対バン選集</li></ul><div class="attendees">出演者延べ人数 <b>250名</b></div></div><div class="photos"><img src="https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80" alt="2024年ライブ"></div></article>
+<article class="year-card"><div class="year">2025<small>活動の拡大</small></div><div class="year-content"><strong>MuST Live Vol.9 ～ 12 を開催</strong><ul><li>Studio Session Vol.1</li><li>ずっとまよ＆King Gnu Session ・ 秋場所</li><li>Acoustic Session Vol.2 ・ 対バン選集</li></ul><div class="attendees">出演者延べ人数 <b>410名</b></div></div><div class="photos"><img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80" alt="2025年ライブ"></div></article>
+<article class="year-card"><div class="year">2026<small>さらなる未来へ</small></div><div class="year-content"><strong>MuST Live Vol.13 ～ 15 を開催</strong><ul><li>ヨルシカ・UNISON SQUARE GARDEN・星街すいせい Session</li></ul><div class="attendees">出演者延べ人数 <b>540名</b></div></div><div class="photos"><img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80" alt="2026年ライブ"></div></article>
+</div></section>
+<section class="next-live mobile-next"><div class="next-script">Next Live</div><div class="next-copy"><strong>2027年3月13日 定期セッションライブ</strong><p>メンバーを募集中です。</p></div><a class="apply-button" href="#entry">募集状況・申込みへ　 →</a></section>
+<footer class="mobile-footer"><span class="foot-brand">MuST</span><span>Music Spot Tokyo</span><span>↑</span></footer>
+</div></div></aside>
+</body>
+</html>

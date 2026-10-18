@@ -1,0 +1,9 @@
+---
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalCmsPage from "../../components/renewal/RenewalCmsPage.astro";
+import { getPageBySlug } from "../../lib/microcms";
+const page = await getPageBySlug("benefit");
+---
+<RenewalLayout title={page?.title ?? "優遇制度"}>
+	<RenewalCmsPage page={page} title="優遇制度" />
+</RenewalLayout>
