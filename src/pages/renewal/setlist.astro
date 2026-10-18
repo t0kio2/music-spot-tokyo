@@ -1,10 +1,10 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import { getScheduleAndArchive } from "../../lib/microcms";
 
 const data = await getScheduleAndArchive();
-const past = data.schedules.filter((event) => new Date(event.event_date) < new Date()).sort((a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime());
 ---
 
 <RenewalLayout title="演奏曲について">
@@ -12,7 +12,6 @@ const past = data.schedules.filter((event) => new Date(event.event_date) < new D
 		<section class="renewal-setlist__hero" aria-labelledby="setlist-title">
 			<RenewalBreadcrumb title="演奏曲について" className="renewal-setlist__breadcrumb" />
 			<h1 id="setlist-title">どんな曲を<span>演奏</span>するの？</h1>
-			<div class="renewal-setlist__stroke" aria-hidden="true"></div>
 			<p>J-POP・邦ロックを中心に、<br />サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。</p>
 		</section>
 
@@ -20,7 +19,7 @@ const past = data.schedules.filter((event) => new Date(event.event_date) < new D
 			<div class="renewal-setlist__genres">
 				<div class="renewal-setlist__intro"><h2>演奏ジャンル</h2><p>J-POP・邦ロックを中心に、話題のアーティストやフェスで盛り上がる人気の曲を演奏します。</p></div>
 				<article><span>♫</span><h3>J-POP</h3><p>最新のヒット曲・<br />話題のアーティスト</p></article>
-				<article><span>🎸</span><h3>邦ロック</h3><p>フェスで盛り上がる<br />人気アーティスト</p></article>
+				<article><span><RenewalIcon name="guitar" /></span><h3>邦ロック</h3><p>フェスで盛り上がる<br />人気アーティスト</p></article>
 				<article><span>☆</span><h3>演奏例</h3><p>King Gnu<br />ずっと真夜中でいいのに。<br />Mr.Children</p></article>
 			</div>
 
@@ -35,7 +34,6 @@ const past = data.schedules.filter((event) => new Date(event.event_date) < new D
 				<section class="renewal-setlist__info renewal-setlist__info--past"><h2>⌕　過去の演奏曲について</h2><p>過去3年以内に演奏した曲はリクエストできません。<br />過去演奏曲一覧・検索でご確認ください。</p><a href={data.past_songs_url} target="_blank" rel="noopener noreferrer">過去の演奏曲一覧を見る →</a></section>
 			</div>
 
-			<section class="renewal-setlist__archive" aria-labelledby="archive-title"><div class="renewal-setlist__archive-heading"><h2 id="archive-title">過去のライブ</h2><a href="/renewal/application/">募集状況・申込み →</a></div><div class="renewal-setlist__archive-list">{past.slice(0, 6).map((event) => <details><summary>{event.title}<span>{new Date(event.event_date).toLocaleDateString("ja-JP")}</span></summary><div class="renewal-prose" set:html={event.content} /></details>)}</div></section>
 		</section>
 	</div>
 </RenewalLayout>

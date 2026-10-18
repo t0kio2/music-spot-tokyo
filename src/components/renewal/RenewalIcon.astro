@@ -1,0 +1,41 @@
+---
+type IconName =
+	| "home"
+	| "users"
+	| "music"
+	| "chart"
+	| "play"
+	| "nodes"
+	| "question"
+	| "warning"
+	| "document"
+	| "calendar"
+	| "pin"
+	| "line"
+	| "guitar";
+
+interface Props {
+	name: IconName;
+	className?: string;
+}
+
+const { name, className = "" } = Astro.props;
+const isLine = name === "line";
+const viewBox = isLine ? "0 0 32 24" : "0 0 24 24";
+---
+
+<svg class={className} viewBox={viewBox} aria-hidden="true">
+	{name === "home" && <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V10Z" />}
+	{name === "users" && <path d="M16 20v-1.5a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4V20M9 10a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 20v-1.5a4 4 0 0 0-3-3.87M16 2.13a4 4 0 0 1 0 7.75" />}
+	{name === "music" && <path d="M9 18V5l10-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3ZM19 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z" />}
+	{name === "chart" && <path d="M3 20V10M9 20V4M15 20v-7M21 20V2M2 20h20" />}
+	{name === "play" && <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="m10 8 5 4-5 4V8Z" /></>}
+	{name === "nodes" && <><circle cx="12" cy="5" r="2" /><circle cx="5" cy="18" r="2" /><circle cx="19" cy="18" r="2" /><path d="m12 7-5 9m5-9 5 9M7 18h10" /></>}
+	{name === "question" && <><circle cx="12" cy="12" r="9" /><path d="M9.6 9a2.5 2.5 0 1 1 4.5 1.5c-.8.9-2.1 1.2-2.1 2.8M12 17h.01" /></>}
+	{name === "warning" && <><path d="m12 3 10 18H2L12 3Z" /><path d="M12 9v5M12 17h.01" /></>}
+	{name === "document" && <><path d="M5 3h10l4 4v14H5V3Z" /><path d="M15 3v5h4M8 12h8M8 16h6" /></>}
+	{name === "calendar" && <><rect x="3" y="4" width="18" height="17" rx="2" /><path d="M8 2v4M16 2v4M3 9h18M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01" /></>}
+	{name === "pin" && <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>}
+	{name === "line" && <><path d="M4 4.5A3.5 3.5 0 0 1 7.5 1h17A3.5 3.5 0 0 1 28 4.5v9A3.5 3.5 0 0 1 24.5 17H14l-5 4v-4H7.5A3.5 3.5 0 0 1 4 13.5Z" /><text x="16" y="11.7" text-anchor="middle" fill="currentColor" stroke="none" font-size="5" font-weight="700" letter-spacing=".15">LINE</text></>}
+	{name === "guitar" && <><path d="m14.6 7.2 2.2 2.2-6.1 6.1c.3.8.2 1.7-.3 2.4-.8 1.1-2.3 1.4-3.4.6-1.1-.8-1.3-2.4-.5-3.5.6-.9 1.7-1.3 2.7-.8l6.1-6.1Z" /><circle cx="7.6" cy="16.4" r=".8" /><path d="m15.5 6.3 2.2-2.2 4.2 4.2-2.2 2.2M17.7 4.1l2.2-2.2M19.9 6.3l2.2-2.2M10.7 15.5l-2.2-2.2" /></>}
+</svg>
