@@ -2,13 +2,12 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import { renewalMockApi, summarizeActivities, selectRecruitmentForBanner, getEventTypeLabel, formatEventDate } from "../../lib/renewal-api";
 
-const years = [
-	{ year: "2023", label: "活動開始期", title: "MuST Live Vol.1 ～ 4 を開催", details: ["春場所・対バン選集・秋場所・King Gnu Session"], attendees: "110名", images: ["photo-1501386761578-eac5c94b800a", "photo-1470229722913-7c0e2dbbafd3", "photo-1506157786151-b8491531f063", "photo-1459749411175-04bf5292ceea"] },
-	{ year: "2024", label: "さらなる成長", title: "MuST Live Vol.5 ～ 8 を開催", details: ["春場所・ヨルシカ＆マカえん Session・秋場所", "Acoustic Session Vol.1・対バン選集"], attendees: "250名", images: ["photo-1501386761578-eac5c94b800a", "photo-1459749411175-04bf5292ceea", "photo-1470229722913-7c0e2dbbafd3", "photo-1506157786151-b8491531f063"] },
-	{ year: "2025", label: "活動の拡大", title: "MuST Live Vol.9 ～ 12 を開催", details: ["春場所・Studio Session Vol.1", "ずっとまよ＆King Gnu Session・秋場所・Acoustic Session Vol.2・対バン選集"], attendees: "410名", images: ["photo-1470229722913-7c0e2dbbafd3", "photo-1506157786151-b8491531f063", "photo-1459749411175-04bf5292ceea", "photo-1501386761578-eac5c94b800a"] },
-	{ year: "2026", label: "さらなる未来へ", title: "MuST Live Vol.13 ～ 15 を開催", details: ["春場所・ヨルシカ・UNISON SQUARE GARDEN・星街すいせい Session・秋場所"], attendees: "540名", images: ["photo-1459749411175-04bf5292ceea", "photo-1501386761578-eac5c94b800a", "photo-1470229722913-7c0e2dbbafd3", "photo-1506157786151-b8491531f063"] },
-];
+const activities = await renewalMockApi.getActivities();
+const applications = await renewalMockApi.getApplication();
+const summary = summarizeActivities(activities);
+const recruitment = selectRecruitmentForBanner(applications);
 ---
 
 <RenewalLayout title="活動実績" description="MuSTのこれまでのライブ活動をご紹介します。">
@@ -20,16 +19,16 @@ const years = [
 			<p>MuSTは、2023年の立ち上げから現在まで、<br />さまざまな形式のライブを開催してきました。<br />これからも、音楽を通じて、もっと多くの人とつながっていきます。</p>
 		</section>
 		<section class="renewal-activity__stats" aria-label="活動実績の数字">
-			<div class="renewal-activity__stat"><span><RenewalIcon name="music" /></span><div><b>開催ライブ</b><strong>15<small>回</small></strong><em>（2026年9月まで）</em></div></div>
-			<div class="renewal-activity__stat"><span><RenewalIcon name="users" /></span><div><b>出演者延べ人数</b><strong>540<small>名</small></strong><em>（2026年9月まで）</em></div></div>
+			<div class="renewal-activity__stat"><span><RenewalIcon name="music" /></span><div><b>開催ライブ</b><strong>{summary.live_count}<small>回</small></strong><em>（{new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）</em></div></div>
+			<div class="renewal-activity__stat"><span><RenewalIcon name="users" /></span><div><b>出演者延べ人数</b><strong>{summary.performer_count}<small>名</small></strong><em>（{new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）</em></div></div>
 			<p class="renewal-activity__note">音楽があるから、<br />もっと楽しくなる。</p>
 		</section>
 		<section class="renewal-activity__timeline" aria-labelledby="activity-history-title">
 			<h2 id="activity-history-title">これまでの活動</h2>
 			<div class="renewal-activity__years">
-				{years.map((item) => <article class="renewal-activity__year"><div class="renewal-activity__year-label"><strong>{item.year}</strong><span>{item.label}</span></div><div class="renewal-activity__year-copy"><b>{item.title}</b><ul>{item.details.map((detail) => <li>{detail}</li>)}</ul><p>出演者延べ人数 <strong>{item.attendees}</strong></p></div><div class="renewal-activity__year-photos" aria-label={`${item.year}年のライブ写真`}>{item.images.map((image) => <img src={`https://images.unsplash.com/${image}?auto=format&fit=crop&w=220&q=80`} alt="" />)}</div></article>)}
+				{activities.map((item) => <article class="renewal-activity__year"><div class="renewal-activity__year-label"><strong>{item.year}</strong><span>{item.period_label}</span></div><div class="renewal-activity__year-copy"><b>{item.title}</b><ul>{item.details.map((detail) => <li>{detail.text}</li>)}</ul><p>出演者延べ人数 <strong>{item.performer_count}名</strong></p></div><div class="renewal-activity__year-photos" aria-label={`${item.year}年のライブ写真`}>{item.photos.map((photo) => <img src={photo.url} alt={photo.alt ?? ""} />)}</div></article>)}
 			</div>
 		</section>
-		<section class="renewal-activity__next" aria-label="次回のライブ"><strong>Next Live</strong><p>2027年3月13日　定期セッションライブ<br />メンバーを募集中です。</p><a href="/renewal/application/">募集状況・申込み <span>→</span></a></section>
+		{recruitment && <section class="renewal-activity__next" aria-label="次回のライブ"><strong>Next Live</strong><p>{formatEventDate(recruitment.event_date)}　{getEventTypeLabel(recruitment.event_type)}<br />メンバーを募集中です。</p><a href={recruitment.application_url ?? "/renewal/application/"}>募集状況・申込み <span>→</span></a></section>}
 	</div>
 </RenewalLayout>
