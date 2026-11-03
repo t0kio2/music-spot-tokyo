@@ -1,12 +1,13 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalMockApi, selectNextApplication, selectRecruitmentForBanner, formatEventDate, getEventTypeLabel } from "../../lib/renewal-api";
+import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
+import { renewalApi, selectNextApplication, selectRecruitmentForBanner, formatEventDate, getEventTypeLabel } from "../../lib/renewal-api";
 import heroImage from "../../assets/renewal/top_header.jpg";
 import heroBandImage from "../../assets/renewal/素材_webp/ギターギター.webp";
 import heroAudienceImage from "../../assets/renewal/素材_webp/観客.webp";
 
-const applications = await renewalMockApi.getApplication();
+const applications = await renewalApi.getApplication();
 const nextLive = selectNextApplication(applications);
 const recruitment = selectRecruitmentForBanner(applications);
 ---
@@ -29,8 +30,10 @@ const recruitment = selectRecruitmentForBanner(applications);
 				<section class="renewal-home__panel renewal-home__feature renewal-home__feature--activity"><div class="renewal-home__panel-content"><h2><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20V10M9 20V4M15 20v-7M21 20V2M2 20h20" /></svg></span> 活動実績・過去のライブ</h2><p>2023年の立ち上げから、ライブやセッションを<br />重ねてきました。<br />いつもの友人たちと、新しい出会いとともに。<br />10年後も、20年後も、その先も。<br />音楽を楽しむ時間を大切にしていきます。</p><div class="renewal-home__actions"><a class="renewal-home__pill" href="/renewal/history/">活動実績を見る <span>→</span></a><a class="renewal-home__pill" href="/renewal/setlist/">過去のライブを見る <span>→</span></a></div></div></section>
 			</div>
 
-			<section class="renewal-home__panel renewal-home__schedule" aria-labelledby="home-schedule-title"><div class="renewal-home__schedule-intro"><h2>MuST のライブ</h2><p>3ヵ月ごとに、異なる形式でライブを開催しています。それぞれ違う楽しさがある4つのライブを楽しめます。</p><div class="renewal-home__actions"><a class="renewal-home__pill" href="/renewal/flow/">参加までの流れ <span>→</span></a><a class="renewal-home__pill" href="/renewal/application/">募集状況・申込み <span>→</span></a></div></div><div class="renewal-home__schedule-main"><h2 id="home-schedule-title">今後のスケジュール</h2><div class="renewal-home__schedule-cards"><article><header><span>♧</span><div><b>3月・6月</b><strong>定期セッションライブ</strong></div></header><p>曲ごとにメンバーが替わるセッション形式で演奏。リクエストをもとに24曲ほど選定。初参加の方も安心。</p></article><article><header><span>✪</span><div><b>6月</b><strong>企画セッション</strong></div></header><p>アーティストやテーマを決めたセッション。これまでにKing Gnu、ずっと真夜中でいいのに。、ミスチルなどのアーティスト縛りで開催。</p></article><article><header><span>▦</span><div><b>12月</b><strong>対バンライブ</strong></div></header><p>定期セッションライブのメンバーを中心にバンドを組んで出演。気軽に参加できるライブです。</p></article></div></div>{nextLive && <aside class="renewal-home__next"><h2>次回のライブ</h2><div class="renewal-home__next-card">{nextLive.cover_image && <img src={nextLive.cover_image.url} alt={nextLive.cover_image.alt ?? "照明に彩られたライブステージ"} />}<h3>{formatEventDate(nextLive.event_date)}<br />{getEventTypeLabel(nextLive.event_type)}</h3><p>{nextLive.place ?? "会場未定"}</p></div></aside>}</section>
+			<section class="renewal-home__panel renewal-home__schedule" aria-labelledby="home-schedule-title"><div class="renewal-home__schedule-intro"><h2>MuST のライブ</h2><p>3ヵ月ごとに、異なる形式でライブを開催しています。それぞれ違う楽しさがある4つのライブを楽しめます。</p><div class="renewal-home__actions"><a class="renewal-home__pill" href="/renewal/flow/">参加までの流れ <span>→</span></a><a class="renewal-home__pill" href="/renewal/application/">募集状況・申込み <span>→</span></a></div></div><div class="renewal-home__schedule-main"><h2 id="home-schedule-title">今後のスケジュール</h2><div class="renewal-home__schedule-cards"><article><header><span>♧</span><div><b>3月・6月</b><strong>定期セッションライブ</strong></div></header><p>曲ごとにメンバーが替わるセッション形式で演奏。リクエストをもとに24曲ほど選定。初参加の方も安心。</p></article><article><header><span>✪</span><div><b>6月</b><strong>企画セッション</strong></div></header><p>アーティストやテーマを決めたセッション。これまでにKing Gnu、ずっと真夜中でいいのに。、ミスチルなどのアーティスト縛りで開催。</p></article><article><header><span>▦</span><div><b>12月</b><strong>対バンライブ</strong></div></header><p>定期セッションライブのメンバーを中心にバンドを組んで出演。気軽に参加できるライブです。</p></article></div></div>{nextLive && <aside class="renewal-home__next"><h2>次回のライブ</h2><div class="renewal-home__next-card">{nextLive.flyer && <button class="renewal-home__next-flyer" type="button" data-renewal-lightbox-src={nextLive.flyer.url} aria-label="次回ライブのチラシを拡大表示"><img src={nextLive.flyer.url} alt={nextLive.flyer.alt ?? "ライブチラシ"} /></button>}<h3>{formatEventDate(nextLive.event_date)}<br />{getEventTypeLabel(nextLive.event_type)}</h3><p>{nextLive.place ?? "会場未定"}</p></div></aside>}</section>
 			{recruitment && <RenewalRecruitCta event={recruitment} />}
 		</div>
 	</div>
 </RenewalLayout>
+
+<RenewalImageLightbox label="チラシを拡大表示" />
