@@ -6,7 +6,6 @@
 	font-display: swap;
 }
 
-/* End of renewal page overrides. */
 .renewal-site {
 	--renewal-bg: #010711;
 	--renewal-bg-deep: #00050b;
@@ -37,6 +36,12 @@
 	--renewal-feature-hero-height: 260px;
 	--renewal-feature-hero-height-mobile: 17rem;
 	--renewal-sidebar: 166px;
+	/* Typography scale: use these for content UI; display lettering remains page-specific. */
+	--renewal-font-md: .8rem;
+	--renewal-font-lg: .9rem;
+	--renewal-font-xl: 1rem;
+	--renewal-heading-sm: 1.25rem;
+	--renewal-heading-md: 1.5rem;
 	margin: 0;
 	background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--renewal-bg);
 	color: var(--renewal-text);
@@ -48,6 +53,40 @@
 .renewal-site img { display: block; max-width: 100%; }
 .renewal-site h1, .renewal-site h2, .renewal-site h3, .renewal-site p { margin: 0; }
 .renewal-shell { min-height: 100vh; }
+
+.renewal-not-found {
+	display: grid;
+	min-height: 100vh;
+	place-items: center;
+	padding: 3rem var(--renewal-content-gutter);
+	background: linear-gradient(135deg, #00050b, #011522 58%, #00050b);
+	text-align: center;
+}
+
+.renewal-not-found__content {
+	width: min(100%, 34rem);
+}
+
+.renewal-not-found__code {
+	color: var(--renewal-cyan);
+	font: 600 clamp(4rem, 14vw, 7rem)/.9 "Zen Old Mincho", serif;
+	letter-spacing: .08em;
+}
+
+.renewal-not-found h1 {
+	margin-top: 1rem;
+	font-size: var(--renewal-heading-sm);
+}
+
+.renewal-not-found__message {
+	margin: .75rem 0 1.5rem !important;
+	color: var(--renewal-muted);
+	font-size: var(--renewal-font-md);
+}
+
+.renewal-not-found .renewal-home__pill {
+	display: inline-flex;
+}
 
 .renewal-header { position: fixed; inset: 0 auto 0 0; z-index: 20; display: flex; flex-direction: column; align-items: stretch; width: var(--renewal-sidebar); padding: 0; border-right: 1px solid var(--renewal-border); background: linear-gradient(180deg, #01060e 0%, #010a15 68%, var(--renewal-surface-0) 100%); }
 .renewal-brand { display: grid; place-items: center; height: 131px; margin: 0; background: radial-gradient(circle, #00cbff1f, transparent 67%); }
@@ -708,6 +747,14 @@
 }
 
 @media (max-width: 760px) {
+	.renewal-site {
+		--renewal-font-md: .85rem;
+		--renewal-font-lg: 1rem;
+		--renewal-font-xl: 1.1rem;
+		--renewal-heading-sm: 1.1rem;
+		--renewal-heading-md: 1.35rem;
+	}
+
 	.renewal-subpage-hero {
 		min-height: 14rem;
 		padding: 1rem var(--renewal-content-gutter) 1.4rem;
@@ -740,3 +787,456 @@
 }
 
 /* End of renewal page overrides. */
+
+/* 履歴カードのPC表示は、参考デザインに合わせて情報の主従を明確にする。 */
+@media (min-width: 761px) {
+	.renewal-activity__year-label {
+		display: grid;
+		place-items: center;
+		text-align: center;
+	}
+
+	.renewal-activity__year-label strong {
+		font-size: var(--renewal-heading-md);
+	}
+
+	.renewal-activity__year-copy {
+		padding: .7rem 1rem;
+	}
+
+	.renewal-activity__year-copy > b {
+		font-size: var(--renewal-heading-md);
+		line-height: 1.45;
+	}
+
+	.renewal-activity__year-copy ul {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: .75rem;
+		margin: .3rem 0 .45rem;
+		padding-left: 0;
+		list-style: none;
+		white-space: nowrap;
+	}
+
+	.renewal-activity__year-copy li {
+		position: relative;
+		padding-left: .8rem;
+		font-size: var(--renewal-font-xl);
+	}
+
+	.renewal-activity__year-copy li::before {
+		content: "•";
+		position: absolute;
+		left: 0;
+		color: var(--renewal-cyan);
+	}
+
+	.renewal-activity__year-copy p {
+		font-size: var(--renewal-font-md);
+	}
+
+	.renewal-activity__year-copy p strong {
+		font-size: var(--renewal-heading-sm);
+	}
+}
+
+@media (min-width: 761px) {
+	.renewal-activity__year-value {
+		font-size: var(--renewal-heading-md) !important;
+	}
+
+	.renewal-activity__year-title {
+		font-size: var(--renewal-heading-md) !important;
+	}
+
+	.renewal-activity__year-participants {
+		font-size: var(--renewal-heading-sm) !important;
+	}
+}
+
+@media (max-width: 760px) {
+	.renewal-activity__year {
+		min-height: 8rem;
+	}
+
+	.renewal-activity__year-label {
+		display: grid;
+		place-items: center;
+		text-align: center;
+	}
+
+	.renewal-activity__year-value {
+		font-size: var(--renewal-heading-sm) !important;
+	}
+
+	.renewal-activity__year-copy {
+		padding: .6rem .5rem;
+		font-size: var(--renewal-font-md);
+		line-height: 1.65;
+	}
+
+	.renewal-activity__year-title {
+		font-size: var(--renewal-font-lg) !important;
+		line-height: 1.4;
+	}
+
+	.renewal-activity__year-copy ul {
+		margin: .2rem 0;
+		padding-left: .9rem;
+	}
+
+	.renewal-activity__year-copy li {
+		font-size: var(--renewal-font-md);
+	}
+
+	.renewal-activity__year-copy p {
+		font-size: var(--renewal-font-md);
+	}
+
+	.renewal-activity__year-participants {
+		font-size: var(--renewal-font-lg) !important;
+	}
+}
+
+.renewal-activity__year-title {
+	color: #ff9d82 !important;
+}
+
+.renewal-activity__year-participants {
+	color: #55e6ff !important;
+}
+
+@media (min-width: 1100px) {
+	.renewal-activity__year {
+		grid-template-columns: 7.5rem minmax(0, 1fr) 20rem;
+		min-height: 7.2rem;
+	}
+
+	.renewal-activity__year-photos {
+		gap: .4rem;
+		padding: .8rem 1rem .8rem 0;
+	}
+
+	.renewal-activity__year-photos img {
+		height: 5rem;
+	}
+}
+
+.renewal-activity__photo-track {
+	display: contents;
+}
+
+.renewal-activity__photo-control {
+	display: none;
+}
+
+.renewal-activity__lightbox[hidden] {
+	display: none;
+}
+
+.renewal-activity__lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: grid;
+	place-items: center;
+	padding: 1.5rem;
+	background: #000b14e8;
+}
+
+.renewal-activity__lightbox img {
+	max-width: min(92vw, 72rem);
+	max-height: 88vh;
+	object-fit: contain;
+}
+
+.renewal-activity__lightbox-close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 2.5rem;
+	height: 2.5rem;
+	color: var(--renewal-text);
+	border: 0;
+	background: transparent;
+	font-size: 1.6rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.renewal-activity__lightbox-control {
+	position: absolute;
+	top: 50%;
+	display: grid;
+	width: 2.6rem;
+	height: 3.2rem;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	color: #fff;
+	background: transparent;
+	font-size: 0;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+.renewal-activity__lightbox-control[hidden] {
+	display: none;
+}
+
+.renewal-activity__lightbox-control::before {
+	content: "";
+	display: block;
+	width: 1rem;
+	height: 1rem;
+	border-top: 2px solid currentColor;
+	border-right: 2px solid currentColor;
+}
+
+.renewal-activity__lightbox-control--prev {
+	left: 1rem;
+}
+
+.renewal-activity__lightbox-control--prev::before {
+	transform: rotate(-135deg);
+}
+
+.renewal-activity__lightbox-control--next {
+	right: 1rem;
+}
+
+.renewal-activity__lightbox-control--next::before {
+	transform: rotate(45deg);
+}
+
+@media (max-width: 760px) {
+	.renewal-activity__year {
+		grid-template-columns: minmax(0, 1fr) 6rem;
+		grid-template-rows: auto 1fr;
+		min-height: 10rem;
+	}
+
+	.renewal-activity__year-label {
+		grid-column: 1 / -1;
+		grid-row: 1;
+		place-items: start;
+		padding: .55rem .6rem .35rem;
+		border-right: 0;
+		border-bottom: 1px solid #58727d;
+		text-align: left;
+	}
+
+	.renewal-activity__year-label::after {
+		display: none;
+	}
+
+	.renewal-activity__year-copy {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	.renewal-activity__year-photos {
+		grid-column: 2;
+		grid-row: 2;
+		align-self: stretch;
+		padding: .6rem .45rem .6rem 0;
+	}
+
+	.renewal-activity__year-photos img {
+		height: 100%;
+		min-height: 7rem;
+		object-fit: cover;
+	}
+
+	.renewal-activity__photo-control {
+		top: 50%;
+	}
+
+	.renewal-activity__year-photos {
+		position: relative;
+		display: block;
+		padding: .6rem .4rem .6rem 0;
+	}
+
+	.renewal-activity__photo-track {
+		display: block;
+	}
+
+	.renewal-activity__year-photos img {
+		display: none !important;
+		width: 100%;
+		height: 4.5rem;
+		cursor: zoom-in;
+	}
+
+	.renewal-activity__year-photos img.is-active {
+		display: block !important;
+	}
+
+	.renewal-activity__year-photos.has-multiple .renewal-activity__photo-control {
+		position: absolute;
+		top: 50%;
+		display: grid;
+		width: 1.45rem;
+		height: 1.75rem;
+		place-items: center;
+		padding: 0;
+		border: 1px solid #d9faffaa;
+		border-radius: .25rem;
+		color: #fff;
+		background: #00131dcc;
+		font-size: 1.25rem;
+		line-height: 1;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
+
+	.renewal-activity__photo-control--prev {
+		left: .15rem;
+	}
+
+	.renewal-activity__photo-control--next {
+		right: .35rem;
+	}
+
+	.renewal-activity__year-photos img {
+		height: 100%;
+		min-height: 7rem;
+		object-fit: cover;
+	}
+}
+
+@media (min-width: 761px) {
+	.renewal-activity__year-photos {
+		position: relative;
+		display: block;
+	}
+
+	.renewal-activity__year-photos:not(.has-carousel) .renewal-activity__photo-track {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: .4rem;
+	}
+
+	.renewal-activity__year-photos:not(.has-carousel) img {
+		display: block;
+		width: 100%;
+		height: 5rem;
+		cursor: zoom-in;
+	}
+
+	.renewal-activity__year-photos.has-carousel .renewal-activity__photo-track {
+		display: block;
+	}
+
+	.renewal-activity__year-photos.has-carousel img {
+		display: none;
+		width: 100%;
+		height: 5rem;
+		cursor: zoom-in;
+	}
+
+	.renewal-activity__year-photos.has-carousel img.is-visible {
+		display: block !important;
+	}
+
+	.renewal-activity__year-photos.has-carousel .renewal-activity__photo-control {
+		position: absolute;
+		top: 50%;
+		display: grid;
+		width: 1.6rem;
+		height: 2rem;
+		place-items: center;
+		padding: 0;
+		border: 1px solid #d9faffaa;
+		border-radius: .25rem;
+		color: #fff;
+		background: #00131dcc;
+		font-size: 1.35rem;
+		line-height: 1;
+		transform: translateY(-50%);
+		cursor: pointer;
+	}
+
+	.renewal-activity__photo-control--prev {
+		left: .2rem;
+	}
+
+	.renewal-activity__photo-control--next {
+		right: .2rem;
+	}
+}
+
+@media (max-width: 760px) {
+	.renewal-activity__year {
+		grid-template-columns: minmax(0, 1fr) 6rem;
+		grid-template-rows: auto 1fr;
+		min-height: 10rem;
+	}
+
+	.renewal-activity__year-label {
+		grid-column: 1;
+		grid-row: 1;
+		padding: .65rem .6rem .2rem;
+		border-bottom: 0;
+	}
+
+	.renewal-activity__year-copy {
+		grid-column: 1;
+		grid-row: 2;
+	}
+
+	.renewal-activity__year-photos {
+		grid-column: 2;
+		grid-row: 1 / -1;
+		align-self: stretch;
+		padding: .6rem .45rem .6rem 0;
+		border-left: 1px solid #58727d;
+	}
+
+	.renewal-activity__year-photos img {
+		height: 100%;
+		min-height: 8.5rem;
+	}
+}
+
+/* SPの履歴カードは、年・内容・画像の3カラムを最終形とする。 */
+@media (max-width: 760px) {
+	.renewal-activity__year {
+		grid-template-columns: 4.25rem minmax(0, 1fr) 6rem;
+		grid-template-rows: 1fr;
+		min-height: 8.5rem;
+	}
+
+	.renewal-activity__year-label {
+		grid-column: 1;
+		grid-row: 1;
+		place-items: center;
+		padding: .6rem .35rem;
+		border-right: 1px solid #58727d;
+		border-bottom: 0;
+		text-align: center;
+	}
+
+	.renewal-activity__year-copy {
+		grid-column: 2;
+		grid-row: 1;
+		min-width: 0;
+		padding: .6rem .45rem;
+	}
+
+	.renewal-activity__year-photos {
+		grid-column: 3;
+		grid-row: 1;
+		align-self: stretch;
+		padding: .6rem .4rem .6rem 0;
+		border-left: 0;
+	}
+
+	.renewal-activity__year-photos img {
+		height: 100%;
+		min-height: 7.3rem;
+		object-fit: cover;
+	}
+}

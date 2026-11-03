@@ -1,7 +1,7 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { renewalMockApi } from "../../../lib/renewal-api";
 
-const endpoints = ["overview", "activities", "archives", "application"] as const;
+const endpoints = ["overview", "history", "archives", "application"] as const;
 type Endpoint = (typeof endpoints)[number];
 
 export const getStaticPaths: GetStaticPaths = () =>
@@ -16,7 +16,7 @@ export const GET: APIRoute = async ({ params }) => {
 
 	const data = {
 		overview: await renewalMockApi.getOverview(),
-		activities: await renewalMockApi.getActivities(),
+		history: await renewalMockApi.getHistory(),
 		archives: await renewalMockApi.getArchives(),
 		application: await renewalMockApi.getApplication(),
 	}[endpoint];
