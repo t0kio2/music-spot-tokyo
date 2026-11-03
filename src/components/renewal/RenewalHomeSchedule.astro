@@ -1,0 +1,108 @@
+---
+import RenewalActionLink from "./RenewalActionLink.astro";
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalHomeSchedule.module.css";
+import { formatEventDate, getEventTypeLabel, type RenewalApplication } from "../../lib/renewal-api";
+
+interface Props {
+  nextLive?: RenewalApplication;
+}
+
+const { nextLive } = Astro.props;
+---
+
+<section class={styles.schedule} aria-labelledby="home-schedule-title">
+  <div class={styles.intro}>
+    <h2>
+      <RenewalIcon name="calendar" />
+      MuSTのライブ
+    </h2>
+    <p>
+      3ヵ月ごとに、異なる形式でライブを開催しています。それぞれ違う楽しさがある4つのライブを楽しめます。
+    </p>
+    <div class={styles.actions}>
+      <RenewalActionLink href="/renewal/flow/" label="参加までの流れ" />
+      <RenewalActionLink
+        href="/renewal/application/"
+        label="募集状況・申込み"
+        variant="warm"
+        icon="person"
+      />
+    </div>
+  </div>
+  <div class={styles.main}>
+    <h2 id="home-schedule-title">今後のスケジュール</h2>
+    <div class={styles.cards}>
+      <article>
+        <header>
+          <span>
+            <RenewalIcon name="users" />
+          </span>
+          <div>
+            <b>3月・6月</b>
+            <strong>定期セッションライブ</strong>
+          </div>
+        </header>
+        <ul>
+          <li>曲ごとにメンバーが変わるセッション形式で演奏。</li>
+          <li>リクエストをもとに24曲ほどに選定。</li>
+          <li>練習会を2回実施(都内スタジオ)。</li>
+          <li>初心者の方も安心(練習会は参加必須)。</li>
+        </ul>
+      </article>
+      <article>
+        <header>
+          <span>
+            <RenewalIcon name="star" />
+          </span>
+          <div>
+            <b>6月</b>
+            <strong>企画セッション</strong>
+          </div>
+        </header>
+        <p>
+          アーティストやテーマを決めたセッション。 ジャンルは企画ごとに変わり、これまでにKing
+          Gnu、ずっと真夜中でいいのに。、ヨルシカなどのアーティスト縛りで開催。
+          「一発合わせ」のセッションです。
+        </p>
+      </article>
+      <article>
+        <header>
+          <span>
+            <RenewalIcon name="calendar" />
+          </span>
+          <div>
+            <b>12月</b>
+            <strong>対バンライブ</strong>
+          </div>
+        </header>
+        <p>
+          定期セッションライブのメンバーを中心にバンドを組んで出演。メンバーの組み合わせや日程は運営がサポート、バンドは基本的に1回限りなので、固定メンバーに縛られる心配もありません。
+        </p>
+      </article>
+    </div>
+  </div>
+  {nextLive && (
+    <aside class={styles.next}>
+      <h2>次回のライブ</h2>
+      <div class={styles.nextCard}>
+        {nextLive.flyer && (
+          <button
+            class={styles.nextFlyer}
+            type="button"
+            data-renewal-lightbox-src={nextLive.flyer.url}
+            aria-label="次回ライブのチラシを拡大表示"
+          >
+            <img src={nextLive.flyer.url} alt={nextLive.flyer.alt ?? "ライブチラシ"} />
+          </button>
+        )}
+        <h3>
+          {formatEventDate(nextLive.event_date)}
+          <br />
+          {getEventTypeLabel(nextLive.event_type)}
+        </h3>
+        <p>{nextLive.place ?? "会場未定"}</p>
+      </div>
+    </aside>
+  )}
+</section>

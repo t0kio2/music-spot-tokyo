@@ -10,11 +10,17 @@
     "build": "astro build",
     "test": "node --test",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.2.0",
     "microcms-js-sdk": "^3.4.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2"
   }
 }

@@ -1,15 +1,19 @@
 ---
 import RenewalLayout from "../layouts/RenewalLayout.astro";
+import RenewalActionLink from "../components/renewal/RenewalActionLink.astro";
 ---
 
-
 <RenewalLayout title="ページが見つかりません" description="お探しのページは見つかりませんでした。">
-	<section class="renewal-not-found" aria-labelledby="not-found-title">
-		<div class="renewal-not-found__content">
-			<p class="renewal-not-found__code" aria-hidden="true">404</p>
-			<h1 id="not-found-title">ページが見つかりません</h1>
-			<p class="renewal-not-found__message">お探しのページは、移動または削除された可能性があります。</p>
-			<a class="renewal-home__pill renewal-home__pill--primary" href="/renewal/">MuSTのホームへ戻る <span>→</span></a>
-		</div>
-	</section>
+  <section class="renewal-not-found" aria-labelledby="not-found-title">
+    <div class="renewal-not-found__content">
+      <p class="renewal-not-found__code" aria-hidden="true">
+        404
+      </p>
+      <h1 id="not-found-title">ページが見つかりません</h1>
+      <p class="renewal-not-found__message">
+        お探しのページは、移動または削除された可能性があります。
+      </p>
+      <RenewalActionLink href="/renewal/" label="MuSTのホームへ戻る" variant="primary" />
+    </div>
+  </section>
 </RenewalLayout>

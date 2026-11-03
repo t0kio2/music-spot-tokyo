@@ -84,10 +84,6 @@
 	font-size: var(--renewal-font-md);
 }
 
-.renewal-not-found .renewal-home__pill {
-	display: inline-flex;
-}
-
 .renewal-header { position: fixed; inset: 0 auto 0 0; z-index: 20; display: flex; flex-direction: column; align-items: stretch; width: var(--renewal-sidebar); padding: 0; border-right: 1px solid var(--renewal-border); background: linear-gradient(180deg, #01060e 0%, #010a15 68%, var(--renewal-surface-0) 100%); }
 .renewal-brand { display: grid; place-items: center; height: 131px; margin: 0; background: radial-gradient(circle, #00cbff1f, transparent 67%); }
 .renewal-brand img { width: 91px; height: 91px; object-fit: cover; border: 2px solid var(--renewal-cyan); border-radius: 50%; box-shadow: 0 0 12px #00eaff66; }
@@ -142,11 +138,6 @@
 .renewal-home-cta { display: flex; flex-direction: column; justify-content: end; min-height: 15rem; padding: 1.5rem; border: 1px solid var(--renewal-pink); border-radius: .8rem; background: radial-gradient(circle at 80% 20%, #ed3aa855, transparent 35%), var(--renewal-panel); }
 .renewal-home-cta p { color: var(--renewal-pink); font: italic 1.8rem "Caveat", cursive; }
 .renewal-home-cta h2 { margin: .5rem 0 1.5rem; font: 600 1.45rem "Zen Old Mincho", serif; }
-.renewal-button { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; width: fit-content; padding: .7rem 1.2rem; border: 1px solid var(--renewal-cyan); border-radius: 999px; color: var(--renewal-cyan); font-weight: 700; }
-.renewal-button span { font-size: 1.2em; }
-.renewal-button--warm { border-color: var(--renewal-gold); background: var(--renewal-gold); color: #111820; }
-.renewal-site .renewal-button--warm, .renewal-site .renewal-home__pill--warm { color: #111820; }
-.renewal-site .renewal-button--warm span, .renewal-site .renewal-home__pill--warm span { color: #111820; }
 .renewal-home-events { margin-top: 3.5rem; }
 .renewal-empty { padding: 2rem; border: 1px dashed var(--renewal-border); color: var(--renewal-muted); text-align: center; }
 .renewal-link-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 3rem; }
@@ -331,74 +322,12 @@
 .renewal-home__hero-copy { max-width: 650px; padding: .5rem 0 1.7rem 4.2%; }
 .renewal-home__hero h1 { max-width: 610px; margin-bottom: 3.15rem; color: var(--renewal-text); font: 400 clamp(1.8rem, 3vw, 2.75rem)/1.14 "Anzu Moji 2020", "Kaisei Decol", cursive; letter-spacing: .025em; transform: rotate(-4deg); text-shadow: 0 2px 12px #000a; }
 .renewal-home__hero-copy p { max-width: 440px; margin-bottom: .75rem; font-size: .88rem; font-weight: 500; text-shadow: 0 2px 5px #000; }
-.renewal-home__pill { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 2.45rem; padding: .5rem 1.3rem; border: 1.5px solid var(--renewal-cyan); border-radius: 99px; color: white; background: #000c17b8; font-size: .75rem; font-weight: 600; line-height: 1.3; transition: .2s; }
-.renewal-home__pill:hover { background: #00d3ff26; box-shadow: 0 0 12px #00eaff59; transform: translateY(-1px); }
-.renewal-home__pill span { color: var(--renewal-cyan); font-size: 1.1rem; }
-.renewal-home__person-icon { width: 1.05rem; height: 1.05rem; fill: currentColor; stroke: none; }
-.renewal-home__pill--primary { min-width: 300px; font-size: .88rem; }
-.renewal-home__pill--warm { border: 0; border-radius: 99px; color: #1b1110; background: var(--renewal-gold); }
-.renewal-home__pill--warm span { color: #1b1110; }
-.renewal-home__schedule-intro a[href="/renewal/application/"] { border: 0; border-radius: 99px; color: #1b1110; background: var(--renewal-gold); }
-.renewal-home__schedule-intro a[href="/renewal/application/"]::before, .renewal-home__cta .renewal-home__pill--warm::before { content: ""; display: block; width: 1.05rem; height: 1.05rem; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm-8 10a8 8 0 0 1 16 0H4Z' fill='%231b1110'/%3E%3C/svg%3E") center / contain no-repeat; }
-.renewal-home__schedule-intro a[href="/renewal/application/"] span { color: #1b1110; }
-.renewal-home__pill--pink { border-color: var(--renewal-pink); }
-.renewal-home__pill--pink span { color: var(--renewal-pink); }
 .renewal-home__content { padding: .6rem 1rem 1.1rem 1.25rem; }
 .renewal-home__feature-grid { display: grid; grid-template-columns: 1fr 1.65fr; gap: .7rem; }
 .renewal-home__panel { position: relative; overflow: hidden; border: 1px solid transparent; border-radius: var(--renewal-radius-sm); background: var(--renewal-panel-fill) padding-box, var(--renewal-panel-edge) border-box; box-shadow: var(--renewal-panel-glow); }
-.renewal-home__feature { min-height: 248px; padding: 1.25rem 1.6rem 1rem; }
-.renewal-home__feature::before { content: ""; position: absolute; inset: 0; opacity: .82; filter: brightness(1.15) saturate(1.25); pointer-events: none; background-position: center; background-size: cover; }
-.renewal-home__feature--song::before { background-image: linear-gradient(90deg, #010811e8 2%, #010811b8 42%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/素材_webp/ギターギター.webp"); }
-.renewal-home__feature--activity::before { background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/集合写真_webp/26,3春.webp"); }
-.renewal-home__panel-content { position: relative; z-index: 1; }
-.renewal-home__feature .renewal-home__panel-content { display: flex; flex-direction: column; width: 100%; height: 100%; }
-.renewal-home__feature h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.3; font-weight: 600; }
-.renewal-home__feature h2 span { display: inline-grid; place-items: center; width: 2.25rem; color: var(--renewal-pink); }
-.renewal-home__feature h2 span svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.renewal-home__feature--activity h2 span { color: var(--renewal-cyan); }
-.renewal-home__feature p { margin: 0 0 .9rem; font-size: .88rem; line-height: 1.8; }
-.renewal-home__actions { display: flex; flex-wrap: wrap; gap: .55rem; }
-.renewal-home__actions .renewal-home__pill { min-height: 2.45rem; padding: .45rem .75rem; }
-.renewal-home__feature--activity .renewal-home__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.renewal-home__feature--activity .renewal-home__actions .renewal-home__pill { width: 100%; min-width: 0; }
-.renewal-home__feature .renewal-home__panel-content > .renewal-home__pill, .renewal-home__feature .renewal-home__actions { margin-top: auto; }
-.renewal-home__schedule { display: grid; grid-template-columns: 1.08fr 2.72fr .8fr; gap: 0; margin-top: 1rem; }
-.renewal-home__schedule-intro { padding: 1.05rem .8rem .95rem; border-right: 1px solid #00eaff40; }
-.renewal-home__schedule-intro h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; font: 600 clamp(1.15rem, 1.7vw, 1.5rem)/1.3 "Noto Sans JP", sans-serif; }
-.renewal-home__next h2 { margin: 0 0 .5rem; font: 600 .95rem/1.1 "Noto Sans JP", sans-serif; }
-.renewal-home__schedule-intro p { margin: .75rem 0 .85rem; font-size: .72rem; line-height: 1.7; }
-.renewal-home__schedule-intro .renewal-home__actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.renewal-home__schedule-intro .renewal-home__actions .renewal-home__pill { width: 100%; min-width: 0; padding-inline: .45rem; }
-@media (min-width: 761px) {
-	.renewal-home__schedule-intro .renewal-home__actions {
-		grid-template-columns: 1fr;
-	}
-}
-.renewal-home__schedule-intro .renewal-home__pill { min-height: 2rem; padding: .35rem .7rem; font-size: .63rem; }
-.renewal-home__schedule-main { display: flex; flex-direction: column; padding: .65rem .7rem .7rem; }
-.renewal-home__schedule-main > h2 { margin: 0 0 .5rem; color: #62f4ff; font: 600 .95rem/1.1 "Noto Sans JP", sans-serif; }
-.renewal-home__schedule-cards { display: grid; flex: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; align-items: stretch; }
-.renewal-home__schedule-cards article { display: flex; flex-direction: column; height: 100%; padding: .6rem .55rem .5rem; border: 1px solid rgba(0, 174, 191, .62); border-radius: 9px; background: linear-gradient(135deg, #000b14e8, #00060cf7); box-shadow: inset 0 0 0 1px #00baca12, 0 0 7px #00baca1c; }
-.renewal-home__schedule-cards header { display: flex; align-items: center; gap: .5rem; min-height: 3.2rem; padding-bottom: .45rem; border-bottom: 1px solid var(--renewal-cyan); }
-.renewal-home__schedule-cards header > span { color: var(--renewal-cyan); font-size: 1.65rem; line-height: 1; }
-.renewal-home__schedule-cards article:nth-child(2) header { border-color: var(--renewal-gold); }
-.renewal-home__schedule-cards article:nth-child(2) header > span, .renewal-home__schedule-cards article:nth-child(2) b { color: var(--renewal-gold); }
-.renewal-home__schedule-cards article:nth-child(3) header { border-color: var(--renewal-pink); }
-.renewal-home__schedule-cards article:nth-child(3) header > span, .renewal-home__schedule-cards article:nth-child(3) b { color: var(--renewal-pink); }
-.renewal-home__schedule-cards b, .renewal-home__schedule-cards strong { display: block; }
-.renewal-home__schedule-cards b { color: #62f4ff; font-size: .86rem; }
-.renewal-home__schedule-cards strong { font-size: .75rem; }
-.renewal-home__schedule-cards p { flex: 1; margin: .5rem 0 0; font-size: .64rem; line-height: 1.8; }
-.renewal-home__next { padding: .65rem .75rem; border-left: 1px solid #00eaff40; }
-.renewal-home__next h2 { color: var(--renewal-gold); font-size: 1rem; transform: none; }
-.renewal-home__next-card { position: relative; min-height: 9rem; overflow: hidden; border: 1px solid #00eaff80; border-radius: 5px; background: #000b14aa; }
-.renewal-home__next-flyer { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
-.renewal-home__next img { width: 100%; height: 100%; object-fit: contain; object-position: center; opacity: .78; }
-.renewal-home__next h3 { position: relative; z-index: 1; margin: 5.8rem .55rem .2rem; font-size: .9rem; line-height: 1.5; text-shadow: 0 1px 5px #000; }
-.renewal-home__next p { position: relative; z-index: 1; margin: 0 .55rem .55rem; font-size: .64rem; line-height: 1.6; text-shadow: 0 1px 4px #000; }
 .renewal-home__cta { display: grid; grid-template-columns: 1fr 1.45fr auto; align-items: center; gap: 1.1rem; min-height: 6.5rem; margin-top: .65rem; padding: .9rem 1.6rem; border: 1px solid transparent; box-shadow: 0 0 0 1px #00baca1a, 0 0 8px #00baca22, 0 0 18px #087bb012; background: linear-gradient(90deg, #00050ddd, #00070db8), url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80") center 52% / cover padding-box, linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box; }
 .renewal-home__cta p { grid-column: 2; font-size: .8rem; font-weight: 600; line-height: 1.7; text-shadow: 0 2px 4px #000; }
-.renewal-home__cta .renewal-home__pill { grid-column: 3; white-space: nowrap; }
+.renewal-home__cta a { grid-column: 3; white-space: nowrap; }
 .renewal-main:has(.renewal-recruit-cta) { padding-bottom: 7rem; }
 .renewal-recruit-cta { position: fixed; right: 0; bottom: 0; left: var(--renewal-sidebar); z-index: 15; margin: 0; border-radius: .6rem 0 0 0; box-shadow: 0 -8px 24px #000b, 0 0 0 1px #00baca1a; }
 
@@ -406,9 +335,6 @@
 	.renewal-shell--home { --renewal-sidebar: 116px; }
 	.renewal-shell--home .renewal-brand { height: 112px; }
 	.renewal-shell--home .renewal-brand__note { width: 76px; height: 76px; }
-	.renewal-home__schedule { grid-template-columns: 1fr 2fr; }
-	.renewal-home__next { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr; gap: .75rem; align-items: center; border-top: 1px solid #00eaff40; border-left: 0; }
-	.renewal-home__next h2 { grid-column: 1 / -1; }
 }
 
 @media (max-width: 760px) {
@@ -426,33 +352,11 @@
 	.renewal-home__hero-copy { padding: 1.5rem 1rem 1.5rem; }
 	.renewal-home__hero h1 { margin-bottom: 2.6rem; font-size: clamp(2rem, 10vw, 3rem); }
 	.renewal-home__hero-copy p { font-size: .78rem; }
-	.renewal-home__pill--primary { min-width: 0; width: 100%; font-size: .75rem; }
-	.renewal-home__pill { gap: .75rem; }
-	.renewal-home__pill .renewal-home__person-icon { margin-right: -.3rem; }
-	.renewal-home__schedule-intro a[href="/renewal/application/"]::before, .renewal-home__cta .renewal-home__pill--warm::before { margin-right: -.3rem; }
-	.renewal-home__actions { justify-content: center; }
-	.renewal-home__feature .renewal-home__panel-content > .renewal-home__pill { display: flex; width: fit-content; margin-inline: auto; }
-	.renewal-home__schedule-intro a[href="/renewal/application/"]::before { width: 1rem; height: 1rem; }
 	.renewal-home__content { padding: .6rem .7rem 1rem; }
 	.renewal-home__feature-grid { grid-template-columns: 1fr; gap: .65rem; }
-	.renewal-home__feature { min-height: 13rem; padding: 1.1rem; }
-	.renewal-home__feature p { font-size: .72rem; }
-	.renewal-home__schedule { grid-template-columns: 1fr; }
-	.renewal-home__schedule-intro { border-right: 0; border-bottom: 1px solid #00eaff40; }
-	.renewal-home__schedule-main { display: block; padding: .9rem .7rem; }
-	.renewal-home__schedule-cards { grid-template-columns: 1fr; grid-template-rows: repeat(3, 8.5rem); }
-	.renewal-home__schedule-cards article { display: flex; height: 8.5rem; min-height: 0; flex-direction: column; gap: 0; overflow: hidden; }
-	.renewal-home__schedule-cards header { min-height: 2.7rem; border-bottom: 1px solid var(--renewal-cyan); border-right: 0; padding: 0 0 .4rem; }
-	.renewal-home__schedule-cards article:nth-child(2) header { border-bottom-color: var(--renewal-gold); }
-	.renewal-home__schedule-cards article:nth-child(3) header { border-bottom-color: var(--renewal-pink); }
-	.renewal-home__schedule-cards p { margin: .5rem 0 0; align-self: auto; font-size: .62rem; }
-	.renewal-home__next { display: grid; grid-template-columns: 1fr; gap: .6rem; align-items: center; border-left: 0; border-top: 1px solid #00eaff40; }
-	.renewal-home__next h2 { grid-column: 1 / -1; margin-top: .7rem; }
-	.renewal-home__next-card { min-height: 15rem; }
-	.renewal-home__next h3 { margin-top: 10rem; }
 	.renewal-home__cta { grid-template-columns: 1fr; gap: .7rem; text-align: center; padding: 1.3rem 1rem; }
-	.renewal-home__cta p, .renewal-home__cta .renewal-home__pill { grid-column: auto; }
-	.renewal-home__cta .renewal-home__pill { justify-self: center; }
+	.renewal-home__cta p, .renewal-home__cta a { grid-column: auto; }
+	.renewal-home__cta a { justify-self: center; }
 	.renewal-main:has(.renewal-recruit-cta) { padding-bottom: 10rem; }
 	.renewal-recruit-cta { right: 0; left: 0; border-right: 0; border-bottom: 0; border-radius: .6rem .6rem 0 0; }
 }
