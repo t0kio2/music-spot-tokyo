@@ -1,0 +1,34 @@
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.card {
+  min-height: 10rem;
+  padding: 1.1rem 1.4rem;
+  border: 1px solid var(--renewal-setlist-line-strong);
+  border-radius: 0.7rem;
+  background: var(--renewal-surface-card-soft);
+}
+.past {
+  border-color: var(--renewal-border-accent);
+}
+.card h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.2rem;
+}
+.card p {
+  margin: 0 0 0.6rem;
+  color: var(--renewal-text);
+  font-size: 0.75rem;
+  line-height: 1.85;
+}
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    min-height: 0;
+  }
+}

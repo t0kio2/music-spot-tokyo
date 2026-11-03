@@ -51,6 +51,11 @@
   min-height: 2rem;
   padding: 0.35rem 0.7rem;
 }
+.centered {
+  display: flex;
+  width: min(100%, 16rem);
+  margin: 0.8rem auto 0;
+}
 .personIcon {
   width: 1.35rem;
   height: 1.35rem;

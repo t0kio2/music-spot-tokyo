@@ -9,9 +9,19 @@ interface Props {
   icon?: "person";
   target?: string;
   rel?: string;
+  centered?: boolean;
 }
 
-const { href, label, variant = "default", size = "default", icon, target, rel } = Astro.props;
+const {
+  href,
+  label,
+  variant = "default",
+  size = "default",
+  icon,
+  target,
+  rel,
+  centered = false,
+} = Astro.props;
 ---
 
 <a
@@ -20,6 +30,7 @@ const { href, label, variant = "default", size = "default", icon, target, rel } 
     "renewal-action-link",
     styles[variant],
     styles[size],
+    { [styles.centered]: centered },
     { [styles.withIcon]: icon },
   ]}
   data-variant={variant}

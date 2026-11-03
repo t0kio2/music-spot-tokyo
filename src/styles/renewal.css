@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap");
+@import "./renewal-tokens.css";
 
 @font-face {
   font-family: "Anzu Moji 2020";
@@ -7,41 +8,6 @@
 }
 
 .renewal-site {
-  --renewal-bg: #010711;
-  --renewal-bg-deep: #00050b;
-  --renewal-panel: #010811;
-  --renewal-panel-soft: #020f1c;
-  --renewal-cyan: #00c7d5;
-  --renewal-pink: #ff4fd8;
-  --renewal-gold: #ffc486;
-  --renewal-text: #f5f8ff;
-  --renewal-muted: #b8d3e1;
-  --renewal-border: rgba(0, 174, 191, 0.42);
-  /* Renewal design tokens: color, surface, geometry, and icon rhythm. */
-  --renewal-surface-0: #00050b;
-  --renewal-surface-1: #010a14;
-  --renewal-surface-2: #020f1c;
-  --renewal-line: rgba(0, 234, 255, 0.5);
-  --renewal-line-soft: rgba(0, 234, 255, 0.25);
-  --renewal-radius-sm: 0.45rem;
-  --renewal-radius-md: 0.7rem;
-  --renewal-icon-box: 2.25rem;
-  --renewal-icon-size: 2rem;
-  --renewal-panel-fill: linear-gradient(135deg, #020d18f7, #00060cf7);
-  --renewal-panel-edge: linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670);
-  --renewal-panel-glow: 0 0 0 1px #00baca1a, 0 0 8px #00baca22, 0 0 18px #087bb012;
-  --renewal-surface-card: linear-gradient(135deg, #010b14f7, #00060cf7);
-  --renewal-surface-card-soft: linear-gradient(120deg, #020f1c, #010711);
-  --renewal-content-gutter: clamp(1rem, 4.6vw, 4rem);
-  --renewal-feature-hero-height: 260px;
-  --renewal-feature-hero-height-mobile: 17rem;
-  --renewal-sidebar: 166px;
-  /* Typography scale: use these for content UI; display lettering remains page-specific. */
-  --renewal-font-md: 0.8rem;
-  --renewal-font-lg: 0.9rem;
-  --renewal-font-xl: 1rem;
-  --renewal-heading-sm: 1.25rem;
-  --renewal-heading-md: 1.5rem;
   margin: 0;
   background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--renewal-bg);
   color: var(--renewal-text);
@@ -87,7 +53,7 @@
 .renewal-not-found__code {
   color: var(--renewal-cyan);
   font:
-    600 clamp(4rem, 14vw, 7rem)/0.9 "Noto Sans JP",
+    600 clamp(4rem, 14vw, 7rem)/0.9 "Zen Old Mincho",
     serif;
   letter-spacing: 0.08em;
 }
@@ -189,7 +155,7 @@
   gap: 1.2rem;
   margin: 1.35rem 0.4rem 0;
   padding: 0.9rem 0.4rem 0;
-  border-top: 1px solid #1a3b49;
+  border-top: 1px solid var(--renewal-border-muted);
 }
 .renewal-socials a {
   min-height: auto;
@@ -250,8 +216,7 @@
   background:
     linear-gradient(90deg, #010b14f2, #010b1480 55%, #010b1422),
     radial-gradient(circle at 80% 25%, #ed3aa855, transparent 25%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
 }
 .renewal-breadcrumb {
   display: flex;
@@ -293,8 +258,8 @@
 }
 .renewal-hero h1 {
   font:
-    700 clamp(2.5rem, 5vw, 4.6rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    600 clamp(2.5rem, 5vw, 4.6rem)/1.2 "Zen Old Mincho",
+    serif;
   letter-spacing: 0.06em;
 }
 .renewal-hero h1 em {
@@ -519,7 +484,7 @@
 }
 .renewal-faq-list details > div {
   padding: 0 1.2rem 1.2rem 3.3rem;
-  border-top: 1px solid #00eaff33;
+  border-top: 1px solid var(--renewal-border-subtle);
 }
 .renewal-footer {
   display: flex;
@@ -653,7 +618,7 @@
     gap: 0.35rem;
     width: min(19rem, 80vw);
     padding: 4.9rem 0.9rem 1.25rem;
-    border-left: 1px solid #123344;
+    border-left: 1px solid var(--renewal-border-muted);
     transform: translateX(100%);
     transition: transform 0.25s ease;
     background: linear-gradient(180deg, #010c16f8, #010811f8);
@@ -697,7 +662,7 @@
     gap: 1.35rem;
     margin: 1.2rem 0.15rem 0;
     padding: 0.9rem 0.65rem 0;
-    border-top: 1px solid #1a3b49;
+    border-top: 1px solid var(--renewal-border-muted);
   }
   .renewal-socials a {
     display: grid;
@@ -812,7 +777,7 @@
     width: min(19rem, 80vw);
     height: 3rem;
     padding: 0.5rem 0.9rem;
-    border-left: 1px solid #123344;
+    border-left: 1px solid var(--renewal-border-muted);
     background: #010811f8;
     transform: translateX(100%);
     transition: transform 0.25s ease;
@@ -849,8 +814,8 @@
   position: relative;
   z-index: 1;
   font:
-    700 clamp(2.4rem, 4.5vw, 3.45rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    600 clamp(2.4rem, 4.5vw, 3.45rem)/1.2 "Zen Old Mincho",
+    serif;
   letter-spacing: 0.06em;
 }
 .renewal-application__hero h1 em {
@@ -1230,7 +1195,7 @@
   }
   .renewal-application__roster,
   .renewal-application__schedule {
-    border-top: 1px solid #087e99;
+    border-top: 1px solid var(--renewal-border-medium);
     border-left: 0;
     padding: 6px 0 0;
     font-size: 0.58rem;
@@ -1321,14 +1286,13 @@
   background:
     linear-gradient(90deg, #010912dc, #01091270 48%, #01091218),
     linear-gradient(0deg, #010912a6, transparent 75%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center 54% / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center 54% / cover;
 }
 .renewal-setlist__hero h1 {
   margin: 0;
   font:
-    700 clamp(2.4rem, 5vw, 4rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    700 clamp(2.4rem, 5vw, 4rem)/1.2 "Zen Old Mincho",
+    serif;
   letter-spacing: 0.03em;
 }
 .renewal-setlist__hero h1 span {
@@ -1369,13 +1333,14 @@
   background: linear-gradient(var(--renewal-cyan), var(--renewal-pink));
 }
 .renewal-setlist__intro p {
+  color: var(--renewal-text);
   font-size: 0.8rem;
   line-height: 1.9;
 }
 .renewal-setlist__genres article {
   min-height: 9rem;
   padding: 0.7rem;
-  border: 1px solid #07517a;
+  border: 1px solid var(--renewal-border-medium);
   border-radius: 0.7rem;
   background: var(--renewal-surface-card);
   text-align: center;
@@ -1416,7 +1381,7 @@
 }
 .renewal-setlist__genres article p {
   margin: 0.2rem 0 0;
-  color: #d7e7f1;
+  color: var(--renewal-text);
   font-size: 0.68rem;
   line-height: 1.6;
 }
@@ -1512,7 +1477,7 @@
   align-items: start;
   gap: 0.6rem;
   padding: 0.4rem 0;
-  border-bottom: 1px solid #00eaff32;
+  border-bottom: 1px solid var(--renewal-border-subtle);
   font-size: 0.82rem;
 }
 .renewal-setlist__legend i {
@@ -1532,44 +1497,12 @@
 }
 .renewal-setlist__legend small {
   display: block;
-  color: var(--renewal-muted);
+  color: var(--renewal-text);
   font-size: 0.62rem;
   line-height: 1.6;
 }
 .renewal-setlist__legend b {
   font-size: 0.75rem;
-}
-.renewal-setlist__bottom {
-  display: grid;
-  grid-template-columns: 1fr 1.08fr;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.renewal-setlist__info {
-  min-height: 10rem;
-  padding: 1.1rem 1.4rem;
-  border: 1px solid var(--renewal-setlist-line-strong);
-  border-radius: 0.7rem;
-  background: var(--renewal-surface-card-soft);
-}
-.renewal-setlist__info--past {
-  border-color: #3069ff;
-}
-.renewal-setlist__info h2 {
-  margin: 0 0 0.6rem;
-  font-size: 1.2rem;
-}
-.renewal-setlist__info p {
-  margin: 0 0 0.6rem;
-  color: var(--renewal-muted);
-  font-size: 0.75rem;
-  line-height: 1.85;
-}
-.renewal-setlist__info a {
-  color: var(--renewal-gold);
-  font-size: 0.75rem;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
 }
 .renewal-setlist__archive {
   margin-top: 2rem;
@@ -1616,7 +1549,7 @@
 }
 .renewal-setlist__archive-list > details > div {
   padding: 0 1rem 1rem;
-  border-top: 1px solid #00eaff33;
+  border-top: 1px solid var(--renewal-border-subtle);
 }
 
 /* 活動実績: renewal/org_html/04_活動実績.html の構成 */
@@ -1632,8 +1565,7 @@
   background:
     linear-gradient(90deg, #010a13ed, #010a1388 45%, #010a1322),
     linear-gradient(0deg, #010a13c4, transparent 62%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center 52% / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center 52% / cover;
 }
 .renewal-activity__hero::after {
   content: "";
@@ -1652,14 +1584,14 @@
 .renewal-activity__hero h1 {
   margin: 0;
   font:
-    700 clamp(2.6rem, 5vw, 4.1rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    600 clamp(2.6rem, 5vw, 4.1rem)/1.2 "Zen Old Mincho",
+    serif;
 }
 .renewal-activity__hero h2 {
   margin-top: 0.8rem;
   color: #fff;
   font:
-    600 clamp(1.05rem, 2vw, 1.45rem)/1.55 "Noto Sans JP",
+    600 clamp(1.05rem, 2vw, 1.45rem)/1.55 "Zen Old Mincho",
     serif;
 }
 .renewal-activity__hero p {
@@ -1668,80 +1600,10 @@
   font-size: 0.82rem;
   line-height: 1.8;
 }
-.renewal-activity__stats,
 .renewal-activity__timeline,
 .renewal-activity__next {
   width: calc(100% - (2 * var(--renewal-content-gutter)));
   margin-inline: auto;
-}
-.renewal-activity__stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr 0.7fr;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-.renewal-activity__stat {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  min-height: 6.5rem;
-  padding: 0.8rem 1.3rem;
-  border: 1px solid var(--renewal-line);
-  border-radius: var(--renewal-radius-sm);
-  background: var(--renewal-surface-card);
-}
-.renewal-activity__stat:first-child {
-  border-color: #b66eb8;
-}
-.renewal-activity__stat:nth-child(2) {
-  border-color: #586aa8;
-}
-.renewal-activity__stat > span {
-  display: grid;
-  place-items: center;
-  flex: 0 0 3.5rem;
-  width: 3.5rem;
-  height: 3.5rem;
-  border: 1.5px solid var(--renewal-cyan);
-  border-radius: 50%;
-  color: var(--renewal-cyan);
-  text-shadow: 0 0 10px currentColor;
-}
-.renewal-activity__stat:first-child > span {
-  color: var(--renewal-pink);
-}
-.renewal-activity__stat > span svg {
-  width: 2rem;
-  height: 2rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.renewal-activity__stat b,
-.renewal-activity__stat strong,
-.renewal-activity__stat em {
-  display: block;
-}
-.renewal-activity__stat b {
-  color: var(--renewal-cyan);
-  font-size: 0.72rem;
-}
-.renewal-activity__stat strong {
-  color: #58e6ff;
-  font-size: 2rem;
-  line-height: 1.1;
-}
-.renewal-activity__stat strong small {
-  margin-left: 0.2rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-}
-.renewal-activity__stat em {
-  color: var(--renewal-muted);
-  font-size: 0.62rem;
-  font-style: normal;
 }
 .renewal-activity__timeline {
   margin-top: 1rem;
@@ -1771,14 +1633,14 @@
   grid-template-columns: 7.5rem minmax(0, 1fr) 15rem;
   min-height: 5.8rem;
   overflow: hidden;
-  border: 1px solid #12516a;
+  border: 1px solid var(--renewal-border-medium);
   border-radius: var(--renewal-radius-sm);
   background: var(--renewal-surface-card);
 }
 .renewal-activity__year-label {
   position: relative;
   padding: 0.7rem 0.8rem;
-  border-right: 1px solid #58727d;
+  border-right: 1px solid var(--renewal-border-neutral);
 }
 .renewal-activity__year-label::after {
   content: "";
@@ -1803,13 +1665,16 @@
   font-size: 0.68rem;
 }
 .renewal-activity__year-copy {
+  min-width: 0;
   padding: 0.6rem 1rem;
   font-size: 0.68rem;
   line-height: 1.65;
+  overflow-wrap: anywhere;
 }
 .renewal-activity__year-copy > b {
   color: var(--renewal-cyan);
   font-size: 0.78rem;
+  overflow-wrap: anywhere;
 }
 .renewal-activity__year-copy ul {
   margin: 0.1rem 0;
@@ -1832,7 +1697,7 @@
 .renewal-activity__year-photos img {
   width: 100%;
   height: 3.8rem;
-  border: 1px solid #3b5965;
+  border: 1px solid var(--renewal-border-neutral);
   border-radius: 0.35rem;
   object-fit: cover;
   opacity: 0.9;
@@ -1845,12 +1710,11 @@
   min-height: 5.8rem;
   margin-bottom: 1rem;
   padding: 0.8rem 1rem;
-  border: 1px solid #15506a;
+  border: 1px solid var(--renewal-border-medium);
   border-radius: var(--renewal-radius-sm);
   background:
     linear-gradient(90deg, #00050ddd, #00070db8),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80")
-      center / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
 }
 .renewal-activity__next > strong {
   color: var(--renewal-pink);
@@ -1886,33 +1750,6 @@
   }
   .renewal-activity__hero p {
     font-size: 0.72rem;
-  }
-  .renewal-activity__stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-  }
-  .renewal-activity__stat {
-    min-height: 5rem;
-    gap: 0.5rem;
-    padding: 0.6rem;
-  }
-  .renewal-activity__stat > span {
-    flex-basis: 2.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-  .renewal-activity__stat > span svg {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .renewal-activity__stat b {
-    font-size: 0.58rem;
-  }
-  .renewal-activity__stat strong {
-    font-size: 1.45rem;
-  }
-  .renewal-activity__stat em {
-    font-size: 0.5rem;
   }
   .renewal-activity__timeline {
     margin-top: 0.8rem;
@@ -2054,12 +1891,6 @@
   }
   .renewal-setlist__legend small {
     display: none;
-  }
-  .renewal-setlist__bottom {
-    grid-template-columns: 1fr;
-  }
-  .renewal-setlist__info {
-    min-height: 0;
   }
   .renewal-setlist__archive-heading {
     align-items: start;
@@ -2269,8 +2100,7 @@
     0 0 18px #087bb012;
   background:
     linear-gradient(90deg, #00050ddd, #00070db8),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80")
-      center 52% / cover padding-box,
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center 52% / cover padding-box,
     linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
 }
 .renewal-home__cta p {
@@ -2287,19 +2117,6 @@
 .renewal-main:has(.renewal-recruit-cta) {
   padding-bottom: 7rem;
 }
-.renewal-recruit-cta {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: var(--renewal-sidebar);
-  z-index: 15;
-  margin: 0;
-  border-radius: 0.6rem 0 0 0;
-  box-shadow:
-    0 -8px 24px #000b,
-    0 0 0 1px #00baca1a;
-}
-
 @media (max-width: 1000px) and (min-width: 761px) {
   .renewal-shell--home {
     --renewal-sidebar: 116px;
@@ -2399,13 +2216,6 @@
   .renewal-main:has(.renewal-recruit-cta) {
     padding-bottom: 10rem;
   }
-  .renewal-recruit-cta {
-    right: 0;
-    left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    border-radius: 0.6rem 0.6rem 0 0;
-  }
 }
 
 /* ホームのコンテンツ領域も、他のrenewalページと同じ左右基準に揃える。 */
@@ -2421,56 +2231,6 @@
   min-height: 100vh;
   overflow: hidden;
   background: radial-gradient(ellipse at 70% 0%, #00345418, transparent 42%), #010711;
-}
-.renewal-overview__hero {
-  position: relative;
-  min-height: var(--renewal-feature-hero-height);
-  overflow: hidden;
-  padding: 1.8rem var(--renewal-content-gutter) 2.2rem;
-  border-bottom: 1px solid #00eaffad;
-  background:
-    linear-gradient(90deg, #010a13e8, #010a1388 48%, #010a1320),
-    linear-gradient(0deg, #010a13c4, transparent 60%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center / cover;
-}
-.renewal-overview__breadcrumb {
-  display: flex;
-  gap: 0.65rem;
-  margin-bottom: 1.25rem;
-  color: var(--renewal-muted);
-  font-size: 0.8rem;
-}
-.renewal-overview__breadcrumb a {
-  color: var(--renewal-muted);
-}
-.renewal-overview__eyebrow {
-  margin-bottom: 0.2rem;
-  color: var(--renewal-cyan);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-}
-.renewal-overview__hero h1 {
-  color: var(--renewal-text);
-  font:
-    700 clamp(2.3rem, 4.5vw, 4rem)/1.15 "Noto Sans JP",
-    sans-serif;
-  letter-spacing: 0.06em;
-}
-.renewal-overview__hero h2 {
-  max-width: 40rem;
-  margin-top: 0.9rem;
-  color: #fff;
-  font:
-    600 clamp(1.1rem, 2vw, 1.55rem)/1.65 "Noto Sans JP",
-    serif;
-}
-.renewal-overview__lead {
-  max-width: 43rem;
-  margin-top: 0.65rem;
-  color: #d4e6ef;
-  font-size: 0.82rem;
-  line-height: 1.9;
 }
 .renewal-overview__slogan {
   position: absolute;
@@ -2493,77 +2253,6 @@
   background: var(--renewal-cyan);
   transform: rotate(-10deg);
 }
-.renewal-overview__stats {
-  display: grid;
-  grid-template-columns: 1fr 1.25fr;
-  width: min(100% - 3rem, 1120px);
-  margin: 1rem auto 0;
-  overflow: hidden;
-  border: 1px solid var(--renewal-line);
-  border-radius: var(--renewal-radius-sm);
-  background: linear-gradient(120deg, var(--renewal-panel-soft), var(--renewal-bg));
-}
-.renewal-overview__stat {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  min-height: 6.4rem;
-  padding: 1rem 1.4rem;
-}
-.renewal-overview__stat + .renewal-overview__stat {
-  border-left: 1px solid #00eaff66;
-}
-.renewal-overview__stat-icon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 3.2rem;
-  width: 3.2rem;
-  height: 3.2rem;
-  border: 1px solid var(--renewal-cyan);
-  border-radius: 50%;
-  color: var(--renewal-cyan);
-  text-shadow: 0 0 12px var(--renewal-cyan);
-}
-.renewal-overview__stat-icon svg {
-  width: 1.9rem;
-  height: 1.9rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.renewal-overview__stat > div > span {
-  display: block;
-  color: var(--renewal-gold);
-  font-size: 0.7rem;
-}
-.renewal-overview__stat strong {
-  display: block;
-  color: #fff;
-  font-size: 1.35rem;
-}
-.renewal-overview__stat:nth-child(2) strong {
-  color: #fff;
-  font-size: 2rem;
-  line-height: 1.1;
-}
-.renewal-overview__stat strong small {
-  margin-left: 0.35rem;
-  color: var(--renewal-muted);
-  font-size: 0.65rem;
-  font-weight: 400;
-}
-.renewal-overview__stat time {
-  position: absolute;
-  right: 1.4rem;
-  bottom: 1rem;
-  color: var(--renewal-muted);
-  font-size: 0.6rem;
-  white-space: nowrap;
-}
 .renewal-overview__content {
   width: min(100% - 3rem, 1120px);
   margin: 0 auto;
@@ -2578,8 +2267,7 @@
   padding: 1rem clamp(1.2rem, 5vw, 4.5rem);
   background:
     linear-gradient(90deg, #010a13cc, #010a1385),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1400&q=80")
-      center / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
 }
 .renewal-overview__recruit p {
   color: #fff;
@@ -2606,54 +2294,10 @@
 @media (max-width: 900px) {
 }
 @media (max-width: 760px) {
-  .renewal-overview__hero {
-    min-height: var(--renewal-feature-hero-height-mobile);
-    padding: 1.2rem 1rem 2rem;
-  }
-  .renewal-overview__breadcrumb {
-    margin-bottom: 1.1rem;
-    font-size: 0.75rem;
-  }
-  .renewal-overview__hero h1 {
-    font-size: clamp(2rem, 11vw, 3rem);
-  }
-  .renewal-overview__hero h2 {
-    margin-top: 0.8rem;
-    font-size: 1rem;
-  }
-  .renewal-overview__lead {
-    font-size: 0.72rem;
-  }
   .renewal-overview__slogan {
     right: 1rem;
     bottom: 1.4rem;
     font-size: 1.9rem;
-  }
-  .renewal-overview__stats {
-    grid-template-columns: 1fr;
-    width: calc(100% - 1.4rem);
-    margin-top: 0.7rem;
-  }
-  .renewal-overview__stat {
-    min-height: 5.2rem;
-    padding: 0.75rem 1rem;
-  }
-  .renewal-overview__stat time {
-    position: static;
-    margin-left: auto;
-  }
-  .renewal-overview__stat + .renewal-overview__stat {
-    border-top: 1px solid #00eaff66;
-    border-left: 0;
-  }
-  .renewal-overview__stat-icon {
-    font-size: 2rem;
-  }
-  .renewal-overview__stat strong {
-    font-size: 1.1rem;
-  }
-  .renewal-overview__stat:nth-child(2) strong {
-    font-size: 1.65rem;
   }
   .renewal-overview__content {
     width: calc(100% - 1.4rem);
@@ -2693,8 +2337,7 @@
   background:
     linear-gradient(90deg, #010811ed 0%, #01081170 55%, #01081112 100%),
     linear-gradient(0deg, #010811aa, transparent 45%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
 }
 .renewal-flow__breadcrumb,
 .renewal-faq-page__breadcrumb,
@@ -2721,8 +2364,8 @@
 .renewal-schedule__hero h1 {
   color: #f5f8ff;
   font:
-    700 clamp(2rem, 4vw, 3.35rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    700 clamp(2rem, 4vw, 3.35rem)/1.2 "Zen Old Mincho",
+    serif;
   letter-spacing: 0.04em;
 }
 .renewal-flow__hero p,
@@ -2759,7 +2402,7 @@
   gap: 0.65rem;
   min-height: 3.2rem;
   padding-bottom: 0.55rem;
-  border-bottom: 1px solid #15516a;
+  border-bottom: 1px solid var(--renewal-border-medium);
 }
 .renewal-flow__step header > span {
   display: grid;
@@ -2809,7 +2452,7 @@
 .renewal-flow__step aside {
   margin-top: 0.55rem;
   padding: 0.45rem 0.55rem;
-  border: 1px solid #0a829b;
+  border: 1px solid var(--renewal-border-strong);
   border-radius: 0.45rem;
   color: #bcecf5;
   font-size: 0.64rem;
@@ -2919,7 +2562,7 @@
 }
 .renewal-faq-page__list details > div {
   padding: 0.8rem 1.2rem 1rem 4.7rem;
-  border-top: 1px solid #00eaff2e;
+  border-top: 1px solid var(--renewal-border-subtle);
   color: #c5e2ed;
   font-size: 0.75rem;
   line-height: 1.9;
@@ -2982,7 +2625,7 @@
   gap: 0.55rem;
   margin: 0;
   padding: 1rem 1rem 1.1rem 2.8rem;
-  border-top: 1px solid #00eaff33;
+  border-top: 1px solid var(--renewal-border-subtle);
 }
 .renewal-precautions__panel li {
   padding-left: 0.2rem;
@@ -2997,7 +2640,7 @@
 .renewal-precautions__fee {
   margin: 0 1rem 1rem;
   padding: 0.65rem 0.8rem;
-  border: 1px solid #0a829b;
+  border: 1px solid var(--renewal-border-strong);
   border-radius: 0.45rem;
   color: #bcecf5;
   font-size: 0.66rem;
@@ -3329,8 +2972,7 @@
   background:
     linear-gradient(90deg, #010a11f2, #010a1199 38%, #010a1110 76%),
     linear-gradient(0deg, #010a1144, transparent 60%),
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
-      center / cover;
+    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
 }
 .renewal-archive__hero::after {
   content: "";
@@ -3349,8 +2991,8 @@
 .renewal-archive__hero h1 {
   margin: 0;
   font:
-    700 clamp(2.4rem, 5vw, 4rem)/1.2 "Noto Sans JP",
-    sans-serif;
+    600 clamp(2.4rem, 5vw, 4rem)/1.2 "Zen Old Mincho",
+    serif;
 }
 .renewal-archive__hero p {
   margin-top: 0.35rem;
@@ -3402,7 +3044,7 @@
   min-height: 14rem;
   padding: 0.7rem;
   overflow: hidden;
-  border: 1px solid #155a70;
+  border: 1px solid var(--renewal-border-medium);
   border-radius: var(--renewal-radius-sm);
   background: var(--renewal-surface-card);
   box-shadow: inset 0 0 15px #002b3c22;
@@ -3426,7 +3068,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid #22576b;
+  border: 1px solid var(--renewal-border-medium);
   border-radius: 0.3rem;
 }
 .renewal-archive__details {
@@ -3491,12 +3133,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: auto;
-  border-top: 1px solid #185267;
-  border-bottom: 1px solid #185267;
+  border-top: 1px solid var(--renewal-border-medium);
+  border-bottom: 1px solid var(--renewal-border-medium);
 }
 .renewal-archive__numbers span {
   padding: 0.3rem 0.05rem;
-  border-right: 1px solid #174b5e;
+  border-right: 1px solid var(--renewal-border-medium);
   color: #d7e6ee;
   font-size: 0.5rem;
   text-align: center;
@@ -3808,6 +3450,7 @@
     url("../assets/renewal/集合写真_webp/26,3春.webp") center 52% / cover padding-box,
     linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
 }
+
 /* Renewalの文字はAnzu Moji以外をNoto Sans JPに統一する。 */
 .renewal-site * {
   font-family: "Noto Sans JP", sans-serif;
@@ -3826,7 +3469,7 @@
   padding: 1.45rem var(--renewal-content-gutter) 1.8rem;
   --renewal-hero-image: var(
     --renewal-page-hero-image,
-    url("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1800&q=85")
+    url("../assets/renewal/集合写真_webp/26,3春.webp")
   );
   background-image:
     linear-gradient(90deg, #010811ed, #01081170 55%, #01081112),
@@ -3876,8 +3519,7 @@
   .renewal-schedule__content,
   .renewal-setlist__content,
   .renewal-application__events,
-  .renewal-archive__filters,
-  .renewal-activity__stats {
+  .renewal-archive__filters {
     margin-top: 0.6rem;
   }
 
@@ -3915,18 +3557,20 @@
 
   .renewal-activity__year-copy ul {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     gap: 0.75rem;
     margin: 0.3rem 0 0.45rem;
     padding-left: 0;
     list-style: none;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .renewal-activity__year-copy li {
     position: relative;
+    min-width: 0;
     padding-left: 0.8rem;
     font-size: var(--renewal-font-md);
+    overflow-wrap: anywhere;
   }
 
   .renewal-activity__year-copy li::before {
@@ -4035,7 +3679,7 @@
 }
 
 .renewal-activity__year-title {
-  color: #ff9d82 !important;
+  color: var(--renewal-cyan) !important;
 }
 
 .renewal-activity__year-participants {
@@ -4158,7 +3802,7 @@
     place-items: start;
     padding: 0.55rem 0.6rem 0.35rem;
     border-right: 0;
-    border-bottom: 1px solid #58727d;
+    border-bottom: 1px solid var(--renewal-border-neutral);
     text-align: left;
   }
 
@@ -4219,7 +3863,7 @@
     height: 1.75rem;
     place-items: center;
     padding: 0;
-    border: 1px solid #d9faffaa;
+    border: 1px solid var(--renewal-border-light);
     border-radius: 0.25rem;
     color: #fff;
     background: #00131dcc;
@@ -4286,7 +3930,7 @@
     height: 2rem;
     place-items: center;
     padding: 0;
-    border: 1px solid #d9faffaa;
+    border: 1px solid var(--renewal-border-light);
     border-radius: 0.25rem;
     color: #fff;
     background: #00131dcc;
@@ -4329,7 +3973,7 @@
     grid-row: 1 / -1;
     align-self: stretch;
     padding: 0.6rem 0.45rem 0.6rem 0;
-    border-left: 1px solid #58727d;
+    border-left: 1px solid var(--renewal-border-neutral);
   }
 
   .renewal-activity__year-photos img {
@@ -4351,7 +3995,7 @@
     grid-row: 1;
     place-items: center;
     padding: 0.6rem 0.35rem;
-    border-right: 1px solid #58727d;
+    border-right: 1px solid var(--renewal-border-neutral);
     border-bottom: 0;
     text-align: center;
   }
@@ -4429,16 +4073,30 @@
 .renewal-archive-detail__hero h1 {
   margin-top: 0.35rem;
   font:
-    700 clamp(1.7rem, 4vw, 3rem)/1.3 "Noto Sans JP",
-    sans-serif;
+    700 clamp(1.7rem, 4vw, 3rem)/1.3 "Zen Old Mincho",
+    serif;
 }
 .renewal-archive-detail__hero p {
   color: var(--renewal-muted);
   font-size: 0.75rem;
 }
 .renewal-archive-detail__eyebrow {
-  color: var(--renewal-cyan) !important;
+  color: var(--renewal-gold) !important;
   font-size: 0.7rem !important;
+}
+.renewal-archive-detail__place {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.renewal-archive-detail__place svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 .renewal-archive-detail__content {
   width: min(100% - (2 * var(--renewal-content-gutter)), 900px);
@@ -4521,7 +4179,7 @@
   height: 1.6rem;
   margin: auto;
   place-items: center;
-  border: 1px solid #fff9;
+  border: 1px solid var(--renewal-border-light);
   border-radius: 50%;
   color: #fff;
   background: #00131dcc;

@@ -2,6 +2,7 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import RenewalOverviewStats from "../../components/renewal/RenewalOverviewStats.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { renewalApi, summarizeActivities, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
@@ -12,109 +13,231 @@ const recruitment = selectRecruitmentForBanner(applications);
 ---
 
 <RenewalLayout title="活動実績" description="MuSTのこれまでのライブ活動をご紹介します。">
-	<div class="renewal-activity">
-		<section class="renewal-activity__hero renewal-subpage-hero" aria-labelledby="activity-title">
-			<RenewalBreadcrumb title="活動実績" className="renewal-activity__breadcrumb" />
-			<h1 id="activity-title">活動実績</h1>
-			<h2>これまでのライブで、<br />たくさんの仲間と音を重ねてきました。</h2>
-			<p>2023年の立ち上げから、ライブやセッションを重ねてきました。<br />いつもの友人たちと、新しい出会いとともに。<br />10年後も、20年後も、その先も。<br />音楽を楽しむ時間を大切にしていきます。</p>
-		</section>
-		<section class="renewal-activity__stats" aria-label="活動実績の数字">
-			<div class="renewal-activity__stat"><span><RenewalIcon name="music" /></span><div><b>開催ライブ</b><strong>{summary.live_count}<small>回</small></strong>{summary.as_of_date && <em>（{new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）</em>}</div></div>
-			<div class="renewal-activity__stat"><span><RenewalIcon name="users" /></span><div><b>出演者延べ人数</b><strong>{summary.performer_count}<small>名</small></strong>{summary.as_of_date && <em>（{new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）</em>}</div></div>
-		</section>
-		<section class="renewal-activity__timeline" aria-labelledby="activity-history-title">
-			<h2 id="activity-history-title">これまでの活動</h2>
-			<div class="renewal-activity__years">
-				{activities.map((item) => <article class="renewal-activity__year"><div class="renewal-activity__year-label"><strong class="renewal-activity__year-value">{item.year}</strong></div><div class="renewal-activity__year-copy"><b class="renewal-activity__year-title">{item.title}</b><ul>{item.details.map((detail) => <li>{detail.text}</li>)}</ul><p>出演者延べ人数 <strong class="renewal-activity__year-participants">{item.performer_count}名</strong></p></div><div class:list={["renewal-activity__year-photos", { "has-multiple": item.photos.length > 1, "has-carousel": item.photos.length > 4 }]} aria-label={`${item.year}年のライブ写真`}><div class="renewal-activity__photo-track">{item.photos.map((photo, index) => <img class:list={{ "is-active": index === 0 }} src={photo.url} alt={photo.alt ?? ""} />)}</div><button class="renewal-activity__photo-control renewal-activity__photo-control--prev" type="button" data-photo-prev aria-label="前の写真">‹</button><button class="renewal-activity__photo-control renewal-activity__photo-control--next" type="button" data-photo-next aria-label="次の写真">›</button></div></article>)}
-			</div>
-		</section>
-		{recruitment && <RenewalRecruitCta event={recruitment} />}
-	</div>
+  <div class="renewal-activity">
+    <section class="renewal-activity__hero renewal-subpage-hero" aria-labelledby="activity-title">
+      <RenewalBreadcrumb title="活動実績" className="renewal-activity__breadcrumb" />
+      <h1 id="activity-title">活動実績</h1>
+      <h2>
+        これまでのライブで、
+        <br />
+        たくさんの仲間と音を重ねてきました。
+      </h2>
+      <p>
+        2023年の立ち上げから、ライブやセッションを重ねてきました。
+        <br />
+        いつもの友人たちと、新しい出会いとともに。
+        <br />
+        10年後も、20年後も、その先も。
+        <br />
+        音楽を楽しむ時間を大切にしていきます。
+      </p>
+    </section>
+    <RenewalOverviewStats
+      ariaLabel="活動実績の概要"
+      items={[
+        {
+          icon: "music",
+          label: "開催ライブ",
+          value: summary.live_count,
+          suffix: "回",
+          large: true,
+          detail: summary.as_of_date
+            ? `（${new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）`
+            : undefined,
+        },
+        {
+          icon: "users",
+          label: "出演者延べ人数",
+          value: summary.performer_count,
+          suffix: "名",
+          large: true,
+          detail: summary.as_of_date
+            ? `（${new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）`
+            : undefined,
+        },
+      ]}
+    />
+    <section
+      class="renewal-activity__timeline"
+      aria-labelledby="activity-history-title"
+    >
+      <h2 id="activity-history-title">これまでの活動</h2>
+      <div class="renewal-activity__years">
+        {activities.map((item) => (
+          <article class="renewal-activity__year">
+            <div class="renewal-activity__year-label">
+              <strong class="renewal-activity__year-value">{item.year}</strong>
+            </div>
+            <div class="renewal-activity__year-copy">
+              <b class="renewal-activity__year-title">{item.title}</b>
+              <ul>
+                {item.details.map((detail) => (
+                  <li>{detail.text}</li>
+                ))}
+              </ul>
+              <p>
+                出演者延べ人数{" "}
+                <strong class="renewal-activity__year-participants">
+                  {item.performer_count}名
+                </strong>
+              </p>
+            </div>
+            <div
+              class:list={[
+                "renewal-activity__year-photos",
+                { "has-multiple": item.photos.length > 1, "has-carousel": item.photos.length > 4 },
+              ]}
+              aria-label={`${item.year}年のライブ写真`}
+            >
+              <div class="renewal-activity__photo-track">
+                {item.photos.map((photo, index) => (
+                  <img
+                    class:list={{ "is-active": index === 0 }}
+                    src={photo.url}
+                    alt={photo.alt ?? ""}
+                  />
+                ))}
+              </div>
+              <button
+                class="renewal-activity__photo-control renewal-activity__photo-control--prev"
+                type="button"
+                data-photo-prev
+                aria-label="前の写真"
+              >
+                ‹
+              </button>
+              <button
+                class="renewal-activity__photo-control renewal-activity__photo-control--next"
+                type="button"
+                data-photo-next
+                aria-label="次の写真"
+              >
+                ›
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+    {recruitment && <RenewalRecruitCta event={recruitment} />}
+  </div>
 </RenewalLayout>
 
-<div class="renewal-activity__lightbox" data-photo-lightbox hidden role="dialog" aria-modal="true" aria-label="写真を拡大表示">
-	<button class="renewal-activity__lightbox-close" type="button" data-photo-close aria-label="写真を閉じる">×</button>
-	<button class="renewal-activity__lightbox-control renewal-activity__lightbox-control--prev" type="button" data-lightbox-prev aria-label="前の拡大写真">‹</button>
-	<img data-photo-lightbox-image src="" alt="" />
-	<button class="renewal-activity__lightbox-control renewal-activity__lightbox-control--next" type="button" data-lightbox-next aria-label="次の拡大写真">›</button>
+<div
+  class="renewal-activity__lightbox"
+  data-photo-lightbox
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-label="写真を拡大表示"
+>
+  <button
+    class="renewal-activity__lightbox-close"
+    type="button"
+    data-photo-close
+    aria-label="写真を閉じる"
+  >
+    ×
+  </button>
+  <button
+    class="renewal-activity__lightbox-control renewal-activity__lightbox-control--prev"
+    type="button"
+    data-lightbox-prev
+    aria-label="前の拡大写真"
+  >
+    ‹
+  </button>
+  <img data-photo-lightbox-image src="" alt="" />
+  <button
+    class="renewal-activity__lightbox-control renewal-activity__lightbox-control--next"
+    type="button"
+    data-lightbox-next
+    aria-label="次の拡大写真"
+  >
+    ›
+  </button>
 </div>
 
 <script>
-	const lightbox = document.querySelector("[data-photo-lightbox]");
-	const lightboxImage = document.querySelector("[data-photo-lightbox-image]");
-	const lightboxPrev = document.querySelector("[data-lightbox-prev]");
-	const lightboxNext = document.querySelector("[data-lightbox-next]");
-	let lightboxImages = [];
-	let lightboxIndex = 0;
+  const lightbox = document.querySelector("[data-photo-lightbox]");
+  const lightboxImage = document.querySelector("[data-photo-lightbox-image]");
+  const lightboxPrev = document.querySelector("[data-lightbox-prev]");
+  const lightboxNext = document.querySelector("[data-lightbox-next]");
+  let lightboxImages = [];
+  let lightboxIndex = 0;
 
-	const renderLightbox = () => {
-		const image = lightboxImages[lightboxIndex];
-		if (!image || !lightboxImage) return;
-		lightboxImage.src = image.src;
-		lightboxImage.alt = image.alt;
-		const hasMultiple = lightboxImages.length > 1;
-		if (lightboxPrev) lightboxPrev.hidden = !hasMultiple;
-		if (lightboxNext) lightboxNext.hidden = !hasMultiple;
-	};
+  const renderLightbox = () => {
+    const image = lightboxImages[lightboxIndex];
+    if (!image || !lightboxImage) return;
+    lightboxImage.src = image.src;
+    lightboxImage.alt = image.alt;
+    const hasMultiple = lightboxImages.length > 1;
+    if (lightboxPrev) lightboxPrev.hidden = !hasMultiple;
+    if (lightboxNext) lightboxNext.hidden = !hasMultiple;
+  };
 
-	document.querySelectorAll(".renewal-activity__year-photos").forEach((gallery) => {
-		const images = [...gallery.querySelectorAll("img")];
-		const isDesktop = window.matchMedia("(min-width: 761px)");
-		let currentIndex = 0;
-		let currentPage = 0;
-		const render = () => {
-			if (isDesktop.matches && images.length > 4) {
-				const start = currentPage * 4;
-				images.forEach((image, index) => image.classList.toggle("is-visible", index >= start && index < start + 4));
-				return;
-			}
+  document.querySelectorAll(".renewal-activity__year-photos").forEach((gallery) => {
+    const images = [...gallery.querySelectorAll("img")];
+    const isDesktop = window.matchMedia("(min-width: 761px)");
+    let currentIndex = 0;
+    let currentPage = 0;
+    const render = () => {
+      if (isDesktop.matches && images.length > 4) {
+        const start = currentPage * 4;
+        images.forEach((image, index) =>
+          image.classList.toggle("is-visible", index >= start && index < start + 4),
+        );
+        return;
+      }
 
-			images.forEach((image, index) => image.classList.toggle("is-active", index === currentIndex));
-		};
-		render();
+      images.forEach((image, index) => image.classList.toggle("is-active", index === currentIndex));
+    };
+    render();
 
-		gallery.querySelector("[data-photo-prev]")?.addEventListener("click", () => {
-			if (isDesktop.matches && images.length > 4) {
-				currentPage = (currentPage - 1 + Math.ceil(images.length / 4)) % Math.ceil(images.length / 4);
-			} else {
-				currentIndex = (currentIndex - 1 + images.length) % images.length;
-			}
-			render();
-		});
-		gallery.querySelector("[data-photo-next]")?.addEventListener("click", () => {
-			if (isDesktop.matches && images.length > 4) {
-				currentPage = (currentPage + 1) % Math.ceil(images.length / 4);
-			} else {
-				currentIndex = (currentIndex + 1) % images.length;
-			}
-			render();
-		});
-		images.forEach((image, index) => image.addEventListener("click", () => {
-			if (!lightbox || !lightboxImage) return;
-			lightboxImages = images;
-			lightboxIndex = index;
-			renderLightbox();
-			lightbox.hidden = false;
-		}));
-	});
+    gallery.querySelector("[data-photo-prev]")?.addEventListener("click", () => {
+      if (isDesktop.matches && images.length > 4) {
+        currentPage =
+          (currentPage - 1 + Math.ceil(images.length / 4)) % Math.ceil(images.length / 4);
+      } else {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+      }
+      render();
+    });
+    gallery.querySelector("[data-photo-next]")?.addEventListener("click", () => {
+      if (isDesktop.matches && images.length > 4) {
+        currentPage = (currentPage + 1) % Math.ceil(images.length / 4);
+      } else {
+        currentIndex = (currentIndex + 1) % images.length;
+      }
+      render();
+    });
+    images.forEach((image, index) =>
+      image.addEventListener("click", () => {
+        if (!lightbox || !lightboxImage) return;
+        lightboxImages = images;
+        lightboxIndex = index;
+        renderLightbox();
+        lightbox.hidden = false;
+      }),
+    );
+  });
 
-	lightboxPrev?.addEventListener("click", () => {
-		lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
-		renderLightbox();
-	});
-	lightboxNext?.addEventListener("click", () => {
-		lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
-		renderLightbox();
-	});
+  lightboxPrev?.addEventListener("click", () => {
+    lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+    renderLightbox();
+  });
+  lightboxNext?.addEventListener("click", () => {
+    lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+    renderLightbox();
+  });
 
-	document.querySelector("[data-photo-close]")?.addEventListener("click", () => {
-		if (lightbox) lightbox.hidden = true;
-	});
-	lightbox?.addEventListener("click", (event) => {
-		if (event.target === lightbox) lightbox.hidden = true;
-	});
-	document.addEventListener("keydown", (event) => {
-		if (event.key === "Escape" && lightbox) lightbox.hidden = true;
-	});
+  document.querySelector("[data-photo-close]")?.addEventListener("click", () => {
+    if (lightbox) lightbox.hidden = true;
+  });
+  lightbox?.addEventListener("click", (event) => {
+    if (event.target === lightbox) lightbox.hidden = true;
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && lightbox) lightbox.hidden = true;
+  });
 </script>

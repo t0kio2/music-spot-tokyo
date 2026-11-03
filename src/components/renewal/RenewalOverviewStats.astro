@@ -1,39 +1,42 @@
 ---
 import RenewalIcon from "./RenewalIcon.astro";
-import type { RenewalOverview } from "../../lib/renewal-api";
-
-interface Props {
-  overview: RenewalOverview;
+import styles from "./RenewalOverviewStats.module.css";
+type IconName = "pin" | "users" | "music";
+interface StatItem {
+  icon: IconName;
+  label: string;
+  value: string | number;
+  suffix?: string;
+  detail?: string;
+  date?: string;
+  large?: boolean;
 }
-
-const { overview } = Astro.props;
+interface Props {
+  items: StatItem[];
+  ariaLabel?: string;
+}
+const { items, ariaLabel = "MuSTの概要" } = Astro.props;
 ---
 
-<section class="renewal-overview__stats" aria-label="MuSTの概要">
-  <div class="renewal-overview__stat">
-    <span class="renewal-overview__stat-icon">
-      <RenewalIcon name="pin" />
-    </span>
-    <div>
-      <span>活動場所</span>
-      <strong>東京都23区内</strong>
+<section class:list={["renewal-overview__stats", styles.stats]} aria-label={ariaLabel}>
+  {items.map((item) => (
+    <div class:list={["renewal-overview__stat", styles.stat, { [styles.large]: item.large }]}>
+      <span class={styles.icon}>
+        <RenewalIcon name={item.icon} />
+      </span>
+      <div>
+        <span class={styles.label}>{item.label}</span>
+        <strong class={styles.value}>
+          {item.value}
+          <small>{item.suffix}</small>
+        </strong>
+        {item.detail && <small class={styles.detail}>{item.detail}</small>}
+      </div>
+      {item.date && (
+        <time class={styles.date} datetime={item.date}>
+          {new Date(item.date).toLocaleDateString("ja-JP")}時点
+        </time>
+      )}
     </div>
-  </div>
-  <div class="renewal-overview__stat">
-    <span class="renewal-overview__stat-icon">
-      <RenewalIcon name="users" />
-    </span>
-    <div>
-      <span>参加人数</span>
-      <strong>
-        {overview.participant_count}
-        <small>
-          名（女性{overview.female_count}名・男性{overview.male_count}名）
-        </small>
-      </strong>
-    </div>
-    <time datetime={overview.participant_as_of}>
-      {new Date(overview.participant_as_of).toLocaleDateString("ja-JP")}時点
-    </time>
-  </div>
+  ))}
 </section>

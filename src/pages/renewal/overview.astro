@@ -14,7 +14,18 @@ const recruitment = selectRecruitmentForBanner(applications);
 <RenewalLayout title="MuSTについて" description="MuSTの活動内容や特徴をご紹介します。">
   <div class="renewal-overview">
     <RenewalOverviewHero />
-    <RenewalOverviewStats overview={overview} />
+    <RenewalOverviewStats
+      items={[
+        { icon: "pin", label: "活動場所", value: "東京都23区内" },
+        {
+          icon: "users",
+          label: "参加人数",
+          value: overview.participant_count,
+          suffix: `名（女性${overview.female_count}名・男性${overview.male_count}名）`,
+          date: overview.participant_as_of,
+        },
+      ]}
+    />
 
     <section class="renewal-overview__content" id="activities" aria-label="MuSTの特徴">
       <RenewalOverviewFeatures />

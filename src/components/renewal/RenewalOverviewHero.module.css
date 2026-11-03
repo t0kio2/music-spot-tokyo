@@ -1,0 +1,66 @@
+.hero {
+  position: relative;
+  min-height: var(--renewal-feature-hero-height);
+  overflow: hidden;
+  padding: 1.8rem var(--renewal-content-gutter) 2.2rem;
+  border-bottom: 1px solid var(--renewal-border-strong);
+  background:
+    linear-gradient(90deg, #010a13e8, #010a1388 48%, #010a1320),
+    linear-gradient(0deg, #010a13c4, transparent 60%),
+    url("../../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
+}
+
+.breadcrumb {
+  display: flex;
+  gap: 0.65rem;
+  margin-bottom: 1.25rem;
+  color: var(--renewal-muted);
+  font-size: 0.8rem;
+}
+
+.breadcrumb :global(a) {
+  color: var(--renewal-muted);
+}
+.title {
+  color: var(--renewal-text);
+  font:
+    600 clamp(2.3rem, 4.5vw, 4rem) / 1.15 "Zen Old Mincho",
+    serif;
+  letter-spacing: 0.06em;
+}
+.heading {
+  max-width: 40rem;
+  margin-top: 0.9rem;
+  color: #fff;
+  font:
+    600 clamp(1.1rem, 2vw, 1.55rem) / 1.65 "Zen Old Mincho",
+    serif;
+}
+.lead {
+  max-width: 43rem;
+  margin-top: 0.65rem;
+  color: #d4e6ef;
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: var(--renewal-feature-hero-height-mobile);
+    padding: 1.2rem 1rem 2rem;
+  }
+  .breadcrumb {
+    margin-bottom: 1.1rem;
+    font-size: 0.75rem;
+  }
+  .title {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+  .heading {
+    margin-top: 0.8rem;
+    font-size: 1rem;
+  }
+  .lead {
+    font-size: 0.72rem;
+  }
+}

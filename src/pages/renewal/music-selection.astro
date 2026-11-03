@@ -2,11 +2,10 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import RenewalMusicInfoCards from "../../components/renewal/RenewalMusicInfoCards.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { getScheduleAndArchive } from "../../lib/microcms";
 import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
-const data = await getScheduleAndArchive();
 const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 ---
 
@@ -18,7 +17,7 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
         どんな曲を<span>演奏</span>するの？
       </h1>
       <p>
-        2017年以降のJ-POP・邦ロックを中心に、
+        J-POP・邦ロックを中心に、
         <br />
         サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。
       </p>
@@ -60,7 +59,7 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
             <br />
             ずっと真夜中でいいのに。
             <br />
-            Mr.Children
+            ヨルシカ
           </p>
         </article>
       </div>
@@ -94,14 +93,17 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
           <div>
             <i></i>
             <span>
-              2017年〜（12曲程度）<small>YouTube再生数を参考にした人気曲</small>
+              2017年〜（12曲程度）<small>Youtubeの再生回数を参考にしています。</small>
             </span>
             <b>50%</b>
           </div>
           <div>
             <i></i>
             <span>
-              2006年以前〜2016年（4曲程度）<small>国民的ヒット曲</small>
+              2007年〜2016年（4曲程度）
+              <small>
+                ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。
+              </small>
             </span>
             <b>17%</b>
           </div>
@@ -122,27 +124,7 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
         </div>
       </section>
 
-      <div class="renewal-setlist__bottom">
-        <section class="renewal-setlist__info">
-          <h2>☆　期待枠について</h2>
-          <p>
-            全体の約2曲を「期待枠」から採用します。
-            <br />
-            リストアップされたアーティストの「代表曲」を中心に参照します。
-          </p>
-        </section>
-        <section class="renewal-setlist__info renewal-setlist__info--past">
-          <h2>⌕　過去の演奏曲について</h2>
-          <p>
-            過去3年以内に演奏した曲はリクエストできません。
-            <br />
-            過去演奏曲一覧・検索でご確認ください。
-          </p>
-          <a href={data.past_songs_url} target="_blank" rel="noopener noreferrer">
-            過去の演奏曲一覧を見る →
-          </a>
-        </section>
-      </div>
+      <RenewalMusicInfoCards />
     </section>
     {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
