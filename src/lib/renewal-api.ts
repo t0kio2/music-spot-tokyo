@@ -42,6 +42,7 @@ export function formatEventDate(date?: string): string {
 }
 
 export interface RenewalArchive {
+	id: string;
 	title: string;
 	subtitle?: string;
 	event_type: ArchiveEventType;
@@ -53,8 +54,15 @@ export interface RenewalArchive {
 	total_count: number;
 	cover_image: RenewalMedia;
 	youtube_url?: string;
+	setlist: RenewalSetlistItem[];
 	sort_order: number;
 	updatedAt: string;
+}
+
+export interface RenewalSetlistItem {
+	artist: string;
+	song_title: string;
+	youtube_url?: string;
 }
 
 export type RecruitmentPartStatus = "open" | "waitlist" | "closed";
@@ -63,6 +71,18 @@ export interface RenewalRecruitmentPart {
 	part_name: string;
 	status: RecruitmentPartStatus;
 	note?: string;
+}
+
+export interface RenewalApplicationSchedule {
+	practice_date?: string;
+	practice_place?: string;
+	practice_fee?: string;
+	live_date?: string;
+	setlist_select_msg?: string;
+}
+
+export interface RenewalApplicationPerformer {
+	name: string;
 }
 
 export interface RenewalApplication {
@@ -74,9 +94,15 @@ export interface RenewalApplication {
 	status_message: string;
 	is_closed: boolean;
 	application_url?: string;
-	cover_image?: RenewalMedia;
+	flyer?: RenewalMedia;
 	sort_order: number;
 	parts: RenewalRecruitmentPart[];
+	performers: RenewalApplicationPerformer[];
+	regular_session_info: RenewalApplicationSchedule[];
+	participants_number: number;
+	audience_number: number;
+	pictures: RenewalMedia[];
+	youtube_url?: string;
 	updatedAt: string;
 }
 
@@ -97,6 +123,45 @@ interface RenewalHistoryRecord {
 	participants_number?: string | number;
 	events?: RenewalHistoryEvent[];
 	pictures?: RenewalMedia[];
+	updatedAt?: string;
+}
+
+interface RenewalOverviewRecord {
+	member_number?: string | number;
+	female_number?: string | number;
+	male_number?: string | number;
+	updatedAt?: string;
+}
+
+interface RenewalApplicationRecord {
+	title?: string;
+	flyer?: RenewalMedia;
+	event_date?: string;
+	event_type?: string;
+	place?: string;
+	fee?: string;
+	regular_session_info?: RenewalApplicationSchedule | RenewalApplicationSchedule[];
+	performers?: RenewalApplicationPerformer[];
+	recruitment_status?: Array<{ name?: string | string[]; status?: string | string[] }>;
+	participants_number?: string | number;
+	audience_number?: string | number;
+	next_attendance_rate?: string | number;
+	youtube_url?: string;
+	pictures?: RenewalMedia[];
+	updatedAt?: string;
+}
+
+interface RenewalArchiveRecord {
+	id?: string;
+	title?: string;
+	event_date?: string;
+	event_type?: string | string[];
+	place?: string;
+	participants_number?: string | number;
+	audience_number?: string | number;
+	youtube_url?: string;
+	pictures?: RenewalMedia[];
+	setlist?: Array<{ artist?: string; song_title?: string; youtube_url?: string }>;
 	updatedAt?: string;
 }
 
@@ -134,6 +199,114 @@ async function getHistoryFromMicrocms(): Promise<RenewalActivity[]> {
 			updatedAt: item.updatedAt ?? "",
 		};
 	});
+}
+
+function toApplicationEventType(type?: string): ArchiveEventType {
+	return { 定期セッション: "regular", 企画ライブ: "project", 対バンライブ: "band" }[type ?? ""] ?? "regular";
+}
+
+function toSelectValue(value?: string | string[]): string | undefined {
+	return Array.isArray(value) ? value[0] : value;
+}
+
+function toRecruitmentStatus(status?: string | string[]): RecruitmentPartStatus {
+	const value = toSelectValue(status);
+	return value === "募集中" ? "open" : value === "キャンセル待ち" ? "waitlist" : "closed";
+}
+
+function toScheduleList(schedule?: RenewalApplicationSchedule | RenewalApplicationSchedule[]): RenewalApplicationSchedule[] {
+	if (!schedule) return [];
+	return Array.isArray(schedule) ? schedule : [schedule];
+}
+
+function toNumber(value?: string | number): number {
+	const number = Number(value ?? 0);
+	return Number.isNaN(number) ? 0 : number;
+}
+
+async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
+	const overview = await getRenewalMicrocmsClient().getObject<RenewalOverviewRecord>({
+		endpoint: "overview",
+	});
+
+	return {
+		participant_count: toNumber(overview?.member_number),
+		female_count: toNumber(overview?.female_number),
+		male_count: toNumber(overview?.male_number),
+		participant_as_of: overview?.updatedAt ?? "",
+	};
+}
+
+async function getApplicationFromMicrocms(): Promise<RenewalApplication[]> {
+	const response = await getRenewalMicrocmsClient().getList<RenewalApplicationRecord>({
+		endpoint: "application",
+		queries: { limit: 100 },
+	});
+
+	return response.contents.map((item, index) => {
+		const parts = (item.recruitment_status ?? [])
+			.map((part) => ({ name: toSelectValue(part.name), status: part.status }))
+			.filter((part): part is { name: string; status?: string | string[] } => Boolean(part.name))
+			.map((part) => ({
+				part_name: part.name,
+				status: toRecruitmentStatus(part.status),
+			}));
+		const isClosed = parts.length === 0 || parts.every((part) => part.status === "closed");
+
+		return {
+			title: item.title ?? "",
+			event_type: toApplicationEventType(item.event_type),
+			event_date: item.event_date,
+			place: item.place,
+			fee: item.fee,
+			status_message: isClosed ? "現在募集していません。" : "パートごとの募集状況",
+			is_closed: isClosed,
+			application_url: "/renewal/application/",
+			flyer: item.flyer ? toBrowserMedia(item.flyer) : undefined,
+			sort_order: index,
+			parts,
+			performers: (item.performers ?? []).filter((performer) => performer.name),
+			regular_session_info: toScheduleList(item.regular_session_info),
+			participants_number: toNumber(item.participants_number),
+			audience_number: toNumber(item.audience_number),
+			pictures: (item.pictures ?? []).map(toBrowserMedia),
+			youtube_url: item.youtube_url,
+			updatedAt: item.updatedAt ?? "",
+		};
+	});
+}
+
+async function getArchivesFromMicrocms(): Promise<RenewalArchive[]> {
+	const response = await getRenewalMicrocmsClient().getList<RenewalArchiveRecord>({
+		endpoint: "archive",
+		queries: { limit: 100 },
+	});
+
+	return response.contents
+		.filter((event): event is RenewalArchiveRecord & { id: string; event_date: string } => Boolean(event.id && event.event_date))
+		.sort((a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime())
+		.map((event, index) => {
+			const performerCount = toNumber(event.participants_number);
+			const audienceCount = toNumber(event.audience_number);
+			const coverImage = event.pictures?.[0] ?? { url: "", alt: `${event.title ?? "ライブ"}のライブ写真` };
+			return {
+				id: event.id,
+				title: event.title ?? "タイトル未設定",
+				event_type: toApplicationEventType(toSelectValue(event.event_type)),
+				event_date: event.event_date,
+				place: event.place ?? "会場未定",
+				performer_count: performerCount,
+				audience_count: audienceCount,
+				total_count: performerCount + audienceCount,
+				cover_image: coverImage,
+				youtube_url: event.youtube_url,
+				setlist: (event.setlist ?? [])
+					.filter((song) => song.artist || song.song_title)
+					.map((song) => ({ artist: song.artist ?? "", song_title: song.song_title ?? "", youtube_url: song.youtube_url })),
+				sort_order: index,
+				updatedAt: event.updatedAt,
+			};
+		});
 }
 
 export interface RenewalActivitySummary {
@@ -180,41 +353,13 @@ export function selectRecruitmentForBanner(applications: RenewalApplication[], n
 		})[0] ?? null;
 }
 
-export function createRenewalMockApi(): RenewalApi {
+export function createRenewalApi(): RenewalApi {
 	return {
-		getOverview: async () => mockOverview,
+		getOverview: getOverviewFromMicrocms,
 		getHistory: getHistoryFromMicrocms,
-		getArchives: async () => mockArchives,
-		getApplication: async () => mockApplications,
+		getArchives: getArchivesFromMicrocms,
+		getApplication: getApplicationFromMicrocms,
 	};
 }
 
-export const renewalMockApi = createRenewalMockApi();
-
-const image = (url: string, alt: string): RenewalMedia => ({ url, alt });
-
-const mockOverview: RenewalOverview = {
-	participant_count: 58,
-	female_count: 20,
-	male_count: 38,
-	participant_as_of: "2026-10-01",
-};
-
-const mockActivities: RenewalActivity[] = [
-	{ year: "2023", period_label: "活動開始期", title: "MuST Live Vol.1 ～ 4 を開催", details: [{ text: "春場所・対バン選集・秋場所・King Gnu Session" }], live_count: 4, performer_count: 110, photos: [image("https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=220&q=80", "2023年のライブ")], sort_order: 1, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ year: "2024", period_label: "さらなる成長", title: "MuST Live Vol.5 ～ 8 を開催", details: [{ text: "春場所・ヨルシカ＆マカえん Session・秋場所" }, { text: "Acoustic Session Vol.1・対バン選集" }], live_count: 4, performer_count: 250, photos: [image("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=220&q=80", "2024年のライブ")], sort_order: 2, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ year: "2025", period_label: "活動の拡大", title: "MuST Live Vol.9 ～ 12 を開催", details: [{ text: "春場所・Studio Session Vol.1" }, { text: "ずっとまよ＆King Gnu Session・秋場所・Acoustic Session Vol.2・対バン選集" }], live_count: 4, performer_count: 410, photos: [image("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=220&q=80", "2025年のライブ")], sort_order: 3, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ year: "2026", period_label: "さらなる未来へ", title: "MuST Live Vol.13 ～ 15 を開催", details: [{ text: "春場所・ヨルシカ・UNISON SQUARE GARDEN・星街すいせい Session・秋場所" }], live_count: 3, performer_count: 540, photos: [image("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=220&q=80", "2026年のライブ")], sort_order: 4, updatedAt: "2026-10-01T00:00:00.000Z" },
-];
-
-const mockArchives: RenewalArchive[] = [
-	{ title: "MuST Live Vol.15 -秋場所-", event_type: "regular", event_date: "2026-09-12", event_time: "10:00〜16:00", place: "大塚ウェルカムバック", performer_count: 46, audience_count: 11, total_count: 57, cover_image: image("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=500&q=85", "ライブステージ"), sort_order: 1, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ title: "MuST Live Vol.14", subtitle: "-ヨルシカ・星街すいせい・UNISON SQUARE GARDEN Session-", event_type: "project", event_date: "2026-06-20", event_time: "10:00〜16:00", place: "大久保ホットショット", performer_count: 43, audience_count: 4, total_count: 47, cover_image: image("https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=500&q=85", "ライブステージ"), sort_order: 2, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ title: "MuST Live Vol.13 -春場所-", event_type: "regular", event_date: "2026-03-07", event_time: "10:00〜16:00", place: "大塚ウェルカムバック", performer_count: 49, audience_count: 11, total_count: 60, cover_image: image("https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=500&q=85", "ライブステージ"), sort_order: 3, updatedAt: "2026-10-01T00:00:00.000Z" },
-];
-
-const mockApplications: RenewalApplication[] = [
-	{ title: "MuST Live Vol.16 -対バン巡業-", event_type: "band", event_date: "2026-12-12", place: "飯田橋 SPACE WITH", fee: "1,500円（1D別）", status_message: "観覧者のみの募集です。出演者の募集は行なっておりません。", is_closed: true, application_url: "/renewal/application/", parts: [], sort_order: 0, updatedAt: "2026-10-01T00:00:00.000Z", cover_image: image("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=500&q=85", "ライブステージ") },
-	{ title: "MuST Live Vol.17 -春場所-", event_type: "regular", event_date: "2027-03-13", place: "大塚 welcome back", fee: "2,600円前後（1D別）", status_message: "パートごとの募集状況", is_closed: false, application_url: "/renewal/application/", parts: [{ part_name: "ボーカル", status: "open" }, { part_name: "ギター", status: "open" }, { part_name: "ベース", status: "waitlist" }, { part_name: "ドラム", status: "open" }, { part_name: "キーボード", status: "open" }], sort_order: 1, updatedAt: "2026-10-01T00:00:00.000Z" },
-	{ title: "MuST Live Vol.18", event_type: "project", status_message: "内容が未定のため、まだ募集していません。", is_closed: true, application_url: "/renewal/application/", parts: [], sort_order: 2, updatedAt: "2026-10-01T00:00:00.000Z" },
-];
+export const renewalApi = createRenewalApi();

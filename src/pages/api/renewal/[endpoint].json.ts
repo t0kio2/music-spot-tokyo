@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { renewalMockApi } from "../../../lib/renewal-api";
+import { renewalApi } from "../../../lib/renewal-api";
 
 const endpoints = ["overview", "history", "archives", "application"] as const;
 type Endpoint = (typeof endpoints)[number];
@@ -15,10 +15,10 @@ export const GET: APIRoute = async ({ params }) => {
 	}
 
 	const data = {
-		overview: await renewalMockApi.getOverview(),
-		history: await renewalMockApi.getHistory(),
-		archives: await renewalMockApi.getArchives(),
-		application: await renewalMockApi.getApplication(),
+		overview: await renewalApi.getOverview(),
+		history: await renewalApi.getHistory(),
+		archives: await renewalApi.getArchives(),
+		application: await renewalApi.getApplication(),
 	}[endpoint];
 
 	const body = Array.isArray(data)

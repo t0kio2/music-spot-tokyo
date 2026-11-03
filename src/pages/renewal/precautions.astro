@@ -2,8 +2,8 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalMockApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
-const recruitment = selectRecruitmentForBanner(await renewalMockApi.getApplication());
+import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
+const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 const sections = [
 	{ icon: "♧", title: "サークル全般について", items: ["参加者間でトラブルが発生した際は当事者同士での解決をお願いします。", "練習会、ライブ本番における貴重品や機材等の管理は各自でお願いします。", "ライブ・練習会の様子を撮影し、各種SNSやYouTubeにアップさせていただきますのでご容赦ください。", "応募いただいた内容に虚偽があった場合や、他の参加者を不快にさせる言動が多い方、運営上支障があると判断した方は、参加をお断りすることがございます。", "曲のエントリー後に出演を辞退される場合は、以下のキャンセル料金が発生しますのでご注意ください。", "招待されたLINEグループでは、返信、投稿をしないでください。ご質問等がある場合は、運営者の個人LINEにご連絡お願いします。"] },
 	{ icon: "♙", title: "練習会について", note: "（3月・9月の定期ライブのみ）", items: ["練習会には極力参加くださるようお願いします。欠席された場合は次回参加の際、制限事項がございます。", "第1回、第2回ともに同じ時間割となります。各自、スケジュールの調整をお願いします。", "スタジオ代は参加者の割り勘となります。1,000円〜1,500円程度です。", "やむを得ず欠席する場合は練習会の14日前までにご連絡をお願いいたします。", "ご自身の演奏曲が始まる10分前までには到着しているようお願いします。", "演奏機材は、すぐにスタジオに入れるよう事前準備をお願いします。"] },

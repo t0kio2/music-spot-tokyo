@@ -1,0 +1,35 @@
+---
+interface Props {
+	label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<div class="renewal-activity__lightbox" data-renewal-lightbox hidden role="dialog" aria-modal="true" aria-label={label}>
+	<button class="renewal-activity__lightbox-close" type="button" data-renewal-lightbox-close aria-label="画像を閉じる">×</button>
+	<img data-renewal-lightbox-image src="" alt="" />
+</div>
+
+<script>
+	const lightbox = document.querySelector<HTMLElement>("[data-renewal-lightbox]");
+	const lightboxImage = document.querySelector<HTMLImageElement>("[data-renewal-lightbox-image]");
+	const closeLightbox = () => {
+		if (lightbox) lightbox.hidden = true;
+	};
+
+	document.querySelectorAll<HTMLElement>("[data-renewal-lightbox-src]").forEach((trigger) => trigger.addEventListener("click", () => {
+		const imageUrl = trigger.dataset.renewalLightboxSrc;
+		if (!imageUrl || !lightbox || !lightboxImage) return;
+		lightboxImage.src = imageUrl;
+		lightboxImage.alt = trigger.getAttribute("aria-label") ?? "画像";
+		lightbox.hidden = false;
+	}));
+	document.querySelector("[data-renewal-lightbox-close]")?.addEventListener("click", closeLightbox);
+	lightbox?.addEventListener("click", (event) => {
+		if (event.target === lightbox) closeLightbox();
+	});
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") closeLightbox();
+	});
+</script>

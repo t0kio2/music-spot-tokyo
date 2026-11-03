@@ -1,0 +1,68 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import { formatEventDate, getEventTypeLabel, type RenewalApplication } from "../../lib/renewal-api";
+
+interface Props {
+	event: RenewalApplication;
+}
+
+const { event } = Astro.props;
+const schedule = event.regular_session_info[0];
+const isClosed = event.is_closed;
+const statusLabel = (status: string) => status === "waitlist" ? "キャンセル待ち" : status === "open" ? "募集中" : "募集終了";
+const eventDate = event.event_date ? new Date(event.event_date) : undefined;
+---
+
+<article class="renewal-application__event">
+	<button
+		class:list={["renewal-application__poster", { "renewal-application__poster--orange": event.event_type === "regular" }]}
+		type="button"
+		data-renewal-lightbox-src={event.flyer?.url}
+		style={event.flyer ? `background-image: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.7)), url(${event.flyer.url})` : undefined}
+		aria-label={event.flyer ? `${event.title}のチラシを拡大表示` : "チラシなし"}
+		disabled={!event.flyer}
+	></button>
+
+	<div class="renewal-application__info">
+		<div class="renewal-application__title">
+			<time>
+				<span>{eventDate?.getFullYear() ?? ""}</span>
+				<b>{eventDate ? `${eventDate.getMonth() + 1}月` : "未定"}</b>
+			</time>
+			<div>
+				<small>{getEventTypeLabel(event.event_type)}</small>
+				<h2>{event.title}</h2>
+			</div>
+		</div>
+		{event.event_date || event.place || event.fee ? (
+			<dl class="renewal-application__details-list">
+				<div><dt>▦</dt><dd><b>日時</b>{formatEventDate(event.event_date)}</dd></div>
+				<div><dt>●</dt><dd><b>会場</b>{event.place ?? "未定"}</dd></div>
+				<div><dt>¥</dt><dd><b>費用</b>{event.fee ?? "未定"}</dd></div>
+			</dl>
+		) : <p class="renewal-application__undecided">日程・内容は未定です。</p>}
+	</div>
+
+	{event.performers.length > 0 && <div class="renewal-application__roster">
+		<h3>出演（演奏順は未定）</h3>
+		<ol>{event.performers.map((performer, index) => <li><span>{index + 1}</span>{performer.name}</li>)}</ol>
+	</div>}
+
+	{schedule && <div class="renewal-application__schedule">
+		{schedule.setlist_select_msg && <><h3>選曲について</h3><p>{schedule.setlist_select_msg}</p></>}
+		{schedule.practice_date && <><h3>練習会</h3><p>▦　{schedule.practice_date}<br />●　{schedule.practice_place ?? "場所未定"}{schedule.practice_fee ? <><br />¥　{schedule.practice_fee}</> : null}</p></>}
+		{schedule.live_date && <><h3>ライブ本番</h3><p>▦　{schedule.live_date}<br />●　{event.place ?? "会場未定"}<br />¥　{event.fee ?? "費用未定"}</p></>}
+	</div>}
+
+	<aside class:list={["renewal-application__status", { "renewal-application__status--closed": isClosed }]}>
+		<h3><span>{isClosed ? "◎" : "♙"}</span>募集状況</h3>
+		{event.parts.length > 0 ? <>
+			<p class:list={{ "renewal-application__audience-only": event.event_type === "band" }}>
+				{event.event_type === "band" ? <>観覧者のみの募集です。<br />出演者の募集は行なっておりません。</> : event.status_message}
+			</p>
+			<div class="renewal-application__vacancies">
+				{event.parts.map((part) => <span>♬ {part.part_name} <b class:list={{ "is-wait": part.status === "waitlist" }}>{statusLabel(part.status)}</b></span>)}
+			</div>
+		</> : <p>{event.status_message}</p>}
+	</aside>
+</article>

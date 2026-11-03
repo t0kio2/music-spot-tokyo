@@ -3,10 +3,10 @@ import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalMockApi, summarizeActivities, selectRecruitmentForBanner } from "../../lib/renewal-api";
+import { renewalApi, summarizeActivities, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
-const activities = await renewalMockApi.getHistory();
-const applications = await renewalMockApi.getApplication();
+const activities = await renewalApi.getHistory();
+const applications = await renewalApi.getApplication();
 const summary = summarizeActivities(activities);
 const recruitment = selectRecruitmentForBanner(applications);
 ---

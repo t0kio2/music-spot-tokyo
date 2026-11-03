@@ -2,8 +2,8 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalMockApi, getEventTypeLabel, formatEventDate, selectRecruitmentForBanner } from "../../lib/renewal-api";
-const applications = await renewalMockApi.getApplication();
+import { renewalApi, getEventTypeLabel, formatEventDate, selectRecruitmentForBanner } from "../../lib/renewal-api";
+const applications = await renewalApi.getApplication();
 const upcoming = applications.filter((event) => event.event_date && new Date(event.event_date).getTime() >= Date.now()).sort((a, b) => new Date(a.event_date as string).getTime() - new Date(b.event_date as string).getTime() || a.sort_order - b.sort_order);
 const recruitment = selectRecruitmentForBanner(applications);
 ---

@@ -8,7 +8,7 @@ interface Props {
 const { event } = Astro.props;
 ---
 
-<section class="renewal-home__panel renewal-home__cta" aria-label="メンバー募集">
+<section class="renewal-home__panel renewal-home__cta renewal-recruit-cta" aria-label="メンバー募集">
 	<p>現在、{formatEventDate(event.event_date)}の{getEventTypeLabel(event.event_type)}のメンバーを募集中です。</p>
 	<a class="renewal-home__pill renewal-home__pill--warm" href={event.application_url ?? "/renewal/application/"}>募集状況・申込み <span>→</span></a>
 </section>

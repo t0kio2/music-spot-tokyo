@@ -5,11 +5,13 @@ interface Props {
 	title: string;
 	className?: string;
 	home?: boolean;
+	parentTitle?: string;
+	parentHref?: string;
 }
 
-const { title, className = "renewal-breadcrumb", home = false } = Astro.props;
+const { title, className = "renewal-breadcrumb", home = false, parentTitle, parentHref } = Astro.props;
 ---
 
 <nav class={`renewal-breadcrumb ${className}`} aria-label="パンくずリスト">
-	{home ? <span><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />{title}</span> : <><a href="/renewal/"><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />ホーム</a><span>›</span><span>{title}</span></>}
+	{home ? <span><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />{title}</span> : <><a href="/renewal/"><RenewalIcon name="home" className="renewal-breadcrumb__home-icon" />ホーム</a><span>›</span>{parentTitle && parentHref ? <><a href={parentHref}>{parentTitle}</a><span>›</span></> : null}<span>{title}</span></>}
 </nav>
