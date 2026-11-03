@@ -158,6 +158,7 @@ const mockArchives: RenewalArchive[] = [
 ];
 
 const mockApplications: RenewalApplication[] = [
+	{ title: "MuST Live Vol.16 -対バン巡業-", event_type: "band", event_date: "2026-12-12", place: "飯田橋 SPACE WITH", fee: "1,500円（1D別）", status_message: "観覧者のみの募集です。出演者の募集は行なっておりません。", is_closed: true, application_url: "/renewal/application/", parts: [], sort_order: 0, updatedAt: "2026-10-01T00:00:00.000Z", cover_image: image("https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=500&q=85", "ライブステージ") },
 	{ title: "MuST Live Vol.17 -春場所-", event_type: "regular", event_date: "2027-03-13", place: "大塚 welcome back", fee: "2,600円前後（1D別）", status_message: "パートごとの募集状況", is_closed: false, application_url: "/renewal/application/", parts: [{ part_name: "ボーカル", status: "open" }, { part_name: "ギター", status: "open" }, { part_name: "ベース", status: "waitlist" }, { part_name: "ドラム", status: "open" }, { part_name: "キーボード", status: "open" }], sort_order: 1, updatedAt: "2026-10-01T00:00:00.000Z" },
 	{ title: "MuST Live Vol.18", event_type: "project", status_message: "内容が未定のため、まだ募集していません。", is_closed: true, application_url: "/renewal/application/", parts: [], sort_order: 2, updatedAt: "2026-10-01T00:00:00.000Z" },
 ];
