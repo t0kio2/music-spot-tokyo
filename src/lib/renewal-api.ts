@@ -120,6 +120,7 @@ export interface RenewalApi {
 
 interface RenewalHistoryEvent {
   title?: string;
+  record_countable?: boolean;
 }
 
 interface RenewalHistoryRecord {
@@ -190,13 +191,14 @@ async function getHistoryFromMicrocms(): Promise<RenewalActivity[]> {
   return response.contents.map((item, index) => {
     const events = item.events ?? [];
     const validEvents = events.filter((event) => event.title);
+    const countableEvents = validEvents.filter((event) => event.record_countable === true);
     const performerCount = Number(item.participants_number ?? 0);
 
     return {
       year: item.year ?? "",
       title: item.title ?? "",
       details: validEvents.map((event) => ({ text: event.title as string })),
-      live_count: validEvents.length,
+      live_count: countableEvents.length,
       performer_count: Number.isNaN(performerCount) ? 0 : performerCount,
       photos: (item.pictures ?? []).map(toBrowserMedia),
       sort_order: index,
