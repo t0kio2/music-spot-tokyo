@@ -3,6 +3,7 @@ import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalOverviewStats from "../../components/renewal/RenewalOverviewStats.astro";
+import RenewalHistoryTimeline from "../../components/renewal/RenewalHistoryTimeline.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { renewalApi, summarizeActivities, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
@@ -57,68 +58,7 @@ const recruitment = selectRecruitmentForBanner(applications);
         },
       ]}
     />
-    <section
-      class="renewal-activity__timeline"
-      aria-labelledby="activity-history-title"
-    >
-      <h2 id="activity-history-title">これまでの活動</h2>
-      <div class="renewal-activity__years">
-        {activities.map((item) => (
-          <article class="renewal-activity__year">
-            <div class="renewal-activity__year-label">
-              <strong class="renewal-activity__year-value">{item.year}</strong>
-            </div>
-            <div class="renewal-activity__year-copy">
-              <b class="renewal-activity__year-title">{item.title}</b>
-              <ul>
-                {item.details.map((detail) => (
-                  <li>{detail.text}</li>
-                ))}
-              </ul>
-              <p>
-                出演者延べ人数{" "}
-                <strong class="renewal-activity__year-participants">
-                  {item.performer_count}名
-                </strong>
-              </p>
-            </div>
-            <div
-              class:list={[
-                "renewal-activity__year-photos",
-                { "has-multiple": item.photos.length > 1, "has-carousel": item.photos.length > 4 },
-              ]}
-              aria-label={`${item.year}年のライブ写真`}
-            >
-              <div class="renewal-activity__photo-track">
-                {item.photos.map((photo, index) => (
-                  <img
-                    class:list={{ "is-active": index === 0 }}
-                    src={photo.url}
-                    alt={photo.alt ?? ""}
-                  />
-                ))}
-              </div>
-              <button
-                class="renewal-activity__photo-control renewal-activity__photo-control--prev"
-                type="button"
-                data-photo-prev
-                aria-label="前の写真"
-              >
-                ‹
-              </button>
-              <button
-                class="renewal-activity__photo-control renewal-activity__photo-control--next"
-                type="button"
-                data-photo-next
-                aria-label="次の写真"
-              >
-                ›
-              </button>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
+    <RenewalHistoryTimeline activities={activities} />
     {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>
