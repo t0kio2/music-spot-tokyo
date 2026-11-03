@@ -10,7 +10,7 @@ import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
 const { title, subtitle, description } = Astro.props;
 ---
 
-<section class="renewal-hero" aria-labelledby="renewal-page-title">
+<section class="renewal-hero renewal-subpage-hero renewal-subpage-hero--compact" aria-labelledby="renewal-page-title">
 	<RenewalBreadcrumb title={title} />
 	<h1 id="renewal-page-title">{title}{subtitle && <em>{subtitle}</em>}</h1>
 	{description && <p class="renewal-hero__description">{description}</p>}
