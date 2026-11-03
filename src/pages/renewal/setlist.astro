@@ -2,9 +2,12 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { getScheduleAndArchive } from "../../lib/microcms";
+import { renewalMockApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
 const data = await getScheduleAndArchive();
+const recruitment = selectRecruitmentForBanner(await renewalMockApi.getApplication());
 ---
 
 <RenewalLayout title="演奏曲について">
@@ -35,5 +38,6 @@ const data = await getScheduleAndArchive();
 			</div>
 
 		</section>
+		{recruitment && <RenewalRecruitCta event={recruitment} />}
 	</div>
 </RenewalLayout>

@@ -2,7 +2,8 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
-import { renewalMockApi, selectRecruitmentForBanner, getEventTypeLabel, formatEventDate } from "../../lib/renewal-api";
+import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
+import { renewalMockApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
 const overview = await renewalMockApi.getOverview();
 const applications = await renewalMockApi.getApplication();
@@ -34,6 +35,6 @@ const recruitment = selectRecruitmentForBanner(applications);
 			</div>
 		</section>
 
-		{recruitment && <section class="renewal-overview__recruit" id="entry" aria-label="メンバー募集"><p>現在、{formatEventDate(recruitment.event_date)}の{getEventTypeLabel(recruitment.event_type)}の<br />メンバーを募集中です。</p><a href={recruitment.application_url ?? "/renewal/application/"}>募集状況・申込みへ <span>→</span></a></section>}
+		{recruitment && <RenewalRecruitCta event={recruitment} />}
 	</div>
 </RenewalLayout>
