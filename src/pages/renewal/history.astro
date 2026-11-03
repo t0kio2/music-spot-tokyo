@@ -4,6 +4,7 @@ import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro"
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalOverviewStats from "../../components/renewal/RenewalOverviewStats.astro";
 import RenewalHistoryTimeline from "../../components/renewal/RenewalHistoryTimeline.astro";
+import lightboxStyles from "../../components/renewal/RenewalImageLightbox.module.css";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { renewalApi, summarizeActivities, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
@@ -64,7 +65,7 @@ const recruitment = selectRecruitmentForBanner(applications);
 </RenewalLayout>
 
 <div
-  class="renewal-activity__lightbox"
+  class:list={["renewal-activity__lightbox", lightboxStyles.lightbox]}
   data-photo-lightbox
   hidden
   role="dialog"
