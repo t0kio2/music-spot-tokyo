@@ -1,3 +1,5 @@
+import { getRenewalMicrocmsClient } from "./renewal-microcms";
+
 export interface RenewalMedia {
 	url: string;
 	alt?: string;
@@ -18,7 +20,7 @@ export interface RenewalActivityDetail {
 
 export interface RenewalActivity {
 	year: string;
-	period_label: string;
+	period_label?: string;
 	title: string;
 	details: RenewalActivityDetail[];
 	live_count: number;
@@ -80,9 +82,58 @@ export interface RenewalApplication {
 
 export interface RenewalApi {
 	getOverview(): Promise<RenewalOverview>;
-	getActivities(): Promise<RenewalActivity[]>;
+	getHistory(): Promise<RenewalActivity[]>;
 	getArchives(): Promise<RenewalArchive[]>;
 	getApplication(): Promise<RenewalApplication[]>;
+}
+
+interface RenewalHistoryEvent {
+	title?: string;
+}
+
+interface RenewalHistoryRecord {
+	year?: string;
+	title?: string;
+	participants_number?: string | number;
+	events?: RenewalHistoryEvent[];
+	pictures?: RenewalMedia[];
+	updatedAt?: string;
+}
+
+function toBrowserMedia(media: RenewalMedia): RenewalMedia {
+	if (!media.url.includes("images.microcms-assets.io")) {
+		return media;
+	}
+
+	const url = new URL(media.url);
+	url.searchParams.set("fm", "jpg");
+
+	return { ...media, url: url.toString() };
+}
+
+async function getHistoryFromMicrocms(): Promise<RenewalActivity[]> {
+	const response = await getRenewalMicrocmsClient().getList<RenewalHistoryRecord>({
+		endpoint: "history",
+		queries: { limit: 100 },
+	});
+
+	return response.contents.map((item, index) => {
+		const events = item.events ?? [];
+		const performerCount = Number(item.participants_number ?? 0);
+
+		return {
+			year: item.year ?? "",
+			title: item.title ?? "",
+			details: events
+				.filter((event) => event.title)
+				.map((event) => ({ text: event.title as string })),
+			live_count: events.length,
+			performer_count: Number.isNaN(performerCount) ? 0 : performerCount,
+			photos: (item.pictures ?? []).map(toBrowserMedia),
+			sort_order: index,
+			updatedAt: item.updatedAt ?? "",
+		};
+	});
 }
 
 export interface RenewalActivitySummary {
@@ -92,10 +143,15 @@ export interface RenewalActivitySummary {
 }
 
 export function summarizeActivities(activities: RenewalActivity[]): RenewalActivitySummary {
+	const latestActivity = [...activities].sort((a, b) => {
+		const yearDiff = Number(b.year) - Number(a.year);
+		return yearDiff || b.sort_order - a.sort_order;
+	})[0];
+
 	return activities.reduce(
 		(summary, activity) => ({
 			live_count: summary.live_count + activity.live_count,
-			performer_count: summary.performer_count + activity.performer_count,
+			performer_count: latestActivity?.performer_count ?? 0,
 			as_of_date: summary.as_of_date > activity.updatedAt ? summary.as_of_date : activity.updatedAt,
 		}),
 		{ live_count: 0, performer_count: 0, as_of_date: "" },
@@ -127,7 +183,7 @@ export function selectRecruitmentForBanner(applications: RenewalApplication[], n
 export function createRenewalMockApi(): RenewalApi {
 	return {
 		getOverview: async () => mockOverview,
-		getActivities: async () => mockActivities,
+		getHistory: getHistoryFromMicrocms,
 		getArchives: async () => mockArchives,
 		getApplication: async () => mockApplications,
 	};
