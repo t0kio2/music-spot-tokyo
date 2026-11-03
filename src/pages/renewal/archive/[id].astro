@@ -2,7 +2,8 @@
 import RenewalLayout from "../../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../../components/renewal/RenewalIcon.astro";
-import { renewalApi, getEventTypeLabel, type RenewalArchive } from "../../../lib/renewal-api";
+import RenewalRecruitCta from "../../../components/renewal/RenewalRecruitCta.astro";
+import { renewalApi, getEventTypeLabel, selectRecruitmentForBanner, type RenewalArchive } from "../../../lib/renewal-api";
 
 export async function getStaticPaths() {
 	const archives = await renewalApi.getArchives();
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 
 interface Props { archive: RenewalArchive; }
 const { archive } = Astro.props;
+const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 const formatDate = (date: string) => new Date(date).toLocaleDateString("ja-JP", { year: "numeric", month: "numeric", day: "numeric", weekday: "short" });
 const getYoutubeThumbnail = (url?: string) => {
 	if (!url) return undefined;
@@ -27,7 +29,7 @@ const getYoutubeThumbnail = (url?: string) => {
 <RenewalLayout title={`${archive.title} 演奏曲`} description={`${archive.title}で演奏した曲をご紹介します。`}>
 	<div class="renewal-archive-detail">
 		<section class="renewal-archive-detail__hero renewal-subpage-hero renewal-subpage-hero--compact" style={`--renewal-archive-detail-image: url("${archive.cover_image.url}")`}>
-			<RenewalBreadcrumb title={`${archive.title}の演奏曲`} parentTitle="過去のライブ" parentHref="/renewal/archive/" className="renewal-archive-detail__breadcrumb" />
+			<RenewalBreadcrumb title="演奏曲" parentTitle="過去のライブ" parentHref="/renewal/archive/" className="renewal-archive-detail__breadcrumb" />
 			<p class="renewal-archive-detail__eyebrow">{formatDate(archive.event_date)}　{getEventTypeLabel(archive.event_type)}</p>
 			<h1>{archive.title}</h1>
 			<p>{archive.place}</p>
@@ -38,5 +40,6 @@ const getYoutubeThumbnail = (url?: string) => {
 				{archive.setlist.map((song, index) => <li class:list={{ "has-video": Boolean(song.youtube_url) }}><span>{String(index + 1).padStart(2, "0")}</span><div><b>{song.song_title}</b><small>{song.artist}</small></div>{song.youtube_url && <a class="renewal-archive-detail__thumbnail" href={song.youtube_url} target="_blank" rel="noopener noreferrer" aria-label={`${song.song_title}の演奏動画`}>{getYoutubeThumbnail(song.youtube_url) && <img src={getYoutubeThumbnail(song.youtube_url)} alt="" />}<i aria-hidden="true">▶</i></a>}</li>)}
 			</ol> : <p class="renewal-archive-detail__empty">演奏曲は準備中です。</p>}
 		</main>
+		{recruitment && <RenewalRecruitCta event={recruitment} />}
 	</div>
 </RenewalLayout>
