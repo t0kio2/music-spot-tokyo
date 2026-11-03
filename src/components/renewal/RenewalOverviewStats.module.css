@@ -1,0 +1,105 @@
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  width: calc(100% - (2 * var(--renewal-content-gutter)));
+  margin: 1rem auto 0;
+  overflow: hidden;
+  border: 1px solid var(--renewal-line);
+  border-radius: var(--renewal-radius-sm);
+  background: linear-gradient(120deg, var(--renewal-panel-soft), var(--renewal-bg));
+}
+
+.stat {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 6.4rem;
+  padding: 1rem 1.4rem;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--renewal-border-medium);
+}
+.icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  flex: 0 0 3.2rem;
+  place-items: center;
+  border: 1px solid var(--renewal-cyan);
+  border-radius: 50%;
+  color: var(--renewal-cyan);
+  text-shadow: 0 0 12px var(--renewal-cyan);
+}
+.icon svg {
+  width: 1.9rem;
+  height: 1.9rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+.label {
+  display: block;
+  color: var(--renewal-gold);
+  font-size: 0.7rem;
+}
+.value {
+  display: block;
+  color: #fff;
+  font-size: 1.35rem;
+}
+.large .value {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+.value small {
+  margin-left: 0.35rem;
+  color: var(--renewal-muted);
+  font-size: 0.65rem;
+  font-weight: 400;
+}
+.detail {
+  display: block;
+  color: var(--renewal-muted);
+  font-size: 0.65rem;
+  line-height: 1.4;
+}
+.date {
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1rem;
+  color: var(--renewal-muted);
+  font-size: 0.6rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .stats {
+    grid-template-columns: 1fr;
+    width: calc(100% - (2 * var(--renewal-content-gutter)));
+    margin-top: 0.7rem;
+  }
+  .stat {
+    justify-content: flex-start;
+    min-height: 5.2rem;
+    padding: 0.75rem 1rem;
+  }
+  .stat + .stat {
+    border-top: 1px solid var(--renewal-border-medium);
+    border-left: 0;
+  }
+  .date {
+    position: static;
+    margin-left: auto;
+  }
+  .value {
+    font-size: 1.1rem;
+  }
+  .large .value {
+    font-size: 1.65rem;
+  }
+}

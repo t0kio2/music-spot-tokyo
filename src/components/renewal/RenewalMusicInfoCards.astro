@@ -1,0 +1,44 @@
+---
+import RenewalActionLink from "./RenewalActionLink.astro";
+import styles from "./RenewalMusicInfoCards.module.css";
+
+const expectationUrl =
+  "https://docs.google.com/spreadsheets/d/1tnC7CjZgbtpTlSGCeHPuJ4ht6PkWHnl_u9pVeK1kVsw/edit?gid=858460741#gid=858460741";
+const pastSongsUrl =
+  "https://docs.google.com/spreadsheets/d/1tnC7CjZgbtpTlSGCeHPuJ4ht6PkWHnl_u9pVeK1kVsw/edit?gid=1606681750#gid=1606681750";
+---
+
+<div class={styles.cards}>
+  <section class={styles.card}>
+    <h2>☆ 期待枠について</h2>
+    <p>
+      約2曲を「期待枠」から採用します。
+      <br />
+      リンク先にリストアップされたアーティストの「代表曲」を中心に参照します。
+    </p>
+    <RenewalActionLink
+      href={expectationUrl}
+      label="詳細を見る"
+      size="compact"
+      centered
+      target="_blank"
+      rel="noopener noreferrer"
+    />
+  </section>
+  <section class:list={[styles.card, styles.past]}>
+    <h2>⌕ 過去の演奏曲について</h2>
+    <p>
+      過去3年以内に演奏した曲はリクエストできません。
+      <br />
+      リンク先の一覧から検索してご確認ください。
+    </p>
+    <RenewalActionLink
+      href={pastSongsUrl}
+      label="過去の演奏曲一覧を見る"
+      size="compact"
+      centered
+      target="_blank"
+      rel="noopener noreferrer"
+    />
+  </section>
+</div>

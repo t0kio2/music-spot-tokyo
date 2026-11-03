@@ -1,6 +1,6 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
-import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalApplicationEvent from "../../components/renewal/RenewalApplicationEvent.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
@@ -9,21 +9,42 @@ import { renewalApi } from "../../lib/renewal-api";
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 const events = (await renewalApi.getApplication()).filter((event) => {
-	if (!event.event_date) return true;
-	const eventDate = new Date(event.event_date);
-	eventDate.setHours(0, 0, 0, 0);
-	return eventDate >= today;
+  if (!event.event_date) return true;
+  const eventDate = new Date(event.event_date);
+  eventDate.setHours(0, 0, 0, 0);
+  return eventDate >= today;
 });
-
 ---
+
 <RenewalLayout title="募集状況・申込み" description="ライブの詳細や募集状況をご確認いただけます。">
-	<div class="renewal-application" id="top">
-		<section class="renewal-application__hero renewal-subpage-hero renewal-subpage-hero--compact"><RenewalBreadcrumb title="募集・申込み" className="renewal-application__breadcrumb" /><h1>募集状況・申込み</h1><p>ライブの詳細や募集状況を確認して、ぜひご参加ください。</p></section>
-		<section class="renewal-application__events" aria-label="募集中のライブイベント">
-			{events.map((event) => <RenewalApplicationEvent event={event} />)}
-		</section>
-		<section class="renewal-application__apply" id="apply"><span class="renewal-application__apply-icon" aria-hidden="true"><RenewalIcon name="users" /></span><h2>参加申込</h2><p>上記の各ライブへの参加をご希望の方は、こちらのフォームからお申し込みください。</p><a href="https://docs.google.com/forms/d/e/1FAIpQLSf0yOb1Km58o-jxFF01zXR4FgyfiBkUHMU_nfsNCM44VwY_Ew/viewform" target="_blank" rel="noopener noreferrer">申込みフォームへ <span>→</span></a></section>
-	</div>
+  <div class="renewal-application" id="top">
+    <RenewalPageHero
+      title="募集状況・申込み"
+      description="ライブの詳細や募集状況を確認して、ぜひご参加ください。"
+      className="renewal-application__hero"
+      breadcrumbClassName="renewal-application__breadcrumb"
+      compact
+    />
+    <section class="renewal-application__events" aria-label="募集中のライブイベント">
+      {events.map((event) => (
+        <RenewalApplicationEvent event={event} />
+      ))}
+    </section>
+    <section class="renewal-application__apply" id="apply">
+      <span class="renewal-application__apply-icon" aria-hidden="true">
+        <RenewalIcon name="users" />
+      </span>
+      <h2>参加申込</h2>
+      <p>上記の各ライブへの参加をご希望の方は、こちらのフォームからお申し込みください。</p>
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf0yOb1Km58o-jxFF01zXR4FgyfiBkUHMU_nfsNCM44VwY_Ew/viewform"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        申込みフォームへ <span>→</span>
+      </a>
+    </section>
+  </div>
 </RenewalLayout>
 
 <RenewalImageLightbox label="チラシを拡大表示" />

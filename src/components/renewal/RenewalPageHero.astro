@@ -1,0 +1,27 @@
+---
+import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
+import styles from "./RenewalPageHero.module.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  className: string;
+  breadcrumbClassName: string;
+  id?: string;
+  compact?: boolean;
+}
+
+const { title, description, className, breadcrumbClassName, id, compact = false } = Astro.props;
+---
+
+<section
+  class:list={[className, "renewal-subpage-hero", { "renewal-subpage-hero--compact": compact }]}
+  aria-labelledby={id}
+>
+  <RenewalBreadcrumb title={title} className={breadcrumbClassName} />
+  <h1 class={styles.title} id={id}>
+    {title}
+  </h1>
+  {description && <p class={styles.description}>{description}</p>}
+  <slot />
+</section>

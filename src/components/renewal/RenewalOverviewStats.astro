@@ -1,0 +1,42 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalOverviewStats.module.css";
+type IconName = "pin" | "users" | "music";
+interface StatItem {
+  icon: IconName;
+  label: string;
+  value: string | number;
+  suffix?: string;
+  detail?: string;
+  date?: string;
+  large?: boolean;
+}
+interface Props {
+  items: StatItem[];
+  ariaLabel?: string;
+}
+const { items, ariaLabel = "MuSTの概要" } = Astro.props;
+---
+
+<section class:list={["renewal-overview__stats", styles.stats]} aria-label={ariaLabel}>
+  {items.map((item) => (
+    <div class:list={["renewal-overview__stat", styles.stat, { [styles.large]: item.large }]}>
+      <span class={styles.icon}>
+        <RenewalIcon name={item.icon} />
+      </span>
+      <div>
+        <span class={styles.label}>{item.label}</span>
+        <strong class={styles.value}>
+          {item.value}
+          <small>{item.suffix}</small>
+        </strong>
+        {item.detail && <small class={styles.detail}>{item.detail}</small>}
+      </div>
+      {item.date && (
+        <time class={styles.date} datetime={item.date}>
+          {new Date(item.date).toLocaleDateString("ja-JP")}時点
+        </time>
+      )}
+    </div>
+  ))}
+</section>

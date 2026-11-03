@@ -1,6 +1,7 @@
 ---
 import { formatEventDate, getEventTypeLabel, type RenewalApplication } from "../../lib/renewal-api";
 import RenewalActionLink from "./RenewalActionLink.astro";
+import styles from "./RenewalRecruitCta.module.css";
 
 interface Props {
   event: RenewalApplication;
@@ -10,7 +11,7 @@ const { event } = Astro.props;
 ---
 
 <section
-  class="renewal-home__panel renewal-home__cta renewal-recruit-cta"
+  class:list={["renewal-home__panel", "renewal-home__cta", "renewal-recruit-cta", styles.cta]}
   aria-label="メンバー募集"
 >
   <p>
