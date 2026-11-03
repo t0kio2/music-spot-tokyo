@@ -2,9 +2,11 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
-import { renewalMockApi, getEventTypeLabel } from "../../lib/renewal-api";
+import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
+import { renewalMockApi, getEventTypeLabel, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
 const archives = await renewalMockApi.getArchives();
+const recruitment = selectRecruitmentForBanner(await renewalMockApi.getApplication());
 const formatDate = (date: string) => new Date(date).toLocaleDateString("ja-JP", { year: "numeric", month: "numeric", day: "numeric", weekday: "short" });
 ---
 
@@ -22,6 +24,7 @@ const formatDate = (date: string) => new Date(date).toLocaleDateString("ja-JP", 
 			{archives.map((live) => <article class="renewal-archive__card" data-year={live.event_date.slice(0, 4)}><img src={live.cover_image.url} alt={live.cover_image.alt ?? `${live.title}のライブ写真`} /><div class="renewal-archive__details"><div class="renewal-archive__meta"><span>{new Date(live.event_date).toLocaleDateString("ja-JP", { year: "numeric", month: "long" })}</span><b class:list={{ pink: live.event_type === "band" }}>{getEventTypeLabel(live.event_type)}</b></div><h2>{live.title}</h2>{live.subtitle && <p class="renewal-archive__subtitle">{live.subtitle}</p>}<p class="renewal-archive__line"><RenewalIcon name="calendar" />{formatDate(live.event_date)}　{live.event_time}</p><p class="renewal-archive__line"><RenewalIcon name="pin" />{live.place}</p><div class="renewal-archive__numbers">{[["出演者", live.performer_count], ["観覧者", live.audience_count], ["合計", live.total_count]].map(([label, count]) => <span>{label}<strong>{count}名</strong></span>)}</div><a class="renewal-archive__video" href={live.youtube_url ?? "#video"}><span>▶</span>演奏動画をみる（YouTube）<b>→</b></a></div></article>)}
 		</section>
 		<button class="renewal-archive__more" type="button">さらに過去のライブを見る <span>→</span></button>
+		{recruitment && <RenewalRecruitCta event={recruitment} />}
 	</div>
 </RenewalLayout>
 

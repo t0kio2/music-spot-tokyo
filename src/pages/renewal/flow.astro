@@ -1,6 +1,9 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalBreadcrumb from "../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
+import { renewalMockApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
+const recruitment = selectRecruitmentForBanner(await renewalMockApi.getApplication());
 const steps = [
 	["1", "▤✎", "参加申込", "本サイト内の「募集状況・申込み」から必要事項を入力しご応募ください。", "※3月及び9月の定期ライブは1987年生まれ〜1999年生まれの方に限定しています"],
 	["2", "▤✓", "注意事項の確認", "当サークルの注意事項について、確認いただきます。", ""],
@@ -18,6 +21,6 @@ const steps = [
 		<section class="renewal-flow__steps" id="steps" aria-label="参加までの8ステップ">
 			{steps.map(([number, icon, title, text, note]) => <article class="renewal-flow__step"><header><span>{number}</span><h2>{title}{title === "練習会" && <small>（{note}）</small>}</h2></header><div class="renewal-flow__icon" aria-hidden="true">{icon}</div><p>{text}</p>{note && title !== "練習会" && <aside>{note}</aside>}</article>)}
 		</section>
-		<section class="renewal-flow__cta"><p>参加するライブが決まったら、まずは申込みへ。</p><a href="/renewal/application/">募集状況・申込み <span>→</span></a></section>
+		{recruitment && <RenewalRecruitCta event={recruitment} />}
 	</div>
 </RenewalLayout>
