@@ -50,7 +50,7 @@
 .renewal-header { position: fixed; inset: 0 auto 0 0; z-index: 20; display: flex; flex-direction: column; align-items: stretch; width: var(--renewal-sidebar); padding: 0; border-right: 1px solid var(--renewal-border); background: linear-gradient(180deg, #01060e 0%, #010a15 68%, var(--renewal-surface-0) 100%); }
 .renewal-brand { display: grid; place-items: center; height: 131px; margin: 0; background: radial-gradient(circle, #00cbff1f, transparent 67%); }
 .renewal-brand img { width: 91px; height: 91px; object-fit: cover; border: 2px solid var(--renewal-cyan); border-radius: 50%; box-shadow: 0 0 12px #00eaff66; }
-.renewal-brand small { display: block; color: var(--renewal-muted); font: .48rem "Noto Sans JP", sans-serif; letter-spacing: .08em; }
+.renewal-brand__name { display: none; }
 .renewal-brand__note { color: var(--renewal-cyan); font-size: 2.2rem; text-shadow: 0 0 12px var(--renewal-cyan); }
 .renewal-nav { display: grid; gap: 0; }
 .renewal-nav a { display: flex; align-items: center; min-height: 44px; padding: .55rem .5rem .55rem .8rem; border-left: 0; color: var(--renewal-muted); font-size: .75rem; white-space: nowrap; }
@@ -124,13 +124,21 @@
 .renewal-to-top { color: var(--renewal-gold); font-size: 1.4rem; }
 
 @media (max-width: 760px) {
-	.renewal-header { position: sticky; inset: 0 0 auto; display: flex; flex-direction: row; align-items: center; width: auto; min-height: 4.5rem; padding: .7rem 1rem; border-right: 0; border-bottom: 1px solid var(--renewal-border); }
-	.renewal-brand { width: 3rem; height: 3rem; margin: 0; border: 0; background: none; }
+	.renewal-header { position: sticky; inset: 0 0 auto; display: flex; flex-direction: row; align-items: center; width: auto; min-height: 4.5rem; padding: .7rem 1rem; border-right: 0; border-bottom: 0; }
+	.renewal-brand { display: flex; justify-content: flex-start; gap: .65rem; width: auto; height: 3rem; margin: 0; border: 0; background: none; }
 	.renewal-brand img { width: 3rem; height: 3rem; border-width: 1px; }
+	.renewal-brand__name { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; color: var(--renewal-text); line-height: 1; }
+	.renewal-brand__name strong { color: var(--renewal-pink); font: 700 1.45rem/1 "Caveat", cursive; text-shadow: 0 0 8px #ff4ec855; }
+	.renewal-brand__name small { display: block; margin-top: .28rem; color: var(--renewal-muted); font: 500 .54rem/1 "Noto Sans JP", sans-serif; letter-spacing: .08em; white-space: nowrap; }
 	.renewal-menu-button { display: grid; gap: 4px; margin-left: auto; padding: .5rem; cursor: pointer; }
-	.renewal-menu-button span { display: block; width: 1.4rem; height: 2px; background: var(--renewal-cyan); }
-	.renewal-nav { position: fixed; inset: 0 0 0 auto; z-index: 2; width: min(18rem, 82vw); padding: 6rem 1.4rem 2rem; transform: translateX(100%); transition: transform .25s ease; background: #010b14; }
-	.renewal-nav a { padding: .8rem .5rem; font-size: .85rem; }
+	.renewal-menu-button span { display: block; width: 1.4rem; height: 2px; background: var(--renewal-text); }
+	.renewal-nav { position: fixed; inset: 0 0 0 auto; z-index: 2; display: grid; align-content: start; gap: .3rem; width: min(19rem, 86vw); padding: 5.5rem .9rem 1.25rem; border-left: 1px solid #123344; transform: translateX(100%); transition: transform .25s ease; background: linear-gradient(180deg, #010c16f8, #010811f8); box-shadow: -1rem 0 2rem #0008; }
+	.renewal-nav a { min-height: 40px; padding: .3rem .65rem; border-left: 2px solid transparent; border-radius: .35rem; color: var(--renewal-text); font-size: .85rem; font-weight: 500; line-height: 1.35; }
+	.renewal-nav a:hover { background: #00c7d512; }
+	.renewal-nav a.active { border-left-color: var(--renewal-cyan); background: linear-gradient(90deg, #00c7ff25, transparent); color: var(--renewal-text); }
+	.renewal-nav__icon { flex: 0 0 1.8rem; width: 1.8rem; margin-right: .35rem; }
+	.renewal-nav__icon svg { width: 1.4rem; height: 1.4rem; }
+	.renewal-nav a:first-child .renewal-nav__icon svg { width: 1.5rem; height: 1.5rem; }
 	.renewal-menu-scrim { position: fixed; inset: 0; z-index: 1; display: none; background: #0008; }
 	.renewal-menu-toggle:checked ~ .renewal-nav { transform: translateX(0); }
 	.renewal-menu-toggle:checked ~ .renewal-menu-scrim { display: block; }
@@ -325,12 +333,17 @@
 
 @media (max-width: 760px) {
 	.renewal-shell--home .renewal-header { width: auto; padding: .7rem 1rem; }
-	.renewal-shell--home .renewal-brand { width: 3rem; height: 3rem; border: 0; background: none; }
+	.renewal-shell--home .renewal-brand { width: auto; height: 3rem; border: 0; background: none; }
 	.renewal-shell--home .renewal-brand img { width: 3rem; height: 3rem; }
-	.renewal-shell--home .renewal-nav { padding-top: 6rem; }
+	.renewal-shell--home .renewal-nav { gap: .3rem; padding: 5.5rem .9rem 1.25rem; }
+	.renewal-shell--home .renewal-nav a { min-height: 40px; padding: .3rem .65rem; border-left: 2px solid transparent; color: var(--renewal-text); font-size: .85rem; font-weight: 500; line-height: 1.35; }
+	.renewal-shell--home .renewal-nav a.active { border-left-color: var(--renewal-cyan); background: linear-gradient(90deg, #00c7ff25, transparent); color: var(--renewal-text); }
+	.renewal-shell--home .renewal-nav a .renewal-nav__icon { flex: 0 0 1.8rem; width: 1.8rem; margin-right: .35rem; }
+	.renewal-shell--home .renewal-nav a .renewal-nav__icon svg { width: 1.4rem; height: 1.4rem; }
+	.renewal-shell--home .renewal-nav a:first-child .renewal-nav__icon svg { width: 1.5rem; height: 1.5rem; }
 	.renewal-home__hero { min-height: 25rem; }
-	.renewal-home__hero-actions { padding: .8rem .8rem 0; }
-	.renewal-home__hero-copy { padding: 3.5rem 1rem 1.5rem; }
+	.renewal-home__hero-actions { display: none; }
+	.renewal-home__hero-copy { padding: 1.5rem 1rem 1.5rem; }
 	.renewal-home__hero h1 { font-size: clamp(2rem, 10vw, 3rem); }
 	.renewal-home__hero h1 { margin-bottom: 1.7rem; }
 	.renewal-home__hero-copy p { font-size: .78rem; }
