@@ -1,14 +1,26 @@
 ---
 import { formatEventDate, getEventTypeLabel, type RenewalApplication } from "../../lib/renewal-api";
+import RenewalActionLink from "./RenewalActionLink.astro";
 
 interface Props {
-	event: RenewalApplication;
+  event: RenewalApplication;
 }
 
 const { event } = Astro.props;
 ---
 
-<section class="renewal-home__panel renewal-home__cta renewal-recruit-cta" aria-label="メンバー募集">
-	<p>現在、{formatEventDate(event.event_date)}の{getEventTypeLabel(event.event_type)}のメンバーを募集中です。</p>
-	<a class="renewal-home__pill renewal-home__pill--warm" href={event.application_url ?? "/renewal/application/"}>募集状況・申込み <span>→</span></a>
+<section
+  class="renewal-home__panel renewal-home__cta renewal-recruit-cta"
+  aria-label="メンバー募集"
+>
+  <p>
+    現在、{formatEventDate(event.event_date)}の{getEventTypeLabel(event.event_type)}
+    のメンバーを募集中です。
+  </p>
+  <RenewalActionLink
+    href={event.application_url ?? "/renewal/application/"}
+    label="募集状況・申込み"
+    variant="warm"
+    icon="person"
+  />
 </section>

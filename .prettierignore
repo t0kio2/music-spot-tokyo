@@ -1,0 +1,7 @@
+node_modules
+dist
+.astro
+public
+src/assets
+*.min.js
+*.min.css

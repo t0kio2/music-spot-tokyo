@@ -1,0 +1,36 @@
+---
+import styles from "./RenewalActionLink.module.css";
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: "default" | "warm" | "primary";
+  size?: "default" | "compact";
+  icon?: "person";
+  target?: string;
+  rel?: string;
+}
+
+const { href, label, variant = "default", size = "default", icon, target, rel } = Astro.props;
+---
+
+<a
+  class:list={[
+    styles.link,
+    "renewal-action-link",
+    styles[variant],
+    styles[size],
+    { [styles.withIcon]: icon },
+  ]}
+  data-variant={variant}
+  href={href}
+  target={target}
+  rel={rel}
+>
+  {icon === "person" && (
+    <svg class={styles.personIcon} viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10ZM3 22a9 9 0 0 1 18 0H3Z" />
+    </svg>
+  )}
+  {label} <span>→</span>
+</a>

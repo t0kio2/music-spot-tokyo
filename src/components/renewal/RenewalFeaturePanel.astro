@@ -1,0 +1,39 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalFeaturePanel.module.css";
+import RenewalActionLink from "./RenewalActionLink.astro";
+
+type IconName = "music" | "chart";
+
+interface Props {
+  variant: "song" | "activity";
+  title: string;
+  icon: IconName;
+  href?: string;
+  linkLabel?: string;
+}
+
+const { variant, title, icon, href, linkLabel } = Astro.props;
+const hasActions = Astro.slots.has("actions");
+---
+
+<section class:list={[styles.panel, styles.feature, styles[variant]]}>
+  <div class={styles.panelContent}>
+    <h2 class={styles.heading}>
+      <span class={styles.icon} aria-hidden="true">
+        <RenewalIcon name={icon} className={icon === "chart" ? styles.chartIcon : undefined} />
+      </span>
+      {title}
+    </h2>
+    <p class={styles.description}>
+      <slot name="description" />
+    </p>
+    {hasActions ? (
+      <div class={styles.actions}>
+        <slot name="actions" />
+      </div>
+    ) : (
+      href && linkLabel && <RenewalActionLink href={href} label={linkLabel} />
+    )}
+  </div>
+</section>
