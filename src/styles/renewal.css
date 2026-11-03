@@ -344,8 +344,8 @@
 .renewal-home__panel { position: relative; overflow: hidden; border: 1px solid transparent; border-radius: var(--renewal-radius-sm); background: var(--renewal-panel-fill) padding-box, var(--renewal-panel-edge) border-box; box-shadow: var(--renewal-panel-glow); }
 .renewal-home__feature { min-height: 248px; padding: 1.25rem 1.6rem 1rem; }
 .renewal-home__feature::before { content: ""; position: absolute; inset: 0; opacity: .82; filter: brightness(1.15) saturate(1.25); pointer-events: none; background-position: center; background-size: cover; }
-.renewal-home__feature--song::before { background-image: linear-gradient(90deg, #010811e8 2%, #010811b8 42%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/素材/ギターギター.JPG"); }
-.renewal-home__feature--activity::before { background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/集合/26,3春.jpg"); }
+.renewal-home__feature--song::before { background-image: linear-gradient(90deg, #010811e8 2%, #010811b8 42%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/素材_webp/ギターギター.webp"); }
+.renewal-home__feature--activity::before { background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), linear-gradient(0deg, #010811d9, transparent 62%), url("../assets/renewal/集合写真_webp/26,3春.webp"); }
 .renewal-home__panel-content { position: relative; z-index: 1; }
 .renewal-home__feature .renewal-home__panel-content { display: flex; flex-direction: column; width: 100%; height: 100%; }
 .renewal-home__feature h2 { display: flex; align-items: center; gap: .8rem; margin: 0 0 .8rem; font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.3; font-weight: 600; }
@@ -475,12 +475,12 @@
 .renewal-overview__feature { position: relative; min-height: 15rem; overflow: hidden; padding: 1.15rem 1.35rem; border: 1px solid var(--renewal-line); border-radius: var(--renewal-radius-sm); background: var(--renewal-surface-card); }
 .renewal-overview__feature::before { content: ""; position: absolute; inset: 0; opacity: .82; filter: brightness(1.15) saturate(1.25); pointer-events: none; background: var(--feature-photo) right top / 72% auto no-repeat; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%), linear-gradient(to right, transparent 0%, #000 18%, #000 78%, transparent 100%); -webkit-mask-composite: source-in; mask-image: linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%), linear-gradient(to right, transparent 0%, #000 18%, #000 78%, transparent 100%); mask-composite: intersect; }
 .renewal-overview__feature::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #010b14ff 0%, #010811ed 38%, #01060c44 78%, #01060c00 100%), linear-gradient(0deg, #010711e6, transparent 68%), linear-gradient(135deg, #00cfff1c, transparent 48%); pointer-events: none; }
-.renewal-overview__feature--one { --feature-photo: url("../assets/renewal/素材/ギターギター.JPG"); }
-.renewal-overview__feature--two { --feature-photo: url("../assets/renewal/素材/観客.JPG"); }
-.renewal-overview__feature--three { --feature-photo: url("../assets/renewal/素材/会場.JPG"); }
-.renewal-overview__feature--four { --feature-photo: url("../assets/renewal/素材/あきな.JPG"); }
-.renewal-overview__feature--five { --feature-photo: url("../assets/renewal/素材/ギター.JPG"); }
-.renewal-overview__feature--six { --feature-photo: url("../assets/renewal/素材/ベース.JPG"); }
+.renewal-overview__feature--one { --feature-photo: url("../assets/renewal/素材_webp/ギターギター.webp"); }
+.renewal-overview__feature--two { --feature-photo: url("../assets/renewal/素材_webp/観客.webp"); }
+.renewal-overview__feature--three { --feature-photo: url("../assets/renewal/素材_webp/会場.webp"); }
+.renewal-overview__feature--four { --feature-photo: url("../assets/renewal/素材_webp/あきな.webp"); }
+.renewal-overview__feature--five { --feature-photo: url("../assets/renewal/素材_webp/ギター.webp"); }
+.renewal-overview__feature--six { --feature-photo: url("../assets/renewal/素材_webp/ベース.webp"); }
 .renewal-overview__feature > * { position: relative; z-index: 1; }
 .renewal-overview__feature-top { display: flex; align-items: center; justify-content: flex-start; gap: .7rem; margin-bottom: .65rem; }
 .renewal-overview__feature-top span { display: grid; place-items: center; width: var(--renewal-icon-box); height: var(--renewal-icon-box); border: 1px solid var(--renewal-cyan); border-radius: 50%; color: var(--renewal-text); font: 600 .9rem/1 "Noto Sans JP", sans-serif; }
@@ -702,22 +702,22 @@
 }
 
 /* ページごとにMuSTの実写真を割り当てる。 */
-.renewal-hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/会場.JPG"); }
-.renewal-setlist__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/ギターギター.JPG"); }
-.renewal-activity__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/観客.JPG"); }
-.renewal-overview__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合/26,3春.jpg"); }
-.renewal-flow__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/会場.JPG"); }
-.renewal-faq-page__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合/26.9秋.JPG"); }
-.renewal-precautions__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/ベース.JPG"); }
-.renewal-application__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材/あきな.JPG"); }
-.renewal-schedule__hero, .renewal-archive__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合/25.9秋.jpg"); }
+.renewal-hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/会場.webp"); }
+.renewal-setlist__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/ギターギター.webp"); }
+.renewal-activity__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/観客.webp"); }
+.renewal-overview__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合写真_webp/26,3春.webp"); }
+.renewal-flow__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/会場.webp"); }
+.renewal-faq-page__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合写真_webp/26.9秋.webp"); }
+.renewal-precautions__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/ベース.webp"); }
+.renewal-application__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/素材_webp/あきな.webp"); }
+.renewal-schedule__hero, .renewal-archive__hero { background-image: linear-gradient(90deg, #010811ed, #01081170 55%, #01081112), linear-gradient(0deg, #010811aa, transparent 45%), url("../assets/renewal/集合写真_webp/25.9秋.webp"); }
 
 .renewal-activity__next,
 .renewal-overview__recruit {
-	background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), url("../assets/renewal/集合/26,3春.jpg");
+	background-image: linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108), url("../assets/renewal/集合写真_webp/26,3春.webp");
 }
 .renewal-home__cta {
-	background: linear-gradient(90deg, #00050ddd, #00070db8), url("../assets/renewal/集合/26,3春.jpg") center 52% / cover padding-box, linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
+	background: linear-gradient(90deg, #00050ddd, #00070db8), url("../assets/renewal/集合写真_webp/26,3春.webp") center 52% / cover padding-box, linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
 }
 /* Renewalの文字はAnzu Moji以外をNoto Sans JPに統一する。 */
 .renewal-site * { font-family: "Noto Sans JP", sans-serif; }
@@ -856,6 +856,10 @@
 }
 
 @media (max-width: 760px) {
+	.renewal-activity__photo-control {
+		display: none !important;
+	}
+
 	.renewal-activity__year {
 		min-height: 8rem;
 	}
@@ -890,6 +894,27 @@
 		font-size: var(--renewal-font-md);
 	}
 
+	.renewal-activity__year-copy ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: .1rem .6rem;
+		margin: .2rem 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.renewal-activity__year-copy li {
+		position: relative;
+		padding-left: .7rem;
+	}
+
+	.renewal-activity__year-copy li::before {
+		content: "•";
+		position: absolute;
+		left: 0;
+		color: var(--renewal-cyan);
+	}
+
 	.renewal-activity__year-copy p {
 		font-size: var(--renewal-font-md);
 	}
@@ -897,6 +922,11 @@
 	.renewal-activity__year-participants {
 		font-size: var(--renewal-font-lg) !important;
 	}
+}
+
+.renewal-activity__photo-control {
+	border: 0 !important;
+	background: transparent !important;
 }
 
 .renewal-activity__year-title {
@@ -1061,6 +1091,8 @@
 
 	.renewal-activity__photo-track {
 		display: block;
+		width: 100%;
+		min-width: 0;
 	}
 
 	.renewal-activity__year-photos img {
@@ -1229,14 +1261,36 @@
 	.renewal-activity__year-photos {
 		grid-column: 3;
 		grid-row: 1;
+		display: flex;
+		align-items: center;
 		align-self: stretch;
 		padding: .6rem .4rem .6rem 0;
 		border-left: 0;
 	}
 
 	.renewal-activity__year-photos img {
-		height: 100%;
-		min-height: 7.3rem;
+		height: 7.3rem;
+		min-height: 0;
 		object-fit: cover;
+	}
+
+	.renewal-activity__timeline {
+		width: 100%;
+		margin-top: .8rem;
+	}
+
+	.renewal-activity__timeline > h2 {
+		padding-inline: var(--renewal-content-gutter);
+	}
+
+	.renewal-activity__years {
+		width: 100%;
+		gap: 0;
+	}
+
+	.renewal-activity__year {
+		border-right: 0;
+		border-left: 0;
+		border-radius: 0;
 	}
 }
