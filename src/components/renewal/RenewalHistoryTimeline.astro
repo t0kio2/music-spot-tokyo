@@ -1,0 +1,72 @@
+---
+import type { RenewalActivity } from "../../lib/renewal-api";
+import styles from "./RenewalHistoryTimeline.module.css";
+
+interface Props {
+  activities: RenewalActivity[];
+}
+
+const { activities } = Astro.props;
+---
+
+<section
+  class:list={["renewal-activity__timeline", styles.timeline]}
+  aria-labelledby="activity-history-title"
+>
+  <h2 id="activity-history-title">これまでの活動</h2>
+  <div class={styles.years}>
+    {activities.map((item) => (
+      <article class:list={["renewal-activity__year", styles.year]}>
+        <div class:list={["renewal-activity__year-label", styles.yearLabel]}>
+          <strong class="renewal-activity__year-value">{item.year}</strong>
+        </div>
+        <div class:list={["renewal-activity__year-copy", styles.copy]}>
+          <b class="renewal-activity__year-title">{item.title}</b>
+          <ul>
+            {item.details.map((detail) => (
+              <li>{detail.text}</li>
+            ))}
+          </ul>
+          <p>
+            出演者延べ人数{" "}
+            <strong class="renewal-activity__year-participants">{item.performer_count}名</strong>
+          </p>
+        </div>
+        <div
+          class:list={[
+            "renewal-activity__year-photos",
+            styles.photos,
+            { "has-multiple": item.photos.length > 1, "has-carousel": item.photos.length > 4 },
+          ]}
+          aria-label={`${item.year}年のライブ写真`}
+        >
+          <div class:list={["renewal-activity__photo-track", styles.photoTrack]}>
+            {item.photos.map((photo, index) => (
+              <img
+                class:list={{ "is-active": index === 0 }}
+                src={photo.url}
+                alt={photo.alt ?? ""}
+              />
+            ))}
+          </div>
+          <button
+            class="renewal-activity__photo-control renewal-activity__photo-control--prev"
+            type="button"
+            data-photo-prev
+            aria-label="前の写真"
+          >
+            ‹
+          </button>
+          <button
+            class="renewal-activity__photo-control renewal-activity__photo-control--next"
+            type="button"
+            data-photo-next
+            aria-label="次の写真"
+          >
+            ›
+          </button>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
