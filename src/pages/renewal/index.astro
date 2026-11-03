@@ -3,8 +3,8 @@ import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { renewalMockApi, selectNextApplication, selectRecruitmentForBanner, formatEventDate, getEventTypeLabel } from "../../lib/renewal-api";
 import heroImage from "../../assets/renewal/top_header.jpg";
-import heroBandImage from "../../assets/renewal/素材/ギターギター.JPG";
-import heroAudienceImage from "../../assets/renewal/素材/観客.JPG";
+import heroBandImage from "../../assets/renewal/素材_webp/ギターギター.webp";
+import heroAudienceImage from "../../assets/renewal/素材_webp/観客.webp";
 
 const applications = await renewalMockApi.getApplication();
 const nextLive = selectNextApplication(applications);
