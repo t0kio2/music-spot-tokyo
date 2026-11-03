@@ -8,9 +8,9 @@ const navItems = [
 	["/renewal/activity/", "活動実績", "chart"],
 	["/renewal/archive/", "過去のライブ", "play"],
 	["/renewal/flow/", "参加までの流れ", "nodes"],
+	["/renewal/application/", "募集・申込み", "document"],
 	["/renewal/faq/", "よくある質問", "question"],
 	["/renewal/precautions/", "注意事項", "warning"],
-	["/renewal/application/", "募集・申込み", "document"],
 ] as const;
 
 const currentPath = Astro.url.pathname;
@@ -21,6 +21,10 @@ const isActive = (href: string) =>
 <header class="renewal-header">
 	<a class="renewal-brand" href="/renewal/" aria-label="MuST ホーム">
 		<img src="/favicon-source.png" alt="" />
+		<span class="renewal-brand__name">
+			<strong>MuST</strong>
+			<small>Music Spot Tokyo</small>
+		</span>
 	</a>
 	<input class="renewal-menu-toggle" type="checkbox" id="renewal-menu-toggle" />
 	<label class="renewal-menu-button" for="renewal-menu-toggle" aria-label="メニューを開く">
