@@ -1,0 +1,39 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import type { RenewalOverview } from "../../lib/renewal-api";
+
+interface Props {
+  overview: RenewalOverview;
+}
+
+const { overview } = Astro.props;
+---
+
+<section class="renewal-overview__stats" aria-label="MuSTの概要">
+  <div class="renewal-overview__stat">
+    <span class="renewal-overview__stat-icon">
+      <RenewalIcon name="pin" />
+    </span>
+    <div>
+      <span>活動場所</span>
+      <strong>東京都23区内</strong>
+    </div>
+  </div>
+  <div class="renewal-overview__stat">
+    <span class="renewal-overview__stat-icon">
+      <RenewalIcon name="users" />
+    </span>
+    <div>
+      <span>参加人数</span>
+      <strong>
+        {overview.participant_count}
+        <small>
+          名（女性{overview.female_count}名・男性{overview.male_count}名）
+        </small>
+      </strong>
+    </div>
+    <time datetime={overview.participant_as_of}>
+      {new Date(overview.participant_as_of).toLocaleDateString("ja-JP")}時点
+    </time>
+  </div>
+</section>

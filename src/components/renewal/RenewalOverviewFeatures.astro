@@ -1,0 +1,124 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalOverviewFeatures.module.css";
+
+type FeatureIcon = "users" | "calendar" | "line" | "music" | "refresh";
+
+const features: Array<{
+  variant: "one" | "two" | "three" | "four" | "five" | "six";
+  icon?: FeatureIcon;
+  number: string;
+  title: string;
+  description: string[];
+  link?: string;
+  id?: string;
+}> = [
+  {
+    variant: "one",
+    icon: "refresh",
+    number: "1",
+    title: "一曲ごとにメンバーが替わる\nセッション形式",
+    description: [
+      "固定バンドではないので、バンドを組む手間や、メンバーに縛られる心配がありません。",
+      "ライフスタイルが変わっても、無理なく続けられます。",
+    ],
+  },
+  {
+    variant: "two",
+    icon: "calendar",
+    number: "2",
+    title: "本番前に、2回の練習会を実施",
+    description: [
+      "都内のスタジオで事前に音を合わせられます。",
+      "久しぶりの方も、ライブ初挑戦の方も、安心してステージに立てます。",
+    ],
+  },
+  {
+    variant: "three",
+    icon: "users",
+    number: "3",
+    title: "同世代（1987〜1999年生まれ）が中心",
+    description: [
+      "趣味や価値観が近く、音楽を通じて自然と友達になれます。",
+      "10年後、20年後も一緒に演奏できる仲間づくりを大切にしています。",
+    ],
+  },
+  {
+    variant: "four",
+    icon: "line",
+    number: "4",
+    title: "連絡は、ライブごとのLINEグループで",
+    description: [
+      "LINEグループは、ライブごとに作成します。そのライブに参加するメンバーだけが入るので、必要な連絡だけが届きます。参加しなくなったあとも通知が届き続けたり、グループを抜けづらくなったりする心配がありません。",
+    ],
+  },
+  {
+    variant: "five",
+    icon: "music",
+    number: "5",
+    title: "ライブハウスで、本格的に演奏",
+    description: [
+      "演奏の舞台はライブハウスです。",
+      "照明と音響の整ったステージで演奏できます。",
+      "演奏の様子はYouTubeでもご覧いただけます。",
+    ],
+    link: "/renewal/",
+  },
+  {
+    variant: "six",
+    number: "6",
+    title: "お一人での参加・初心者も歓迎",
+    description: [
+      "お一人でのご参加も、初心者・ライブ未経験の方も歓迎です。「ライブハウスのステージに立ってみたい」という気持ちがあれば、お気軽にご参加ください。",
+    ],
+    id: "members",
+  },
+];
+---
+
+<div class={styles.grid}>
+  {features.map((feature) => (
+    <article class:list={[styles.feature, styles[feature.variant]]} id={feature.id}>
+      <div class={styles.featureTop}>
+        <span>{feature.number}</span>
+        <b aria-hidden="true">
+          {feature.icon ? (
+            <RenewalIcon
+              name={feature.icon}
+              className={feature.icon === "line" ? styles.lineIcon : undefined}
+            />
+          ) : (
+            "♧"
+          )}
+        </b>
+      </div>
+      <h3>{feature.title}</h3>
+      <p>
+        {feature.description.map((line, index) => (
+          <Fragment>
+            {line}
+            {index < feature.description.length - 1 && <br />}
+          </Fragment>
+        ))}
+      </p>
+      {feature.link && (
+        <a
+          href="https://www.youtube.com/@MuST-Music_Spot_Tokyo-"
+          class={styles.videoLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z" />
+            <path class={styles.youtubePlay} d="m9.6 8.5 6.3 3.5-6.3 3.5Z" />
+          </svg>
+          <span class={styles.linkLabel}>演奏の様子を見る</span>
+          <svg class={styles.externalIcon} viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 4h6v6M20 4l-9 9" />
+            <path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5" />
+          </svg>
+        </a>
+      )}
+    </article>
+  ))}
+</div>

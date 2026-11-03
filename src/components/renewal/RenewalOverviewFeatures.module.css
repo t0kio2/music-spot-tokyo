@@ -1,0 +1,207 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.feature {
+  position: relative;
+  min-height: 15rem;
+  overflow: hidden;
+  padding: 1.15rem 1.35rem;
+  border: 1px solid var(--renewal-line);
+  border-radius: var(--renewal-radius-sm);
+  background: var(--renewal-surface-card);
+}
+
+.feature::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.82;
+  filter: brightness(1.15) saturate(1.25);
+  pointer-events: none;
+  background: var(--feature-photo) right top / 72% auto no-repeat;
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 0%, #000 42%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 18%, #000 78%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.feature::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #010b14ff 0%, #010811ed 38%, #01060c44 78%, #01060c00 100%),
+    linear-gradient(0deg, #010711e6, transparent 68%),
+    linear-gradient(135deg, #00cfff1c, transparent 48%);
+}
+
+.one {
+  --feature-photo: url("../../assets/renewal/素材_webp/ギターギター.webp");
+}
+.two {
+  --feature-photo: url("../../assets/renewal/素材_webp/ギターギタードラム.webp");
+}
+.three {
+  --feature-photo: url("../../assets/renewal/素材_webp/会場.webp");
+}
+.four {
+  --feature-photo: url("../../assets/renewal/素材_webp/あきな.webp");
+}
+.five {
+  --feature-photo: url("../../assets/renewal/素材_webp/ギター.webp");
+}
+.six {
+  --feature-photo: url("../../assets/renewal/素材_webp/ベース.webp");
+}
+
+.feature > * {
+  position: relative;
+  z-index: 1;
+}
+
+.featureTop {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+  margin-bottom: 0.65rem;
+}
+
+.featureTop > span {
+  display: grid;
+  width: var(--renewal-icon-box);
+  height: var(--renewal-icon-box);
+  place-items: center;
+  border: 1px solid var(--renewal-cyan);
+  border-radius: 50%;
+  color: var(--renewal-text);
+  font:
+    600 0.9rem/1 "Noto Sans JP",
+    sans-serif;
+}
+
+.featureTop > b {
+  display: grid;
+  width: var(--renewal-icon-box);
+  height: var(--renewal-icon-box);
+  flex: 0 0 var(--renewal-icon-box);
+  place-items: center;
+  color: var(--renewal-cyan);
+  font-size: 1.8rem;
+  line-height: 1;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.featureTop > b svg {
+  width: var(--renewal-icon-size);
+  height: var(--renewal-icon-size);
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.featureTop > b svg.lineIcon text {
+  fill: currentColor;
+  stroke: none;
+}
+.feature h3 {
+  min-height: 3.2rem;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+.feature p {
+  margin-top: 0.65rem;
+  color: #d1e2eb;
+  font-size: 0.69rem;
+  line-height: 1.85;
+}
+.videoLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.55rem;
+  color: var(--renewal-gold);
+  font-size: 0.7rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.videoLink svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+  fill: currentColor;
+  stroke: none;
+}
+
+.linkLabel {
+  display: block;
+  line-height: 1.2;
+}
+
+.videoLink .youtubePlay {
+  fill: var(--renewal-bg);
+}
+
+.videoLink .externalIcon {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature {
+    min-height: 14rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .feature {
+    min-height: 0;
+    padding: 1rem;
+  }
+  .featureTop {
+    display: block;
+    float: left;
+    margin: 0 0.7rem 0.2rem 0;
+  }
+  .featureTop > span {
+    display: grid;
+  }
+  .featureTop > b {
+    display: none;
+  }
+  .feature h3 {
+    min-height: 0;
+    font-size: 0.95rem;
+  }
+  .feature p {
+    clear: both;
+    font-size: 0.69rem;
+  }
+  .videoLink {
+    clear: both;
+  }
+}
