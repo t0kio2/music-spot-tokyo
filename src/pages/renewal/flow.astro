@@ -14,7 +14,7 @@ const steps = [
 ---
 <RenewalLayout title="参加までの流れ" description="参加申込みからライブ本番までの流れをご案内します。">
 	<div class="renewal-flow">
-		<section class="renewal-flow__hero"><RenewalBreadcrumb title="参加までの流れ" className="renewal-flow__breadcrumb" /><h1>参加までの流れ</h1><p>下記のステップで、ライブへの参加ができます。</p></section>
+		<section class="renewal-flow__hero renewal-subpage-hero renewal-subpage-hero--compact"><RenewalBreadcrumb title="参加までの流れ" className="renewal-flow__breadcrumb" /><h1>参加までの流れ</h1><p>下記のステップで、ライブへの参加ができます。</p></section>
 		<section class="renewal-flow__steps" id="steps" aria-label="参加までの8ステップ">
 			{steps.map(([number, icon, title, text, note]) => <article class="renewal-flow__step"><header><span>{number}</span><h2>{title}{title === "練習会" && <small>（{note}）</small>}</h2></header><div class="renewal-flow__icon" aria-hidden="true">{icon}</div><p>{text}</p>{note && title !== "練習会" && <aside>{note}</aside>}</article>)}
 		</section>
