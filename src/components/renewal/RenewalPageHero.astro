@@ -15,7 +15,7 @@ const { title, description, className, breadcrumbClassName, id, compact = false 
 ---
 
 <section
-  class:list={[className, "renewal-subpage-hero", { "renewal-subpage-hero--compact": compact }]}
+  class:list={[className, "renewal-subpage-hero", styles.hero, { [styles.compact]: compact }]}
   aria-labelledby={id}
 >
   <RenewalBreadcrumb title={title} className={breadcrumbClassName} />

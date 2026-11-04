@@ -1,0 +1,54 @@
+---
+import RenewalLayout from "../../../layouts/RenewalLayout.astro";
+import RenewalPageHero from "../../../components/renewal/RenewalPageHero.astro";
+import RenewalPastSongsList from "../../../components/renewal/RenewalPastSongsList.astro";
+import RenewalRecruitCta from "../../../components/renewal/RenewalRecruitCta.astro";
+import { renewalApi, selectRecruitmentForBanner } from "../../../lib/renewal-api";
+
+const archives = await renewalApi.getArchives();
+const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
+const songs = new Map<
+  string,
+  {
+    artist: string;
+    title: string;
+    events: { id: string; title: string; eventDate: string; youtubeUrl?: string }[];
+  }
+>();
+
+archives.forEach((archive) => {
+  archive.setlist.forEach((song) => {
+    const artist = song.artist.trim();
+    const title = song.song_title.trim();
+    if (!artist && !title) return;
+    const key = `${artist.toLocaleLowerCase()}\u0000${title.toLocaleLowerCase()}`;
+    const existing = songs.get(key) ?? { artist, title, events: [] };
+    if (!existing.events.some((event) => event.id === archive.id)) {
+      existing.events.push({
+        id: archive.id,
+        title: archive.title,
+        eventDate: archive.event_date,
+        youtubeUrl: song.youtube_url,
+      });
+    }
+    songs.set(key, existing);
+  });
+});
+
+const pastSongs = [...songs.values()].sort((a, b) => a.title.localeCompare(b.title, "ja"));
+---
+
+<RenewalLayout title="過去の演奏曲" description="MuSTがこれまでに演奏した曲を検索できます。">
+  <div class="renewal-setlist">
+    <RenewalPageHero
+      title="過去の演奏曲"
+      description="これまでのライブで演奏した曲を検索できます。"
+      className="renewal-setlist__hero renewal-past-songs__hero"
+      breadcrumbClassName="renewal-setlist__breadcrumb"
+      id="past-songs-title"
+      compact
+    />
+    <RenewalPastSongsList songs={pastSongs} />
+    {recruitment && <RenewalRecruitCta event={recruitment} />}
+  </div>
+</RenewalLayout>

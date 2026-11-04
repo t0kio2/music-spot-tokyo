@@ -1,0 +1,25 @@
+---
+import styles from "./RenewalTabNav.module.css";
+
+interface Props {
+  items: { value: string; label: string }[];
+  activeValue: string;
+  ariaLabel: string;
+  scope: string;
+  className?: string;
+}
+
+const { items, activeValue, ariaLabel, scope, className } = Astro.props;
+---
+
+<nav class:list={[styles.nav, className]} aria-label={ariaLabel} data-tab-nav={scope}>
+  {items.map((item) => (
+    <button
+      type="button"
+      data-tab-value={item.value}
+      aria-pressed={item.value === activeValue ? "true" : "false"}
+    >
+      {item.label}
+    </button>
+  ))}
+</nav>
