@@ -2,6 +2,7 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
+import RenewalTabNav from "../../components/renewal/RenewalTabNav.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
 import { renewalApi, getEventTypeLabel, selectRecruitmentForBanner } from "../../lib/renewal-api";
@@ -31,19 +32,21 @@ const archivePageSize = 6;
       id="archive-title"
       compact
     />
-    <nav class="renewal-archive__filters" aria-label="ライブ開催年で絞り込み">
-      {["all", ...years].map((year, index) => (
-        <button
-          type="button"
-          class:list={{ active: index === 0 }}
-          data-year={year}
-          aria-pressed={index === 0 ? "true" : "false"}
-        >
-          {year === "all" ? "すべて" : year}
-        </button>
-      ))}
-    </nav>
-    <section class="renewal-archive__grid" aria-label="過去のライブ一覧">
+    <RenewalTabNav
+      className="renewal-archive__filters"
+      items={["all", ...years].map((year) => ({
+        value: year,
+        label: year === "all" ? "すべて" : year,
+      }))}
+      activeValue="all"
+      ariaLabel="ライブ開催年で絞り込み"
+      scope="archive"
+    />
+    <section
+      class="renewal-archive__grid"
+      aria-label="過去のライブ一覧"
+      data-page-size={archivePageSize}
+    >
       {archives.map((live, index) => (
         <article
           class:list={[
@@ -139,36 +142,38 @@ const archivePageSize = 6;
 <RenewalImageLightbox label="ライブ写真を拡大表示" />
 
 <script>
-  const filters = document.querySelectorAll<HTMLButtonElement>(".renewal-archive__filters button");
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-tab-nav="archive"] button');
   const cards = document.querySelectorAll<HTMLElement>(".renewal-archive__card");
   const moreButton = document.querySelector<HTMLButtonElement>(".renewal-archive__more");
+  const pageSize = Number(
+    document.querySelector<HTMLElement>(".renewal-archive__grid")?.dataset.pageSize ?? cards.length,
+  );
   let showAll = false;
-  const applyFilter = (year = "all") => {
+  let currentYear = "all";
+  const applyFilter = (year = currentYear) => {
+    currentYear = year;
+    const matchingCards = [...cards].filter((card) => year === "all" || card.dataset.year === year);
+    const shouldPaginate = !showAll && matchingCards.length > pageSize;
     cards.forEach((card) => {
       card.hidden =
-        (!showAll && card.classList.contains("renewal-archive__card--extra")) ||
-        (year !== "all" && card.dataset.year !== year);
+        (year !== "all" && card.dataset.year !== year) ||
+        (shouldPaginate && card.classList.contains("renewal-archive__card--extra"));
     });
+    if (moreButton) moreButton.hidden = !shouldPaginate;
   };
   filters.forEach((filter) =>
     filter.addEventListener("click", () => {
-      const year = filter.dataset.year;
+      const year = filter.dataset.tabValue;
       filters.forEach((button) => {
         const active = button === filter;
-        button.classList.toggle("active", active);
         button.setAttribute("aria-pressed", String(active));
       });
       showAll = false;
-      if (moreButton) moreButton.hidden = false;
       applyFilter(year);
     }),
   );
   moreButton?.addEventListener("click", () => {
     showAll = true;
-    applyFilter(
-      document.querySelector<HTMLButtonElement>(".renewal-archive__filters button.active")?.dataset
-        .year,
-    );
-    moreButton.hidden = true;
+    applyFilter(currentYear);
   });
 </script>

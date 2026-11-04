@@ -6,6 +6,7 @@ import RenewalRecruitCta from "../../../components/renewal/RenewalRecruitCta.ast
 import {
   renewalApi,
   getEventTypeLabel,
+  getYoutubeThumbnail,
   selectRecruitmentForBanner,
   type RenewalArchive,
 } from "../../../lib/renewal-api";
@@ -27,19 +28,6 @@ const formatDate = (date: string) =>
     day: "numeric",
     weekday: "short",
   });
-const getYoutubeThumbnail = (url?: string) => {
-  if (!url) return undefined;
-  try {
-    const parsed = new URL(url);
-    const videoId =
-      parsed.hostname === "youtu.be"
-        ? parsed.pathname.slice(1)
-        : (parsed.searchParams.get("v") ?? parsed.pathname.match(/\/shorts\/([^/]+)/)?.[1]);
-    return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : undefined;
-  } catch {
-    return undefined;
-  }
-};
 ---
 
 <RenewalLayout

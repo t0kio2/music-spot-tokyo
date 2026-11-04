@@ -1,0 +1,65 @@
+---
+import styles from "./RenewalPastSongsList.module.css";
+import { getYoutubeThumbnail } from "../../lib/renewal-api";
+
+interface Props {
+  song: {
+    artist: string;
+    title: string;
+    events: { id: string; title: string; eventDate: string; youtubeUrl?: string }[];
+  };
+  showArtist?: boolean;
+}
+
+const { song, showArtist = false } = Astro.props;
+const videoEvents = song.events.filter((event) => event.youtubeUrl);
+---
+
+<li class={styles.item} data-song-item data-search={`${song.artist} ${song.title}`}>
+  <div class={styles.songInfo}>
+    <strong>{showArtist ? `${song.artist} - ${song.title}` : song.title}</strong>
+    <span>演奏回数 {song.events.length}回</span>
+  </div>
+  {videoEvents.length > 0 && (
+    <div class={styles.videoGallery} data-song-video>
+      <div class={styles.videoTrack}>
+        {videoEvents.map((event, index) => (
+          <a
+            class:list={[styles.youtube, { "video-active": index === 0 }]}
+            data-song-video-item
+            href={event.youtubeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${song.title}の${event.title}の演奏動画を見る`}
+          >
+            {getYoutubeThumbnail(event.youtubeUrl) && (
+              <img src={getYoutubeThumbnail(event.youtubeUrl)} alt="" />
+            )}
+            <span>{event.title}</span>
+            <i aria-hidden="true">▶</i>
+          </a>
+        ))}
+      </div>
+      {videoEvents.length > 1 && (
+        <>
+          <button
+            class={styles.videoControl}
+            type="button"
+            data-song-video-prev
+            aria-label="前の動画"
+          >
+            ‹
+          </button>
+          <button
+            class={styles.videoControl}
+            type="button"
+            data-song-video-next
+            aria-label="次の動画"
+          >
+            ›
+          </button>
+        </>
+      )}
+    </div>
+  )}
+</li>
