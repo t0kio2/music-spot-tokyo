@@ -1,26 +1,13 @@
 .hero {
-  position: relative;
   min-height: var(--renewal-feature-hero-height);
   overflow: hidden;
   padding: 1.8rem var(--renewal-content-gutter) 2.2rem;
-  border-bottom: 1px solid var(--renewal-border-strong);
-  background:
+  background-image:
     linear-gradient(90deg, #010a13e8, #010a1388 48%, #010a1320),
     linear-gradient(0deg, #010a13c4, transparent 60%),
-    url("../../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
+    url("../../assets/renewal/集合写真_webp/26,3春.webp");
 }
 
-.breadcrumb {
-  display: flex;
-  gap: 0.65rem;
-  margin-bottom: 1.25rem;
-  color: var(--renewal-muted);
-  font-size: 0.8rem;
-}
-
-.breadcrumb :global(a) {
-  color: var(--renewal-muted);
-}
 .title {
   color: var(--renewal-text);
   font:
@@ -47,11 +34,7 @@
 @media (max-width: 760px) {
   .hero {
     min-height: var(--renewal-feature-hero-height-mobile);
-    padding: 1.2rem 1rem 2rem;
-  }
-  .breadcrumb {
-    margin-bottom: 1.1rem;
-    font-size: 0.75rem;
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
   }
   .title {
     font-size: clamp(2rem, 11vw, 3rem);

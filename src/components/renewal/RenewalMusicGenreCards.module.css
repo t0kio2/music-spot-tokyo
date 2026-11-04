@@ -1,0 +1,122 @@
+.genres {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1.7fr) repeat(3, minmax(8rem, 0.85fr));
+  gap: 1rem;
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+.intro h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0 0 0.7rem;
+  font-size: 1.8rem;
+}
+.intro h2::before {
+  content: "";
+  width: 0.4rem;
+  height: 2.2rem;
+  border-radius: 0.2rem;
+  background: linear-gradient(var(--renewal-cyan), var(--renewal-pink));
+}
+.intro p {
+  color: var(--renewal-text);
+  font-size: 0.8rem;
+  line-height: 1.9;
+}
+.genres article {
+  min-height: 9rem;
+  padding: 0.7rem;
+  border: 1px solid var(--renewal-border-medium);
+  border-radius: 0.7rem;
+  background: var(--renewal-surface-card);
+  text-align: center;
+}
+.genres article > span {
+  display: grid;
+  place-items: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  margin: -1.25rem auto 0.1rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  background: #06152a;
+  font-size: 2.2rem;
+  text-shadow: 0 0 12px currentColor;
+}
+.genres article > span svg {
+  width: 2.2rem;
+  height: 2.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.genres article:nth-child(2) > span {
+  color: var(--renewal-pink);
+}
+.genres article:nth-child(3) > span {
+  color: #249eff;
+}
+.genres article:nth-child(4) > span {
+  color: #13d5d1;
+}
+.genres article:nth-child(4) > span svg {
+  width: 3rem;
+  height: 3rem;
+}
+.genres h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.genres article p {
+  margin: 0.2rem 0 0;
+  color: var(--renewal-text);
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .genres {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .intro {
+    grid-column: 1 / -1;
+  }
+}
+@media (max-width: 760px) {
+  .genres {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.45rem;
+  }
+  .intro h2 {
+    font-size: 1.4rem;
+  }
+  .intro p {
+    font-size: 0.7rem;
+  }
+  .genres article {
+    min-height: 8rem;
+    padding: 0.35rem;
+  }
+  .genres article > span {
+    width: 3rem;
+    height: 3rem;
+    margin-top: -0.65rem;
+    font-size: 1.5rem;
+  }
+  .genres article > span svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .genres article:nth-child(4) > span svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+  .genres h3 {
+    font-size: 0.75rem;
+  }
+  .genres article p {
+    font-size: 0.56rem;
+  }
+}

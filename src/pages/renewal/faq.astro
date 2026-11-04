@@ -1,6 +1,7 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
+import RenewalFaqList from "../../components/renewal/RenewalFaqList.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { getFaqList } from "../../lib/microcms";
 import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
@@ -14,22 +15,10 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
       title="よくある質問"
       description="みなさまからのよくあるご質問をまとめました。"
       className="renewal-faq-page__hero"
-      breadcrumbClassName="renewal-faq-page__breadcrumb"
       compact
     />
     <section class="renewal-faq-page__content" aria-label="よくある質問一覧">
-      <div class="renewal-faq-page__list">
-        {faqs.map((faq, index) => (
-          <details>
-            <summary>
-              <span>Q{index + 1}</span>
-              <b>{faq.question}</b>
-              <i>＋</i>
-            </summary>
-            <div set:html={faq.answer} />{" "}
-          </details>
-        ))}
-      </div>
+      <RenewalFaqList faqs={faqs} />
     </section>
   </div>
   {recruitment && <RenewalRecruitCta event={recruitment} />}

@@ -1,17 +1,24 @@
 ---
 interface Props {
-	title: string;
-	subtitle?: string;
-	description?: string;
+  title: string;
+  subtitle?: string;
+  description?: string;
 }
 
 import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
+import styles from "./RenewalPageHero.module.css";
 
 const { title, subtitle, description } = Astro.props;
 ---
 
-<section class="renewal-hero renewal-subpage-hero renewal-subpage-hero--compact" aria-labelledby="renewal-page-title">
-	<RenewalBreadcrumb title={title} />
-	<h1 id="renewal-page-title">{title}{subtitle && <em>{subtitle}</em>}</h1>
-	{description && <p class="renewal-hero__description">{description}</p>}
+<section
+  class:list={["renewal-hero", styles.hero, styles.compact]}
+  aria-labelledby="renewal-page-title"
+>
+  <RenewalBreadcrumb title={title} className={styles.breadcrumb} />
+  <h1 class={styles.title} id="renewal-page-title">
+    {title}
+    {subtitle && <em class={styles.subtitle}>{subtitle}</em>}
+  </h1>
+  {description && <p class={styles.description}>{description}</p>}
 </section>

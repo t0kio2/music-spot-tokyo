@@ -1,6 +1,6 @@
 ---
 import RenewalLayout from "../../../layouts/RenewalLayout.astro";
-import RenewalBreadcrumb from "../../../components/renewal/RenewalBreadcrumb.astro";
+import RenewalPageHero from "../../../components/renewal/RenewalPageHero.astro";
 import RenewalIcon from "../../../components/renewal/RenewalIcon.astro";
 import RenewalRecruitCta from "../../../components/renewal/RenewalRecruitCta.astro";
 import {
@@ -35,25 +35,24 @@ const formatDate = (date: string) =>
   description={`${archive.title}で演奏した曲をご紹介します。`}
 >
   <div class="renewal-archive-detail">
-    <section
-      class="renewal-archive-detail__hero renewal-subpage-hero renewal-subpage-hero--compact"
+    <RenewalPageHero
+      title={archive.title}
+      className="renewal-archive-detail__hero"
+      breadcrumbTitle="演奏曲"
+      parentTitle="過去のライブ"
+      parentHref="/renewal/archive/"
+      id="archive-title"
+      compact
       style={`--renewal-archive-detail-image: url("${archive.cover_image.url}")`}
     >
-      <RenewalBreadcrumb
-        title="演奏曲"
-        parentTitle="過去のライブ"
-        parentHref="/renewal/archive/"
-        className="renewal-archive-detail__breadcrumb"
-      />
-      <p class="renewal-archive-detail__eyebrow">
+      <p slot="eyebrow" class="renewal-archive-detail__eyebrow">
         {formatDate(archive.event_date)} {getEventTypeLabel(archive.event_type)}
       </p>
-      <h1>{archive.title}</h1>
       <p class="renewal-archive-detail__place">
         <RenewalIcon name="pin" />
         {archive.place}
       </p>
-    </section>
+    </RenewalPageHero>
     <main class="renewal-archive-detail__content">
       <div class="renewal-archive-detail__heading">
         <h2>演奏曲</h2>

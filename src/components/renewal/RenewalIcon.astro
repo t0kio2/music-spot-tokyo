@@ -1,5 +1,5 @@
 ---
-type IconName =
+export type IconName =
   | "home"
   | "users"
   | "music"
@@ -14,7 +14,9 @@ type IconName =
   | "line"
   | "guitar"
   | "star"
-  | "refresh";
+  | "star-simple"
+  | "refresh"
+  | "search";
 
 interface Props {
   name: IconName;
@@ -93,11 +95,15 @@ const viewBox = isLine ? "0 0 32 24" : "0 0 24 24";
       <path d="m12 6 1.8 3.7 4.2.6-3 2.9.7 4.2-3.7-2-3.7 2 .7-4.2-3-2.9 4.2-.6L12 6Z" />
     </>
   )}
+  {name === "star-simple" && (
+    <path d="m12 6 1.8 3.7 4.2.6-3 2.9.7 4.2-3.7-2-3.7 2 .7-4.2-3-2.9 4.2-.6L12 6Z" />
+  )}
   {name === "refresh" && (
     <>
       <path d="M20 11a8 8 0 0 0-14.9-3M4 5v4h4M4 13a8 8 0 0 0 14.9 3M20 19v-4h-4" />
     </>
   )}
+  {name === "search" && <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15ZM16 16l5 5" />}
   {name === "pin" && (
     <>
       <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />

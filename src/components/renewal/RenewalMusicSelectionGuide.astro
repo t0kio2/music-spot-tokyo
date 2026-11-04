@@ -1,0 +1,67 @@
+---
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalMusicSelectionGuide.module.css";
+---
+
+<section class={styles.selection} aria-labelledby="selection-title">
+  <div class={styles.copy}>
+    <h2 id="selection-title">
+      <RenewalIcon name="music" className={styles.icon} />
+      選曲の目安
+    </h2>
+    <p>
+      ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。
+    </p>
+    <p class={styles.note}>
+      ただし、あくまで目安です。状況に応じて増減します。
+      <br />
+      ※目安を満たしたリクエスト曲が少ない場合、運営者セレクトの曲が選出される可能性もございます。
+    </p>
+  </div>
+  <div
+    class={styles.donut}
+    role="img"
+    aria-label="選曲の目安：2017年以降50%、2006年以前から2016年17%、期待枠8%、管楽器枠17%"
+  >
+    <strong>
+      全体<em>24曲</em>（目安）
+    </strong>
+    <b class={styles.p50}>50%</b>
+    <b class={styles.p17}>17%</b>
+    <b class={styles.p8}>8%</b>
+    <b class={styles.p17b}>17%</b>
+  </div>
+  <div class={styles.legend}>
+    <div>
+      <i></i>
+      <span>
+        2017年〜（12曲程度）<small>YouTubeの再生回数を参考にしています。</small>
+      </span>
+      <b>50%</b>
+    </div>
+    <div>
+      <i></i>
+      <span>
+        2007年〜2016年（4曲程度）
+        <small>
+          ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。
+        </small>
+      </span>
+      <b>17%</b>
+    </div>
+    <div>
+      <i></i>
+      <span>
+        期待枠（2曲程度）<small>今後、活躍が期待されるアーティスト</small>
+      </span>
+      <b>8%</b>
+    </div>
+    <div>
+      <i></i>
+      <span>
+        管楽器枠（4曲程度）<small>主に管楽器パートメンバーで話し合い決定</small>
+      </span>
+      <b>17%</b>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+import RenewalGuitarIcon from "./RenewalGuitarIcon.astro";
+import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalMusicGenreCards.module.css";
+---
+
+<div class={styles.genres}>
+  <div class={styles.intro}>
+    <h2>演奏ジャンル</h2>
+    <p>J-POP・邦ロックを中心に、話題のアーティストやフェスで盛り上がる人気の曲を演奏します。</p>
+  </div>
+  <article>
+    <span>
+      <RenewalIcon name="music" />
+    </span>
+    <h3>J-POP</h3>
+    <p>
+      最新のヒット曲・
+      <br />
+      話題のアーティスト
+    </p>
+  </article>
+  <article>
+    <span>
+      <RenewalGuitarIcon />
+    </span>
+    <h3>邦ロック</h3>
+    <p>
+      フェスで盛り上がる
+      <br />
+      人気アーティスト
+    </p>
+  </article>
+  <article>
+    <span>
+      <RenewalIcon name="star-simple" />
+    </span>
+    <h3>演奏例</h3>
+    <p>
+      King Gnu
+      <br />
+      ずっと真夜中でいいのに。
+      <br />
+      ヨルシカ
+    </p>
+  </article>
+</div>

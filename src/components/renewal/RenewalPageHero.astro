@@ -6,22 +6,46 @@ interface Props {
   title: string;
   description?: string;
   className: string;
-  breadcrumbClassName: string;
+  breadcrumbTitle?: string;
+  parentTitle?: string;
+  parentHref?: string;
   id?: string;
   compact?: boolean;
+  style?: string;
 }
 
-const { title, description, className, breadcrumbClassName, id, compact = false } = Astro.props;
+const {
+  title,
+  description,
+  className,
+  breadcrumbTitle = title,
+  parentTitle,
+  parentHref,
+  id,
+  compact = false,
+  style,
+} = Astro.props;
 ---
 
 <section
-  class:list={[className, "renewal-subpage-hero", styles.hero, { [styles.compact]: compact }]}
+  class:list={[className, styles.hero, { [styles.compact]: compact }]}
+  style={style}
   aria-labelledby={id}
 >
-  <RenewalBreadcrumb title={title} className={breadcrumbClassName} />
-  <h1 class={styles.title} id={id}>
-    {title}
-  </h1>
+  <RenewalBreadcrumb
+    title={breadcrumbTitle}
+    parentTitle={parentTitle}
+    parentHref={parentHref}
+    className={styles.breadcrumb}
+  />
+  <slot name="eyebrow" />
+  {Astro.slots.has("title") ? (
+    <slot name="title" />
+  ) : (
+    <h1 class={styles.title} id={id}>
+      {title}
+    </h1>
+  )}
   {description && <p class={styles.description}>{description}</p>}
   <slot />
 </section>

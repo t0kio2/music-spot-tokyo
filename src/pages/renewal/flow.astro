@@ -1,54 +1,55 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
+import RenewalFlowSteps from "../../components/renewal/RenewalFlowSteps.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 const steps = [
   [
     "1",
-    "▤✎",
+    "document",
     "参加申込",
     "本サイト内の「募集状況・申込み」から必要事項を入力しご応募ください。",
     "※3月及び9月の定期ライブは1987年生まれ〜1999年生まれの方に限定しています",
   ],
-  ["2", "▤✓", "注意事項の確認", "当サークルの注意事項について、確認いただきます。", ""],
+  ["2", "warning", "注意事項の確認", "当サークルの注意事項について、確認いただきます。", ""],
   [
     "3",
-    "Ⓛ♧",
+    "line",
     "LINEグループ招待",
     "参加希望のライブのLINEグループに招待させていただきます。（LINEグループはライブ毎に作成しております。）",
     "",
   ],
   [
     "4",
-    "♫▤",
+    "music",
     "希望曲のリクエスト",
     "希望曲を募集期間にリクエストします。その後、運営者が選曲します。",
     "※企画ライブは企画内容によります。",
   ],
   [
     "5",
-    "▤✓",
+    "document",
     "出演曲のエントリー",
     "エントリー期間になったら、演奏したい曲にエントリーします。",
     "",
   ],
   [
     "6",
-    "♬",
+    "guitar",
     "各自、自主練習",
     "練習会や本番まで各自、トレーニングに励んでください。自主練習期間は2か月ほどございます。",
     "",
   ],
   [
     "6",
-    "♧♬",
+    "users",
     "練習会",
     "スタジオにて練習会を行います。費用は1,000円〜1,500円。練習会は2回行います。",
     "定期セッションライブのみ",
   ],
-  ["7", "♬♙", "ライブ本番", "ライブ本番です。大いに楽しみましょう。", ""],
+  ["7", "play", "ライブ本番", "ライブ本番です。大いに楽しみましょう。", ""],
 ];
 ---
 
@@ -61,27 +62,18 @@ const steps = [
       title="参加までの流れ"
       description="下記のステップで、ライブへの参加ができます。"
       className="renewal-flow__hero"
-      breadcrumbClassName="renewal-flow__breadcrumb"
       compact
     />
-    <section class="renewal-flow__steps" id="steps" aria-label="参加までの8ステップ">
-      {steps.map(([number, icon, title, text, note]) => (
-        <article class="renewal-flow__step">
-          <header>
-            <span>{number}</span>
-            <h2>
-              {title}
-              {title === "練習会" && <small>（{note}）</small>}
-            </h2>
-          </header>
-          <div class="renewal-flow__icon" aria-hidden="true">
-            {icon}
-          </div>
-          <p>{text}</p>
-          {note && title !== "練習会" && <aside>{note}</aside>}
-        </article>
-      ))}
-    </section>
+    <RenewalFlowSteps
+      mobileOnlyAccordion
+      steps={steps.map(([number, icon, title, text, note]) => ({
+        number,
+        icon,
+        title,
+        text,
+        note,
+      }))}
+    />
     {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>
