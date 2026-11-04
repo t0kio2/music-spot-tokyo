@@ -1,0 +1,113 @@
+---
+import styles from "./RenewalPastSongsList.module.css";
+import RenewalPastSongItem from "./RenewalPastSongItem.astro";
+
+interface SongEvent {
+  id: string;
+  title: string;
+  eventDate: string;
+  youtubeUrl?: string;
+}
+
+interface Song {
+  artist: string;
+  title: string;
+  events: SongEvent[];
+}
+
+interface Props {
+  songs: Song[];
+}
+
+const { songs } = Astro.props;
+const getArtistOrder = (artist: string) => {
+  const first = artist.trim().charAt(0);
+  if (/[\u3040-\u30ff\u3400-\u9fff]/.test(first)) return 0;
+  if (/[A-Za-z]/.test(first)) return 1;
+  return 2;
+};
+const groups = [
+  ...songs.reduce((map, song) => {
+    const artist = song.artist || "アーティスト不明";
+    const group = map.get(artist) ?? [];
+    group.push(song);
+    map.set(artist, group);
+    return map;
+  }, new Map<string, Song[]>()),
+].sort(([artistA], [artistB]) => {
+  const orderDiff = getArtistOrder(artistA) - getArtistOrder(artistB);
+  return orderDiff || artistA.localeCompare(artistB, getArtistOrder(artistA) === 1 ? "en" : "ja");
+});
+---
+
+<section class={styles.section} aria-labelledby="past-songs-heading">
+  <div class={styles.toolbar}>
+    <label for="past-songs-search">曲名・アーティスト名で検索</label>
+    <input
+      id="past-songs-search"
+      type="search"
+      placeholder="例：ヨルシカ、怪獣"
+      autocomplete="off"
+    />
+    <p class={styles.count} aria-live="polite">
+      <strong data-song-count>{songs.length}</strong>曲
+    </p>
+  </div>
+  <h2 id="past-songs-heading" class={styles.visuallyHidden}>
+    過去の演奏曲一覧
+  </h2>
+  <p class={styles.empty} data-song-empty hidden>
+    該当する演奏曲がありません。
+  </p>
+  <div class={styles.list}>
+    {groups.map(([artist, artistSongs]) => (
+      <details class={styles.group} data-song-group>
+        <summary>{artist}</summary>
+        <ul class={styles.groupList}>
+          {artistSongs.map((song) => (
+            <RenewalPastSongItem song={song} />
+          ))}
+        </ul>
+      </details>
+    ))}
+  </div>
+</section>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>("#past-songs-search");
+  const count = document.querySelector<HTMLElement>("[data-song-count]");
+  const empty = document.querySelector<HTMLElement>("[data-song-empty]");
+
+  const apply = () => {
+    const query = input?.value.trim().toLocaleLowerCase() ?? "";
+    const items = [...document.querySelectorAll<HTMLElement>("[data-song-item]")];
+    const groups = [...document.querySelectorAll<HTMLElement>("[data-song-group]")];
+    let visibleCount = 0;
+    items.forEach((item) => {
+      const matches = !query || (item.dataset.search ?? "").toLocaleLowerCase().includes(query);
+      item.hidden = !matches;
+      if (matches) visibleCount += 1;
+    });
+    groups.forEach((group) => {
+      group.hidden = !group.querySelector<HTMLElement>("[data-song-item]:not([hidden])");
+      if (!group.hidden && query && group instanceof HTMLDetailsElement) group.open = true;
+    });
+    if (count) count.textContent = String(visibleCount);
+    if (empty) empty.hidden = visibleCount > 0;
+  };
+  input?.addEventListener("input", apply);
+  document.querySelectorAll<HTMLElement>("[data-song-video]").forEach((gallery) => {
+    const videos = [...gallery.querySelectorAll<HTMLElement>("[data-song-video-item]")];
+    let index = 0;
+    const render = () =>
+      videos.forEach((video, current) => video.classList.toggle("video-active", current === index));
+    gallery.querySelector("[data-song-video-prev]")?.addEventListener("click", () => {
+      index = (index - 1 + videos.length) % videos.length;
+      render();
+    });
+    gallery.querySelector("[data-song-video-next]")?.addEventListener("click", () => {
+      index = (index + 1) % videos.length;
+      render();
+    });
+  });
+</script>

@@ -3056,6 +3056,9 @@
   font-size: 0.7rem;
   cursor: pointer;
 }
+.renewal-archive__more[hidden] {
+  display: none;
+}
 .renewal-archive__more span {
   margin-left: 0.8rem;
 }
@@ -3275,6 +3278,9 @@
 .renewal-setlist__hero {
   --renewal-page-hero-image: url("../assets/renewal/素材_webp/ギターギター.webp");
 }
+.renewal-past-songs__hero {
+  --renewal-page-hero-image: url("../assets/renewal/素材_webp/まどかギターギター.webp");
+}
 .renewal-activity__hero {
   --renewal-page-hero-image: url("../assets/renewal/素材_webp/観客.webp");
 }
@@ -3352,6 +3358,12 @@
 .renewal-subpage-hero--compact {
   min-height: 11.5rem;
 }
+.renewal-setlist__hero {
+  background-position: center;
+}
+.renewal-past-songs__hero {
+  background-position: center bottom;
+}
 
 @media (max-width: 760px) {
   .renewal-site {
@@ -3370,6 +3382,12 @@
 
   .renewal-subpage-hero--compact {
     min-height: 11rem;
+  }
+  .renewal-setlist__hero {
+    background-position: center;
+  }
+  .renewal-past-songs__hero {
+    background-position: center bottom;
   }
 
   .renewal-overview__stats,
@@ -3513,8 +3531,6 @@
   width: 7rem;
   height: 3.9rem;
   overflow: hidden;
-  border: 1px solid var(--renewal-border);
-  border-radius: 0.3rem;
 }
 .renewal-archive-detail__thumbnail img {
   width: 100%;

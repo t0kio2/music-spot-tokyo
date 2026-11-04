@@ -4,9 +4,10 @@ import RenewalIcon from "./RenewalIcon.astro";
 const navItems = [
   ["/renewal/", "ホーム", "home"],
   ["/renewal/overview/", "MuSTについて", "users"],
-  ["/renewal/music-selection/", "演奏曲について", "music"],
   ["/renewal/history/", "活動実績", "chart"],
+  ["/renewal/music-selection/", "演奏曲について", "music"],
   ["/renewal/archive/", "過去のライブ", "play"],
+  ["/renewal/archive/past-songs/", "過去の演奏曲一覧", "play"],
   ["/renewal/flow/", "参加までの流れ", "nodes"],
   ["/renewal/application/", "募集・申込み", "document"],
   ["/renewal/faq/", "よくある質問", "question"],
@@ -37,8 +38,14 @@ const socialLinks = [
 ] as const;
 
 const currentPath = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === "/renewal/" ? currentPath === href : currentPath.startsWith(href);
+const isActive = (href: string) => {
+  if (href === "/renewal/") return currentPath === href;
+  const hasMoreSpecificMatch = navItems.some(
+    ([candidate]) =>
+      candidate !== href && candidate.length > href.length && currentPath.startsWith(candidate),
+  );
+  return currentPath.startsWith(href) && !hasMoreSpecificMatch;
+};
 ---
 
 <header class="renewal-header">

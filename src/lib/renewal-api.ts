@@ -46,6 +46,20 @@ export function formatEventDate(date?: string): string {
   });
 }
 
+export function getYoutubeThumbnail(url?: string): string | undefined {
+  if (!url) return undefined;
+  try {
+    const parsed = new URL(url);
+    const videoId =
+      parsed.hostname === "youtu.be"
+        ? parsed.pathname.slice(1)
+        : (parsed.searchParams.get("v") ?? parsed.pathname.match(/\/shorts\/([^/]+)/)?.[1]);
+    return videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 export interface RenewalArchive {
   id: string;
   title: string;

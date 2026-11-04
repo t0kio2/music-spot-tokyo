@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+.nav button {
+  position: relative;
+  padding: 0.25rem 0.45rem 0.5rem;
+  border: 0;
+  color: var(--renewal-muted);
+  background: transparent;
+  font: inherit;
+  font-size: var(--renewal-font-md);
+  cursor: pointer;
+}
+.nav button[aria-pressed="true"] {
+  color: var(--renewal-text);
+}
+.nav button[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--renewal-gold);
+}
