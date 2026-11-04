@@ -1,14 +1,15 @@
 ---
 import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
+import sharedStyles from "./RenewalPageHero.module.css";
 import styles from "./RenewalOverviewHero.module.css";
 ---
 
 <section
-  class:list={["renewal-overview__hero", "renewal-subpage-hero", styles.hero]}
+  class:list={["renewal-overview__hero", sharedStyles.hero, styles.hero]}
   id="about"
   aria-labelledby="overview-title"
 >
-  <RenewalBreadcrumb title="MuSTについて" className={styles.breadcrumb} />
+  <RenewalBreadcrumb title="MuSTについて" className={sharedStyles.breadcrumb} />
   <h1 class={styles.title} id="overview-title">
     MuSTについて
   </h1>

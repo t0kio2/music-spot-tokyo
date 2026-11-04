@@ -1,0 +1,23 @@
+---
+import styles from "./RenewalFaqList.module.css";
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+const { faqs } = Astro.props as { faqs: Faq[] };
+---
+
+<div class={styles.list}>
+  {faqs.map((faq, index) => (
+    <details class:list={[styles.item, { [styles.alternate]: index % 2 === 1 }]}>
+      <summary>
+        <span>Q{index + 1}</span>
+        <b>{faq.question}</b>
+        <i>＋</i>
+      </summary>
+      <div set:html={faq.answer} />
+    </details>
+  ))}
+</div>

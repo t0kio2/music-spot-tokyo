@@ -1,5 +1,6 @@
 ---
 import RenewalActionLink from "./RenewalActionLink.astro";
+import RenewalIcon from "./RenewalIcon.astro";
 import styles from "./RenewalMusicInfoCards.module.css";
 
 const expectationUrl =
@@ -10,7 +11,10 @@ const pastSongsUrl =
 
 <div class={styles.cards}>
   <section class={styles.card}>
-    <h2>☆ 期待枠について</h2>
+    <h2>
+      <RenewalIcon name="star-simple" className={styles.expectationIcon} />
+      期待枠について
+    </h2>
     <p>
       約2曲を「期待枠」から採用します。
       <br />
@@ -19,7 +23,10 @@ const pastSongsUrl =
     <RenewalActionLink href={expectationUrl} label="詳細を見る" size="compact" centered />
   </section>
   <section class:list={[styles.card, styles.past]}>
-    <h2>⌕ 過去の演奏曲について</h2>
+    <h2>
+      <RenewalIcon name="search" />
+      過去の演奏曲について
+    </h2>
     <p>
       過去3年以内に演奏した曲はリクエストできません。
       <br />

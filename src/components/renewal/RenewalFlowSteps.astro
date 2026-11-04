@@ -1,0 +1,63 @@
+---
+import styles from "./RenewalFlowSteps.module.css";
+import RenewalIcon, { type IconName } from "./RenewalIcon.astro";
+import RenewalGuitarIcon from "./RenewalGuitarIcon.astro";
+
+interface FlowStep {
+  number: string;
+  icon: string;
+  title: string;
+  text: string;
+  note: string;
+}
+
+interface Props {
+  steps: FlowStep[];
+  mobileOnlyAccordion?: boolean;
+}
+
+const { steps, mobileOnlyAccordion = true } = Astro.props;
+---
+
+<section
+  class:list={["renewal-flow__steps", styles.steps, { [styles.mobileOnly]: mobileOnlyAccordion }]}
+  id="steps"
+  aria-label="参加までの8ステップ"
+>
+  {steps.map((step, index) => (
+    <details
+      class:list={[styles.step, { [styles.alternate]: index % 2 === 1 }]}
+      data-flow-step
+      open
+    >
+      <summary class={styles.toggle}>
+        <span class={styles.number}>{step.number}</span>
+        <span class={styles.icon} aria-hidden="true">
+          {step.icon === "guitar" ? (
+            <RenewalGuitarIcon className={styles.guitarIcon} />
+          ) : (
+            <RenewalIcon name={step.icon as IconName} className={styles.iconSvg} />
+          )}
+        </span>
+        <h2>
+          {step.title}
+          {step.title === "練習会" && <small>（{step.note}）</small>}
+        </h2>
+        <i aria-hidden="true">＋</i>
+      </summary>
+      <div class={styles.body}>
+        <p>{step.text}</p>
+        {step.note && step.title !== "練習会" && <aside>{step.note}</aside>}
+      </div>
+    </details>
+  ))}
+</section>
+
+<script>
+  const flowSteps = document.querySelectorAll<HTMLElement>("[data-flow-step]");
+  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+
+  flowSteps.forEach((step) => {
+    if (step instanceof HTMLDetailsElement) step.open = !isMobile;
+  });
+</script>

@@ -2,6 +2,7 @@
   position: relative;
   min-height: 14rem;
   padding: 1.45rem var(--renewal-content-gutter) 1.8rem;
+  border-bottom: 0;
   --renewal-hero-image: var(
     --renewal-page-hero-image,
     url("../../assets/renewal/集合写真_webp/26,3春.webp")
@@ -23,6 +24,21 @@
   background: linear-gradient(0deg, #010711b8, transparent);
 }
 
+:global(.renewal-breadcrumb).breadcrumb {
+  display: flex;
+  gap: 0.7rem;
+  width: fit-content;
+  margin-bottom: 1.55rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--renewal-border);
+  color: var(--renewal-muted);
+  font-size: 0.8rem;
+}
+
+:global(.renewal-breadcrumb).breadcrumb :global(a) {
+  color: var(--renewal-muted);
+}
+
 .hero > * {
   position: relative;
   z-index: 1;
@@ -41,9 +57,75 @@
 }
 
 .description {
+  max-width: 42rem;
   margin-top: 0.35rem;
+  color: var(--renewal-muted);
   font-size: 0.86rem;
   font-weight: 500;
+}
+
+.subtitle {
+  margin-left: 0.8rem;
+  color: var(--renewal-pink);
+  font:
+    400 0.48em "Caveat",
+    cursive;
+  letter-spacing: 0;
+}
+
+:global(.renewal-hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/会場.webp");
+}
+
+:global(.renewal-setlist__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギターギター.webp");
+}
+
+:global(.renewal-past-songs__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/まどかギターギター.webp");
+}
+
+:global(.renewal-activity__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/観客.webp");
+}
+
+:global(.renewal-overview__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/集合写真_webp/26,3春.webp");
+}
+
+:global(.renewal-flow__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/会場.webp");
+}
+
+:global(.renewal-faq-page__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギター.webp");
+}
+
+:global(.renewal-precautions__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギターギタードラム.webp");
+}
+
+:global(.renewal-application__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギターベースドラム.webp");
+}
+
+:global(.renewal-schedule__hero).hero,
+:global(.renewal-archive__hero).hero {
+  --renewal-page-hero-image: url("../../assets/renewal/集合写真_webp/25.9秋.webp");
+}
+
+:global(.renewal-flow__hero).hero,
+:global(.renewal-faq-page__hero).hero,
+:global(.renewal-precautions__hero).hero,
+:global(.renewal-application__hero).hero,
+:global(.renewal-schedule__hero).hero,
+:global(.renewal-setlist__hero).hero {
+  min-height: 12.5rem;
+  overflow: hidden;
+  padding: 1.8rem var(--renewal-content-gutter) 2rem;
+  background-image:
+    linear-gradient(90deg, #010811ed 0%, #01081170 55%, #01081112 100%),
+    linear-gradient(0deg, #010811aa, transparent 45%), var(--renewal-hero-image);
 }
 
 :global(.renewal-overview__hero) .title {
@@ -55,10 +137,115 @@
   font-size: clamp(2.4rem, 5vw, 4rem);
 }
 
+:global(.renewal-archive__hero).hero {
+  min-height: var(--renewal-feature-hero-height);
+  overflow: hidden;
+  padding: 1.8rem var(--renewal-content-gutter) 1.8rem;
+  background-image:
+    linear-gradient(90deg, #010a11f2, #010a1199 38%, #010a1110 76%),
+    linear-gradient(0deg, #010a1144, transparent 60%), var(--renewal-hero-image);
+}
+
+:global(.renewal-archive__hero).hero::after {
+  height: 30%;
+  background: linear-gradient(0deg, var(--renewal-bg), transparent);
+}
+
+:global(.renewal-activity__hero).hero {
+  min-height: var(--renewal-feature-hero-height);
+  overflow: hidden;
+  padding: 1.8rem var(--renewal-content-gutter) 2rem;
+  background-image:
+    linear-gradient(90deg, #010a13ed, #010a1388 45%, #010a1322),
+    linear-gradient(0deg, #010a13c4, transparent 62%), var(--renewal-hero-image);
+  background-position: center 52%;
+}
+
+:global(.renewal-activity__hero).hero::after {
+  background: linear-gradient(0deg, var(--renewal-bg), transparent);
+}
+
+:global(.renewal-activity__hero) h1 {
+  margin: 0;
+  font:
+    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Zen Old Mincho",
+    serif;
+}
+
+:global(.renewal-activity__hero) h2 {
+  margin-top: 0.8rem;
+  color: #fff;
+  font:
+    600 clamp(1.05rem, 2vw, 1.45rem) / 1.55 "Zen Old Mincho",
+    serif;
+}
+
+:global(.renewal-activity__hero) h2 + p {
+  margin-top: 0.35rem;
+  color: #d4e6ef;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+:global(.renewal-setlist__hero).hero {
+  overflow: hidden;
+  background-image:
+    linear-gradient(90deg, #010912dc, #01091270 48%, #01091218),
+    linear-gradient(0deg, #010912a6, transparent 75%), var(--renewal-hero-image);
+  background-position: center 54%;
+}
+
+:global(.renewal-setlist__hero) h1 {
+  margin: 0;
+  font:
+    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Zen Old Mincho",
+    serif;
+  letter-spacing: 0.03em;
+}
+
+:global(.renewal-setlist__hero) h1 span {
+  color: inherit;
+}
+
+:global(.renewal-setlist__hero) p {
+  max-width: 43rem;
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+:global(.renewal-archive-detail__hero).hero {
+  min-height: 12rem;
+  padding: 1.3rem var(--renewal-content-gutter) 2rem;
+  background-image:
+    linear-gradient(90deg, #010912e8, #01091270),
+    var(--renewal-archive-detail-image, var(--renewal-page-hero-image));
+  background-position: center;
+  background-size: cover;
+}
+
+:global(.renewal-archive-detail__hero).hero::after {
+  height: 38%;
+  background: linear-gradient(0deg, #010711c9, transparent);
+}
+
+:global(.renewal-archive-detail__hero) h1 {
+  margin-top: 0.35rem;
+  font:
+    700 clamp(1.7rem, 4vw, 3rem) / 1.3 "Zen Old Mincho",
+    serif;
+}
+
+:global(.renewal-archive-detail__hero) > p {
+  color: var(--renewal-muted);
+  font-size: 0.75rem;
+}
+
 @media (max-width: 760px) {
   .hero {
     min-height: 14rem;
-    padding: 1rem var(--renewal-content-gutter) 1.4rem;
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
     background-position: center;
   }
 
@@ -66,7 +253,71 @@
     min-height: 11rem;
   }
 
+  :global(.renewal-breadcrumb).breadcrumb {
+    margin-bottom: 1.1rem;
+    font-size: 0.75rem;
+  }
+
   .title {
     font-size: 2rem;
+  }
+
+  .subtitle {
+    display: block;
+    margin: 0.25rem 0 0;
+    font-size: 0.7em;
+  }
+
+  :global(.renewal-activity__hero).hero {
+    min-height: var(--renewal-feature-hero-height-mobile);
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+  }
+
+  :global(.renewal-activity__hero) h1 {
+    font-size: clamp(2.2rem, 11vw, 3rem);
+  }
+
+  :global(.renewal-activity__hero) h2 {
+    font-size: 1rem;
+  }
+
+  :global(.renewal-activity__hero) h2 + p {
+    font-size: 0.72rem;
+  }
+
+  :global(.renewal-setlist__hero) h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  :global(.renewal-setlist__hero) p {
+    font-size: 0.75rem;
+  }
+
+  :global(.renewal-archive-detail__hero).hero {
+    min-height: 11rem;
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+  }
+
+  :global(.renewal-archive-detail__hero) h1 {
+    font-size: 1.65rem;
+  }
+
+  :global(.renewal-flow__hero).hero,
+  :global(.renewal-faq-page__hero).hero,
+  :global(.renewal-precautions__hero).hero,
+  :global(.renewal-application__hero).hero,
+  :global(.renewal-schedule__hero).hero,
+  :global(.renewal-setlist__hero).hero {
+    min-height: 9.5rem;
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+  }
+
+  :global(.renewal-archive__hero).hero {
+    min-height: 11rem;
+    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+  }
+
+  :global(.renewal-archive__hero) .title {
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 }

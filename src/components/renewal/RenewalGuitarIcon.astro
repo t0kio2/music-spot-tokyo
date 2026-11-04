@@ -1,0 +1,16 @@
+---
+import guitarIcon from "../../assets/renewal/guitar.svg";
+import styles from "./RenewalGuitarIcon.module.css";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<span
+  class:list={[styles.icon, className]}
+  style={`--guitar-image: url(${guitarIcon.src})`}
+  aria-hidden="true"
+></span>

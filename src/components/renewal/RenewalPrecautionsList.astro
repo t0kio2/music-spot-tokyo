@@ -1,0 +1,57 @@
+---
+interface PrecautionSection {
+  icon: string;
+  title: string;
+  note?: string;
+  items: string[];
+}
+
+interface Props {
+  sections: PrecautionSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+<section class="renewal-precautions__content" id="notice" aria-label="サークルの注意事項">
+  {sections.map((section, index) => (
+    <details
+      class:list={[
+        "renewal-precautions__panel",
+        { "renewal-precautions__panel--pink": index === 2 },
+      ]}
+      open={index !== 2}
+    >
+      <summary>
+        <span>{section.icon}</span>
+        <h2>
+          {section.title}
+          <small>{section.note}</small>
+        </h2>
+        <i>＋</i>
+      </summary>
+      <ol>
+        {section.items.map((item) => (
+          <li>
+            <b>{item}</b>
+          </li>
+        ))}
+      </ol>
+      {index === 0 && (
+        <div class="renewal-precautions__fee">
+          キャンセル料金：本番2か月以内は出演料の50%、1か月以内は出演料の100%（100円未満切り上げ）
+        </div>
+      )}
+    </details>
+  ))}
+</section>
+
+<script>
+  const precautionDetails = document.querySelectorAll<HTMLDetailsElement>(
+    ".renewal-precautions__content details",
+  );
+  const precautionsIsMobile = window.matchMedia("(max-width: 760px)").matches;
+  precautionDetails.forEach((detail) => {
+    detail.open = !precautionsIsMobile;
+  });
+</script>

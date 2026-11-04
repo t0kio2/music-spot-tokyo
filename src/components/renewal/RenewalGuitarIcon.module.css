@@ -1,0 +1,21 @@
+.icon {
+  display: block;
+  width: var(--guitar-icon-size, 2.7rem);
+  height: var(--guitar-icon-size, 2.7rem);
+}
+
+.icon::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: currentColor;
+  mask: var(--guitar-image) center / contain no-repeat;
+  -webkit-mask: var(--guitar-image) center / contain no-repeat;
+}
+
+@media (max-width: 760px) {
+  .icon {
+    --guitar-icon-size: 1.9rem;
+  }
+}

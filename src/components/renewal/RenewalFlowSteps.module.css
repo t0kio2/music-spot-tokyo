@@ -1,0 +1,227 @@
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.65rem clamp(1rem, 2.2vw, 2rem) 0.9rem;
+}
+
+.step {
+  position: relative;
+  min-height: 18rem;
+  padding: 0.8rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--renewal-cyan);
+  border-radius: 0.8rem;
+  background: var(--renewal-surface-card-soft);
+}
+
+.alternate {
+  border-color: var(--renewal-pink);
+}
+
+.toggle {
+  display: grid;
+  grid-template-columns: var(--renewal-icon-box) minmax(0, 1fr) 1.35rem;
+  grid-template-areas:
+    "number title chevron"
+    "icon icon icon";
+  column-gap: 0.7rem;
+  align-items: center;
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0 0 0.55rem;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  list-style: none;
+}
+
+.toggle::-webkit-details-marker {
+  display: none;
+}
+
+.number {
+  grid-area: number;
+  display: grid;
+  width: var(--renewal-icon-box);
+  height: var(--renewal-icon-box);
+  place-items: center;
+  border: 1px solid var(--renewal-cyan);
+  border-radius: 50%;
+  color: var(--renewal-text);
+  font:
+    600 0.9rem/1 "Noto Sans JP",
+    sans-serif;
+}
+
+.alternate .number {
+  border-color: var(--renewal-pink);
+}
+
+.toggle h2 {
+  grid-area: title;
+  min-width: 0;
+  margin: 0;
+  font:
+    700 clamp(0.85rem, 1.35vw, 1.15rem) / 1.45 "Noto Sans JP",
+    serif;
+}
+
+.toggle h2 small {
+  display: block;
+  color: var(--renewal-cyan);
+  font:
+    600 0.58rem "Noto Sans JP",
+    sans-serif;
+}
+
+.icon {
+  grid-area: icon;
+  display: grid;
+  height: 6.5rem;
+  place-items: center;
+  color: var(--renewal-cyan);
+  font-size: 2.8rem;
+  line-height: 1;
+  text-shadow: 0 0 13px #04d8ff55;
+}
+
+.iconSvg {
+  width: 4.5rem;
+  height: 4.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.guitarIcon {
+  display: block;
+  --guitar-icon-size: 4.5rem;
+}
+
+.alternate .icon {
+  color: var(--renewal-pink);
+}
+
+.toggle > i {
+  display: block;
+  grid-area: chevron;
+  color: var(--renewal-cyan);
+  font-size: 1.35rem;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.alternate .toggle > i {
+  color: var(--renewal-pink);
+}
+
+.step[open] .toggle > i {
+  transform: rotate(45deg);
+}
+
+.body {
+  display: block;
+  padding: 1rem 1rem 1.1rem 2.8rem;
+  border-top: 1px solid var(--renewal-border-subtle);
+}
+
+.body p {
+  color: #edf5ff;
+  font-size: 0.72rem;
+  line-height: 1.8;
+}
+
+.body aside {
+  margin-top: 0.55rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--renewal-border-strong);
+  border-radius: var(--renewal-radius-sm);
+  color: #bcecf5;
+  font-size: 0.64rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) and (min-width: 761px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.8rem 0.7rem;
+  }
+
+  .step {
+    min-height: 0;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .toggle {
+    grid-template-columns: var(--renewal-icon-box) var(--renewal-icon-box) minmax(0, 1fr) 1.35rem;
+    grid-template-areas: "number icon title chevron";
+    column-gap: 0.45rem;
+    min-height: 2.8rem;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .number {
+    width: var(--renewal-icon-box);
+    height: var(--renewal-icon-box);
+  }
+
+  .icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .iconSvg {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .guitarIcon {
+    --guitar-icon-size: 1.9rem;
+  }
+
+  .body {
+    display: none;
+    padding: 0.65rem 0.75rem 0.8rem 3.3rem;
+  }
+
+  .step[open] .body {
+    display: block;
+  }
+
+  .body p {
+    display: block;
+    font-size: 0.7rem;
+  }
+
+  .body aside {
+    margin-top: 0.5rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .mobileOnly .toggle {
+    pointer-events: none;
+  }
+
+  .mobileOnly .toggle > i {
+    display: none;
+  }
+}
