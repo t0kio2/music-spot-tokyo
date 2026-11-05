@@ -4,6 +4,7 @@ import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalApplicationEvent from "../../components/renewal/RenewalApplicationEvent.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
+import styles from "../../components/renewal/RenewalApplication.module.css";
 import { renewalApi } from "../../lib/renewal-api";
 
 const today = new Date();
@@ -17,19 +18,22 @@ const events = (await renewalApi.getApplication()).filter((event) => {
 ---
 
 <RenewalLayout title="募集状況・申込み" description="ライブの詳細や募集状況をご確認いただけます。">
-  <div class="renewal-application" id="top">
+  <div class:list={["renewal-application", styles.page]} id="top">
     <RenewalPageHero
       title="募集状況・申込み"
       description="ライブの詳細や募集状況を確認して、ぜひご参加ください。"
       className="renewal-application__hero"
       compact
     />
-    <section class="renewal-application__events" aria-label="募集中のライブイベント">
+    <section
+      class:list={["renewal-application__events", styles.events]}
+      aria-label="募集中のライブイベント"
+    >
       {events.map((event) => (
         <RenewalApplicationEvent event={event} />
       ))}
     </section>
-    <section class="renewal-application__apply" id="apply">
+    <section class:list={["renewal-application__apply", styles.apply]} id="apply">
       <span class="renewal-application__apply-icon" aria-hidden="true">
         <RenewalIcon name="users" />
       </span>

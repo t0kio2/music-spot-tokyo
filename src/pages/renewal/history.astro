@@ -16,11 +16,7 @@ const recruitment = selectRecruitmentForBanner(applications);
 
 <RenewalLayout title="活動実績" description="MuSTのこれまでのライブ活動をご紹介します。">
   <div class="renewal-activity">
-    <RenewalPageHero
-      title="活動実績"
-      className="renewal-activity__hero"
-      id="activity-title"
-    >
+    <RenewalPageHero title="活動実績" className="renewal-activity__hero" id="activity-title">
       <h2>
         これまでのライブで、
         <br />
@@ -45,9 +41,7 @@ const recruitment = selectRecruitmentForBanner(applications);
           value: summary.live_count,
           suffix: "回",
           large: true,
-          detail: summary.as_of_date
-            ? `（${new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）`
-            : undefined,
+          date: summary.as_of_date,
         },
         {
           icon: "users",
@@ -55,9 +49,7 @@ const recruitment = selectRecruitmentForBanner(applications);
           value: summary.performer_count,
           suffix: "名",
           large: true,
-          detail: summary.as_of_date
-            ? `（${new Date(summary.as_of_date).toLocaleDateString("ja-JP")}まで）`
-            : undefined,
+          date: summary.as_of_date,
         },
       ]}
     />

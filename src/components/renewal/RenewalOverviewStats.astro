@@ -31,12 +31,12 @@ const { items, ariaLabel = "MuSTの概要" } = Astro.props;
           <small>{item.suffix}</small>
         </strong>
         {item.detail && <small class={styles.detail}>{item.detail}</small>}
+        {item.date && (
+          <time class={styles.date} datetime={item.date}>
+            {new Date(item.date).toLocaleDateString("ja-JP")}時点
+          </time>
+        )}
       </div>
-      {item.date && (
-        <time class={styles.date} datetime={item.date}>
-          {new Date(item.date).toLocaleDateString("ja-JP")}時点
-        </time>
-      )}
     </div>
   ))}
 </section>

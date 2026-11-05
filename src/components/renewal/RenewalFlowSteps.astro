@@ -36,7 +36,10 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
           {step.icon === "guitar" ? (
             <RenewalGuitarIcon className={styles.guitarIcon} />
           ) : (
-            <RenewalIcon name={step.icon as IconName} className={styles.iconSvg} />
+            <RenewalIcon
+              name={step.icon as IconName}
+              className={step.title === "ライブ本番" ? styles.stageIcon : styles.iconSvg}
+            />
           )}
         </span>
         <h2>
