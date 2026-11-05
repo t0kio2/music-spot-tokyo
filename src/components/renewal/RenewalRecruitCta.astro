@@ -15,7 +15,7 @@ const { event } = Astro.props;
   aria-label="メンバー募集"
 >
   <p>
-    現在、{formatEventDate(event.event_date)}の{getEventTypeLabel(event.event_type)}
+    現在、{formatEventDate(event.event_date)} の {getEventTypeLabel(event.event_type)} <br>
     のメンバーを募集中です。
   </p>
   <RenewalActionLink

@@ -13,20 +13,12 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
 <RenewalLayout title="演奏曲について">
   <div class="renewal-setlist">
     <RenewalPageHero
-      title="演奏曲について"
+      title="どんな曲を演奏するの？"
+      description="J-POP・邦ロックを中心に、サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。"
       className="renewal-setlist__hero"
       id="setlist-title"
       compact
-    >
-      <h1 slot="title" id="setlist-title">
-        どんな曲を<span>演奏</span>するの？
-      </h1>
-      <p>
-        J-POP・邦ロックを中心に、
-        <br />
-        サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。
-      </p>
-    </RenewalPageHero>
+    />
 
     <section class="renewal-setlist__content">
       <RenewalMusicGenreCards />

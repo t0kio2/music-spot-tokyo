@@ -2,8 +2,8 @@
   min-height: 100vh;
   padding-bottom: 1.5rem;
   background:
-    radial-gradient(ellipse at 88% 69%, #12345a44, transparent 38%),
-    linear-gradient(110deg, #00121a, #001824 65%, #00111a);
+    radial-gradient(ellipse at 76% 20%, #00345418, transparent 38%),
+    linear-gradient(140deg, #00050b, #010d18 65%, #00050b);
 }
 
 .events {
@@ -58,7 +58,7 @@
 .apply p {
   flex: 1;
   margin: 0;
-  font-size: 0.75rem;
+  font-size: var(--renewal-font-md);
 }
 
 .apply a {
@@ -112,7 +112,7 @@
 
   .apply p {
     grid-column: 2;
-    font-size: 0.66rem;
+    font-size: var(--renewal-font-md);
     line-height: 1.5;
   }
 

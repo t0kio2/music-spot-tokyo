@@ -21,7 +21,7 @@
 }
 .intro p {
   color: var(--renewal-text);
-  font-size: 0.8rem;
+  font-size: var(--renewal-font-md);
   line-height: 1.9;
 }
 .genres article {
@@ -93,7 +93,7 @@
     font-size: 1.4rem;
   }
   .intro p {
-    font-size: 0.7rem;
+    font-size: var(--renewal-font-md);
   }
   .genres article {
     min-height: 8rem;

@@ -15,7 +15,7 @@
     serif;
   letter-spacing: 0.06em;
 }
-.heading {
+:global(.renewal-overview__hero) .heading {
   max-width: 40rem;
   margin-top: 0.9rem;
   color: #fff;
@@ -23,12 +23,13 @@
     600 clamp(1.1rem, 2vw, 1.55rem) / 1.65 "Zen Old Mincho",
     serif;
 }
-.lead {
+:global(.renewal-overview__hero) .lead {
   max-width: 43rem;
-  margin-top: 0.65rem;
-  color: #d4e6ef;
-  font-size: 0.82rem;
-  line-height: 1.9;
+  margin-top: 0.8rem;
+  color: inherit;
+  font-size: var(--renewal-font-md);
+  font-weight: 500;
+  line-height: 1.8;
 }
 
 @media (max-width: 760px) {
@@ -39,11 +40,11 @@
   .title {
     font-size: clamp(2rem, 11vw, 3rem);
   }
-  .heading {
+  :global(.renewal-overview__hero) .heading {
     margin-top: 0.8rem;
     font-size: 1rem;
   }
-  .lead {
-    font-size: 0.72rem;
+  :global(.renewal-overview__hero) .lead {
+    font-size: var(--renewal-font-md);
   }
 }

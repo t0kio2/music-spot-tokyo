@@ -74,6 +74,7 @@
 
 .toggle h2 small {
   display: block;
+  margin-left: -0.15rem;
   color: var(--renewal-gold);
   font:
     600 0.58rem "Noto Sans JP",
@@ -149,7 +150,7 @@
 
 .body p {
   color: #edf5ff;
-  font-size: 0.72rem;
+  font-size: var(--renewal-font-md);
   line-height: 1.8;
 }
 
@@ -235,7 +236,7 @@
 
   .body p {
     display: block;
-    font-size: 0.7rem;
+    font-size: var(--renewal-font-md);
   }
 
   .body aside {

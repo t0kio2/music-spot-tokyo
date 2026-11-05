@@ -28,7 +28,6 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
     <details
       class:list={[styles.step, { [styles.alternate]: index % 2 === 1 }]}
       data-flow-step
-      open
     >
       <summary class={styles.toggle}>
         <span class={styles.number}>{step.number}</span>
@@ -55,12 +54,3 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
     </details>
   ))}
 </section>
-
-<script>
-  const flowSteps = document.querySelectorAll<HTMLElement>("[data-flow-step]");
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-
-  flowSteps.forEach((step) => {
-    if (step instanceof HTMLDetailsElement) step.open = !isMobile;
-  });
-</script>

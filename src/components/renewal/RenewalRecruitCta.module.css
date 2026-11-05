@@ -13,6 +13,16 @@
     url("../../assets/renewal/集合写真_webp/26,3春.webp") center 52% / cover;
 }
 
+.cta p {
+  text-align: center;
+}
+
+@media (min-width: 761px) {
+  .cta p {
+    grid-column: 1 / 3;
+  }
+}
+
 @media (max-width: 760px) {
   .cta {
     right: 0;

@@ -6,6 +6,7 @@ import RenewalTabNav from "../../components/renewal/RenewalTabNav.astro";
 import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
 import styles from "../../components/renewal/RenewalArchive.module.css";
+import "../../components/renewal/RenewalArchive.css";
 import { renewalApi, getEventTypeLabel, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
 const archives = await renewalApi.getArchives();
