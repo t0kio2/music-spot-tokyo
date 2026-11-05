@@ -16,7 +16,8 @@ export type IconName =
   | "star"
   | "star-simple"
   | "refresh"
-  | "search";
+  | "search"
+  | "stage";
 
 interface Props {
   name: IconName;
@@ -104,6 +105,20 @@ const viewBox = isLine ? "0 0 32 24" : "0 0 24 24";
     </>
   )}
   {name === "search" && <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15ZM16 16l5 5" />}
+  {name === "stage" && (
+    <>
+      <g transform="rotate(-12 5 4) translate(0.9 -0.55) scale(0.35)">
+        <path d="M9 18V5l10-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3ZM19 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z" />
+      </g>
+      <g transform="rotate(10 17 4) translate(13 -1) scale(0.35)">
+        <path d="M9 18V5l10-2v13M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3ZM19 16a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z" />
+      </g>
+      <circle cx="6" cy="14" r="1.4" />
+      <circle cx="12" cy="13" r="1.6" />
+      <circle cx="18" cy="14" r="1.4" />
+      <path d="M2.5 21c.2-2.5 1.4-4 3.5-4s3.3 1.5 3.5 4M8 21c.2-3 1.5-4.7 4-4.7s3.8 1.7 4 4.7M14.5 21c.2-2.5 1.4-4 3.5-4s3.3 1.5 3.5 4" />
+    </>
+  )}
   {name === "pin" && (
     <>
       <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />

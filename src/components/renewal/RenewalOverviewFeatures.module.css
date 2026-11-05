@@ -198,10 +198,13 @@
     font-size: 0.95rem;
   }
   .feature p {
-    clear: both;
+    margin-left: calc(var(--renewal-icon-box) + 0.7rem);
     font-size: 0.69rem;
   }
   .videoLink {
-    clear: both;
+    width: calc(100% - (var(--renewal-icon-box) + 0.7rem));
+    max-width: calc(100% - (var(--renewal-icon-box) + 0.7rem));
+    margin-left: calc(var(--renewal-icon-box) + 0.7rem);
+    box-sizing: border-box;
   }
 }

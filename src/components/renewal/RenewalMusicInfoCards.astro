@@ -20,7 +20,14 @@ const pastSongsUrl =
       <br />
       リンク先にリストアップされたアーティストの「代表曲」を中心に参照します。
     </p>
-    <RenewalActionLink href={expectationUrl} label="詳細を見る" size="compact" centered />
+    <RenewalActionLink
+      href={expectationUrl}
+      label="詳細を見る"
+      size="compact"
+      centered
+      target="_blank"
+      rel="noopener noreferrer"
+    />
   </section>
   <section class:list={[styles.card, styles.past]}>
     <h2>

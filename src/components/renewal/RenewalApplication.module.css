@@ -1,0 +1,126 @@
+.page {
+  min-height: 100vh;
+  padding-bottom: 1.5rem;
+  background:
+    radial-gradient(ellipse at 88% 69%, #12345a44, transparent 38%),
+    linear-gradient(110deg, #00121a, #001824 65%, #00111a);
+}
+
+.events {
+  display: grid;
+  gap: 0.75rem;
+  width: min(calc(100% - (2 * var(--renewal-content-gutter))), 1120px);
+  margin: auto;
+  padding: 1.25rem 0 0.75rem;
+}
+
+.page .apply {
+  display: grid;
+  grid-template-columns: 2.4rem auto minmax(0, 1fr) auto;
+  width: min(calc(100% - (2 * var(--renewal-content-gutter))), 1120px);
+  align-items: center;
+  gap: 16px;
+  margin: 1px auto 0;
+  padding: 13px 20px;
+  border: 1px solid var(--renewal-line);
+  border-radius: 15px;
+  background: var(--renewal-surface-card);
+}
+
+.apply > span {
+  display: flex;
+  flex: 0 0 2.4rem;
+  width: 2.4rem;
+  align-self: center;
+  align-items: center;
+  color: var(--renewal-cyan);
+}
+
+.apply > span svg {
+  display: block;
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.apply h2 {
+  margin: 0;
+  align-self: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  font:
+    700 1.45rem "Noto Sans JP",
+    serif;
+}
+
+.apply p {
+  flex: 1;
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+.apply a {
+  min-width: 255px;
+  padding: 12px 22px;
+  border-radius: 7px;
+  color: #111b20;
+  background: linear-gradient(100deg, #ffbd7c, #ffb979);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.apply a span {
+  margin-left: 16px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 760px) {
+  .page {
+    padding-bottom: 1rem;
+  }
+
+  .events {
+    width: calc(100% - 1.1rem);
+    gap: 8px;
+    padding: 10px 0 8px;
+  }
+
+  .page .apply {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    width: calc(100% - 1.1rem);
+    gap: 6px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 11px;
+  }
+
+  .apply > span {
+    grid-row: 1;
+    width: 2rem;
+    flex-basis: 2rem;
+    align-self: center;
+  }
+
+  .apply h2 {
+    align-self: center;
+    font-size: 1rem;
+  }
+
+  .apply p {
+    grid-column: 2;
+    font-size: 0.66rem;
+    line-height: 1.5;
+  }
+
+  .apply a {
+    grid-column: 1 / -1;
+    min-width: 0;
+    padding: 10px;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+}

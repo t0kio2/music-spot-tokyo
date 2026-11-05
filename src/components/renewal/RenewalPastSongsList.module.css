@@ -279,4 +279,16 @@
   .videoGallery {
     width: min(100%, 12rem);
   }
+  .videoControl {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: transparent;
+    font-size: 2rem;
+  }
+  .videoControl:first-of-type {
+    left: 0;
+  }
+  .videoControl:last-of-type {
+    right: 0;
+  }
 }
