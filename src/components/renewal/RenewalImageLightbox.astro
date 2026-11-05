@@ -1,5 +1,5 @@
 ---
-import styles from "./RenewalImageLightbox.module.css";
+import "./RenewalImageLightbox.module.css";
 
 interface Props {
   label: string;
@@ -9,7 +9,7 @@ const { label } = Astro.props;
 ---
 
 <div
-  class:list={["renewal-activity__lightbox", styles.lightbox]}
+  class="renewal-activity__lightbox"
   data-renewal-lightbox
   hidden
   role="dialog"

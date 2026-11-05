@@ -52,7 +52,7 @@ const eventDate = event.event_date ? new Date(event.event_date) : undefined;
           </dt>
           <dd>
             <b>日時</b>
-            {formatEventDate(event.event_date)}
+            <span>{formatEventDate(event.event_date)}</span>
           </dd>
         </div>
         <div>
@@ -61,14 +61,14 @@ const eventDate = event.event_date ? new Date(event.event_date) : undefined;
           </dt>
           <dd>
             <b>会場</b>
-            {event.place ?? "未定"}
+            <span>{event.place ?? "未定"}</span>
           </dd>
         </div>
         <div>
           <dt>¥</dt>
           <dd>
             <b>費用</b>
-            {event.fee ?? "未定"}
+            <span>{event.fee ?? "未定"}</span>
           </dd>
         </div>
       </dl>
@@ -109,20 +109,23 @@ const eventDate = event.event_date ? new Date(event.event_date) : undefined;
         <div class="renewal-application__schedule-item">
           <h3>練習会</h3>
           <p>
-            <span class={styles.metaIcon}>
-              <RenewalIcon name="calendar" />
+            <span class={styles.scheduleLine}>
+              <span class={styles.metaIcon}>
+                <RenewalIcon name="calendar" />
+              </span>
+              <span>{schedule.practice_date}</span>
             </span>
-            {schedule.practice_date}
-            <br />
-            <span class={styles.metaIcon}>
-              <RenewalIcon name="pin" />
+            <span class={styles.scheduleLine}>
+              <span class={styles.metaIcon}>
+                <RenewalIcon name="pin" />
+              </span>
+              <span>{schedule.practice_place ?? "場所未定"}</span>
             </span>
-            {schedule.practice_place ?? "場所未定"}
             {schedule.practice_fee ? (
-              <>
-                <br />
-                ¥　{schedule.practice_fee}
-              </>
+              <span class={styles.scheduleLine}>
+                <span class={styles.currency}>¥</span>
+                <span>{schedule.practice_fee}</span>
+              </span>
             ) : null}
           </p>
         </div>
@@ -131,17 +134,22 @@ const eventDate = event.event_date ? new Date(event.event_date) : undefined;
         <div class="renewal-application__schedule-item">
           <h3>ライブ本番</h3>
           <p>
-            <span class={styles.metaIcon}>
-              <RenewalIcon name="calendar" />
+            <span class={styles.scheduleLine}>
+              <span class={styles.metaIcon}>
+                <RenewalIcon name="calendar" />
+              </span>
+              <span>{schedule.live_date}</span>
             </span>
-            {schedule.live_date}
-            <br />
-            <span class={styles.metaIcon}>
-              <RenewalIcon name="pin" />
+            <span class={styles.scheduleLine}>
+              <span class={styles.metaIcon}>
+                <RenewalIcon name="pin" />
+              </span>
+              <span>{event.place ?? "会場未定"}</span>
             </span>
-            {event.place ?? "会場未定"}
-            <br />
-            ¥　{event.fee ?? "費用未定"}
+            <span class={styles.scheduleLine}>
+              <span class={styles.currency}>¥</span>
+              <span>{event.fee ?? "費用未定"}</span>
+            </span>
           </p>
         </div>
       )}

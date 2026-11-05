@@ -23,6 +23,31 @@
   stroke-width: 1.7;
 }
 
+.currency {
+  display: inline-block;
+  width: 1.25rem;
+  margin-right: 0.25rem;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+.scheduleLine {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.scheduleLine > :last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.scheduleLine .metaIcon,
+.scheduleLine .currency {
+  flex: 0 0 1.25rem;
+  margin-right: 0;
+}
+
 .eventType {
   margin-top: 4px;
 }
@@ -93,8 +118,9 @@
   }
 
   .roster li {
-    white-space: normal;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .schedule {
