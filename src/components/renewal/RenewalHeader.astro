@@ -1,5 +1,6 @@
 ---
 import RenewalIcon from "./RenewalIcon.astro";
+import styles from "./RenewalHeader.module.css";
 
 const navItems = [
   ["/renewal/", "ホーム", "home"],
@@ -48,30 +49,34 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="renewal-header">
-  <a class="renewal-brand" href="/renewal/" aria-label="MuST ホーム">
+<header class={styles.header}>
+  <a class={styles.brand} href="/renewal/" aria-label="MuST ホーム">
     <img src="/favicon-source.png" alt="" />
-    <span class="renewal-brand__name">
+    <span class={styles.brandName}>
       <strong>MuST</strong>
       <small>Music Spot Tokyo</small>
     </span>
   </a>
-  <input class="renewal-menu-toggle" type="checkbox" id="renewal-menu-toggle" />
-  <label class="renewal-menu-button" for="renewal-menu-toggle" aria-label="メニューを開く">
+  <input class={styles.menuToggle} type="checkbox" id="renewal-menu-toggle" />
+  <label class={styles.menuButton} for="renewal-menu-toggle" aria-label="メニューを開く">
     <span></span>
     <span></span>
     <span></span>
   </label>
-  <nav class="renewal-nav" aria-label="新デザインのメインナビゲーション">
+  <nav class={styles.nav} data-renewal-nav aria-label="新デザインのメインナビゲーション">
+    <div class={styles.navBrand} aria-label="MuST - Music Spot Tokyo -">
+      <strong>MuST</strong>
+      <small>- Music Spot Tokyo -</small>
+    </div>
     {navItems.map(([href, label, icon]) => (
-      <a href={href} class:list={{ active: isActive(href) }}>
-        <span class="renewal-nav__icon" aria-hidden="true">
+      <a href={href} class:list={{ [styles.active]: isActive(href) }}>
+        <span class={styles.navIcon} aria-hidden="true">
           <RenewalIcon name={icon} />
         </span>
         {label}
       </a>
     ))}
-    <div class="renewal-socials" aria-label="SNS">
+    <div class={styles.socials} aria-label="SNS">
       {socialLinks.map(({ href, label, path }) => (
         <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -81,15 +86,15 @@ const isActive = (href: string) => {
       ))}
     </div>
   </nav>
-  <label class="renewal-menu-scrim" for="renewal-menu-toggle"></label>
-  <div class="renewal-sidebar-meta">
+  <label class={styles.menuScrim} for="renewal-menu-toggle"></label>
+  <div class={styles.sidebarMeta}>
     <small>© 2026 MuST - Music Spot Tokyo -</small>
   </div>
 </header>
 
 <script>
   const menuToggle = document.querySelector<HTMLInputElement>("#renewal-menu-toggle");
-  const menuLinks = document.querySelectorAll<HTMLAnchorElement>(".renewal-nav a");
+  const menuLinks = document.querySelectorAll<HTMLAnchorElement>("[data-renewal-nav] a");
 
   const syncMenuState = () => {
     document.body.classList.toggle("renewal-menu-open", menuToggle?.checked ?? false);
