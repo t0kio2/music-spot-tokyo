@@ -28,7 +28,7 @@
   filter: drop-shadow(0 0 5px var(--renewal-cyan));
 }
 .copy p {
-  font-size: 0.82rem;
+  font-size: var(--renewal-font-md);
   line-height: 1.9;
 }
 .note {
@@ -105,7 +105,7 @@
   gap: 0.6rem;
   padding: 0.4rem 0;
   border-bottom: 1px solid var(--renewal-border-subtle);
-  font-size: 0.82rem;
+  font-size: var(--renewal-font-md);
 }
 .legend i {
   width: 1.35rem;
@@ -158,7 +158,7 @@
     flex-basis: 1.85rem;
   }
   .copy p {
-    font-size: 0.7rem;
+    font-size: var(--renewal-font-md);
   }
   .donut {
     width: min(14rem, 68vw);

@@ -31,7 +31,7 @@
 .schedule {
   border-left: 1px solid var(--renewal-line-soft);
   padding-left: 13px;
-  font-size: 0.7rem;
+  font-size: var(--renewal-font-md);
 }
 
 .roster h3,
@@ -84,7 +84,7 @@
     border-top: 1px solid var(--renewal-border-medium);
     border-left: 0;
     padding: 6px 1rem 0;
-    font-size: 0.68rem;
+    font-size: var(--renewal-font-md);
   }
 
   .roster ol {

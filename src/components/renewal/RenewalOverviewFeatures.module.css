@@ -124,7 +124,7 @@
 .feature p {
   margin-top: 0.65rem;
   color: #d1e2eb;
-  font-size: 0.69rem;
+  font-size: var(--renewal-font-md);
   line-height: 1.85;
 }
 .videoLink {
@@ -199,7 +199,7 @@
   }
   .feature p {
     margin-left: calc(var(--renewal-icon-box) + 0.7rem);
-    font-size: 0.69rem;
+    font-size: var(--renewal-font-md);
   }
   .videoLink {
     width: calc(100% - (var(--renewal-icon-box) + 0.7rem));
