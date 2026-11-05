@@ -1259,7 +1259,7 @@
   border-radius: 0.8rem;
   background: var(--renewal-surface-card-soft);
 }
-.renewal-precautions__panel--pink {
+.renewal-precautions__panel:nth-child(even) {
   border-color: var(--renewal-pink);
 }
 .renewal-precautions__panel summary {
@@ -1277,7 +1277,7 @@
   color: var(--renewal-cyan);
   font-size: 1.7rem;
 }
-.renewal-precautions__panel--pink summary > span {
+.renewal-precautions__panel:nth-child(even) summary > span {
   color: var(--renewal-pink);
 }
 .renewal-precautions__panel summary h2 {
@@ -1294,6 +1294,9 @@
   font-size: 1.35rem;
   font-style: normal;
   transition: transform 0.2s;
+}
+.renewal-precautions__panel:nth-child(even) summary i {
+  color: var(--renewal-pink);
 }
 .renewal-precautions__panel[open] summary i {
   transform: rotate(45deg);
@@ -1314,6 +1317,9 @@
 .renewal-precautions__panel li::marker {
   color: var(--renewal-cyan);
   font-weight: 700;
+}
+.renewal-precautions__panel:nth-child(even) li::marker {
+  color: var(--renewal-pink);
 }
 .renewal-precautions__fee {
   margin: 0 1rem 1rem;

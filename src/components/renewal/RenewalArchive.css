@@ -9,17 +9,21 @@
   gap: 1.1rem;
   width: calc(100% - (2 * var(--renewal-content-gutter)));
   margin: 0 auto;
+  overflow-x: auto;
   padding: 0.7rem 0;
   border-bottom: 1px solid var(--renewal-line-soft);
+  scrollbar-width: thin;
 }
 .renewal-archive__filters button {
   position: relative;
+  flex: 0 0 auto;
   padding: 0.25rem 0.45rem 0.5rem;
   border: 0;
   color: var(--renewal-muted);
   background: transparent;
   font: inherit;
   font-size: var(--renewal-font-md);
+  white-space: nowrap;
   cursor: pointer;
 }
 .renewal-archive__filters button.active {
