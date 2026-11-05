@@ -67,7 +67,7 @@
   border-radius: 7px;
   color: #111b20;
   background: linear-gradient(100deg, #ffbd7c, #ffb979);
-  font-size: 0.8rem;
+  font-size: var(--renewal-font-md);
   font-weight: 800;
   text-align: center;
 }
@@ -79,7 +79,7 @@
 
 @media (max-width: 760px) {
   .page {
-    padding-bottom: 1rem;
+    padding-bottom: 3rem;
   }
 
   .events {
@@ -120,7 +120,6 @@
     grid-column: 1 / -1;
     min-width: 0;
     padding: 10px;
-    font-size: 0.82rem;
     text-align: center;
   }
 }

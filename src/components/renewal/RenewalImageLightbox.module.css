@@ -1,6 +1,3 @@
-.lightbox {
-}
-
 :global(.renewal-activity__lightbox[hidden]),
 :global(.renewal-activity__lightbox-control[hidden]) {
   display: none;

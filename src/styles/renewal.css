@@ -404,47 +404,6 @@
   color: var(--renewal-muted);
   font-size: var(--renewal-font-md);
 }
-.renewal-application-cta {
-  display: flex;
-  justify-content: center;
-  padding-top: 0;
-}
-.renewal-faq-list {
-  display: grid;
-  gap: 0.8rem;
-}
-.renewal-faq-list details {
-  border: 1px solid var(--renewal-border);
-  border-radius: 0.7rem;
-  background: var(--renewal-panel);
-}
-.renewal-faq-list summary {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.2rem;
-  cursor: pointer;
-  list-style: none;
-  font-weight: 700;
-}
-.renewal-faq-list summary::-webkit-details-marker {
-  display: none;
-}
-.renewal-faq-list summary span {
-  color: var(--renewal-cyan);
-}
-.renewal-faq-list summary b {
-  margin-left: auto;
-  color: var(--renewal-pink);
-  font-size: 1.25rem;
-}
-.renewal-faq-list details[open] summary b {
-  transform: rotate(45deg);
-}
-.renewal-faq-list details > div {
-  padding: 0 1.2rem 1.2rem 3.3rem;
-  border-top: 1px solid var(--renewal-border-subtle);
-}
 .renewal-footer {
   display: flex;
   align-items: center;
@@ -763,7 +722,7 @@
   display: grid;
   place-items: center;
   color: var(--renewal-muted);
-  font-size: 0.8rem;
+  font-size: var(--renewal-font-md);
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -791,10 +750,10 @@
   line-height: 1.08;
 }
 .renewal-application__title time span {
-  font-size: 0.85rem;
+  font-size: var(--renewal-font-md);
 }
 .renewal-application__title time b {
-  font-size: 1.2rem;
+  font-size: var(--renewal-font-lg);
 }
 .renewal-application__title small {
   display: inline-block;
@@ -849,6 +808,10 @@
 .renewal-application__details-list dd b {
   color: var(--renewal-cyan);
   font-size: var(--renewal-font-md);
+}
+.renewal-application__details-list dd span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .renewal-application__undecided {
   margin-top: 1rem;
@@ -933,13 +896,13 @@
   gap: 4px;
   min-width: 0;
   overflow: hidden;
-  font-size: 0.72rem;
+  font-size: var(--renewal-font-md);
   white-space: nowrap;
 }
 .renewal-application__vacancies b {
   margin-left: auto;
   color: var(--renewal-cyan);
-  font-size: 0.67rem;
+  font-size: var(--renewal-font-md);
   white-space: nowrap;
 }
 .renewal-application__vacancies .is-wait {
@@ -988,10 +951,9 @@
   }
   .renewal-application__title small {
     padding: 2px 8px;
-    font-size: 0.58rem;
   }
   .renewal-application__details-list {
-    margin: 5px 1rem 0;
+    margin: 0.65rem 1rem 0;
     gap: 2px;
   }
   .renewal-application__details-list > div {
@@ -1032,12 +994,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 4px 1rem;
     margin-inline: 1rem;
-  }
-  .renewal-application__vacancies span {
-    font-size: 0.64rem;
-  }
-  .renewal-application__vacancies b {
-    font-size: 0.58rem;
   }
   .renewal-application__footer {
     display: none;
@@ -1575,8 +1531,6 @@
   font-size: 1.2rem;
 }
 
-@media (max-width: 900px) {
-}
 @media (max-width: 760px) {
   .renewal-overview__slogan {
     right: 1rem;
@@ -2021,9 +1975,6 @@
   .renewal-application__schedule,
   .renewal-application__status {
     grid-column: 1 / -1;
-  }
-  .renewal-application__footer {
-    display: none;
   }
 }
 
