@@ -1,0 +1,437 @@
+.header {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: var(--renewal-sidebar);
+  padding: 0;
+  border-right: 1px solid var(--renewal-border);
+  background: linear-gradient(180deg, #01060e 0%, #010a15 68%, var(--renewal-surface-0) 100%);
+}
+
+.brand {
+  display: grid;
+  place-items: center;
+  height: 131px;
+  margin: 0;
+  background: radial-gradient(circle, #00cbff1f, transparent 67%);
+}
+
+.brand img {
+  width: 91px;
+  height: 91px;
+  object-fit: cover;
+  border: 2px solid var(--renewal-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00eaff66;
+}
+
+.brandName {
+  display: none;
+}
+
+.brandNote {
+  color: var(--renewal-cyan);
+  font-size: 2.2rem;
+  text-shadow: 0 0 12px var(--renewal-cyan);
+}
+
+.nav {
+  display: grid;
+  gap: 0;
+}
+
+.navBrand {
+  display: none;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.55rem 0.5rem 0.55rem 0.8rem;
+  border-left: 0;
+  color: var(--renewal-muted);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.nav a span {
+  display: inline-block;
+  color: var(--renewal-cyan);
+}
+
+.navIcon {
+  display: grid !important;
+  place-items: center;
+  width: 2.05rem;
+  margin-right: 0.2rem;
+  line-height: 1;
+}
+
+.navIcon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav a:first-of-type .navIcon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.nav a.active {
+  border-left: 2px solid var(--renewal-cyan);
+  background: transparent;
+  color: white;
+}
+
+:global(.renewal-shell--home) .header {
+  background: linear-gradient(180deg, #01060e 0%, #010a15 68%, #00050b 100%);
+}
+
+:global(.renewal-shell--home) .nav a .navIcon {
+  width: 2rem;
+}
+
+:global(.renewal-shell--home) .nav a:first-of-type .navIcon svg {
+  width: 1.85rem;
+  height: 1.85rem;
+}
+
+:global(.renewal-shell--home) .socials a {
+  display: grid;
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  place-items: center;
+}
+
+.socials {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 1.35rem 0.4rem 0;
+  padding: 0.9rem 0.4rem 0;
+  border-top: 1px solid var(--renewal-border-muted);
+}
+
+.socials a {
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--renewal-muted);
+}
+
+.socials a:hover {
+  color: var(--renewal-cyan);
+  background: transparent;
+}
+
+.socials svg {
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.sidebarMeta {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem 0.4rem 2.35rem;
+  color: var(--renewal-muted);
+  text-align: center;
+}
+
+.sidebarMeta small {
+  position: absolute;
+  right: 0.2rem;
+  bottom: 0.65rem;
+  left: 0.2rem;
+  font-size: 0.5rem;
+  letter-spacing: -0.04em;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.menuToggle,
+.menuButton,
+.menuScrim {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  :global(.renewal-menu-open) {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  .header {
+    position: sticky;
+    inset: 0 0 auto;
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    min-height: 4.5rem;
+    padding: 0.7rem 1rem;
+    border-right: 0;
+    border-bottom: 0;
+  }
+
+  .brand {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.65rem;
+    width: auto;
+    height: 3rem;
+    border: 0;
+    background: none;
+  }
+
+  .brand,
+  .header a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .brand:active,
+  .brand:focus,
+  .brand:focus-visible {
+    outline: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .brand img {
+    width: 3rem;
+    height: 3rem;
+    border-width: 1px;
+  }
+
+  .brandName {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: var(--renewal-text);
+    line-height: 1;
+  }
+
+  .brandName strong {
+    color: var(--renewal-pink);
+    font:
+      700 1.45rem/1 "Caveat",
+      cursive;
+    text-shadow: 0 0 8px #ff4ec855;
+  }
+
+  .brandName small {
+    display: block;
+    margin-top: 0.28rem;
+    color: var(--renewal-muted);
+    font:
+      500 0.54rem/1 "Noto Sans JP",
+      sans-serif;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .menuButton {
+    display: grid;
+    gap: 4px;
+    margin-left: auto;
+    padding: 0.5rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .menuButton:active,
+  .menuButton:focus,
+  .menuButton:focus-visible {
+    outline: 0;
+    background: transparent;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .menuButton span {
+    display: block;
+    width: 1.4rem;
+    height: 2px;
+    background: var(--renewal-text);
+  }
+
+  .nav {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 2;
+    align-content: start;
+    gap: 0.35rem;
+    width: min(19rem, 80vw);
+    padding: 1.2rem 0.9rem 1.25rem;
+    border-left: 1px solid var(--renewal-border-muted);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    background: linear-gradient(180deg, #010c16f8, #010811f8);
+    box-shadow: -1rem 0 2rem #0008;
+  }
+
+  .navBrand {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin: 0 0.65rem 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--renewal-border-muted);
+    line-height: 1;
+  }
+
+  .nav > a:first-of-type {
+    margin-top: 0.6rem;
+  }
+
+  .navBrand strong {
+    color: var(--renewal-pink);
+    font:
+      700 1.45rem/1 "Caveat",
+      cursive;
+    text-shadow: 0 0 8px #ff4ec855;
+  }
+
+  .navBrand small {
+    color: var(--renewal-muted);
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav a {
+    min-height: 44px;
+    padding: 0.35rem 0.65rem;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    color: var(--renewal-text);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .nav a:hover {
+    background: #00c7d512;
+  }
+
+  .nav a.active {
+    border-left-color: var(--renewal-cyan);
+    background: transparent;
+    color: var(--renewal-text);
+  }
+
+  .navIcon {
+    flex: 0 0 1.8rem;
+    width: 1.8rem;
+    margin-right: 0.35rem;
+  }
+
+  .navIcon svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .nav a:first-of-type .navIcon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  :global(.renewal-shell--home) .nav a .navIcon {
+    flex: 0 0 1.8rem;
+    width: 1.8rem;
+    margin-right: 0.35rem;
+  }
+
+  :global(.renewal-shell--home) .nav a:first-of-type .navIcon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .socials {
+    gap: 1.35rem;
+    margin: 1.2rem 0.15rem 0;
+    padding: 0.9rem 0.65rem 0;
+  }
+
+  .socials a {
+    display: grid;
+    place-items: center;
+    min-height: 2.25rem;
+    padding: 0;
+    border: 0;
+    color: var(--renewal-muted);
+  }
+
+  .socials a:hover {
+    color: var(--renewal-cyan);
+    background: transparent;
+  }
+
+  .socials svg {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .menuScrim {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #0008;
+  }
+
+  .menuToggle:checked ~ .nav {
+    transform: translateX(0);
+  }
+
+  .menuToggle:checked ~ .menuScrim {
+    display: block;
+  }
+
+  .sidebarMeta {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    width: min(19rem, 80vw);
+    height: 3rem;
+    padding: 0.5rem 0.9rem;
+    border-left: 1px solid var(--renewal-border-muted);
+    background: #010811f8;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    pointer-events: none;
+  }
+
+  .sidebarMeta small {
+    position: static;
+    font-size: 0.54rem;
+    white-space: nowrap;
+  }
+
+  .menuToggle:checked ~ .sidebarMeta {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+}
