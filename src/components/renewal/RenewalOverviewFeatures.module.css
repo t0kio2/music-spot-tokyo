@@ -44,22 +44,22 @@
 }
 
 .one {
-  --feature-photo: url("../../assets/renewal/素材_webp/ギターギター.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/guitar-guitar.webp");
 }
 .two {
-  --feature-photo: url("../../assets/renewal/素材_webp/guitar-guitar-drum.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/guitar-guitar-drum.webp");
 }
 .three {
-  --feature-photo: url("../../assets/renewal/素材_webp/会場.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/venue.webp");
 }
 .four {
-  --feature-photo: url("../../assets/renewal/素材_webp/あきな.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/akina.webp");
 }
 .five {
-  --feature-photo: url("../../assets/renewal/素材_webp/guitar.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/guitar.webp");
 }
 .six {
-  --feature-photo: url("../../assets/renewal/素材_webp/ベース.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/bass.webp");
 }
 
 .feature > * {
