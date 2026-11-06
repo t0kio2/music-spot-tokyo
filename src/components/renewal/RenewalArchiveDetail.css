@@ -73,7 +73,7 @@
   gap: 0.05rem;
 }
 .renewal-archive-detail__setlist li b {
-  font-size: 0.9rem;
+  font-size: var(--renewal-font-lg);
 }
 .renewal-archive-detail__setlist li small {
   color: var(--renewal-muted);
@@ -131,8 +131,5 @@
   .renewal-archive-detail__setlist li .renewal-archive-detail__thumbnail {
     width: 5rem;
     height: 2.8rem;
-  }
-  .renewal-archive-detail__setlist li b {
-    font-size: 0.8rem;
   }
 }
