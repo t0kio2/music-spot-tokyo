@@ -99,15 +99,15 @@
 }
 
 :global(.renewal-faq-page__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギター.webp");
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/guitar.webp");
 }
 
 :global(.renewal-precautions__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギターギタードラム.webp");
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/guitar-guitar-drum.webp");
 }
 
 :global(.renewal-application__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/ギターベースドラム.webp");
+  --renewal-page-hero-image: url("../../assets/renewal/素材_webp/guitar-bass-drum.webp");
 }
 
 :global(.renewal-schedule__hero).hero,
