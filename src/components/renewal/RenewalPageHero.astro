@@ -1,39 +1,60 @@
 ---
 import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
 import styles from "./RenewalPageHero.module.css";
+import { getPageSettings, type RenewalMedia } from "../../lib/renewal-api";
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   className: string;
   breadcrumbTitle?: string;
+  subTitle?: string;
   parentTitle?: string;
   parentHref?: string;
   id?: string;
   compact?: boolean;
   style?: string;
+  heroImage?: RenewalMedia;
+  useCmsContent?: boolean;
 }
 
 const {
   title,
   description,
   className,
-  breadcrumbTitle = title,
+  breadcrumbTitle,
+  subTitle,
   parentTitle,
   parentHref,
   id,
   compact = false,
   style,
+  heroImage,
+  useCmsContent = true,
 } = Astro.props;
+const pageSettings = await getPageSettings(Astro.url.pathname);
+const resolvedTitle = useCmsContent ? pageSettings?.title : title;
+const resolvedDescription = useCmsContent ? pageSettings?.description : description;
+const resolvedSubTitle = useCmsContent ? pageSettings?.sub_title : subTitle;
+const resolvedBreadcrumbTitle = useCmsContent
+  ? pageSettings?.sidemenu_page_title
+  : breadcrumbTitle;
+const resolvedHeroImage = useCmsContent ? pageSettings?.hero_images[0] : heroImage;
+const heroStyle = [
+  resolvedHeroImage ? `--renewal-page-hero-image: url("${resolvedHeroImage.url}")` : "",
+  style ?? "",
+]
+  .filter(Boolean)
+  .join(";");
 ---
 
 <section
   class:list={[className, styles.hero, { [styles.compact]: compact }]}
-  style={style}
+  style={heroStyle || undefined}
   aria-labelledby={id}
 >
   <RenewalBreadcrumb
-    title={breadcrumbTitle}
+    title={resolvedBreadcrumbTitle ?? ""}
     parentTitle={parentTitle}
     parentHref={parentHref}
     className={styles.breadcrumb}
@@ -43,9 +64,10 @@ const {
     <slot name="title" />
   ) : (
     <h1 class={styles.title} id={id}>
-      {title}
+      {resolvedTitle}
+      {resolvedSubTitle && <span class={styles.subtitle}>{resolvedSubTitle}</span>}
     </h1>
   )}
-  {description && <p class={styles.description}>{description}</p>}
+  {resolvedDescription && <p class={styles.description}>{resolvedDescription}</p>}
   <slot />
 </section>

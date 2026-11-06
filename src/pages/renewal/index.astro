@@ -6,29 +6,28 @@ import RenewalFeaturePanel from "../../components/renewal/RenewalFeaturePanel.as
 import RenewalActionLink from "../../components/renewal/RenewalActionLink.astro";
 import RenewalHomeSchedule from "../../components/renewal/RenewalHomeSchedule.astro";
 import {
+  getPageSettings,
   renewalApi,
   selectNextApplication,
   selectRecruitmentForBanner,
 } from "../../lib/renewal-api";
-import heroImage from "../../assets/renewal/materials_webp/shimotan-guitar-guitar.webp";
-import heroBandImage from "../../assets/renewal/materials_webp/guitar-guitar.webp";
-import heroAudienceImage from "../../assets/renewal/materials_webp/audience.webp";
 
 const applications = await renewalApi.getApplication();
+const homePageSettings = await getPageSettings("/");
 const nextLive = selectNextApplication(applications);
 const recruitment = selectRecruitmentForBanner(applications);
+const homeHeroImages = homePageSettings?.hero_images ?? [];
+const homeSubTitle = homePageSettings?.sub_title ?? "";
+const homeDescription = homePageSettings?.description ?? "";
 ---
 
 <RenewalLayout
   home
-  description="MuST（マスト）は、気の合う仲間と気軽にライブハウスで演奏できる東京都内の社会人軽音サークルです。"
 >
   <div class="renewal-home" id="home">
     <section class="renewal-home__hero" aria-labelledby="home-title">
       <div class="renewal-home__hero-slideshow" aria-hidden="true">
-        <img src={heroImage.src} alt="" />
-        <img src={heroBandImage.src} alt="" />
-        <img src={heroAudienceImage.src} alt="" />
+        {homeHeroImages.map((image) => <img src={image.url} alt={image.alt ?? ""} />)}
       </div>
       <div class="renewal-home__hero-actions">
         <RenewalActionLink
@@ -40,16 +39,14 @@ const recruitment = selectRecruitmentForBanner(applications);
       </div>
       <div class="renewal-home__hero-copy">
         <h1 id="home-title">
-          何歳になっても、
-          <br />
-          気の知れた仲間と、
-          <br />
-          気軽にライブハウスで演奏を。
+          {homeSubTitle.split("\n").map((line, index) => (
+            <Fragment>{index > 0 && <br />}{line}</Fragment>
+          ))}
         </h1>
         <p>
-          MuSTは、そんな“居場所”を作りたくて始めた
-          <br />
-          社会人軽音サークルです。
+          {homeDescription.split("\n").map((line, index) => (
+            <Fragment>{index > 0 && <br />}{line}</Fragment>
+          ))}
         </p>
         <RenewalActionLink
           href="/renewal/overview/"

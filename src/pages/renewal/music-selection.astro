@@ -10,11 +10,9 @@ import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 ---
 
-<RenewalLayout title="演奏曲について">
+<RenewalLayout>
   <div class="renewal-setlist">
     <RenewalPageHero
-      title="どんな曲を演奏するの？"
-      description="J-POP・邦ロックを中心に、サブスクやフェスでよく聴く曲を自由に持ち寄って演奏しています。"
       className="renewal-setlist__hero"
       id="setlist-title"
       compact

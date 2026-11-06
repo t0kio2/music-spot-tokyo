@@ -32,6 +32,7 @@ const formatDate = (date: string) =>
 ---
 
 <RenewalLayout
+  useCmsContent={false}
   title={`${archive.title} 演奏曲`}
   description={`${archive.title}で演奏した曲をご紹介します。`}
 >
@@ -44,6 +45,7 @@ const formatDate = (date: string) =>
       parentHref="/renewal/archive/"
       id="archive-title"
       compact
+      useCmsContent={false}
       style={`--renewal-archive-detail-image: url("${archive.cover_image.url}")`}
     >
       <p slot="eyebrow" class="renewal-archive-detail__eyebrow">

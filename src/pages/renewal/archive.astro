@@ -24,11 +24,9 @@ const years = [...new Set(archives.map((live) => live.event_date.slice(0, 4)))].
 const archivePageSize = 6;
 ---
 
-<RenewalLayout title="過去のライブ" description="これまで開催したライブの記録をご紹介します。">
+<RenewalLayout>
   <div class="renewal-archive">
     <RenewalPageHero
-      title="過去のライブ"
-      description="これまで開催したライブの記録をご紹介します。"
       className="renewal-archive__hero"
       id="archive-title"
       compact

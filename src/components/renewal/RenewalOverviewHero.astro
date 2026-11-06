@@ -2,25 +2,34 @@
 import RenewalBreadcrumb from "./RenewalBreadcrumb.astro";
 import sharedStyles from "./RenewalPageHero.module.css";
 import styles from "./RenewalOverviewHero.module.css";
+import { getPageSettings } from "../../lib/renewal-api";
+
+const pageSettings = await getPageSettings(Astro.url.pathname);
+const heroImage = pageSettings?.hero_images[0];
+const title = pageSettings?.title ?? "";
+const subTitle = pageSettings?.sub_title ?? "";
+const description = pageSettings?.description ?? "";
+const breadcrumbTitle = pageSettings?.sidemenu_page_title ?? "";
 ---
 
 <section
   class:list={["renewal-overview__hero", sharedStyles.hero, styles.hero]}
+  style={heroImage ? `--renewal-page-hero-image: url("${heroImage.url}")` : undefined}
   id="about"
   aria-labelledby="overview-title"
 >
-  <RenewalBreadcrumb title="MuSTについて" className={sharedStyles.breadcrumb} />
+  <RenewalBreadcrumb title={breadcrumbTitle} className={sharedStyles.breadcrumb} />
   <h1 class={styles.title} id="overview-title">
-    MuSTについて
+    {title}
   </h1>
   <h2 class={styles.heading}>
-    何歳になっても、気の知れた仲間と、
-    <br />
-    気軽にライブハウスで演奏を。
+    {subTitle.split("\n").map((line, index) => (
+      <Fragment>{index > 0 && <br />}{line}</Fragment>
+    ))}
   </h2>
   <p class={styles.lead}>
-    MuSTは、そんな“居場所”をつくりたくて始めた社会人軽音サークルです。
-    <br />
-    楽しむことを一番に、本番に向けてしっかり音を合わせます。
+    {description.split("\n").map((line, index) => (
+      <Fragment>{index > 0 && <br />}{line}</Fragment>
+    ))}
   </p>
 </section>
