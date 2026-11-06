@@ -29,6 +29,16 @@
   background: var(--renewal-bg);
 }
 
+.slideshow::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 42%;
+  pointer-events: none;
+  background: linear-gradient(0deg, #010711e8, transparent);
+}
+
 .slideshow img {
   position: absolute;
   inset: 0;
@@ -42,10 +52,6 @@
   opacity: 0;
   animation: renewal-page-hero-fade calc(var(--renewal-hero-slide-count) * 6s) ease-in-out infinite;
   animation-delay: calc(var(--renewal-hero-slide-index) * -6s);
-}
-
-.slideshowAnimated img:first-child {
-  opacity: 1;
 }
 
 @keyframes renewal-page-hero-fade {
