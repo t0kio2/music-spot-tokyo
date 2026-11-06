@@ -15,10 +15,51 @@
   content: "";
   position: absolute;
   inset: auto 0 0;
-  z-index: 0;
+  z-index: 1;
   height: 34%;
   pointer-events: none;
   background: linear-gradient(0deg, #010711b8, transparent);
+}
+
+.slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--renewal-bg);
+}
+
+.slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.slideshowAnimated img {
+  opacity: 0;
+  animation: renewal-page-hero-fade calc(var(--renewal-hero-slide-count) * 6s) ease-in-out infinite;
+  animation-delay: calc(var(--renewal-hero-slide-index) * -6s);
+}
+
+.slideshowAnimated img:first-child {
+  opacity: 1;
+}
+
+@keyframes renewal-page-hero-fade {
+  0%,
+  28% {
+    opacity: 1;
+  }
+  36%,
+  94% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 :global(.renewal-breadcrumb).breadcrumb {
@@ -38,7 +79,12 @@
 
 .hero > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+.hero > .slideshow {
+  position: absolute;
+  z-index: 0;
 }
 
 .compact {

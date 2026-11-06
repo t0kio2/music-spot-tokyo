@@ -201,74 +201,11 @@
     600 1.3rem "Noto Sans JP",
     serif;
 }
-.renewal-home-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.7fr);
-  gap: 2rem;
-  align-items: stretch;
-}
-.renewal-home-copy {
-  min-width: 0;
-  padding: 1.5rem;
-  border: 1px solid var(--renewal-border);
-  border-radius: 0.8rem;
-  background: var(--renewal-surface-card);
-}
-.renewal-home-cta {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  min-height: 15rem;
-  padding: 1.5rem;
-  border: 1px solid var(--renewal-pink);
-  border-radius: 0.8rem;
-  background: radial-gradient(circle at 80% 20%, #ed3aa855, transparent 35%), var(--renewal-panel);
-}
-.renewal-home-cta p {
-  color: var(--renewal-pink);
-  font:
-    italic 1.8rem "Caveat",
-    cursive;
-}
-.renewal-home-cta h2 {
-  margin: 0.5rem 0 1.5rem;
-  font:
-    600 1.45rem "Noto Sans JP",
-    serif;
-}
-.renewal-home-events {
-  margin-top: 3.5rem;
-}
 .renewal-empty {
   padding: 2rem;
   border: 1px dashed var(--renewal-border);
   color: var(--renewal-muted);
   text-align: center;
-}
-.renewal-link-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 3rem;
-}
-.renewal-feature-link {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 1.5rem;
-  border: 1px solid var(--renewal-border);
-  border-radius: 0.8rem;
-  background: var(--renewal-panel);
-}
-.renewal-feature-link strong {
-  color: var(--renewal-cyan);
-  font:
-    600 1.4rem "Noto Sans JP",
-    serif;
-}
-.renewal-feature-link span {
-  color: var(--renewal-muted);
-  font-size: var(--renewal-font-md);
 }
 .renewal-footer {
   display: flex;
@@ -336,17 +273,6 @@
   }
   .renewal-event-card h3 {
     font-size: 1.05rem;
-  }
-  .renewal-home-grid,
-  .renewal-link-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  .renewal-home-cta {
-    min-height: 12rem;
-  }
-  .renewal-home-events {
-    margin-top: 2.5rem;
   }
   .renewal-footer {
     flex-wrap: wrap;
@@ -790,61 +716,15 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 0;
+  z-index: 1;
   height: 34%;
   pointer-events: none;
   background: linear-gradient(0deg, #010711, transparent);
 }
-.renewal-home__hero-slideshow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.renewal-home__hero-slideshow img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  animation: renewal-hero-crossfade 18s ease-in-out infinite;
-}
-.renewal-home__hero-slideshow img:nth-child(1) {
-  animation-delay: -12s;
-}
-.renewal-home__hero-slideshow img:nth-child(2) {
-  animation-delay: -6s;
-}
-.renewal-home__hero-slideshow img:nth-child(3) {
-  animation-delay: 0s;
-}
 .renewal-home__hero-actions,
 .renewal-home__hero-copy {
   position: relative;
-  z-index: 1;
-}
-@keyframes renewal-hero-crossfade {
-  0%,
-  27% {
-    opacity: 0;
-  }
-  8%,
-  20% {
-    opacity: 1;
-  }
-  35%,
-  100% {
-    opacity: 0;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .renewal-home__hero-slideshow img {
-    animation: none;
-    opacity: 0;
-  }
-  .renewal-home__hero-slideshow img:first-child {
-    opacity: 1;
-  }
+  z-index: 2;
 }
 .renewal-home__hero-actions {
   display: flex;
@@ -875,7 +755,11 @@
   text-shadow: 0 2px 5px #000;
 }
 .renewal-home__content {
+  width: calc(100% - (2 * var(--renewal-content-gutter)));
+  margin-inline: auto;
   padding: 0.6rem 1rem 1.1rem 1.25rem;
+  padding-right: 0;
+  padding-left: 0;
 }
 .renewal-home__feature-grid {
   display: grid;
@@ -972,14 +856,6 @@
   }
 }
 
-/* ホームのコンテンツ領域も、他のrenewalページと同じ左右基準に揃える。 */
-.renewal-home__content {
-  width: calc(100% - (2 * var(--renewal-content-gutter)));
-  margin-inline: auto;
-  padding-right: 0;
-  padding-left: 0;
-}
-
 /* MuSTについて: renewal/02_MuSTについて.html のデスクトップ構成を、同じDOMでレスポンシブ化する。 */
 .renewal-overview {
   min-height: 100vh;
@@ -1019,9 +895,11 @@
   gap: 1rem;
   min-height: 6rem;
   padding: 1rem clamp(1.2rem, 5vw, 4.5rem);
-  background:
-    linear-gradient(90deg, #010a13cc, #010a1385),
-    url("../assets/renewal/group-photos_webp/26.3-spring.webp") center / cover;
+  background-image:
+    linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108),
+    url("../assets/renewal/group-photos_webp/26.3-spring.webp");
+  background-position: center;
+  background-size: cover;
 }
 .renewal-overview__recruit p {
   color: #fff;
@@ -1502,18 +1380,6 @@
   .renewal-application {
     padding-bottom: 1rem;
   }
-}
-
-.renewal-overview__recruit {
-  background-image:
-    linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108),
-    url("../assets/renewal/group-photos_webp/26.3-spring.webp");
-}
-.renewal-home__cta {
-  background:
-    linear-gradient(90deg, #00050ddd, #00070db8),
-    url("../assets/renewal/group-photos_webp/26.3-spring.webp") center 52% / cover padding-box,
-    linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
 }
 
 /* Renewalの文字はAnzu Moji以外をNoto Sans JPに統一する。 */
