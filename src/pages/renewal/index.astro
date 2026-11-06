@@ -5,6 +5,7 @@ import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.
 import RenewalFeaturePanel from "../../components/renewal/RenewalFeaturePanel.astro";
 import RenewalActionLink from "../../components/renewal/RenewalActionLink.astro";
 import RenewalHomeSchedule from "../../components/renewal/RenewalHomeSchedule.astro";
+import homeHeroStyles from "./index.module.css";
 import {
   getPageSettings,
   renewalApi,
@@ -26,8 +27,14 @@ const homeDescription = homePageSettings?.description ?? "";
 >
   <div class="renewal-home" id="home">
     <section class="renewal-home__hero" aria-labelledby="home-title">
-      <div class="renewal-home__hero-slideshow" aria-hidden="true">
-        {homeHeroImages.map((image) => <img src={image.url} alt={image.alt ?? ""} />)}
+      <div
+        class={homeHeroStyles.slideshow}
+        data-slide-count={homeHeroImages.length}
+        aria-hidden="true"
+      >
+        {homeHeroImages.map((image, index) => (
+          <img src={image.url} alt="" style={`--renewal-home-slide-index: ${index}`} />
+        ))}
       </div>
       <div class="renewal-home__hero-actions">
         <RenewalActionLink

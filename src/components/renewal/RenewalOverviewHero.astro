@@ -5,7 +5,7 @@ import styles from "./RenewalOverviewHero.module.css";
 import { getPageSettings } from "../../lib/renewal-api";
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
-const heroImage = pageSettings?.hero_images[0];
+const heroImages = pageSettings?.hero_images ?? [];
 const title = pageSettings?.title ?? "";
 const subTitle = pageSettings?.sub_title ?? "";
 const description = pageSettings?.description ?? "";
@@ -14,10 +14,20 @@ const breadcrumbTitle = pageSettings?.sidemenu_page_title ?? "";
 
 <section
   class:list={["renewal-overview__hero", sharedStyles.hero, styles.hero]}
-  style={heroImage ? `--renewal-page-hero-image: url("${heroImage.url}")` : undefined}
   id="about"
   aria-labelledby="overview-title"
 >
+  {heroImages.length > 0 && (
+    <div
+      class:list={[sharedStyles.slideshow, { [sharedStyles.slideshowAnimated]: heroImages.length > 1 }]}
+      style={`--renewal-hero-slide-count: ${heroImages.length}`}
+      aria-hidden="true"
+    >
+      {heroImages.map((image, index) => (
+        <img src={image.url} alt="" style={`--renewal-hero-slide-index: ${index}`} />
+      ))}
+    </div>
+  )}
   <RenewalBreadcrumb title={breadcrumbTitle} className={sharedStyles.breadcrumb} />
   <h1 class={styles.title} id="overview-title">
     {title}

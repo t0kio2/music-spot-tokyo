@@ -39,7 +39,8 @@ const resolvedSubTitle = useCmsContent ? pageSettings?.sub_title : subTitle;
 const resolvedBreadcrumbTitle = useCmsContent
   ? pageSettings?.sidemenu_page_title
   : breadcrumbTitle;
-const resolvedHeroImage = useCmsContent ? pageSettings?.hero_images[0] : heroImage;
+const heroImages = useCmsContent ? pageSettings?.hero_images ?? [] : [];
+const resolvedHeroImage = useCmsContent ? undefined : heroImage;
 const heroStyle = [
   resolvedHeroImage ? `--renewal-page-hero-image: url("${resolvedHeroImage.url}")` : "",
   style ?? "",
@@ -53,6 +54,21 @@ const heroStyle = [
   style={heroStyle || undefined}
   aria-labelledby={id}
 >
+  {heroImages.length > 0 && (
+    <div
+      class:list={[styles.slideshow, { [styles.slideshowAnimated]: heroImages.length > 1 }]}
+      style={`--renewal-hero-slide-count: ${heroImages.length}`}
+      aria-hidden="true"
+    >
+      {heroImages.map((image, index) => (
+        <img
+          src={image.url}
+          alt=""
+          style={`--renewal-hero-slide-index: ${index}`}
+        />
+      ))}
+    </div>
+  )}
   <RenewalBreadcrumb
     title={resolvedBreadcrumbTitle ?? ""}
     parentTitle={parentTitle}
