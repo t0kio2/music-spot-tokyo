@@ -189,15 +189,7 @@
     serif;
 }
 
-:global(.renewal-activity__hero) h2 {
-  margin-top: 0.8rem;
-  color: #fff;
-  font:
-    600 clamp(1.05rem, 2vw, 1.45rem) / 1.55 "Zen Old Mincho",
-    serif;
-}
-
-:global(.renewal-activity__hero) h2 + p {
+:global(.renewal-activity__hero) > p {
   max-width: 43rem;
   margin-top: 0.8rem;
   color: inherit;
@@ -292,14 +284,6 @@
 
   :global(.renewal-activity__hero) h1 {
     font-size: clamp(2.2rem, 11vw, 3rem);
-  }
-
-  :global(.renewal-activity__hero) h2 {
-    font-size: 1rem;
-  }
-
-  :global(.renewal-activity__hero) h2 + p {
-    font-size: var(--renewal-font-md);
   }
 
   :global(.renewal-setlist__hero) h1 {

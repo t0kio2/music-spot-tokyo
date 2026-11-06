@@ -735,65 +735,6 @@
   min-height: 100vh;
   background: radial-gradient(ellipse at 72% 0%, #00345418, transparent 42%), var(--renewal-bg);
 }
-.renewal-activity__next {
-  width: calc(100% - (2 * var(--renewal-content-gutter)));
-  margin-inline: auto;
-}
-.renewal-activity__next {
-  display: grid;
-  grid-template-columns: 9rem 1fr auto;
-  align-items: center;
-  gap: 1rem;
-  min-height: 5.8rem;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--renewal-border-medium);
-  border-radius: var(--renewal-radius-sm);
-  background:
-    linear-gradient(90deg, #00050ddd, #00070db8),
-    url("../assets/renewal/集合写真_webp/26,3春.webp") center / cover;
-}
-.renewal-activity__next > strong {
-  color: var(--renewal-pink);
-  font:
-    italic 2rem "Caveat",
-    cursive;
-  transform: rotate(-8deg);
-}
-.renewal-activity__next p {
-  font-size: var(--renewal-font-md);
-  line-height: 1.7;
-}
-.renewal-activity__next a {
-  padding: 0.65rem 1rem;
-  border-radius: 0.4rem;
-  color: #151216;
-  background: var(--renewal-gold);
-  font-size: var(--renewal-font-md);
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-@media (max-width: 760px) {
-  .renewal-activity__next {
-    grid-template-columns: 5rem 1fr;
-    gap: 0.5rem;
-    min-height: 5rem;
-    padding: 0.6rem;
-  }
-  .renewal-activity__next > strong {
-    font-size: 1.35rem;
-  }
-  .renewal-activity__next p {
-    font-size: var(--renewal-font-md);
-  }
-  .renewal-activity__next a {
-    grid-column: 2;
-    justify-self: end;
-    padding: 0.45rem 0.6rem;
-    font-size: 0.58rem;
-  }
-}
 
 @media (max-width: 760px) {
   .renewal-setlist__content {
@@ -1563,7 +1504,6 @@
   }
 }
 
-.renewal-activity__next,
 .renewal-overview__recruit {
   background-image:
     linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108),
