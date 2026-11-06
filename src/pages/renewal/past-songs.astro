@@ -1,9 +1,9 @@
 ---
-import RenewalLayout from "../../../layouts/RenewalLayout.astro";
-import RenewalPageHero from "../../../components/renewal/RenewalPageHero.astro";
-import RenewalPastSongsList from "../../../components/renewal/RenewalPastSongsList.astro";
-import RenewalRecruitCta from "../../../components/renewal/RenewalRecruitCta.astro";
-import { renewalApi, selectRecruitmentForBanner } from "../../../lib/renewal-api";
+import RenewalLayout from "../../layouts/RenewalLayout.astro";
+import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
+import RenewalPastSongsList from "../../components/renewal/RenewalPastSongsList.astro";
+import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
+import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
 
 const archives = await renewalApi.getArchives();
 const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
@@ -38,11 +38,9 @@ archives.forEach((archive) => {
 const pastSongs = [...songs.values()].sort((a, b) => a.title.localeCompare(b.title, "ja"));
 ---
 
-<RenewalLayout title="過去の演奏曲" description="MuSTがこれまでに演奏した曲を検索できます。">
+<RenewalLayout>
   <div class="renewal-setlist">
     <RenewalPageHero
-      title="過去の演奏曲"
-      description="これまでのライブで演奏した曲を検索できます。"
       className="renewal-setlist__hero renewal-past-songs__hero"
       id="past-songs-title"
       compact

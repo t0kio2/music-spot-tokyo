@@ -3,10 +3,7 @@
   min-height: 14rem;
   padding: 1.45rem var(--renewal-content-gutter) 1.8rem;
   border-bottom: 0;
-  --renewal-hero-image: var(
-    --renewal-page-hero-image,
-    url("../../assets/renewal/group-photos_webp/26.3-spring.webp")
-  );
+  --renewal-hero-image: var(--renewal-page-hero-image, none);
   background-image:
     linear-gradient(90deg, #010811ed, #01081170 55%, #01081112),
     linear-gradient(0deg, #010811aa, transparent 45%), var(--renewal-hero-image);
@@ -72,47 +69,6 @@
     400 0.48em "Caveat",
     cursive;
   letter-spacing: 0;
-}
-
-:global(.renewal-hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/venue.webp");
-}
-
-:global(.renewal-setlist__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/guitar-guitar.webp");
-}
-
-:global(.renewal-past-songs__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/madoka-guitar-guitar.webp");
-}
-
-:global(.renewal-activity__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/audience.webp");
-}
-
-:global(.renewal-overview__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/group-photos_webp/26.3-spring.webp");
-}
-
-:global(.renewal-flow__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/venue.webp");
-}
-
-:global(.renewal-faq-page__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/guitar.webp");
-}
-
-:global(.renewal-precautions__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/guitar-guitar-drum.webp");
-}
-
-:global(.renewal-application__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/materials_webp/guitar-bass-drum.webp");
-}
-
-:global(.renewal-schedule__hero).hero,
-:global(.renewal-archive__hero).hero {
-  --renewal-page-hero-image: url("../../assets/renewal/group-photos_webp/25.9-autumn.webp");
 }
 
 :global(.renewal-flow__hero).hero,

@@ -7,6 +7,15 @@ export interface RenewalMedia {
   height?: number;
 }
 
+export interface RenewalPageSettings {
+  path: string;
+  hero_images: RenewalMedia[];
+  sidemenu_page_title?: string;
+  title?: string;
+  sub_title?: string;
+  description?: string;
+}
+
 export interface RenewalOverview {
   participant_count: number;
   female_count: number;
@@ -153,6 +162,15 @@ interface RenewalOverviewRecord {
   updatedAt?: string;
 }
 
+interface RenewalPageSettingsRecord {
+  path?: string;
+  hero_images?: RenewalMedia[];
+  sidemenu_page_title?: string;
+  title?: string;
+  sub_title?: string;
+  description?: string;
+}
+
 interface RenewalApplicationRecord {
   title?: string;
   flyer?: RenewalMedia;
@@ -194,6 +212,50 @@ function toBrowserMedia(media: RenewalMedia): RenewalMedia {
   url.searchParams.set("fm", "jpg");
 
   return { ...media, url: url.toString() };
+}
+
+export function normalizeRenewalPagePath(path: string): string {
+  const withoutRenewalPrefix = path.replace(/^\/renewal(?=\/|$)/, "") || "/";
+  const withLeadingSlash = withoutRenewalPrefix.startsWith("/")
+    ? withoutRenewalPrefix
+    : `/${withoutRenewalPrefix}`;
+  return withLeadingSlash.endsWith("/") ? withLeadingSlash : `${withLeadingSlash}/`;
+}
+
+let pageSettingsListPromise: Promise<RenewalPageSettings[]> | undefined;
+
+function fetchPageSettingsList(): Promise<RenewalPageSettings[]> {
+  return getRenewalMicrocmsClient()
+    .getList<RenewalPageSettingsRecord>({
+      endpoint: "page_settings",
+      queries: { limit: 100 },
+    })
+    .then((response) =>
+      response.contents.map((item) => ({
+        path: normalizeRenewalPagePath(item.path ?? "/"),
+        hero_images: (item.hero_images ?? []).map(toBrowserMedia),
+        sidemenu_page_title: item.sidemenu_page_title,
+        title: item.title,
+        sub_title: item.sub_title,
+        description: item.description,
+      })),
+    );
+}
+
+export async function getPageSettingsList(): Promise<RenewalPageSettings[]> {
+  if (import.meta.env.DEV) {
+    return fetchPageSettingsList();
+  }
+
+  pageSettingsListPromise ??= fetchPageSettingsList();
+
+  return pageSettingsListPromise;
+}
+
+export async function getPageSettings(path: string): Promise<RenewalPageSettings | undefined> {
+  const normalizedPath = normalizeRenewalPagePath(path);
+  const settings = await getPageSettingsList();
+  return settings.find((item) => item.path === normalizedPath);
 }
 
 async function getHistoryFromMicrocms(): Promise<RenewalActivity[]> {

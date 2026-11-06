@@ -1,18 +1,19 @@
 ---
 import RenewalIcon from "./RenewalIcon.astro";
 import styles from "./RenewalHeader.module.css";
+import { getPageSettingsList, normalizeRenewalPagePath } from "../../lib/renewal-api";
 
 const navItems = [
-  ["/renewal/", "ホーム", "home"],
-  ["/renewal/overview/", "MuSTについて", "users"],
-  ["/renewal/history/", "活動実績", "chart"],
-  ["/renewal/music-selection/", "演奏曲について", "music"],
-  ["/renewal/archive/", "過去のライブ", "play"],
-  ["/renewal/archive/past-songs/", "過去の演奏曲一覧", "play"],
-  ["/renewal/flow/", "参加までの流れ", "nodes"],
-  ["/renewal/application/", "募集・申込み", "document"],
-  ["/renewal/faq/", "よくある質問", "question"],
-  ["/renewal/precautions/", "注意事項", "warning"],
+  ["/renewal/", "home"],
+  ["/renewal/overview/", "users"],
+  ["/renewal/history/", "chart"],
+  ["/renewal/music-selection/", "music"],
+  ["/renewal/archive/", "play"],
+  ["/renewal/past-songs/", "play"],
+  ["/renewal/flow/", "nodes"],
+  ["/renewal/application/", "document"],
+  ["/renewal/faq/", "question"],
+  ["/renewal/precautions/", "warning"],
 ] as const;
 
 const socialLinks = [
@@ -39,6 +40,10 @@ const socialLinks = [
 ] as const;
 
 const currentPath = Astro.url.pathname;
+const pageSettings = await getPageSettingsList();
+const pageSettingsByPath = new Map(pageSettings.map((item) => [item.path, item]));
+const getPageLabel = (href: string) =>
+  pageSettingsByPath.get(normalizeRenewalPagePath(href))?.sidemenu_page_title ?? "";
 const isActive = (href: string) => {
   if (href === "/renewal/") return currentPath === href;
   const hasMoreSpecificMatch = navItems.some(
@@ -68,12 +73,12 @@ const isActive = (href: string) => {
       <strong>MuST</strong>
       <small>- Music Spot Tokyo -</small>
     </div>
-    {navItems.map(([href, label, icon]) => (
+    {navItems.map(([href, icon]) => (
       <a href={href} class:list={{ [styles.active]: isActive(href) }}>
         <span class={styles.navIcon} aria-hidden="true">
           <RenewalIcon name={icon} />
         </span>
-        {label}
+        {getPageLabel(href)}
       </a>
     ))}
     <div class={styles.socials} aria-label="SNS">

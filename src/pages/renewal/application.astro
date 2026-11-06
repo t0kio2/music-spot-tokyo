@@ -17,11 +17,9 @@ const events = (await renewalApi.getApplication()).filter((event) => {
 });
 ---
 
-<RenewalLayout title="募集状況・申込み" description="ライブの詳細や募集状況をご確認いただけます。">
+<RenewalLayout>
   <div class:list={["renewal-application", styles.page]} id="top">
     <RenewalPageHero
-      title="募集状況・申込み"
-      description="ライブの詳細や募集状況を確認して、ぜひご参加ください。"
       className="renewal-application__hero"
       compact
     />

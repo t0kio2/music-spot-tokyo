@@ -9,11 +9,9 @@ const faqs = await getFaqList();
 const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 ---
 
-<RenewalLayout title="よくある質問" description="参加前によくいただくご質問をまとめました。">
+<RenewalLayout>
   <div class="renewal-faq-page">
     <RenewalPageHero
-      title="よくある質問"
-      description="みなさまからのよくあるご質問をまとめました。"
       className="renewal-faq-page__hero"
       compact
     />

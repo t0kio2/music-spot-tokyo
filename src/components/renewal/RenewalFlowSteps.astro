@@ -23,6 +23,8 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
   class:list={["renewal-flow__steps", styles.steps, { [styles.mobileOnly]: mobileOnlyAccordion }]}
   id="steps"
   aria-label="参加までの8ステップ"
+  data-flow-steps
+  data-mobile-only-accordion={mobileOnlyAccordion ? "true" : "false"}
 >
   {steps.map((step, index) => (
     <details
@@ -54,3 +56,18 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
     </details>
   ))}
 </section>
+
+<script>
+  const flowSteps = document.querySelector<HTMLElement>("[data-flow-steps]");
+  const desktopMedia = window.matchMedia("(min-width: 761px)");
+
+  const syncFlowSteps = () => {
+    if (!flowSteps || flowSteps.dataset.mobileOnlyAccordion !== "true") return;
+    flowSteps.querySelectorAll<HTMLDetailsElement>("details").forEach((detail) => {
+      detail.open = desktopMedia.matches;
+    });
+  };
+
+  syncFlowSteps();
+  desktopMedia.addEventListener("change", syncFlowSteps);
+</script>
