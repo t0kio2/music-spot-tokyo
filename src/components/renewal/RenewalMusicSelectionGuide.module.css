@@ -44,10 +44,10 @@
   border-radius: 50%;
   background: conic-gradient(
     var(--renewal-pink) 0 50%,
-    #249eff 50% 67%,
-    #9264ff 67% 75%,
-    #13d5d1 75% 92%,
-    var(--renewal-gold) 92% 100%
+    #13d5d1 50% 67%,
+    var(--renewal-gold) 67% 75%,
+    #9264ff 75% 83%,
+    #249eff 83% 100%
   );
 }
 .donut::after {
@@ -84,20 +84,20 @@
   right: 3%;
 }
 .p17 {
-  bottom: 12%;
-  left: 28%;
+  top: 12%;
+  left: 27%;
 }
 .p8 {
-  top: 53%;
+  top: 34%;
   left: 9%;
 }
 .p17b {
-  top: 27%;
-  left: 8%;
+  bottom: 11%;
+  left: 28%;
 }
 .p8b {
-  top: 8%;
-  left: 37%;
+  top: 53%;
+  left: 9%;
 }
 .legend {
   display: grid;
