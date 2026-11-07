@@ -756,6 +756,7 @@
 }
 .renewal-home__content {
   width: calc(100% - (2 * var(--renewal-content-gutter)));
+  max-width: 1200px;
   margin-inline: auto;
   padding: 0.6rem 1rem 1.1rem 1.25rem;
   padding-right: 0;
@@ -1294,8 +1295,8 @@
   .renewal-faq-page__content,
   .renewal-precautions__content,
   .renewal-schedule__content {
-    width: calc(100% - (2 * var(--renewal-content-gutter)));
-    max-width: none;
+    width: min(calc(100% - (2 * var(--renewal-content-gutter))), 1200px);
+    max-width: 1200px;
   }
 }
 

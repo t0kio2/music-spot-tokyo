@@ -21,7 +21,8 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
   <div
     class={styles.donut}
     role="img"
-    aria-label="選曲の目安：2017年以降50%、2006年以前から2016年17%、期待枠8%、管楽器枠17%"
+    data-renewal-music-chart
+    aria-label="選曲の目安"
   >
     <strong>
       全体<em>24曲</em>（目安）
@@ -36,14 +37,18 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
     <div>
       <i></i>
       <span>
-        2017年〜（12曲程度）<small>YouTubeの再生回数を参考にしています。</small>
+        <span><span data-renewal-music-year="recent-start">—</span>年〜（12曲程度）</span>
+        <small>YouTubeの再生回数を参考にしています。</small>
       </span>
       <b>50%</b>
     </div>
     <div>
       <i></i>
       <span>
-        2007年〜2016年（4曲程度）
+        <span>
+          <span data-renewal-music-year="previous-start">—</span>年〜<span
+            data-renewal-music-year="previous-end">—</span>年（4曲程度）
+        </span>
         <small>
           ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。
         </small>
@@ -52,7 +57,7 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
     </div>
     <div class={styles.oldLegend}>
       <i></i>
-      <span>〜2006年（2曲程度）<small>当時、流行した。または近年バズった。</small></span>
+      <span>〜<span data-renewal-music-year="old-end">—</span>年（2曲程度）<small>当時、流行した。または近年バズった。</small></span>
       <b>8%</b>
     </div>
     <div>
@@ -71,3 +76,30 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
     </div>
   </div>
 </section>
+
+<script>
+  const currentYear = Number(
+    new Intl.DateTimeFormat("en-US", { year: "numeric", timeZone: "Asia/Tokyo" }).format(new Date()),
+  );
+  const yearRanges = {
+    recentStart: currentYear - 9,
+    previousStart: currentYear - 19,
+    previousEnd: currentYear - 10,
+    oldEnd: currentYear - 20,
+  };
+
+  document.querySelectorAll("[data-renewal-music-year]").forEach((element) => {
+    const key = element.dataset.renewalMusicYear;
+    if (key === "recent-start") element.textContent = String(yearRanges.recentStart);
+    if (key === "previous-start") element.textContent = String(yearRanges.previousStart);
+    if (key === "previous-end") element.textContent = String(yearRanges.previousEnd);
+    if (key === "old-end") element.textContent = String(yearRanges.oldEnd);
+  });
+
+  document.querySelectorAll("[data-renewal-music-chart]").forEach((chart) => {
+    chart.setAttribute(
+      "aria-label",
+      `選曲の目安：${yearRanges.recentStart}年以降50%、${yearRanges.oldEnd}年以前8%、${yearRanges.previousStart}年から${yearRanges.previousEnd}年17%、期待枠8%、管楽器枠17%`,
+    );
+  });
+</script>

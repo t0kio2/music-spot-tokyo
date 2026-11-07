@@ -73,7 +73,7 @@ const homeDescription = homePageSettings?.description ?? "";
           linkLabel="演奏曲について詳しく見る"
         >
           <Fragment slot="description">
-            2017年以降のJ-POP・邦ロックを中心に、
+            <span data-renewal-home-music-year>—</span>年以降のJ-POP・邦ロックを中心に、
             <br />
             話題のアーティストやフェスで盛り上がる
             <br />
@@ -106,3 +106,16 @@ const homeDescription = homePageSettings?.description ?? "";
 </RenewalLayout>
 
 <RenewalImageLightbox label="チラシを拡大表示" />
+
+<script>
+  const homeMusicYear =
+    Number(
+      new Intl.DateTimeFormat("en-US", { year: "numeric", timeZone: "Asia/Tokyo" }).format(
+        new Date(),
+      ),
+    ) - 9;
+
+  document.querySelectorAll("[data-renewal-home-music-year]").forEach((element) => {
+    element.textContent = String(homeMusicYear);
+  });
+</script>
