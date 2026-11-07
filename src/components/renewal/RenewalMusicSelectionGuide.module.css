@@ -80,20 +80,24 @@
   text-shadow: 0 1px 4px #000;
 }
 .p50 {
-  top: 47%;
+  top: 42%;
   right: 3%;
 }
 .p17 {
-  bottom: 11%;
+  bottom: 12%;
   left: 28%;
 }
 .p8 {
-  top: 59%;
+  top: 53%;
   left: 9%;
 }
 .p17b {
   top: 27%;
   left: 8%;
+}
+.p8b {
+  top: 8%;
+  left: 37%;
 }
 .legend {
   display: grid;
@@ -117,9 +121,12 @@
   background: #249eff;
 }
 .legend > div:nth-child(3) i {
-  background: var(--renewal-gold);
+  background: #9264ff;
 }
 .legend > div:nth-child(4) i {
+  background: var(--renewal-gold);
+}
+.legend > div:nth-child(5) i {
   background: #13d5d1;
 }
 .legend small {
