@@ -21,6 +21,7 @@ export interface RenewalOverview {
   female_count: number;
   male_count: number;
   participant_as_of: string;
+  logo?: RenewalMedia;
 }
 
 export interface RenewalActivityDetail {
@@ -159,6 +160,7 @@ interface RenewalOverviewRecord {
   member_number?: string | number;
   female_number?: string | number;
   male_number?: string | number;
+  logo?: RenewalMedia;
   updatedAt?: string;
 }
 
@@ -321,6 +323,7 @@ async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
     female_count: toNumber(overview?.female_number),
     male_count: toNumber(overview?.male_number),
     participant_as_of: overview?.updatedAt ?? "",
+    logo: overview?.logo,
   };
 }
 

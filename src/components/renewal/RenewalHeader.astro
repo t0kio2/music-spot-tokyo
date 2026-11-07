@@ -1,7 +1,7 @@
 ---
 import RenewalIcon from "./RenewalIcon.astro";
 import styles from "./RenewalHeader.module.css";
-import { getPageSettingsList, normalizeRenewalPagePath } from "../../lib/renewal-api";
+import { getPageSettingsList, normalizeRenewalPagePath, renewalApi } from "../../lib/renewal-api";
 
 const navItems = [
   ["/renewal/", "home"],
@@ -41,6 +41,7 @@ const socialLinks = [
 
 const currentPath = Astro.url.pathname;
 const pageSettings = await getPageSettingsList();
+const overview = await renewalApi.getOverview();
 const pageSettingsByPath = new Map(pageSettings.map((item) => [item.path, item]));
 const getPageLabel = (href: string) =>
   pageSettingsByPath.get(normalizeRenewalPagePath(href))?.sidemenu_page_title ?? "";
@@ -56,7 +57,7 @@ const isActive = (href: string) => {
 
 <header class={styles.header}>
   <a class={styles.brand} href="/renewal/" aria-label="MuST ホーム">
-    <img src="/favicon-source.png" alt="" />
+    <img src={overview.logo?.url} alt={overview.logo?.alt ?? "MuST"} />
     <span class={styles.brandName}>
       <strong>MuST</strong>
       <small>Music Spot Tokyo</small>
