@@ -55,6 +55,16 @@
   white-space: nowrap;
 }
 
+@media (max-width: 760px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .actions :global(.renewal-action-link) {
+    width: 100%;
+  }
+}
+
 @media (min-width: 761px) {
   .actions {
     grid-template-columns: 1fr;

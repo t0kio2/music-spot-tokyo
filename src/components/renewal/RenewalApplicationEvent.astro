@@ -13,6 +13,7 @@ const isClosed = event.is_closed;
 const statusLabel = (status: string) =>
   status === "waitlist" ? "キャンセル待ち" : status === "open" ? "募集中" : "募集終了";
 const eventDate = event.event_date ? new Date(event.event_date) : undefined;
+const formatMonth = (month: number) => (month < 10 ? `０${month}` : String(month));
 ---
 
 <article class="renewal-application__event">
@@ -37,7 +38,7 @@ const eventDate = event.event_date ? new Date(event.event_date) : undefined;
     <div class="renewal-application__title">
       <time>
         <span>{eventDate?.getFullYear() ?? ""}</span>
-        <b>{eventDate ? `${eventDate.getMonth() + 1}月` : "未定"}</b>
+        <b>{eventDate ? `${formatMonth(eventDate.getMonth() + 1)}月` : "未定"}</b>
       </time>
       <div class={styles.titleContent}>
         <h2>{event.title}</h2>

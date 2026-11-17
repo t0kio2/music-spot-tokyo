@@ -29,9 +29,9 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
     </strong>
     <b class={styles.p50}>50%</b>
     <b class={styles.p17}>17%</b>
-    <b class={styles.p8}>8%</b>
+    <b class={styles.p8}>８%</b>
     <b class={styles.p17b}>17%</b>
-    <b class={styles.p8b}>8%</b>
+    <b class={styles.p8b}>８%</b>
   </div>
   <div class={styles.legend}>
     <div>
@@ -47,7 +47,7 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
       <span>
         <span>
           <span data-renewal-music-year="previous-start">—</span>年〜<span
-            data-renewal-music-year="previous-end">—</span>年（4曲程度）
+            data-renewal-music-year="previous-end">—</span>年（４曲程度）
         </span>
         <small>
           ここ10年以内にリリースされたJ-POPや邦ロックを中心に採用します。YouTube再生数が一定以上のある程度メジャーな曲が採用されやすいです。それ以前の年代は、国民的ヒット曲や近年バズった曲を少数採用します。
@@ -57,20 +57,20 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
     </div>
     <div class={styles.oldLegend}>
       <i></i>
-      <span>〜<span data-renewal-music-year="old-end">—</span>年（2曲程度）<small>当時、流行した。または近年バズった。</small></span>
-      <b>8%</b>
+      <span>〜<span data-renewal-music-year="old-end">—</span>年（２曲程度）<small>当時、流行した。または近年バズった。</small></span>
+      <b>８%</b>
     </div>
     <div>
       <i></i>
       <span>
-        期待枠（2曲程度）<small>今後、活躍が期待されるアーティスト</small>
+        期待枠（２曲程度）<small>今後、活躍が期待されるアーティスト</small>
       </span>
-      <b>8%</b>
+      <b>８%</b>
     </div>
     <div>
       <i></i>
       <span>
-        管楽器枠（4曲程度）<small>主に管楽器パートメンバーで話し合い決定</small>
+        管楽器枠（４曲程度）<small>主に管楽器パートメンバーで話し合い決定</small>
       </span>
       <b>17%</b>
     </div>
@@ -99,7 +99,7 @@ import styles from "./RenewalMusicSelectionGuide.module.css";
   document.querySelectorAll("[data-renewal-music-chart]").forEach((chart) => {
     chart.setAttribute(
       "aria-label",
-      `選曲の目安：${yearRanges.recentStart}年以降50%、${yearRanges.oldEnd}年以前8%、${yearRanges.previousStart}年から${yearRanges.previousEnd}年17%、期待枠8%、管楽器枠17%`,
+      `選曲の目安：${yearRanges.recentStart}年以降50%、${yearRanges.oldEnd}年以前８%、${yearRanges.previousStart}年から${yearRanges.previousEnd}年17%、期待枠８%、管楽器枠17%`,
     );
   });
 </script>
