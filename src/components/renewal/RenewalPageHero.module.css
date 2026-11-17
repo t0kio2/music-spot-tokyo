@@ -100,8 +100,8 @@
 .title {
   color: #f5f8ff;
   font:
-    700 clamp(2rem, 4vw, 3.35rem) / 1.2 "Zen Old Mincho",
-    serif;
+    700 clamp(2rem, 4vw, 3.35rem) / 1.2 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.04em;
 }
 
@@ -193,8 +193,8 @@
 :global(.renewal-activity__hero) h1 {
   margin: 0;
   font:
-    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Zen Old Mincho",
-    serif;
+    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Noto Sans JP",
+    sans-serif;
 }
 
 :global(.renewal-activity__hero) > p {
@@ -217,8 +217,8 @@
 :global(.renewal-setlist__hero) h1 {
   margin: 0;
   font:
-    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Zen Old Mincho",
-    serif;
+    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.03em;
 }
 
