@@ -43,17 +43,20 @@ export interface RenewalActivity {
 export type ArchiveEventType = "regular" | "project" | "band";
 
 export function getEventTypeLabel(type: ArchiveEventType): string {
-  return { regular: "定期セッションライブ", project: "企画セッション", band: "対バンライブ" }[type];
+  return { regular: "定期セッションライブ", project: "企画セッションライブ", band: "対バンライブ" }[type];
 }
 
 export function formatEventDate(date?: string): string {
   if (!date) return "日程未定";
-  return new Date(date).toLocaleDateString("ja-JP", {
+  const formatted = new Date(date).toLocaleDateString("ja-JP", {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "short",
   });
+  return formatted.replace(/(?<!\d)\d(?!\d)/g, (digit) =>
+    String.fromCharCode(digit.charCodeAt(0) + 0xfee0),
+  );
 }
 
 export function getYoutubeThumbnail(url?: string): string | undefined {
@@ -128,11 +131,6 @@ export interface RenewalApplication {
   parts: RenewalRecruitmentPart[];
   performers: RenewalApplicationPerformer[];
   regular_session_info: RenewalApplicationSchedule[];
-  participants_number: number;
-  audience_number: number;
-  pictures: RenewalMedia[];
-  youtube_url?: string;
-  updatedAt: string;
 }
 
 export interface RenewalApi {
@@ -183,12 +181,6 @@ interface RenewalApplicationRecord {
   regular_session_info?: RenewalApplicationSchedule | RenewalApplicationSchedule[];
   performers?: RenewalApplicationPerformer[];
   recruitment_status?: Array<{ name?: string | string[]; status?: string | string[] }>;
-  participants_number?: string | number;
-  audience_number?: string | number;
-  next_attendance_rate?: string | number;
-  youtube_url?: string;
-  pictures?: RenewalMedia[];
-  updatedAt?: string;
 }
 
 interface RenewalArchiveRecord {
@@ -287,8 +279,14 @@ async function getHistoryFromMicrocms(): Promise<RenewalActivity[]> {
 
 function toApplicationEventType(type?: string): ArchiveEventType {
   return (
-    { 定期セッション: "regular", 企画ライブ: "project", 対バンライブ: "band" }[type ?? ""] ??
-    "regular"
+    {
+      定期セッションライブ: "regular",
+      企画セッションライブ: "project",
+      対バンライブ: "band",
+      // 旧API値も既存データのために受け付ける。
+      定期セッション: "regular",
+      企画ライブ: "project",
+    }[type ?? ""] ?? "regular"
   );
 }
 
@@ -357,11 +355,6 @@ async function getApplicationFromMicrocms(): Promise<RenewalApplication[]> {
       parts,
       performers: (item.performers ?? []).filter((performer) => performer.name),
       regular_session_info: toScheduleList(item.regular_session_info),
-      participants_number: toNumber(item.participants_number),
-      audience_number: toNumber(item.audience_number),
-      pictures: (item.pictures ?? []).map(toBrowserMedia),
-      youtube_url: item.youtube_url,
-      updatedAt: item.updatedAt ?? "",
     };
   });
 }

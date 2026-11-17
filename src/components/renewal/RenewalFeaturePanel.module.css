@@ -137,11 +137,14 @@
   }
 
   .activity .actions {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    grid-template-columns: 1fr;
   }
 
   .feature > .panelContent > :global(.renewal-action-link) {
     display: flex;
     margin-inline: 0;
+    align-self: stretch;
+    width: 100%;
   }
 }
