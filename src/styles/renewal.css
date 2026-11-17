@@ -1,12 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap");
 @import "./renewal-tokens.css";
 
-@font-face {
-  font-family: "Anzu Moji 2020";
-  src: url("../../あんずもじ2020/AP.ttf") format("truetype");
-  font-display: block;
-}
-
 .renewal-site {
   margin: 0;
   background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--renewal-bg);
@@ -740,9 +734,8 @@
   margin-bottom: 3.15rem;
   color: var(--renewal-text);
   font:
-    400 clamp(1.8rem, 3vw, 2.75rem)/1.14 "Anzu Moji 2020",
-    "Kaisei Decol",
-    cursive;
+    400 clamp(1.8rem, 3vw, 2.75rem)/1.14 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.025em;
   transform: rotate(-4deg);
   text-shadow: 0 2px 12px #000a;
@@ -1383,12 +1376,9 @@
   }
 }
 
-/* Renewalの文字はAnzu Moji以外をNoto Sans JPに統一する。 */
+/* Renewalの文字をNoto Sans JPに統一する。 */
 .renewal-site * {
   font-family: "Noto Sans JP", sans-serif;
-}
-.renewal-site .renewal-home__hero h1 {
-  font-family: "Anzu Moji 2020", cursive;
 }
 
 @media (max-width: 760px) {
