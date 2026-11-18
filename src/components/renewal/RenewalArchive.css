@@ -19,7 +19,7 @@
   flex: 0 0 auto;
   padding: 0.25rem 0.45rem 0.5rem;
   border: 0;
-  color: var(--renewal-muted);
+  color: #fff;
   background: transparent;
   font: inherit;
   font-size: var(--renewal-font-md);
@@ -94,7 +94,7 @@
 }
 .renewal-archive__subtitle {
   margin: -0.25rem 0 0.25rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
   line-height: 1.5;
 }

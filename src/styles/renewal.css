@@ -65,7 +65,7 @@
 
 .renewal-not-found__message {
   margin: 0.75rem 0 1.5rem !important;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
 }
 
@@ -80,7 +80,7 @@
   margin-bottom: 1.6rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--renewal-border);
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.75rem;
 }
 .renewal-breadcrumb a,
@@ -99,7 +99,7 @@
   stroke-linejoin: round;
 }
 .renewal-breadcrumb a {
-  color: var(--renewal-muted);
+  color: #fff;
 }
 .renewal-breadcrumb > span:last-child {
   color: var(--renewal-text);
@@ -142,7 +142,7 @@
   font-size: 2.5rem;
 }
 .renewal-prose {
-  color: var(--renewal-muted);
+  color: #fff;
 }
 .renewal-prose h1,
 .renewal-prose h2,
@@ -204,7 +204,7 @@
 .renewal-empty {
   padding: 2rem;
   border: 1px dashed var(--renewal-border);
-  color: var(--renewal-muted);
+  color: #fff;
   text-align: center;
 }
 .renewal-footer {
@@ -215,7 +215,7 @@
   padding: 1rem 2rem;
   border-top: 1px solid var(--renewal-border);
   margin-left: var(--renewal-sidebar);
-  color: var(--renewal-muted);
+  color: #fff;
 }
 .renewal-footer__brand {
   color: var(--renewal-pink);
@@ -226,7 +226,7 @@
 }
 .renewal-footer__brand small {
   margin-left: 0.4rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font:
     0.65rem "Noto Sans JP",
     sans-serif;
@@ -315,7 +315,7 @@
 .renewal-application__poster--empty {
   display: grid;
   place-items: center;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -452,7 +452,7 @@
 }
 .renewal-application__status p {
   margin: 6px 1rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
   line-height: 1.7;
 }
@@ -790,10 +790,6 @@
     0 0 0 1px #00baca1a,
     0 0 8px #00baca22,
     0 0 18px #087bb012;
-  background:
-    linear-gradient(90deg, #00050ddd, #00070db8),
-    url("../assets/renewal/group-photos_webp/26.3-spring.webp") center 52% / cover padding-box,
-    linear-gradient(135deg, #00d5e080, #087bb080 48%, #60479670) border-box;
 }
 .renewal-home__cta p {
   grid-column: 2;
@@ -806,7 +802,7 @@
   grid-column: 3;
   white-space: nowrap;
 }
-.renewal-main:has(.renewal-recruit-cta) {
+.renewal-shell:has(.renewal-recruit-cta) .renewal-main {
   padding-bottom: 7rem;
 }
 @media (max-width: 1000px) and (min-width: 761px) {
@@ -852,7 +848,7 @@
   .renewal-home__cta a {
     justify-self: center;
   }
-  .renewal-main:has(.renewal-recruit-cta) {
+  .renewal-shell:has(.renewal-recruit-cta) .renewal-main {
     padding-bottom: 10rem;
   }
 }
@@ -889,41 +885,6 @@
   margin: 0 auto;
   padding: 1rem 0 2.5rem;
 }
-.renewal-overview__recruit {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 6rem;
-  padding: 1rem clamp(1.2rem, 5vw, 4.5rem);
-  background-image:
-    linear-gradient(90deg, #010811e8, #010811b8 48%, #01081108),
-    url("../assets/renewal/group-photos_webp/26.3-spring.webp");
-  background-position: center;
-  background-size: cover;
-}
-.renewal-overview__recruit p {
-  color: #fff;
-  font-size: var(--renewal-font-md);
-  font-weight: 600;
-  line-height: 1.7;
-}
-.renewal-overview__recruit a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.7rem 1.25rem;
-  border-radius: 0.45rem;
-  color: #1b1110;
-  background: var(--renewal-gold);
-  font-size: var(--renewal-font-md);
-  font-weight: 700;
-  white-space: nowrap;
-}
-.renewal-overview__recruit a span {
-  font-size: 1.2rem;
-}
-
 @media (max-width: 760px) {
   .renewal-overview__slogan {
     right: 1rem;
@@ -933,14 +894,6 @@
   .renewal-overview__content {
     width: calc(100% - 1.4rem);
     padding: 1rem 0 2rem;
-  }
-  .renewal-overview__recruit {
-    align-items: stretch;
-    flex-direction: column;
-    padding: 1.2rem 1rem;
-  }
-  .renewal-overview__recruit a {
-    justify-content: center;
   }
 }
 
@@ -1097,6 +1050,18 @@
   color: var(--renewal-cyan);
   font-size: 1.7rem;
 }
+.renewal-precautions__panel summary > span svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.renewal-precautions__panel summary > span .renewal-precautions__guitar-icon {
+  --guitar-icon-size: 1.7rem;
+}
 .renewal-precautions__panel:nth-child(even) summary > span {
   color: var(--renewal-pink);
 }
@@ -1105,7 +1070,7 @@
   font-size: 1rem;
 }
 .renewal-precautions__panel summary small {
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.62rem;
   font-weight: 400;
 }
@@ -1121,18 +1086,39 @@
 .renewal-precautions__panel[open] summary i {
   transform: rotate(45deg);
 }
+.renewal-precautions__intro {
+  margin: 0;
+  padding: 1rem 1rem 0;
+  border-top: 1px solid var(--renewal-cyan);
+  color: #fff;
+  font-size: var(--renewal-font-md);
+  line-height: 1.75;
+}
+.renewal-precautions__panel:nth-child(even) .renewal-precautions__intro {
+  border-top-color: var(--renewal-pink);
+}
 .renewal-precautions__panel ol {
   display: grid;
   gap: 0.55rem;
   margin: 0;
   padding: 1rem 1rem 1.1rem 2.8rem;
-  border-top: 1px solid var(--renewal-border-subtle);
+  border-top: 1px solid var(--renewal-cyan);
+}
+.renewal-precautions__panel:nth-child(even) ol {
+  border-top-color: var(--renewal-pink);
+}
+.renewal-precautions__intro + ol {
+  padding-top: 0.55rem;
+  border-top: 0;
 }
 .renewal-precautions__panel li {
   padding-left: 0.2rem;
-  color: #d6e8ef;
+  color: #fff;
   font-size: var(--renewal-font-md);
   line-height: 1.75;
+}
+.renewal-precautions__panel li b {
+  font-weight: 400;
 }
 .renewal-precautions__panel li::marker {
   color: var(--renewal-cyan);
@@ -1144,11 +1130,14 @@
 .renewal-precautions__fee {
   margin: 0 1rem 1rem;
   padding: 0.65rem 0.8rem;
-  border: 1px solid var(--renewal-border-strong);
+  border: 1px solid var(--renewal-cyan);
   border-radius: 0.45rem;
-  color: #bcecf5;
+  color: #fff;
   font-size: 0.66rem;
   line-height: 1.7;
+}
+.renewal-precautions__panel:nth-child(even) .renewal-precautions__fee {
+  border-color: var(--renewal-pink);
 }
 
 .renewal-schedule__heading {

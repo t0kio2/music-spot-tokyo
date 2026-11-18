@@ -1,7 +1,8 @@
 ---
 import "../styles/renewal.css";
 import RenewalHeader from "../components/renewal/RenewalHeader.astro";
-import { getPageSettings } from "../lib/renewal-api";
+import RenewalRecruitCta from "../components/renewal/RenewalRecruitCta.astro";
+import { getPageSettings, renewalApi } from "../lib/renewal-api";
 import anzuFont from "../../あんずもじ2020/AP.ttf";
 
 interface Props {
@@ -19,6 +20,7 @@ const {
 } = Astro.props;
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
+const overview = await renewalApi.getOverview();
 const resolvedPageTitle = useCmsContent ? pageSettings?.title : title;
 const resolvedDescription = useCmsContent ? pageSettings?.description : description;
 const documentTitle = resolvedPageTitle
@@ -53,6 +55,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       <main class="renewal-main">
         <slot />
       </main>
+      {overview.recruiting?.is_recruiting && overview.recruiting.message && (
+        <RenewalRecruitCta recruiting={overview.recruiting} />
+      )}
     </div>
   </body>
 </html>

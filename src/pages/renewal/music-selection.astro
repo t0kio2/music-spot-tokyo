@@ -4,10 +4,6 @@ import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalMusicGenreCards from "../../components/renewal/RenewalMusicGenreCards.astro";
 import RenewalMusicInfoCards from "../../components/renewal/RenewalMusicInfoCards.astro";
 import RenewalMusicSelectionGuide from "../../components/renewal/RenewalMusicSelectionGuide.astro";
-import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
-
-const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 ---
 
 <RenewalLayout>
@@ -25,6 +21,5 @@ const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication()
 
       <RenewalMusicInfoCards />
     </section>
-    {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>

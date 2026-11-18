@@ -2,9 +2,6 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalFlowSteps from "../../components/renewal/RenewalFlowSteps.astro";
-import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
-const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 const steps = [
   [
     "１",
@@ -69,6 +66,5 @@ const steps = [
         note,
       }))}
     />
-    {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>

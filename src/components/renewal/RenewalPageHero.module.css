@@ -75,12 +75,12 @@
   margin-bottom: 1.55rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--renewal-border);
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.8rem;
 }
 
 :global(.renewal-breadcrumb).breadcrumb :global(a) {
-  color: var(--renewal-muted);
+  color: #fff;
 }
 
 .hero > * {
@@ -108,7 +108,7 @@
 .description {
   max-width: 42rem;
   margin-top: 0.35rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
   font-weight: 500;
   line-height: 1.8;
@@ -255,7 +255,7 @@
 }
 
 :global(.renewal-archive-detail__hero) > p {
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
 }
 

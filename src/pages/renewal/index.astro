@@ -1,6 +1,5 @@
 ---
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
-import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
 import RenewalFeaturePanel from "../../components/renewal/RenewalFeaturePanel.astro";
 import RenewalActionLink from "../../components/renewal/RenewalActionLink.astro";
@@ -10,13 +9,11 @@ import {
   getPageSettings,
   renewalApi,
   selectNextApplication,
-  selectRecruitmentForBanner,
 } from "../../lib/renewal-api";
 
 const applications = await renewalApi.getApplication();
 const homePageSettings = await getPageSettings("/");
 const nextLive = selectNextApplication(applications);
-const recruitment = selectRecruitmentForBanner(applications);
 const homeHeroImages = homePageSettings?.hero_images ?? [];
 const homeSubTitle = homePageSettings?.sub_title ?? "";
 const homeDescription = homePageSettings?.description ?? "";
@@ -94,7 +91,6 @@ const homeDescription = homePageSettings?.description ?? "";
       </div>
 
       <RenewalHomeSchedule nextLive={nextLive} />
-      {recruitment && <RenewalRecruitCta event={recruitment} />}
     </div>
   </div>
 </RenewalLayout>

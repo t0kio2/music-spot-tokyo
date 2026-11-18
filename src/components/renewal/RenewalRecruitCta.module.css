@@ -8,13 +8,18 @@
   border: 0;
   border-radius: 0;
   box-shadow: 0 -8px 24px #000b;
+  background: var(--renewal-panel-fill);
+}
+
+.hasImage {
   background:
     linear-gradient(90deg, #00050ddd, #00070db8),
-    url("../../assets/renewal/group-photos_webp/26.3-spring.webp") center 52% / cover;
+    var(--renewal-recruit-image, none) center 52% / cover;
 }
 
 .cta p {
   text-align: center;
+  white-space: pre-line;
 }
 
 @media (min-width: 761px) {

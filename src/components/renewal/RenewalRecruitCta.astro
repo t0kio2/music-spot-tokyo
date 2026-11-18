@@ -1,27 +1,34 @@
 ---
-import { formatEventDate, getEventTypeLabel, type RenewalApplication } from "../../lib/renewal-api";
+import type { RenewalRecruiting } from "../../lib/renewal-api";
 import RenewalActionLink from "./RenewalActionLink.astro";
 import styles from "./RenewalRecruitCta.module.css";
 
 interface Props {
-  event: RenewalApplication;
+  recruiting: RenewalRecruiting;
 }
 
-const { event } = Astro.props;
+const { recruiting } = Astro.props;
+const style = recruiting.image
+  ? `--renewal-recruit-image: url("${recruiting.image.url}");`
+  : undefined;
 ---
 
-<section
-  class:list={["renewal-home__panel", "renewal-home__cta", "renewal-recruit-cta", styles.cta]}
+<footer
+  class:list={[
+    "renewal-home__panel",
+    "renewal-home__cta",
+    "renewal-recruit-cta",
+    styles.cta,
+    { [styles.hasImage]: Boolean(recruiting.image) },
+  ]}
   aria-label="メンバー募集"
+  style={style}
 >
-  <p>
-    現在、{formatEventDate(event.event_date)} の {getEventTypeLabel(event.event_type)} <br>
-    のメンバーを募集中です。
-  </p>
+  <p>{recruiting.message}</p>
   <RenewalActionLink
-    href={event.application_url ?? "/renewal/application/"}
+    href="/renewal/application/"
     label="募集状況・申込み"
     variant="warm"
     icon="person"
   />
-</section>
+</footer>

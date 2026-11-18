@@ -58,13 +58,13 @@
 }
 .value small {
   margin-left: 0.35rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.65rem;
   font-weight: 400;
 }
 .detail {
   display: block;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.65rem;
   line-height: 1.4;
 }
@@ -72,7 +72,7 @@
   position: absolute;
   right: 1.4rem;
   bottom: 1rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.6rem;
   white-space: nowrap;
 }

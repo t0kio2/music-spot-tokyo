@@ -22,6 +22,13 @@ export interface RenewalOverview {
   male_count: number;
   participant_as_of: string;
   logo?: RenewalMedia;
+  recruiting?: RenewalRecruiting;
+}
+
+export interface RenewalRecruiting {
+  message?: string;
+  is_recruiting: boolean;
+  image?: RenewalMedia;
 }
 
 export interface RenewalActivityDetail {
@@ -159,6 +166,7 @@ interface RenewalOverviewRecord {
   female_number?: string | number;
   male_number?: string | number;
   logo?: RenewalMedia;
+  recruiting?: RenewalRecruiting | RenewalRecruiting[];
   updatedAt?: string;
 }
 
@@ -311,6 +319,19 @@ function toNumber(value?: string | number): number {
   return Number.isNaN(number) ? 0 : number;
 }
 
+function toRecruiting(
+  recruiting?: RenewalRecruiting | RenewalRecruiting[],
+): RenewalRecruiting | undefined {
+  const value = Array.isArray(recruiting) ? recruiting[0] : recruiting;
+  if (!value) return undefined;
+
+  return {
+    message: value.message,
+    is_recruiting: value.is_recruiting === true,
+    image: value.image ? toBrowserMedia(value.image) : undefined,
+  };
+}
+
 async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
   const overview = await getRenewalMicrocmsClient().getObject<RenewalOverviewRecord>({
     endpoint: "overview",
@@ -322,6 +343,7 @@ async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
     male_count: toNumber(overview?.male_number),
     participant_as_of: overview?.updatedAt ?? "",
     logo: overview?.logo,
+    recruiting: toRecruiting(overview?.recruiting),
   };
 }
 
@@ -437,27 +459,6 @@ export function selectNextApplication(
       .sort((a, b) => {
         const dateDiff =
           new Date(a.event_date as string).getTime() - new Date(b.event_date as string).getTime();
-        return dateDiff || a.sort_order - b.sort_order;
-      })[0] ?? null
-  );
-}
-
-export function selectRecruitmentForBanner(
-  applications: RenewalApplication[],
-  now = new Date(),
-): RenewalApplication | null {
-  const nowDate = now.getTime();
-  return (
-    [...applications]
-      .filter(
-        (application) =>
-          !application.is_closed &&
-          (!application.event_date || new Date(application.event_date).getTime() >= nowDate),
-      )
-      .sort((a, b) => {
-        if (!a.event_date) return 1;
-        if (!b.event_date) return -1;
-        const dateDiff = new Date(a.event_date).getTime() - new Date(b.event_date).getTime();
         return dateDiff || a.sort_order - b.sort_order;
       })[0] ?? null
   );
