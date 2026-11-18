@@ -75,12 +75,12 @@
   margin-bottom: 1.55rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--renewal-border);
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.8rem;
 }
 
 :global(.renewal-breadcrumb).breadcrumb :global(a) {
-  color: var(--renewal-muted);
+  color: #fff;
 }
 
 .hero > * {
@@ -100,15 +100,15 @@
 .title {
   color: #f5f8ff;
   font:
-    700 clamp(2rem, 4vw, 3.35rem) / 1.2 "Zen Old Mincho",
-    serif;
+    700 clamp(2rem, 4vw, 3.35rem) / 1.2 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.04em;
 }
 
 .description {
   max-width: 42rem;
   margin-top: 0.35rem;
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
   font-weight: 500;
   line-height: 1.8;
@@ -171,6 +171,10 @@
     linear-gradient(0deg, #010a1144, transparent 60%), var(--renewal-hero-image);
 }
 
+:global(.renewal-activity__hero).hero {
+  min-height: 11.5rem;
+}
+
 :global(.renewal-archive__hero).hero::after {
   height: 30%;
   background: linear-gradient(0deg, var(--renewal-bg), transparent);
@@ -193,8 +197,8 @@
 :global(.renewal-activity__hero) h1 {
   margin: 0;
   font:
-    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Zen Old Mincho",
-    serif;
+    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Noto Sans JP",
+    sans-serif;
 }
 
 :global(.renewal-activity__hero) > p {
@@ -217,8 +221,8 @@
 :global(.renewal-setlist__hero) h1 {
   margin: 0;
   font:
-    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Zen Old Mincho",
-    serif;
+    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.03em;
 }
 
@@ -255,7 +259,7 @@
 }
 
 :global(.renewal-archive-detail__hero) > p {
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: var(--renewal-font-md);
 }
 
@@ -286,7 +290,7 @@
   }
 
   :global(.renewal-activity__hero).hero {
-    min-height: var(--renewal-feature-hero-height-mobile);
+    min-height: 11rem;
     padding: 1.2rem var(--renewal-content-gutter) 2rem;
   }
 

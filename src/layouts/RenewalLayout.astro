@@ -1,8 +1,8 @@
 ---
 import "../styles/renewal.css";
 import RenewalHeader from "../components/renewal/RenewalHeader.astro";
-import { getPageSettings } from "../lib/renewal-api";
-import anzuFont from "../../あんずもじ2020/AP.ttf";
+import RenewalRecruitCta from "../components/renewal/RenewalRecruitCta.astro";
+import { getPageSettings, renewalApi } from "../lib/renewal-api";
 
 interface Props {
   title?: string;
@@ -19,6 +19,7 @@ const {
 } = Astro.props;
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
+const overview = await renewalApi.getOverview();
 const resolvedPageTitle = useCmsContent ? pageSettings?.title : title;
 const resolvedDescription = useCmsContent ? pageSettings?.description : description;
 const documentTitle = resolvedPageTitle
@@ -40,7 +41,6 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    {home && <link rel="preload" href={anzuFont} as="font" type="font/ttf" crossorigin />}
     <meta name="theme-color" content="#020d17" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -53,6 +53,9 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       <main class="renewal-main">
         <slot />
       </main>
+      {overview.recruiting?.is_recruiting && overview.recruiting.message && (
+        <RenewalRecruitCta recruiting={overview.recruiting} />
+      )}
     </div>
   </body>
 </html>

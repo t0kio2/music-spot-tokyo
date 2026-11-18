@@ -22,6 +22,13 @@ export interface RenewalOverview {
   male_count: number;
   participant_as_of: string;
   logo?: RenewalMedia;
+  recruiting?: RenewalRecruiting;
+}
+
+export interface RenewalRecruiting {
+  message?: string;
+  is_recruiting: boolean;
+  image?: RenewalMedia;
 }
 
 export interface RenewalActivityDetail {
@@ -46,13 +53,44 @@ export function getEventTypeLabel(type: ArchiveEventType): string {
   return { regular: "定期セッションライブ", project: "企画セッションライブ", band: "対バンライブ" }[type];
 }
 
+/** CMSの日付フィールドを、日本時間のカレンダー日付として扱う。 */
+export function parseRenewalDate(date: string): Date {
+  const [year, month, day] = date.slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+export function getRenewalDateValue(date: string): number {
+  return parseRenewalDate(date).getTime();
+}
+
+export function getRenewalToday(now = new Date()): Date {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(now);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, Number(value)]));
+  return new Date(Date.UTC(values.year, values.month - 1, values.day));
+}
+
 export function formatEventDate(date?: string): string {
   if (!date) return "日程未定";
-  const formatted = new Date(date).toLocaleDateString("ja-JP", {
+  return formatRenewalDate(date, {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "short",
+  });
+}
+
+export function formatRenewalDate(
+  date: string,
+  options: Intl.DateTimeFormatOptions,
+): string {
+  const formatted = parseRenewalDate(date).toLocaleDateString("ja-JP", {
+    ...options,
+    timeZone: "UTC",
   });
   return formatted.replace(/(?<!\d)\d(?!\d)/g, (digit) =>
     String.fromCharCode(digit.charCodeAt(0) + 0xfee0),
@@ -159,6 +197,7 @@ interface RenewalOverviewRecord {
   female_number?: string | number;
   male_number?: string | number;
   logo?: RenewalMedia;
+  recruiting?: RenewalRecruiting | RenewalRecruiting[];
   updatedAt?: string;
 }
 
@@ -311,6 +350,19 @@ function toNumber(value?: string | number): number {
   return Number.isNaN(number) ? 0 : number;
 }
 
+function toRecruiting(
+  recruiting?: RenewalRecruiting | RenewalRecruiting[],
+): RenewalRecruiting | undefined {
+  const value = Array.isArray(recruiting) ? recruiting[0] : recruiting;
+  if (!value) return undefined;
+
+  return {
+    message: value.message,
+    is_recruiting: value.is_recruiting === true,
+    image: value.image ? toBrowserMedia(value.image) : undefined,
+  };
+}
+
 async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
   const overview = await getRenewalMicrocmsClient().getObject<RenewalOverviewRecord>({
     endpoint: "overview",
@@ -322,6 +374,7 @@ async function getOverviewFromMicrocms(): Promise<RenewalOverview> {
     male_count: toNumber(overview?.male_number),
     participant_as_of: overview?.updatedAt ?? "",
     logo: overview?.logo,
+    recruiting: toRecruiting(overview?.recruiting),
   };
 }
 
@@ -369,7 +422,7 @@ async function getArchivesFromMicrocms(): Promise<RenewalArchive[]> {
     .filter((event): event is RenewalArchiveRecord & { id: string; event_date: string } =>
       Boolean(event.id && event.event_date),
     )
-    .sort((a, b) => new Date(b.event_date).getTime() - new Date(a.event_date).getTime())
+    .sort((a, b) => getRenewalDateValue(b.event_date) - getRenewalDateValue(a.event_date))
     .map((event, index) => {
       const performerCount = toNumber(event.participants_number);
       const audienceCount = toNumber(event.audience_number);
@@ -427,37 +480,16 @@ export function selectNextApplication(
   applications: RenewalApplication[],
   now = new Date(),
 ): RenewalApplication | null {
-  const nowDate = now.getTime();
+  const nowDate = getRenewalToday(now).getTime();
   return (
     [...applications]
       .filter(
         (application) =>
-          application.event_date && new Date(application.event_date).getTime() >= nowDate,
+          application.event_date && getRenewalDateValue(application.event_date) >= nowDate,
       )
       .sort((a, b) => {
         const dateDiff =
-          new Date(a.event_date as string).getTime() - new Date(b.event_date as string).getTime();
-        return dateDiff || a.sort_order - b.sort_order;
-      })[0] ?? null
-  );
-}
-
-export function selectRecruitmentForBanner(
-  applications: RenewalApplication[],
-  now = new Date(),
-): RenewalApplication | null {
-  const nowDate = now.getTime();
-  return (
-    [...applications]
-      .filter(
-        (application) =>
-          !application.is_closed &&
-          (!application.event_date || new Date(application.event_date).getTime() >= nowDate),
-      )
-      .sort((a, b) => {
-        if (!a.event_date) return 1;
-        if (!b.event_date) return -1;
-        const dateDiff = new Date(a.event_date).getTime() - new Date(b.event_date).getTime();
+          getRenewalDateValue(a.event_date as string) - getRenewalDateValue(b.event_date as string);
         return dateDiff || a.sort_order - b.sort_order;
       })[0] ?? null
   );

@@ -2,18 +2,15 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalFlowSteps from "../../components/renewal/RenewalFlowSteps.astro";
-import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
-const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
 const steps = [
   [
     "１",
     "document",
     "参加申込",
     "本サイト内の「募集状況・申込み」から必要事項を入力しご応募ください。",
-    "※３月及び９月の定期ライブは1987年生まれ〜1999年生まれの方に限定しています",
+    "",
   ],
-  ["２", "warning", "注意事項の確認", "当サークルの注意事項について、確認いただきます。", ""],
+  ["２", "warning", "注意事項の確認", "当サークルの注意事項について、ご確認いただきます。", ""],
   [
     "３",
     "line",
@@ -69,6 +66,5 @@ const steps = [
         note,
       }))}
     />
-    {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>

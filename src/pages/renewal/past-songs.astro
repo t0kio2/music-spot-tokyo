@@ -2,11 +2,11 @@
 import RenewalLayout from "../../layouts/RenewalLayout.astro";
 import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalPastSongsList from "../../components/renewal/RenewalPastSongsList.astro";
-import RenewalRecruitCta from "../../components/renewal/RenewalRecruitCta.astro";
-import { renewalApi, selectRecruitmentForBanner } from "../../lib/renewal-api";
+import { renewalApi } from "../../lib/renewal-api";
 
-const archives = await renewalApi.getArchives();
-const recruitment = selectRecruitmentForBanner(await renewalApi.getApplication());
+const archives = (await renewalApi.getArchives()).filter(
+  (archive) => archive.event_type === "regular",
+);
 const songs = new Map<
   string,
   {
@@ -46,6 +46,5 @@ const pastSongs = [...songs.values()].sort((a, b) => a.title.localeCompare(b.tit
       compact
     />
     <RenewalPastSongsList songs={pastSongs} />
-    {recruitment && <RenewalRecruitCta event={recruitment} />}
   </div>
 </RenewalLayout>

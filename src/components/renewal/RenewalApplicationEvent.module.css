@@ -48,8 +48,22 @@
   margin-right: 0;
 }
 
-.eventType {
+.titleContent .eventType {
   margin-top: 4px;
+  border: 1px solid var(--renewal-cyan);
+  border-radius: 20px;
+  color: var(--renewal-cyan);
+  font-weight: 700;
+}
+
+.titleContent .project {
+  border-color: var(--renewal-gold);
+  color: var(--renewal-gold);
+}
+
+.titleContent .band {
+  border-color: var(--renewal-pink);
+  color: #ff90db;
 }
 
 .roster,

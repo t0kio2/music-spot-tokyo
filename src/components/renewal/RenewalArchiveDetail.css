@@ -76,7 +76,7 @@
   font-size: var(--renewal-font-lg);
 }
 .renewal-archive-detail__setlist li small {
-  color: var(--renewal-muted);
+  color: #fff;
   font-size: 0.65rem;
 }
 .renewal-archive-detail__setlist li .renewal-archive-detail__thumbnail {
@@ -109,7 +109,7 @@
 .renewal-archive-detail__empty {
   padding: 2rem;
   border: 1px dashed var(--renewal-border);
-  color: var(--renewal-muted);
+  color: #fff;
   text-align: center;
 }
 

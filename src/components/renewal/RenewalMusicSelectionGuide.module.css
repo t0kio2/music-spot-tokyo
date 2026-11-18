@@ -32,9 +32,14 @@
   line-height: 1.9;
 }
 .note {
+  grid-column: 3;
   margin-top: 1rem;
   color: var(--renewal-gold);
   font-size: 0.7rem !important;
+}
+.examples {
+  margin-top: 1rem;
+  color: #fff;
 }
 .donut {
   position: relative;
@@ -146,6 +151,9 @@
   .copy {
     grid-column: 1 / -1;
   }
+  .note {
+    grid-column: 2;
+  }
 }
 @media (max-width: 760px) {
   .selection {
@@ -155,6 +163,9 @@
   }
   .copy {
     grid-column: auto;
+  }
+  .note {
+    grid-column: 1;
   }
   .copy h2 {
     gap: 0.45rem;
@@ -174,6 +185,6 @@
     font-size: 0.7rem;
   }
   .legend small {
-    display: none;
+    display: block;
   }
 }

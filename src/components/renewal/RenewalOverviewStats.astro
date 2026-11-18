@@ -14,11 +14,12 @@ interface StatItem {
 interface Props {
   items: StatItem[];
   ariaLabel?: string;
+  className?: string;
 }
-const { items, ariaLabel = "MuSTの概要" } = Astro.props;
+const { items, ariaLabel = "MuSTの概要", className } = Astro.props;
 ---
 
-<section class:list={["renewal-overview__stats", styles.stats]} aria-label={ariaLabel}>
+<section class:list={["renewal-overview__stats", styles.stats, className]} aria-label={ariaLabel}>
   {items.map((item) => (
     <div class:list={["renewal-overview__stat", styles.stat, { [styles.large]: item.large }]}>
       <span class={styles.icon}>
