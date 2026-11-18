@@ -17,6 +17,7 @@ const summary = summarizeActivities(activities);
     </RenewalPageHero>
     <RenewalOverviewStats
       ariaLabel="活動実績の概要"
+      className="renewal-activity__stats"
       items={[
         {
           icon: "music",
@@ -24,7 +25,6 @@ const summary = summarizeActivities(activities);
           value: summary.live_count,
           suffix: "回",
           large: true,
-          date: "today",
         },
         {
           icon: "users",
@@ -32,7 +32,6 @@ const summary = summarizeActivities(activities);
           value: summary.performer_count,
           suffix: "名",
           large: true,
-          date: "today",
         },
       ]}
     />

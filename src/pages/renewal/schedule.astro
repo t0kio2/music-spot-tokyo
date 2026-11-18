@@ -5,13 +5,19 @@ import {
   renewalApi,
   getEventTypeLabel,
   formatEventDate,
+  getRenewalDateValue,
+  getRenewalToday,
 } from "../../lib/renewal-api";
 const applications = await renewalApi.getApplication();
+const today = getRenewalToday().getTime();
 const upcoming = applications
-  .filter((event) => event.event_date && new Date(event.event_date).getTime() >= Date.now())
+  .filter(
+    (event) =>
+      event.event_date && getRenewalDateValue(event.event_date) >= today,
+  )
   .sort(
     (a, b) =>
-      new Date(a.event_date as string).getTime() - new Date(b.event_date as string).getTime() ||
+      getRenewalDateValue(a.event_date as string) - getRenewalDateValue(b.event_date as string) ||
       a.sort_order - b.sort_order,
   );
 ---

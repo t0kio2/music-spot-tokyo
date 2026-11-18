@@ -12,7 +12,7 @@
   background: var(--renewal-surface-card-soft);
 }
 .past {
-  border-color: var(--renewal-border-accent);
+  border-color: var(--renewal-setlist-line-strong);
 }
 .card h2 {
   display: flex;

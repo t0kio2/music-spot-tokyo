@@ -4,7 +4,9 @@ import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalPastSongsList from "../../components/renewal/RenewalPastSongsList.astro";
 import { renewalApi } from "../../lib/renewal-api";
 
-const archives = await renewalApi.getArchives();
+const archives = (await renewalApi.getArchives()).filter(
+  (archive) => archive.event_type === "regular",
+);
 const songs = new Map<
   string,
   {

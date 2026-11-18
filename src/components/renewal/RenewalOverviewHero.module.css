@@ -10,8 +10,8 @@
 .title {
   color: var(--renewal-text);
   font:
-    600 clamp(2.3rem, 4.5vw, 4rem) / 1.15 "Zen Old Mincho",
-    serif;
+    600 clamp(2.3rem, 4.5vw, 4rem) / 1.15 "Noto Sans JP",
+    sans-serif;
   letter-spacing: 0.06em;
 }
 :global(.renewal-overview__hero) .heading {
@@ -19,8 +19,8 @@
   margin-top: 0.9rem;
   color: #fff;
   font:
-    600 clamp(1.1rem, 2vw, 1.55rem) / 1.65 "Zen Old Mincho",
-    serif;
+    600 clamp(1.1rem, 2vw, 1.55rem) / 1.65 "Noto Sans JP",
+    sans-serif;
 }
 :global(.renewal-overview__hero) .lead {
   max-width: 43rem;

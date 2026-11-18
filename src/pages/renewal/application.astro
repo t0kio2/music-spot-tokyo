@@ -5,15 +5,12 @@ import RenewalIcon from "../../components/renewal/RenewalIcon.astro";
 import RenewalApplicationEvent from "../../components/renewal/RenewalApplicationEvent.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
 import styles from "../../components/renewal/RenewalApplication.module.css";
-import { renewalApi } from "../../lib/renewal-api";
+import { getRenewalDateValue, getRenewalToday, renewalApi } from "../../lib/renewal-api";
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+const today = getRenewalToday();
 const events = (await renewalApi.getApplication()).filter((event) => {
   if (!event.event_date) return true;
-  const eventDate = new Date(event.event_date);
-  eventDate.setHours(0, 0, 0, 0);
-  return eventDate >= today;
+  return getRenewalDateValue(event.event_date) >= today.getTime();
 });
 ---
 

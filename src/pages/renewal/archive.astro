@@ -6,15 +6,19 @@ import RenewalTabNav from "../../components/renewal/RenewalTabNav.astro";
 import RenewalImageLightbox from "../../components/renewal/RenewalImageLightbox.astro";
 import styles from "../../components/renewal/RenewalArchive.module.css";
 import "../../components/renewal/RenewalArchive.css";
-import { renewalApi, getEventTypeLabel } from "../../lib/renewal-api";
+import {
+  renewalApi,
+  formatEventDate,
+  formatRenewalDate,
+  getEventTypeLabel,
+} from "../../lib/renewal-api";
 
 const archives = await renewalApi.getArchives();
-const formatDate = (date: string) =>
-  new Date(date).toLocaleDateString("ja-JP", {
+const formatDate = (date: string) => formatEventDate(date);
+const formatMonth = (date: string) =>
+  formatRenewalDate(date, {
     year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    weekday: "short",
+    month: "long",
   });
 const years = [...new Set(archives.map((live) => live.event_date.slice(0, 4)))].sort(
   (a, b) => Number(b) - Number(a),
@@ -68,12 +72,14 @@ const archivePageSize = 6;
           <div class="renewal-archive__details">
             <div class="renewal-archive__meta">
               <span>
-                {new Date(live.event_date).toLocaleDateString("ja-JP", {
-                  year: "numeric",
-                  month: "long",
-                })}
+                {formatMonth(live.event_date)}
               </span>
-              <b class:list={{ pink: live.event_type === "band" }}>
+              <b
+                class:list={{
+                  pink: live.event_type === "band",
+                  gold: live.event_type === "project",
+                }}
+              >
                 {getEventTypeLabel(live.event_type)}
               </b>
             </div>
