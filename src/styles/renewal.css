@@ -385,15 +385,19 @@
 .renewal-application__status > summary {
   position: relative;
   display: block;
-  margin: 0 0 8px;
-  padding: 0 1.5rem 8px 0;
-  border-bottom: 1px solid var(--renewal-line-soft);
+  margin: 0;
+  padding: 0 1.5rem 0 0;
   font:
     700 1.05rem "Noto Sans JP",
     serif;
   white-space: nowrap;
   cursor: pointer;
   list-style: none;
+}
+.renewal-application__status[open] > summary {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--renewal-line-soft);
 }
 .renewal-application__status > summary::after {
   content: "＋";
@@ -405,6 +409,15 @@
   font-weight: 400;
   line-height: 1;
   transform: translateY(-50%);
+}
+@media (min-width: 761px) {
+  .renewal-application__status > summary {
+    cursor: default;
+    pointer-events: none;
+  }
+  .renewal-application__status > summary::after {
+    display: none;
+  }
 }
 .renewal-application__status[open] > summary::after {
   content: "−";
