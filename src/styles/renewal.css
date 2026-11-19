@@ -2,7 +2,7 @@
 @import "./renewal-tokens.css";
 
 .renewal-site {
-  --renewal-layout-max-width: 1440px;
+  --renewal-layout-max-width: 1280px;
   --renewal-layout-offset: max(
     0px,
     calc((100vw - var(--renewal-layout-max-width)) / 2)
@@ -498,8 +498,11 @@
   --renewal-setlist-line: #087aa4;
   --renewal-setlist-line-strong: #00c7d5;
   min-height: 100vh;
-  background: #010811;
+  background: var(--renewal-page-bg);
   color: var(--renewal-text);
+}
+.renewal-site:has(.renewal-setlist) {
+  background: var(--renewal-page-bg);
 }
 .renewal-setlist__content {
   width: calc(100% - (2 * var(--renewal-content-gutter)));
@@ -587,7 +590,7 @@
 
 /* ホームは renewal/01_ホーム.html の構成を、同じDOMのままレスポンシブ化する。 */
 .renewal-shell--home {
-  --renewal-sidebar: 200px;
+  --renewal-sidebar: 232px;
   --renewal-cyan: #00c7d5;
   --renewal-border: rgba(0, 174, 191, 0.42);
   --renewal-panel: #010a14;
@@ -651,7 +654,7 @@
 }
 .renewal-home__feature-grid {
   display: grid;
-  grid-template-columns: 1fr 1.65fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.7rem;
 }
 .renewal-home__panel {
@@ -788,9 +791,14 @@
 .renewal-application,
 .renewal-schedule {
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 76% 20%, #00345418, transparent 38%),
-    linear-gradient(140deg, #00050b, #010d18 65%, #00050b);
+  background: var(--renewal-page-bg);
+}
+.renewal-site:has(.renewal-flow),
+.renewal-site:has(.renewal-faq-page),
+.renewal-site:has(.renewal-precautions),
+.renewal-site:has(.renewal-application),
+.renewal-site:has(.renewal-schedule) {
+  background: var(--renewal-page-bg);
 }
 .renewal-schedule__apply {
   display: flex;

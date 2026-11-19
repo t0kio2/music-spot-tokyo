@@ -1,9 +1,5 @@
 .page {
-  min-height: 100vh;
   padding-bottom: 1.5rem;
-  background:
-    radial-gradient(ellipse at 76% 20%, #00345418, transparent 38%),
-    linear-gradient(140deg, #00050b, #010d18 65%, #00050b);
 }
 
 .events {

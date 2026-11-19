@@ -6,11 +6,16 @@
   overflow: hidden;
   border: 1px solid var(--renewal-line);
   border-radius: var(--renewal-radius-sm);
-  background: linear-gradient(120deg, var(--renewal-panel-soft), var(--renewal-bg));
+  background: var(--renewal-page-bg);
 }
 
 :global(.renewal-activity__stats) {
   grid-template-columns: repeat(2, 1fr);
+  width: min(calc(100% - (2 * var(--renewal-content-gutter))), 720px);
+}
+
+:global(.renewal-overview__stats) {
+  width: min(calc(100% - (2 * var(--renewal-content-gutter))), 720px);
 }
 
 .stat {
@@ -73,9 +78,8 @@
   line-height: 1.4;
 }
 .date {
-  position: absolute;
-  right: 1.4rem;
-  bottom: 1rem;
+  display: block;
+  margin-top: 0.25rem;
   color: #fff;
   font-size: 0.6rem;
   white-space: nowrap;

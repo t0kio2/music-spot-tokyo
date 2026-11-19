@@ -23,7 +23,7 @@ const eventDate = event.event_date ? parseRenewalDate(event.event_date) : undefi
 const formatMonth = (month: number) => String(month).padStart(2, "0");
 ---
 
-<article class="renewal-application__event">
+<article class:list={["renewal-application__event", { "renewal-application__event--band": isBand }]}>
   <button
     class:list={[
       "renewal-application__poster",
