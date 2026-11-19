@@ -77,7 +77,8 @@
 .schedule h3 {
   margin: 5px 0 7px;
   color: var(--renewal-text);
-  font-size: 0.75rem;
+  font-size: var(--renewal-font-lg);
+  font-weight: 700;
 }
 
 .roster ol {

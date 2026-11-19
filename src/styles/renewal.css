@@ -2,6 +2,11 @@
 @import "./renewal-tokens.css";
 
 .renewal-site {
+  --renewal-layout-max-width: 1440px;
+  --renewal-layout-offset: max(
+    0px,
+    calc((100vw - var(--renewal-layout-max-width)) / 2)
+  );
   margin: 0;
   background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--renewal-bg);
   color: var(--renewal-text);
@@ -65,7 +70,8 @@
 
 .renewal-main {
   min-height: 100vh;
-  margin-left: var(--renewal-sidebar);
+  margin-right: var(--renewal-layout-offset);
+  margin-left: calc(var(--renewal-sidebar) + var(--renewal-layout-offset));
 }
 .renewal-breadcrumb {
   display: flex;
@@ -204,6 +210,8 @@
 @media (max-width: 760px) {
   .renewal-main {
     margin-left: 0;
+    margin-right: 0;
+    padding-inline: 0;
   }
   .renewal-breadcrumb {
     margin-bottom: 1.2rem;
@@ -306,7 +314,7 @@
   border: 1px solid var(--renewal-pink);
   border-radius: 20px;
   color: #ffa5e9;
-  font-size: 0.68rem;
+  font-size: var(--renewal-font-md);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -676,9 +684,6 @@
   --renewal-cyan: #00c7d5;
   --renewal-border: rgba(0, 174, 191, 0.42);
   --renewal-panel: #010a14;
-}
-.renewal-shell--home .renewal-main {
-  margin-right: 0;
 }
 .renewal-home {
   min-height: 100vh;
@@ -1273,6 +1278,11 @@
     --renewal-font-xl: 1.1rem;
     --renewal-heading-sm: 1.1rem;
     --renewal-heading-md: 1.35rem;
+  }
+
+  .renewal-home__content {
+    width: calc(100% - 1.4rem);
+    padding-inline: 0;
   }
 
   .renewal-overview__stats,

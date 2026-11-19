@@ -1,6 +1,7 @@
 ---
 import "../styles/renewal.css";
 import RenewalHeader from "../components/renewal/RenewalHeader.astro";
+import RenewalFooter from "../components/renewal/RenewalFooter.astro";
 import RenewalRecruitCta from "../components/renewal/RenewalRecruitCta.astro";
 import { getPageSettings, renewalApi } from "../lib/renewal-api";
 
@@ -20,6 +21,7 @@ const {
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
 const overview = await renewalApi.getOverview();
+const hasRecruitCta = Boolean(overview.recruiting?.is_recruiting && overview.recruiting.message);
 const resolvedPageTitle = useCmsContent ? pageSettings?.title : title;
 const defaultDescription =
   "MuST（マスト）は、東京都内で活動する社会人向けの軽音サークルです。ライブハウスでのセッションやライブを楽しめます。";
@@ -57,9 +59,10 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
       <main class="renewal-main">
         <slot />
       </main>
-      {overview.recruiting?.is_recruiting && overview.recruiting.message && (
+      {hasRecruitCta && overview.recruiting && (
         <RenewalRecruitCta recruiting={overview.recruiting} />
       )}
+      {!hasRecruitCta && <RenewalFooter />}
     </div>
   </body>
 </html>
