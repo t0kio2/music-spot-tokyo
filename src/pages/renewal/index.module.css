@@ -1,3 +1,12 @@
+:global(.renewal-home__content) {
+  width: calc(100% - (2 * var(--renewal-content-gutter)));
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0.6rem 1rem 1.1rem 1.25rem;
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .slideshow {
   position: absolute;
   inset: 0;
@@ -56,5 +65,12 @@
 
   .slideshow img:first-child {
     opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  :global(.renewal-home__content) {
+    width: calc(100% - 1.4rem);
+    padding-inline: 0;
   }
 }

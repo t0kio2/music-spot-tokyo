@@ -214,3 +214,17 @@ const formatMonth = (month: number) => String(month).padStart(2, "0");
     </details>
   )}
 </article>
+
+<script>
+  const desktopQuery = window.matchMedia("(min-width: 761px)");
+  const syncStatusDetails = () => {
+    document.querySelectorAll<HTMLDetailsElement>(".renewal-application__status").forEach(
+      (details) => {
+        if (desktopQuery.matches) details.open = true;
+      },
+    );
+  };
+
+  syncStatusDetails();
+  desktopQuery.addEventListener("change", syncStatusDetails);
+</script>
