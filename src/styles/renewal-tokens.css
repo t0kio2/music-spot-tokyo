@@ -32,8 +32,8 @@
   --renewal-surface-card: linear-gradient(135deg, #010b14f7, #00060cf7);
   --renewal-surface-card-soft: linear-gradient(120deg, #020f1c, #010711);
   --renewal-content-gutter: clamp(1rem, 4.6vw, 4rem);
-  --renewal-feature-hero-height: 260px;
-  --renewal-feature-hero-height-mobile: 17rem;
+  --renewal-feature-hero-height: 240px;
+  --renewal-feature-hero-height-mobile: 15.5rem;
   --renewal-sidebar: 232px;
   --renewal-font-md: 0.8rem;
   --renewal-font-lg: 0.9rem;

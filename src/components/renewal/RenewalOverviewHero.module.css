@@ -10,7 +10,7 @@
 .title {
   color: var(--renewal-text);
   font:
-    600 clamp(2.3rem, 4.5vw, 4rem) / 1.15 "Noto Sans JP",
+    600 clamp(1.9rem, 3.7vw, 3.25rem) / 1.15 "Noto Sans JP",
     sans-serif;
   letter-spacing: 0.06em;
 }
@@ -19,12 +19,12 @@
   margin-top: 0.9rem;
   color: #fff;
   font:
-    600 clamp(1.1rem, 2vw, 1.55rem) / 1.65 "Noto Sans JP",
+    600 clamp(1.1rem, 2vw, 1.55rem) / 1.5 "Noto Sans JP",
     sans-serif;
 }
 :global(.renewal-overview__hero) .lead {
   max-width: 43rem;
-  margin-top: 0.8rem;
+  margin-top: 0.35rem;
   color: inherit;
   font-size: var(--renewal-font-md);
   font-weight: 500;
@@ -37,7 +37,7 @@
     padding: 1.2rem var(--renewal-content-gutter) 2rem;
   }
   .title {
-    font-size: clamp(2rem, 11vw, 3rem);
+    font-size: clamp(1.5rem, 8vw, 2.3rem);
   }
   :global(.renewal-overview__hero) .heading {
     margin-top: 0.8rem;
