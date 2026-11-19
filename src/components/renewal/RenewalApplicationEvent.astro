@@ -20,7 +20,8 @@ const hasStatusMessage = event.status_message !== "パートごとの募集状�
 const statusLabel = (status: string) =>
   status === "waitlist" ? "キャンセル待ち" : status === "open" ? "募集中" : "募集終了";
 const eventDate = event.event_date ? parseRenewalDate(event.event_date) : undefined;
-const formatMonth = (month: number) => String(month).padStart(2, "0");
+const formatMonth = (month: number) =>
+  month < 10 ? String.fromCharCode("０".charCodeAt(0) + month) : String(month);
 ---
 
 <article class:list={["renewal-application__event", { "renewal-application__event--band": isBand }]}>
