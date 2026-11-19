@@ -42,5 +42,12 @@
   .cta {
     right: 0;
     left: 0;
+    min-height: 0;
+    gap: 0.45rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  .cta:global(.renewal-recruit-cta) p {
+    line-height: 1.4;
   }
 }

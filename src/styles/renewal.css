@@ -632,17 +632,16 @@
 }
 .renewal-home__hero-copy {
   max-width: 650px;
-  padding: 0.5rem 0 1.7rem 4.2%;
+  padding: 1.5rem 0 1.7rem 4.2%;
 }
 .renewal-home__hero h1 {
   max-width: 610px;
-  margin-bottom: 3.15rem;
+  margin-bottom: 3.2rem;
   color: var(--renewal-text);
   font:
-    400 clamp(1.8rem, 3vw, 2.75rem)/1.14 "Noto Sans JP",
+    400 clamp(1.5rem, 3vw, 2.2rem)/1.5 "Noto Sans JP",
     sans-serif;
   letter-spacing: 0.025em;
-  transform: rotate(-4deg);
   text-shadow: 0 2px 12px #000a;
 }
 .renewal-home__hero-copy p {
@@ -703,17 +702,17 @@
 
 @media (max-width: 760px) {
   .renewal-home__hero {
-    min-height: 25rem;
+    min-height: 21rem;
   }
   .renewal-home__hero-actions {
     display: none;
   }
   .renewal-home__hero-copy {
-    padding: 1.5rem 1rem 1.5rem;
+    padding: 2.2rem 1rem 1.5rem;
   }
   .renewal-home__hero h1 {
-    margin-bottom: 2.6rem;
-    font-size: clamp(2rem, 10vw, 3rem);
+    margin-bottom: 5rem;
+    font-size: 1.35rem;
   }
   .renewal-home__hero-copy p {
     font-size: var(--renewal-font-md);
@@ -736,7 +735,7 @@
     justify-self: center;
   }
   .renewal-shell:has(.renewal-recruit-cta) .renewal-main {
-    padding-bottom: 10rem;
+    padding-bottom: 8rem;
   }
 }
 

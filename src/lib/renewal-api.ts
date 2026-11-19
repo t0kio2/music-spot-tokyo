@@ -187,6 +187,7 @@ export interface RenewalApplication {
   status_message: string;
   is_closed: boolean;
   application_url?: string;
+  recruit_spreadsheet_url?: string;
   flyer?: RenewalMedia;
   sort_order: number;
   parts: RenewalRecruitmentPart[];
@@ -244,6 +245,7 @@ interface RenewalApplicationRecord {
   regular_session_info?: RenewalApplicationSchedule | RenewalApplicationSchedule[];
   performers?: RenewalApplicationPerformer[];
   recruitment_status?: Array<{ name?: string | string[]; status?: string | string[] }>;
+  recruit_spreadsheet?: string;
 }
 
 interface RenewalArchiveRecord {
@@ -417,7 +419,10 @@ async function getApplicationFromMicrocms(): Promise<RenewalApplication[]> {
         part_name: part.name,
         status: toRecruitmentStatus(part.status),
       }));
-    const isClosed = parts.length === 0 || parts.every((part) => part.status === "closed");
+    const recruitSpreadsheetUrl = item.recruit_spreadsheet?.trim() || undefined;
+    const isClosed =
+      !recruitSpreadsheetUrl &&
+      (parts.length === 0 || parts.every((part) => part.status === "closed"));
 
     return {
       title: item.title ?? "",
@@ -428,6 +433,7 @@ async function getApplicationFromMicrocms(): Promise<RenewalApplication[]> {
       status_message: isClosed ? "現在募集していません。" : "パートごとの募集状況",
       is_closed: isClosed,
       application_url: "/renewal/application/",
+      recruit_spreadsheet_url: recruitSpreadsheetUrl,
       flyer: item.flyer ? toBrowserMedia(item.flyer) : undefined,
       sort_order: index,
       parts,

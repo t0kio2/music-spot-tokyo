@@ -137,6 +137,20 @@
   stroke-width: 1.7;
 }
 
+:global(.renewal-application__status > a.renewal-application__spreadsheet-link) {
+  display: block;
+  margin: 6px 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--renewal-gold);
+  background: transparent;
+  font-size: var(--renewal-font-md);
+  text-align: left;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 760px) {
   :global(.renewal-application__title small) {
     padding: 2px 8px;

@@ -19,7 +19,7 @@
   inset: 0;
   content: "";
   opacity: 0.82;
-  filter: brightness(1.15) saturate(1.25);
+  filter: brightness(1.35) saturate(1.25);
   pointer-events: none;
   background: var(--feature-photo) right top / 72% auto no-repeat;
   -webkit-mask-image:
@@ -44,19 +44,19 @@
 }
 
 .one {
-  --feature-photo: url("../../assets/renewal/materials_webp/guitar-guitar.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/sachi.webp");
 }
 .two {
-  --feature-photo: url("../../assets/renewal/materials_webp/guitar-guitar-drum.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/saku.webp");
 }
 .three {
-  --feature-photo: url("../../assets/renewal/materials_webp/venue.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/keyboard.webp");
 }
 .four {
-  --feature-photo: url("../../assets/renewal/materials_webp/akina.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/guitar.webp");
 }
 .five {
-  --feature-photo: url("../../assets/renewal/materials_webp/guitar.webp");
+  --feature-photo: url("../../assets/renewal/materials_webp/akina.webp");
 }
 .six {
   --feature-photo: url("../../assets/renewal/materials_webp/bass.webp");

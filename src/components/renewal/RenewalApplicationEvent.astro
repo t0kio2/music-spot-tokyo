@@ -195,7 +195,19 @@ const formatMonth = (month: number) =>
         </span>
         募集状況
       </summary>
-      {event.parts.length > 0 ? (
+      {event.recruit_spreadsheet_url ? (
+        <>
+          <p>以下のリンクから空きパート一覧が確認できます。</p>
+          <a
+            class="renewal-application__spreadsheet-link"
+            href={event.recruit_spreadsheet_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {event.recruit_spreadsheet_url}
+          </a>
+        </>
+      ) : event.parts.length > 0 ? (
         <>
           {hasStatusMessage && <p>{event.status_message}</p>}
           <div class="renewal-application__vacancies">
