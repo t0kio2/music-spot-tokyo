@@ -11,6 +11,7 @@ import {
   formatEventDate,
   formatRenewalDate,
   getEventTypeLabel,
+  getRenewalDateYear,
 } from "../../lib/renewal-api";
 
 const archives = await renewalApi.getArchives();
@@ -20,7 +21,7 @@ const formatMonth = (date: string) =>
     year: "numeric",
     month: "long",
   });
-const years = [...new Set(archives.map((live) => live.event_date.slice(0, 4)))].sort(
+const years = [...new Set(archives.map((live) => getRenewalDateYear(live.event_date)))].sort(
   (a, b) => Number(b) - Number(a),
 );
 const archivePageSize = 6;
@@ -55,7 +56,7 @@ const archivePageSize = 6;
             { "renewal-archive__card--extra": index >= archivePageSize },
           ]}
           hidden={index >= archivePageSize}
-          data-year={live.event_date.slice(0, 4)}
+          data-year={getRenewalDateYear(live.event_date)}
         >
           <button
             class:list={["renewal-archive__photo", styles.photo]}

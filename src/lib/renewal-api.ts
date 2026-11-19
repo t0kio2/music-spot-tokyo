@@ -14,6 +14,7 @@ export interface RenewalPageSettings {
   title?: string;
   sub_title?: string;
   description?: string;
+  seo_description?: string;
 }
 
 export interface RenewalOverview {
@@ -49,29 +50,50 @@ export interface RenewalActivity {
 
 export type ArchiveEventType = "regular" | "project" | "band";
 
+const RENEWAL_TIME_ZONE = "Asia/Tokyo";
+
+function getRenewalCalendarDate(value: Date): Date {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: RENEWAL_TIME_ZONE,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }).formatToParts(value);
+  const values = Object.fromEntries(parts.map(({ type, value }) => [type, Number(value)]));
+  return new Date(Date.UTC(values.year, values.month - 1, values.day));
+}
+
 export function getEventTypeLabel(type: ArchiveEventType): string {
   return { regular: "定期セッションライブ", project: "企画セッションライブ", band: "対バンライブ" }[type];
 }
 
 /** CMSの日付フィールドを、日本時間のカレンダー日付として扱う。 */
 export function parseRenewalDate(date: string): Date {
-  const [year, month, day] = date.slice(0, 10).split("-").map(Number);
-  return new Date(Date.UTC(year, month - 1, day));
+  if (/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    const [year, month, day] = date.slice(0, 10).split("-").map(Number);
+    return new Date(Date.UTC(year, month - 1, day));
+  }
+
+  const instant = new Date(date);
+  if (Number.isNaN(instant.getTime())) return new Date(Number.NaN);
+
+  return getRenewalCalendarDate(instant);
 }
 
 export function getRenewalDateValue(date: string): number {
   return parseRenewalDate(date).getTime();
 }
 
+export function isValidRenewalDate(date: string): boolean {
+  return Number.isFinite(getRenewalDateValue(date));
+}
+
+export function getRenewalDateYear(date: string): string {
+  return String(parseRenewalDate(date).getUTCFullYear());
+}
+
 export function getRenewalToday(now = new Date()): Date {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone: "Asia/Tokyo",
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  }).formatToParts(now);
-  const values = Object.fromEntries(parts.map(({ type, value }) => [type, Number(value)]));
-  return new Date(Date.UTC(values.year, values.month - 1, values.day));
+  return getRenewalCalendarDate(now);
 }
 
 export function formatEventDate(date?: string): string {
@@ -153,6 +175,7 @@ export interface RenewalApplicationSchedule {
 
 export interface RenewalApplicationPerformer {
   name: string;
+  start_at?: string;
 }
 
 export interface RenewalApplication {
@@ -208,6 +231,7 @@ interface RenewalPageSettingsRecord {
   title?: string;
   sub_title?: string;
   description?: string;
+  seo_description?: string;
 }
 
 interface RenewalApplicationRecord {
@@ -271,6 +295,7 @@ function fetchPageSettingsList(): Promise<RenewalPageSettings[]> {
         title: item.title,
         sub_title: item.sub_title,
         description: item.description,
+        seo_description: item.seo_description,
       })),
     );
 }
@@ -420,7 +445,7 @@ async function getArchivesFromMicrocms(): Promise<RenewalArchive[]> {
 
   return response.contents
     .filter((event): event is RenewalArchiveRecord & { id: string; event_date: string } =>
-      Boolean(event.id && event.event_date),
+      Boolean(event.id && event.event_date && isValidRenewalDate(event.event_date)),
     )
     .sort((a, b) => getRenewalDateValue(b.event_date) - getRenewalDateValue(a.event_date))
     .map((event, index) => {

@@ -21,7 +21,11 @@ const {
 const pageSettings = await getPageSettings(Astro.url.pathname);
 const overview = await renewalApi.getOverview();
 const resolvedPageTitle = useCmsContent ? pageSettings?.title : title;
-const resolvedDescription = useCmsContent ? pageSettings?.description : description;
+const defaultDescription =
+  "MuST（マスト）は、東京都内で活動する社会人向けの軽音サークルです。ライブハウスでのセッションやライブを楽しめます。";
+const resolvedDescription = useCmsContent
+  ? pageSettings?.seo_description || pageSettings?.description || defaultDescription
+  : description || defaultDescription;
 const documentTitle = resolvedPageTitle
   ? `${resolvedPageTitle} | MuST Music Spot Tokyo`
   : "MuST | Music Spot Tokyo";

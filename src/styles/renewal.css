@@ -374,16 +374,37 @@
 .renewal-application__status--closed {
   border-color: var(--renewal-pink);
 }
-.renewal-application__status h3 {
+.renewal-application__status > summary {
+  position: relative;
+  display: block;
   margin: 0 0 8px;
-  padding-bottom: 8px;
+  padding: 0 1.5rem 8px 0;
   border-bottom: 1px solid var(--renewal-line-soft);
   font:
     700 1.05rem "Noto Sans JP",
     serif;
   white-space: nowrap;
+  cursor: pointer;
+  list-style: none;
 }
-.renewal-application__status h3 span {
+.renewal-application__status > summary::after {
+  content: "＋";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  color: var(--renewal-cyan);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+.renewal-application__status[open] > summary::after {
+  content: "−";
+}
+.renewal-application__status > summary::-webkit-details-marker {
+  display: none;
+}
+.renewal-application__status > summary span {
   display: inline-flex;
   width: 1.25rem;
   height: 1.25rem;
@@ -392,7 +413,7 @@
   margin-right: 6px;
   color: var(--renewal-cyan);
 }
-.renewal-application__status h3 span svg {
+.renewal-application__status > summary span svg {
   width: 100%;
   height: 100%;
   fill: none;
@@ -433,6 +454,14 @@
 }
 .renewal-application__audience-only {
   color: #ffd5f4 !important;
+}
+.renewal-application__audience-only--details {
+  margin: 0;
+  padding-top: 0.35rem;
+  padding-left: 25px;
+  color: var(--renewal-gold) !important;
+  font-size: var(--renewal-font-md);
+  line-height: 1.6;
 }
 .renewal-application__vacancies span {
   display: flex;
@@ -501,6 +530,10 @@
     margin: 0.65rem 1rem 0;
     gap: 2px;
   }
+  .renewal-application__audience-only--details {
+    margin-left: 1rem;
+    padding-left: 19px;
+  }
   .renewal-application__details-list > div {
     grid-template-columns: 15px 35px 1fr;
     gap: 4px;
@@ -518,12 +551,12 @@
     padding: 6px 8px;
     border-radius: 8px;
   }
-  .renewal-application__status h3 {
+  .renewal-application__status > summary {
     display: flex;
     align-items: center;
     margin-bottom: 4px;
     padding-bottom: 4px;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
   }
   .renewal-application__status p,
   .renewal-application__status--closed p {
@@ -536,7 +569,7 @@
     display: none;
   }
   .renewal-application__vacancies {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 4px 1rem;
     margin-inline: 1rem;
   }

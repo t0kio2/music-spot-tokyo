@@ -264,13 +264,21 @@
   margin-inline: auto;
   justify-content: center;
   border-radius: 999px;
-  padding-inline: 1rem;
+  min-height: 2.5rem;
+  padding-inline: 1.1rem;
+  font-size: var(--renewal-font-md);
 }
 .renewal-archive__setlist b {
   margin-left: 0.4rem;
+  font-size: 1.2rem;
 }
 .renewal-archive__setlist .renewal-archive__youtube-play {
   fill: var(--renewal-bg);
+}
+.renewal-archive__setlist svg {
+  flex-basis: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 @media (max-width: 760px) {
   .renewal-archive__filters {

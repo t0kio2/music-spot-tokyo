@@ -15,6 +15,8 @@ interface Props {
 const { event } = Astro.props;
 const schedule = event.regular_session_info[0];
 const isClosed = event.is_closed;
+const isBand = event.event_type === "band";
+const hasStatusMessage = event.status_message !== "パートごとの募集状況";
 const statusLabel = (status: string) =>
   status === "waitlist" ? "キャンセル待ち" : status === "open" ? "募集中" : "募集終了";
 const eventDate = event.event_date ? parseRenewalDate(event.event_date) : undefined;
@@ -59,33 +61,40 @@ const formatMonth = (month: number) => (month < 10 ? `０${month}` : String(mont
       </div>
     </div>
     {event.event_date || event.place || event.fee ? (
-      <dl class="renewal-application__details-list">
-        <div>
-          <dt>
-            <RenewalIcon name="calendar" />
-          </dt>
-          <dd>
-            <b>日時</b>
-            <span>{formatEventDate(event.event_date)}</span>
-          </dd>
-        </div>
-        <div>
-          <dt>
-            <RenewalIcon name="pin" />
-          </dt>
-          <dd>
-            <b>会場</b>
-            <span>{event.place ?? "未定"}</span>
-          </dd>
-        </div>
-        <div>
-          <dt>¥</dt>
-          <dd>
-            <b>費用</b>
-            <span>{event.fee ?? "未定"}</span>
-          </dd>
-        </div>
-      </dl>
+      <>
+        <dl class="renewal-application__details-list">
+          <div>
+            <dt>
+              <RenewalIcon name="calendar" />
+            </dt>
+            <dd>
+              <b>日時</b>
+              <span>{formatEventDate(event.event_date)}</span>
+            </dd>
+          </div>
+          <div>
+            <dt>
+              <RenewalIcon name="pin" />
+            </dt>
+            <dd>
+              <b>会場</b>
+              <span>{event.place ?? "未定"}</span>
+            </dd>
+          </div>
+          <div>
+            <dt>¥</dt>
+            <dd>
+              <b>費用</b>
+              <span>{event.fee ?? "未定"}</span>
+            </dd>
+          </div>
+        </dl>
+        {isBand && (
+          <p class="renewal-application__audience-only renewal-application__audience-only--details">
+            観覧者のみの募集です。<br />出演者の募集は行なっておりません。
+          </p>
+        )}
+      </>
     ) : (
       <p class="renewal-application__undecided">日程・内容は未定です。</p>
     )}
@@ -93,12 +102,13 @@ const formatMonth = (month: number) => (month < 10 ? `０${month}` : String(mont
 
   {event.performers.length > 0 && (
     <div class:list={["renewal-application__roster", styles.roster]}>
-      <h3>出演（演奏順は未定）</h3>
+      <h3>出演</h3>
       <ol>
         {event.performers.map((performer, index) => (
           <li>
             <span>{index + 1}</span>
-            {performer.name}
+            <time class={styles.performerTime}>{performer.start_at ?? ""}</time>
+            <span class={styles.performerName}>{performer.name}</span>
           </li>
         ))}
       </ol>
@@ -170,44 +180,37 @@ const formatMonth = (month: number) => (month < 10 ? `０${month}` : String(mont
     </div>
   )}
 
-  <aside
-    class:list={[
-      "renewal-application__status",
-      { "renewal-application__status--closed": isClosed },
-    ]}
-  >
-    <h3>
-      <span>
-        <RenewalIcon name="users" />
-      </span>
-      募集状況
-    </h3>
-    {event.parts.length > 0 ? (
-      <>
-        <p class:list={{ "renewal-application__audience-only": event.event_type === "band" }}>
-          {event.event_type === "band" ? (
-            <>
-              観覧者のみの募集です。
-              <br />
-              出演者の募集は行なっておりません。
-            </>
-          ) : (
-            event.status_message
-          )}
-        </p>
-        <div class="renewal-application__vacancies">
-          {event.parts.map((part) => (
-            <span>
-              ♬ {part.part_name}{" "}
-              <b class:list={{ "is-wait": part.status === "waitlist" }}>
-                {statusLabel(part.status)}
-              </b>
-            </span>
-          ))}
-        </div>
-      </>
-    ) : (
-      <p>{event.status_message}</p>
-    )}
-  </aside>
+  {!isBand && (
+    <details
+      open
+      class:list={[
+        "renewal-application__status",
+        { "renewal-application__status--closed": isClosed },
+      ]}
+    >
+      <summary>
+        <span>
+          <RenewalIcon name="users" />
+        </span>
+        募集状況
+      </summary>
+      {event.parts.length > 0 ? (
+        <>
+          {hasStatusMessage && <p>{event.status_message}</p>}
+          <div class="renewal-application__vacancies">
+            {event.parts.map((part) => (
+              <span>
+                ♬ {part.part_name}{" "}
+                <b class:list={{ "is-wait": part.status === "waitlist" }}>
+                  {statusLabel(part.status)}
+                </b>
+              </span>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p>{event.status_message}</p>
+      )}
+    </details>
+  )}
 </article>
