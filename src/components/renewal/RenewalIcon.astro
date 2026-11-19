@@ -4,7 +4,7 @@ export type IconName =
   | "users"
   | "music"
   | "mic"
-  | "route"
+  | "double-arrow"
   | "chart"
   | "play"
   | "nodes"
@@ -44,14 +44,7 @@ const viewBox = isLine ? "0 0 32 24" : "0 0 24 24";
       <path d="M5 11a7 7 0 0 0 14 0M12 18v4M8 22h8" />
     </>
   )}
-  {name === "route" && (
-    <>
-      <circle cx="5" cy="5" r="2" />
-      <circle cx="19" cy="12" r="2" />
-      <circle cx="5" cy="19" r="2" />
-      <path d="M7 5h4a6 6 0 0 1 6 6M17 14a6 6 0 0 1-6 5H7" />
-    </>
-  )}
+  {name === "double-arrow" && <path d="m4 5 7 7-7 7m6-14 7 7-7 7" />}
   {name === "chart" && (
     <>
       <rect x="3" y="16" width="4" height="4" rx="0.7" />
