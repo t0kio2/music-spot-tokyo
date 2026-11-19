@@ -146,9 +146,12 @@
 :global(.renewal-flow__hero) .title,
 :global(.renewal-application__hero) .title,
 :global(.renewal-faq-page__hero) .title,
-:global(.renewal-precautions__hero) .title,
-:global(.renewal-archive-detail__hero) .title {
+:global(.renewal-precautions__hero) .title {
   font-size: clamp(2.4rem, 5vw, 4rem);
+}
+
+:global(.renewal-archive-detail__hero) .title {
+  font-size: clamp(2.25rem, 4.5vw, 3.7rem);
 }
 
 :global(.renewal-archive__hero) .description,
@@ -330,8 +333,11 @@
   :global(.renewal-flow__hero) .title,
   :global(.renewal-application__hero) .title,
   :global(.renewal-faq-page__hero) .title,
-  :global(.renewal-precautions__hero) .title,
-  :global(.renewal-archive-detail__hero) .title {
+  :global(.renewal-precautions__hero) .title {
     font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  :global(.renewal-archive-detail__hero) .title {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
   }
 }
