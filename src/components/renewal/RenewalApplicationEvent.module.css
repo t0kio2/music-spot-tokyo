@@ -239,6 +239,20 @@
   text-overflow: ellipsis;
 }
 
+@media (min-width: 761px) {
+  :global(.renewal-application__event--band) .renewal-application__poster {
+    grid-row: 1 / span 2;
+  }
+
+  :global(.renewal-application__event--band) .roster {
+    grid-column: 3 / -1;
+  }
+
+  :global(.renewal-application__event--band) .schedule {
+    grid-column: 2 / -1;
+  }
+}
+
 .performerTime {
   color: var(--renewal-gold);
   white-space: nowrap;

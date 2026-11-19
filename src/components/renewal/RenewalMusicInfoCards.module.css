@@ -36,10 +36,6 @@
 .past {
   --renewal-card-image: url("../../assets/renewal/materials_webp/wataru.webp");
 }
-.past::before {
-  background-image: linear-gradient(90deg, #010811d9 0%, #010811b8 38%, #0108113d 70%, transparent),
-    linear-gradient(0deg, #010811b8, transparent 62%), var(--renewal-card-image);
-}
 @media (min-width: 761px) {
   .past::before {
     background-position: center, center, -25% 70%;

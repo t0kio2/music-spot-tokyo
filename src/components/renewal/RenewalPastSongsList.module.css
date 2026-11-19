@@ -1,5 +1,5 @@
 .section {
-  width: min(100% - 3rem, 1120px);
+  width: min(100% - 3rem, 760px);
   margin: 1rem auto 2rem;
 }
 .toolbar {
