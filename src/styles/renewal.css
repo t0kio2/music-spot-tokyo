@@ -1186,20 +1186,29 @@
   .renewal-overview__stats,
   .renewal-flow__steps,
   .renewal-faq-page__content,
-  .renewal-precautions__content,
   .renewal-schedule__content,
-  .renewal-setlist__content,
-  .renewal-application__events,
-  .renewal-archive__filters {
+  .renewal-application__events {
     margin-top: 0.6rem;
   }
 
   .renewal-overview__content,
   .renewal-faq-page__content,
-  .renewal-precautions__content,
-  .renewal-schedule__content,
-  .renewal-setlist__content {
+  .renewal-schedule__content {
     padding-top: 0.6rem;
+  }
+
+  .renewal-precautions__content,
+  .renewal-setlist__content {
+    margin-top: 0.2rem;
+    padding-top: 0.2rem;
+  }
+
+  .renewal-archive__filters {
+    margin-top: 0;
+  }
+
+  .renewal-archive__grid {
+    margin-top: 0.35rem;
   }
 }
 

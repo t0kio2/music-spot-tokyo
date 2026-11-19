@@ -1,7 +1,7 @@
 .hero {
   position: relative;
-  min-height: 14rem;
-  padding: 1.45rem var(--renewal-content-gutter) 1.8rem;
+  min-height: 13.5rem;
+  padding: 1.45rem var(--renewal-content-gutter) 1.4rem;
   border-bottom: 0;
   --renewal-hero-image: var(--renewal-page-hero-image, none);
   background-image:
@@ -94,13 +94,13 @@
 }
 
 .compact {
-  min-height: 11.5rem;
+  min-height: 10.5rem;
 }
 
 .title {
   color: #f5f8ff;
   font:
-    700 clamp(2rem, 4vw, 3.35rem) / 1.2 "Noto Sans JP",
+    700 clamp(1.65rem, 3.2vw, 2.75rem) / 1.2 "Noto Sans JP",
     sans-serif;
   letter-spacing: 0.04em;
 }
@@ -129,17 +129,12 @@
 :global(.renewal-application__hero).hero,
 :global(.renewal-schedule__hero).hero,
 :global(.renewal-setlist__hero).hero {
-  min-height: 12.5rem;
+  min-height: 11.5rem;
   overflow: hidden;
-  padding: 1.8rem var(--renewal-content-gutter) 2rem;
+  padding: 1.8rem var(--renewal-content-gutter) 1.4rem;
   background-image:
     linear-gradient(90deg, #010811ed 0%, #01081170 55%, #01081112 100%),
     linear-gradient(0deg, #010811aa, transparent 45%), var(--renewal-hero-image);
-}
-
-:global(.renewal-overview__hero) .title {
-  font-size: clamp(2.3rem, 4.5vw, 4rem);
-  letter-spacing: 0.06em;
 }
 
 :global(.renewal-archive__hero) .title,
@@ -147,11 +142,11 @@
 :global(.renewal-application__hero) .title,
 :global(.renewal-faq-page__hero) .title,
 :global(.renewal-precautions__hero) .title {
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
 }
 
 :global(.renewal-archive-detail__hero) .title {
-  font-size: clamp(2.25rem, 4.5vw, 3.7rem);
+  font-size: clamp(1.9rem, 3.8vw, 3.05rem);
 }
 
 :global(.renewal-archive__hero) .description,
@@ -200,7 +195,7 @@
 :global(.renewal-activity__hero) h1 {
   margin: 0;
   font:
-    600 clamp(2.6rem, 5vw, 4.1rem) / 1.2 "Noto Sans JP",
+    600 clamp(2.1rem, 4.2vw, 3.35rem) / 1.2 "Noto Sans JP",
     sans-serif;
 }
 
@@ -218,13 +213,19 @@
   background-image:
     linear-gradient(90deg, #010912dc, #01091270 48%, #01091218),
     linear-gradient(0deg, #010912a6, transparent 75%), var(--renewal-hero-image);
-  background-position: center 54%;
+  background-position: center 33%;
+}
+
+@media (min-width: 761px) {
+  :global(.renewal-setlist__hero) .slideshow img {
+    object-position: center 33%;
+  }
 }
 
 :global(.renewal-setlist__hero) h1 {
   margin: 0;
   font:
-    700 clamp(2.4rem, 5vw, 4rem) / 1.2 "Noto Sans JP",
+    700 clamp(2rem, 4.2vw, 3.25rem) / 1.2 "Noto Sans JP",
     sans-serif;
   letter-spacing: 0.03em;
 }
@@ -268,13 +269,13 @@
 
 @media (max-width: 760px) {
   .hero {
-    min-height: 14rem;
-    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+    min-height: 13rem;
+    padding: 1.2rem var(--renewal-content-gutter) 1.5rem;
     background-position: center;
   }
 
   .compact {
-    min-height: 11rem;
+    min-height: 10rem;
   }
 
   :global(.renewal-breadcrumb).breadcrumb {
@@ -283,7 +284,7 @@
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .subtitle {
@@ -293,16 +294,16 @@
   }
 
   :global(.renewal-activity__hero).hero {
-    min-height: 11rem;
-    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+    min-height: 10rem;
+    padding: 1.2rem var(--renewal-content-gutter) 1.5rem;
   }
 
   :global(.renewal-activity__hero) h1 {
-    font-size: clamp(2.2rem, 11vw, 3rem);
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
   }
 
   :global(.renewal-setlist__hero) h1 {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.6rem, 8vw, 2.3rem);
   }
 
   :global(.renewal-setlist__hero) p {
@@ -310,8 +311,8 @@
   }
 
   :global(.renewal-archive-detail__hero).hero {
-    min-height: 11rem;
-    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+    min-height: 10rem;
+    padding: 1.2rem var(--renewal-content-gutter) 1.5rem;
   }
 
   :global(.renewal-flow__hero).hero,
@@ -320,13 +321,13 @@
   :global(.renewal-application__hero).hero,
   :global(.renewal-schedule__hero).hero,
   :global(.renewal-setlist__hero).hero {
-    min-height: 9.5rem;
-    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+    min-height: 8.5rem;
+    padding: 1.2rem var(--renewal-content-gutter) 1.5rem;
   }
 
   :global(.renewal-archive__hero).hero {
-    min-height: 11rem;
-    padding: 1.2rem var(--renewal-content-gutter) 2rem;
+    min-height: 10rem;
+    padding: 1.2rem var(--renewal-content-gutter) 1.5rem;
   }
 
   :global(.renewal-archive__hero) .title,
@@ -334,10 +335,10 @@
   :global(.renewal-application__hero) .title,
   :global(.renewal-faq-page__hero) .title,
   :global(.renewal-precautions__hero) .title {
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(1.6rem, 8vw, 2.3rem);
   }
 
   :global(.renewal-archive-detail__hero) .title {
-    font-size: clamp(1.9rem, 9vw, 2.8rem);
+    font-size: clamp(1.5rem, 7.5vw, 2.1rem);
   }
 }
