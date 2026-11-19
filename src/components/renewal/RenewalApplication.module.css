@@ -84,7 +84,7 @@
 
   .events {
     width: calc(100% - 1.1rem);
-    gap: 8px;
+    gap: 12px;
     padding: 10px 0 8px;
   }
 

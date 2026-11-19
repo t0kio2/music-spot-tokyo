@@ -11,7 +11,7 @@
   overflow: hidden;
   min-height: 10rem;
   padding: 1.1rem 1.4rem;
-  border: 1px solid var(--renewal-setlist-line-strong);
+  border: 1px solid var(--renewal-border-medium);
   border-radius: 0.7rem;
   background: var(--renewal-panel-fill);
 }
@@ -35,7 +35,6 @@
 }
 .past {
   --renewal-card-image: url("../../assets/renewal/materials_webp/wataru.webp");
-  border-color: var(--renewal-setlist-line-strong);
 }
 .past::before {
   background-image: linear-gradient(90deg, #010811d9 0%, #010811b8 38%, #0108113d 70%, transparent),

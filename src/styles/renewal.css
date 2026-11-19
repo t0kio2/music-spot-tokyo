@@ -308,16 +308,6 @@
 .renewal-application__title time b {
   font-size: var(--renewal-font-lg);
 }
-.renewal-application__title small {
-  display: inline-block;
-  padding: 3px 10px;
-  border: 1px solid var(--renewal-pink);
-  border-radius: 20px;
-  color: #ffa5e9;
-  font-size: var(--renewal-font-md);
-  font-weight: 700;
-  line-height: 1.2;
-}
 .renewal-application__title h2 {
   margin-top: 6px;
   font:
@@ -381,67 +371,6 @@
 }
 .renewal-application__status--closed {
   border-color: var(--renewal-pink);
-}
-.renewal-application__status > summary {
-  position: relative;
-  display: block;
-  margin: 0;
-  padding: 0 1.5rem 0 0;
-  font:
-    700 1.05rem "Noto Sans JP",
-    serif;
-  white-space: nowrap;
-  cursor: pointer;
-  list-style: none;
-}
-.renewal-application__status[open] > summary {
-  margin-bottom: 8px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--renewal-line-soft);
-}
-.renewal-application__status > summary::after {
-  content: "＋";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  color: var(--renewal-cyan);
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1;
-  transform: translateY(-50%);
-}
-@media (min-width: 761px) {
-  .renewal-application__status > summary {
-    cursor: default;
-    pointer-events: none;
-  }
-  .renewal-application__status > summary::after {
-    display: none;
-  }
-}
-.renewal-application__status[open] > summary::after {
-  content: "−";
-}
-.renewal-application__status > summary::-webkit-details-marker {
-  display: none;
-}
-.renewal-application__status > summary span {
-  display: inline-flex;
-  width: 1.25rem;
-  height: 1.25rem;
-  align-items: center;
-  justify-content: center;
-  margin-right: 6px;
-  color: var(--renewal-cyan);
-}
-.renewal-application__status > summary span svg {
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.7;
 }
 .renewal-application__status p {
   margin: 6px 1rem;
@@ -544,9 +473,6 @@
     white-space: normal;
     width: calc(100% + 7.2rem + 7px);
   }
-  .renewal-application__title small {
-    padding: 2px 8px;
-  }
   .renewal-application__details-list {
     margin: 0.65rem 1rem 0;
     gap: 2px;
@@ -564,38 +490,6 @@
   }
   .renewal-application__details-list dd b {
     font-size: var(--renewal-font-md);
-  }
-  .renewal-application__status {
-    width: 100%;
-    box-sizing: border-box;
-    min-height: unset;
-    padding: 6px 8px;
-    border-radius: 8px;
-  }
-  .renewal-application__status > summary {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    font-size: 0.9rem;
-  }
-  .renewal-application__status p,
-  .renewal-application__status--closed p {
-    margin: 3px 1rem;
-    padding: 0;
-    font-size: var(--renewal-font-md);
-    overflow-wrap: anywhere;
-  }
-  .renewal-application__status > a {
-    display: none;
-  }
-  .renewal-application__vacancies {
-    grid-template-columns: 1fr;
-    gap: 4px 1rem;
-    margin-inline: 1rem;
-  }
-  .renewal-application__footer {
-    display: none;
   }
 }
 
@@ -755,14 +649,6 @@
   font-weight: 500;
   text-shadow: 0 2px 5px #000;
 }
-.renewal-home__content {
-  width: calc(100% - (2 * var(--renewal-content-gutter)));
-  max-width: 1200px;
-  margin-inline: auto;
-  padding: 0.6rem 1rem 1.1rem 1.25rem;
-  padding-right: 0;
-  padding-left: 0;
-}
 .renewal-home__feature-grid {
   display: grid;
   grid-template-columns: 1fr 1.65fr;
@@ -828,9 +714,6 @@
   }
   .renewal-home__hero-copy p {
     font-size: var(--renewal-font-md);
-  }
-  .renewal-home__content {
-    padding: 0.6rem 0.7rem 1rem;
   }
   .renewal-home__feature-grid {
     grid-template-columns: 1fr;
@@ -1291,11 +1174,6 @@
     --renewal-font-xl: 1.1rem;
     --renewal-heading-sm: 1.1rem;
     --renewal-heading-md: 1.35rem;
-  }
-
-  .renewal-home__content {
-    width: calc(100% - 1.4rem);
-    padding-inline: 0;
   }
 
   .renewal-overview__stats,
