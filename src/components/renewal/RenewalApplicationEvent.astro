@@ -217,7 +217,12 @@ const recruitmentAge = "1987〜1999年生まれ";
             {event.parts.map((part) => (
               <span>
                 ♬ {part.part_name}{" "}
-                <b class:list={{ "is-wait": part.status === "waitlist" }}>
+                <b
+                  class:list={{
+                    "is-wait": part.status === "waitlist",
+                    "is-closed": part.status === "closed",
+                  }}
+                >
                   {statusLabel(part.status)}
                 </b>
               </span>
