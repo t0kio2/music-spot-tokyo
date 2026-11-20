@@ -444,6 +444,9 @@
 .renewal-application__vacancies .is-wait {
   color: var(--renewal-gold);
 }
+.renewal-application__vacancies .is-closed {
+  color: var(--renewal-muted);
+}
 @media (max-width: 1000px) and (min-width: 761px) {
   .renewal-application__event {
     grid-template-columns: 8rem minmax(13rem, 1fr) minmax(10rem, 0.8fr) minmax(10rem, 0.8fr);

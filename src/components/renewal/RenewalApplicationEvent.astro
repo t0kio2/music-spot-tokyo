@@ -16,6 +16,7 @@ const { event } = Astro.props;
 const schedule = event.regular_session_info[0];
 const isClosed = event.is_closed;
 const isBand = event.event_type === "band";
+const isStatusOnly = !isBand && !schedule;
 const hasStatusMessage = event.status_message !== "パートごとの募集状況";
 const statusLabel = (status: string) =>
   status === "waitlist" ? "キャンセル待ち" : status === "open" ? "募集中" : "募集終了";
@@ -25,7 +26,14 @@ const formatMonth = (month: number) =>
 const recruitmentAge = "1987〜1999年生まれ";
 ---
 
-<article class:list={["renewal-application__event", { "renewal-application__event--band": isBand }]}>
+<article
+  class:list={[
+    "renewal-application__event",
+    { "renewal-application__event--band": isBand },
+    { "renewal-application__event--project": event.event_type === "project" },
+    { "renewal-application__event--status-only": isStatusOnly },
+  ]}
+>
   <button
     class:list={[
       "renewal-application__poster",
@@ -173,29 +181,6 @@ const recruitmentAge = "1987〜1999年生まれ";
           </p>
         </div>
       )}
-      {schedule.live_date && (
-        <div class="renewal-application__schedule-item">
-          <h3>ライブ本番</h3>
-          <p>
-            <span class={styles.scheduleLine}>
-              <span class={styles.metaIcon}>
-                <RenewalIcon name="calendar" />
-              </span>
-              <span>{schedule.live_date}</span>
-            </span>
-            <span class={styles.scheduleLine}>
-              <span class={styles.metaIcon}>
-                <RenewalIcon name="pin" />
-              </span>
-              <span>{event.place ?? "会場未定"}</span>
-            </span>
-            <span class={styles.scheduleLine}>
-              <span class={styles.currency}>¥</span>
-              <span>{event.fee ?? "費用未定"}</span>
-            </span>
-          </p>
-        </div>
-      )}
     </div>
   )}
 
@@ -232,7 +217,12 @@ const recruitmentAge = "1987〜1999年生まれ";
             {event.parts.map((part) => (
               <span>
                 ♬ {part.part_name}{" "}
-                <b class:list={{ "is-wait": part.status === "waitlist" }}>
+                <b
+                  class:list={{
+                    "is-wait": part.status === "waitlist",
+                    "is-closed": part.status === "closed",
+                  }}
+                >
                   {statusLabel(part.status)}
                 </b>
               </span>
