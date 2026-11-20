@@ -91,7 +91,7 @@ import styles from "./MusicSelectionGuide.module.css";
   };
 
   document.querySelectorAll("[data-music-year]").forEach((element) => {
-    const key = element.dataset.MusicYear;
+    const key = element.getAttribute("data-music-year");
     if (key === "recent-start") element.textContent = String(yearRanges.recentStart);
     if (key === "previous-start") element.textContent = String(yearRanges.previousStart);
     if (key === "previous-end") element.textContent = String(yearRanges.previousEnd);

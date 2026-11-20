@@ -67,10 +67,14 @@
 
 .item > div {
   padding: 0.8rem 1.2rem 1rem 4.7rem;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--cyan);
   color: #fff;
   font-size: var(--font-md);
   line-height: 1.9;
+}
+
+.alternate > div {
+  border-top-color: var(--pink);
 }
 
 @media (max-width: 760px) {

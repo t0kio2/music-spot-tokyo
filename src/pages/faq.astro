@@ -2,11 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import PageHero from "../components/PageHero.astro";
 import FaqList from "../components/FaqList.astro";
-import { getFaqList } from "../lib/microcms";
+import { faqs as faqEntries } from "../data/faqs";
 const currentYear = new Date().getFullYear();
 const youngestAge = currentYear - 1999;
 const oldestAge = currentYear - 1987;
-const faqs = (await getFaqList()).map((faq) => {
+const faqs = faqEntries.map((faq) => {
   if (!faq.question.includes("年齢層")) return faq;
 
   return {
