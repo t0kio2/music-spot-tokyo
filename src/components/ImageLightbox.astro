@@ -36,7 +36,7 @@ const { label } = Astro.props;
 
   document.querySelectorAll<HTMLElement>("[data-lightbox-src]").forEach((trigger) =>
     trigger.addEventListener("click", () => {
-      const imageUrl = trigger.dataset.LightboxSrc;
+      const imageUrl = trigger.getAttribute("data-lightbox-src");
       if (!imageUrl || !lightbox || !lightboxImage) return;
       lightboxImage.src = imageUrl;
       lightboxImage.alt = trigger.getAttribute("aria-label") ?? "画像";
