@@ -68,6 +68,17 @@
   font-size: var(--font-md);
 }
 
+@media (max-width: 760px) {
+  .not-found {
+    min-height: calc(100vh - 4.5rem);
+    min-height: calc(100dvh - 4.5rem);
+  }
+
+  .not-found__content {
+    transform: translateY(-4rem);
+  }
+}
+
 .main {
   min-height: 100vh;
   margin-right: var(--layout-offset);
