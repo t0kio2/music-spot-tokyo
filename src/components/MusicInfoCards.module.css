@@ -5,7 +5,7 @@
   margin-top: 1rem;
 }
 .card {
-  --card-image: url("../assets/materials_webp/madoka.webp");
+  --card-image: url("../assets/materials_webp/photo-08.webp");
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -24,21 +24,29 @@
   pointer-events: none;
   background-image:
     linear-gradient(90deg, #010811d9 0%, #010811b8 38%, #0108113d 70%, transparent),
-    linear-gradient(0deg, #010811b8, transparent 62%),
-    var(--card-image);
-  background-position: center, center, -25% 100%;
-  background-size: auto, auto, 140% auto;
+    linear-gradient(0deg, #010811b8, transparent 62%), var(--card-image);
+  background-position:
+    center,
+    center,
+    -25% 100%;
+  background-size:
+    auto,
+    auto,
+    140% auto;
 }
 .card > * {
   position: relative;
   z-index: 1;
 }
 .past {
-  --card-image: url("../assets/materials_webp/wataru.webp");
+  --card-image: url("../assets/materials_webp/photo-14.webp");
 }
 @media (min-width: 761px) {
   .past::before {
-    background-position: center, center, -25% 70%;
+    background-position:
+      center,
+      center,
+      -25% 70%;
   }
 }
 .card h2 {
