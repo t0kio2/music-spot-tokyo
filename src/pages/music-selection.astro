@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import MusicInfoCards from "../components/MusicInfoCards.astro";
+import MusicSelectionGuide from "../components/MusicSelectionGuide.astro";
+---
+
+<Layout>
+  <div class="setlist">
+    <PageHero
+      className="setlist__hero"
+      id="setlist-title"
+      compact
+    />
+
+    <section class="setlist__content">
+      <MusicSelectionGuide />
+
+      <MusicInfoCards />
+    </section>
+  </div>
+</Layout>

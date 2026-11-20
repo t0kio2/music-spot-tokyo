@@ -1,86 +1,49 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPageBySlug } from "../lib/microcms";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import ApplicationEvent from "../components/ApplicationEvent.astro";
+import ImageLightbox from "../components/ImageLightbox.astro";
+import styles from "../components/Application.module.css";
+import { getDateValue, getToday, Api } from "../lib/api";
+import { APPLICATION_FORM_URL } from "../lib/links";
 
-const page = await getPageBySlug("application");
-
+const today = getToday();
+const events = (await Api.getApplication()).filter((event) => {
+  if (!event.event_date) return true;
+  return getDateValue(event.event_date) >= today.getTime();
+});
 ---
 
-<Layout
-	title={page?.title ?? "募集状況・申込み"}
-	description="社会人軽音サークルMuST（マスト）の募集状況・参加申込みのご案内です。東京都内で音楽仲間を探している方は、募集内容をご確認のうえ、こちらからお申し込みください。"
->
-	<section class="section">
-		<div class="container prose" set:html={page?.content ?? ""} />
-	</section>
+<Layout>
+  <div class:list={["application", styles.page]} id="top">
+    <PageHero
+      className="application__hero"
+      compact
+    />
+    <section
+      class:list={["application__events", styles.events]}
+      aria-label="募集中のライブイベント"
+    >
+      {events.map((event) => (
+        <ApplicationEvent event={event} />
+      ))}
+    </section>
+    <section class:list={["application__apply", styles.apply]} id="apply">
+      <span class="application__apply-icon" aria-hidden="true">
+        <Icon name="users" />
+      </span>
+      <h2>参加申込</h2>
+      <p>上記の各ライブへの参加をご希望の方は、こちらのフォームからお申し込みください。</p>
+      <a
+        href={APPLICATION_FORM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        申込みフォームへ <span>→</span>
+      </a>
+    </section>
+  </div>
 </Layout>
 
-<style>
-	.apply-form {
-		max-width: 680px;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-	}
-
-	.apply-form label {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		font-size: 0.9rem;
-		font-weight: 600;
-		color: var(--color-ink);
-	}
-
-	.apply-form input[type="text"],
-	.apply-form textarea {
-		font: inherit;
-		border: 1px solid var(--color-border);
-		border-radius: 8px;
-		padding: 0.65rem 0.85rem;
-		font-weight: 400;
-	}
-
-	.apply-form fieldset {
-		border: none;
-		padding: 0;
-		margin: 0;
-	}
-
-	.apply-form legend {
-		font-size: 0.9rem;
-		font-weight: 600;
-		margin-bottom: 0.6rem;
-		padding: 0;
-	}
-
-	.checkbox-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 0.6rem;
-	}
-
-	.checkbox {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-weight: 400;
-		font-size: 0.88rem;
-	}
-
-	.submit {
-		align-self: flex-start;
-	}
-
-	.form-note {
-		font-size: 0.8rem;
-		color: var(--color-muted);
-	}
-
-	@media (max-width: 780px) {
-		.checkbox-grid {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
+<ImageLightbox label="チラシを拡大表示" />

@@ -1,10 +1,10 @@
-# Renewalページのルート移行手順
+# ページのルート移行手順
 
 ## 目的
 
-現在 `/renewal/` 配下で公開している新ページを、完全移行時にサイトのルートへ移す。
+現在 `/` 配下で公開している新ページを、完全移行時にサイトのルートへ移す。
 
-- 新ページ: `/renewal/` → `/`
+- 新ページ: `/` → `/`
 - 旧ページ: ビルド対象外へ退避して保管する
 - `/old/` は公開ページとして生成せず、アクセス不可にする
 
@@ -12,56 +12,50 @@
 
 Astroの `src/pages/` 配下にファイルを置くと、静的ビルド時に公開URLが生成される。そのため、旧ページを `src/pages/old/` に移動して保管してはいけない。
 
-旧ページのソースは、次のようなビルド対象外の場所に移す。
-
-```text
-docs/legacy/old-pages/
-```
-
-これにより、旧ページをGit上には残しつつ、`/old/` は生成されない。ホスティング側に既存の `/old/` ファイルが残っている場合は、デプロイ時に削除するか、サーバー設定で `/old/*` を `404` または `403` にする。
+旧ページのソースは移行完了時に削除し、`/old/` は生成しない。ホスティング側に既存の `/old/` ファイルが残っている場合は、デプロイ時に削除するか、サーバー設定で `/old/*` を `404` または `403` にする。
 
 ## ルートの対応表
 
 | 現在のURL                   | 移行後のURL         |
 | --------------------------- | ------------------- |
-| `/renewal/`                 | `/`                 |
-| `/renewal/application/`     | `/application/`     |
-| `/renewal/archive/`         | `/archive/`         |
-| `/renewal/archive/[id]/`    | `/archive/[id]/`    |
-| `/renewal/faq/`             | `/faq/`             |
-| `/renewal/flow/`            | `/flow/`            |
-| `/renewal/history/`         | `/history/`         |
-| `/renewal/music-selection/` | `/music-selection/` |
-| `/renewal/overview/`        | `/overview/`        |
-| `/renewal/past-songs/`      | `/past-songs/`      |
-| `/renewal/precautions/`     | `/precautions/`     |
-| `/renewal/schedule/`        | `/schedule/`        |
+| `/`                 | `/`                 |
+| `/application/`     | `/application/`     |
+| `/archive/`         | `/archive/`         |
+| `/archive/[id]/`    | `/archive/[id]/`    |
+| `/faq/`             | `/faq/`             |
+| `/flow/`            | `/flow/`            |
+| `/history/`         | `/history/`         |
+| `/music-selection/` | `/music-selection/` |
+| `/overview/`        | `/overview/`        |
+| `/past-songs/`      | `/past-songs/`      |
+| `/precautions/`     | `/precautions/`     |
+| `/schedule/`        | `/schedule/`        |
 
-`/benefit/` や旧 `/setlist/` など、Renewal側に対応ページがない旧URLは、移行対象を決めてから扱う。対応ページが不要なら旧ソースを退避し、URLを生成しない。
+`/benefit/` や旧 `/setlist/` など、側に対応ページがない旧URLは、移行対象を決めてから扱う。対応ページが不要なら旧ソースを退避し、URLを生成しない。
 
-## `renewal` 命名の完全撤去
+## `` 命名の完全撤去
 
-ルート移行と同時に、実装上の `renewal` という名前も残さない。URLだけを変更して、コンポーネント名やCSS名に残すと、後から新旧の区別が必要になり続けるため、同じ移行で一括して名前を変更する。
+ルート移行と同時に、実装上の `` という名前も残さない。URLだけを変更して、コンポーネント名やCSS名に残すと、後から新旧の区別が必要になり続けるため、同じ移行で一括して名前を変更する。
 
 ### 変更対象
 
 | 現在の名前の例                   | 移行後の例                                   |
 | -------------------------------- | -------------------------------------------- |
-| `/renewal/...`                   | `/...`                                       |
-| `/api/renewal/...`               | `/api/...` または `/api/site/...`            |
-| `src/pages/renewal/`             | `src/pages/`                                 |
-| `src/components/renewal/`        | `src/components/must/`                       |
-| `RenewalLayout.astro`            | `SiteLayout.astro` または `MustLayout.astro` |
-| `RenewalHeader.astro`            | `SiteHeader.astro` または `MustHeader.astro` |
-| `RenewalApplicationEvent.astro`  | `ApplicationEvent.astro`                     |
-| `renewal-api.ts`                 | `site-api.ts` または `must-api.ts`           |
-| `renewal.css`                    | `site.css` または `must.css`                 |
-| `renewal-tokens.css`             | `site-tokens.css` または `must-tokens.css`   |
-| `RenewalFeaturePanel.module.css` | `FeaturePanel.module.css`                    |
-| `.renewal-*`                     | `.site-*` またはページ固有のクラス名         |
-| `--renewal-*`                    | `--site-*` または意味に合う共通トークン名    |
-| `data-renewal-*`                 | `data-site-*` または意味に合う属性名         |
-| `src/assets/renewal/`            | `src/assets/site/` または用途別ディレクトリ  |
+| `/...`                   | `/...`                                       |
+| `/api/...`               | `/api/...` または `/api/site/...`            |
+| `src/pages/`             | `src/pages/`                                 |
+| `src/components/`        | `src/components/must/`                       |
+| `Layout.astro`            | `SiteLayout.astro` または `MustLayout.astro` |
+| `Header.astro`            | `SiteHeader.astro` または `MustHeader.astro` |
+| `ApplicationEvent.astro`  | `ApplicationEvent.astro`                     |
+| `api.ts`                 | `site-api.ts` または `must-api.ts`           |
+| `.css`                    | `site.css` または `must.css`                 |
+| `site-tokens.css`             | `site-tokens.css` または `must-tokens.css`   |
+| `FeaturePanel.module.css` | `FeaturePanel.module.css`                    |
+| `.*`                     | `.site-*` またはページ固有のクラス名         |
+| `--*`                    | `--site-*` または意味に合う共通トークン名    |
+| `data-*`                 | `data-site-*` または意味に合う属性名         |
+| `src/assets/`            | `src/assets/site/` または用途別ディレクトリ  |
 
 対象はファイル名だけではない。次もすべて検索・変更する。
 
@@ -77,13 +71,13 @@ docs/legacy/old-pages/
 
 ### 推奨する改名順
 
-1. `src/components/renewal/`、`src/styles/renewal*`、`src/assets/renewal/` を新しい名前へ移す。
-2. `Renewal*` のコンポーネント名、型名、APIモジュール名を変更する。
-3. CSSの `.renewal-*`、`--renewal-*`、`data-renewal-*` を変更する。
-4. `src/pages/renewal/` のページをルートへ移し、相対importを修正する。
-5. `/api/renewal/` を新しいAPIパスへ移し、呼び出し元を修正する。
+1. `src/components/`、`src/styles/*`、`src/assets/` を新しい名前へ移す。
+2. `*` のコンポーネント名、型名、APIモジュール名を変更する。
+3. CSSの `.*`、`--*`、`data-*` を変更する。
+4. `src/pages/` のページをルートへ移し、相対importを修正する。
+5. `/api/` を新しいAPIパスへ移し、呼び出し元を修正する。
 6. ナビゲーション、CTA、パンくず、404、CMSパス、canonical、sitemapを修正する。
-7. 旧ファイルを `docs/legacy/old-pages/` へ退避する。退避先のファイル名にも `renewal` を残さない。
+7. 旧ファイルを削除し、ビルド対象から除外する。
 
 大量の単純置換を行う場合でも、URLとCSSクラスを同じ置換規則で機械的に変更しない。URL、コンポーネント、CSS、APIはそれぞれの命名規則に合わせて確認する。
 
@@ -92,7 +86,7 @@ docs/legacy/old-pages/
 生成物や依存パッケージを除外して、大小文字を無視した検索結果を0件にする。
 
 ```sh
-rg -n -i 'renewal' \
+rg -n -i '' \
   src public docs scripts astro.config.mjs package.json README.md AGENTS.md CLAUDE.md \
   -g '!docs/route-migration.md'
 ```
@@ -100,13 +94,13 @@ rg -n -i 'renewal' \
 次も確認する。
 
 ```sh
-rg -n -i 'renewal' dist || true
-find src/pages -type f -path '*renewal*' -print
-find src/components -type f -path '*renewal*' -print
-find src/styles src/assets -type f -path '*renewal*' -print
+rg -n -i '' dist || true
+find src/pages -type f -path '**' -print
+find src/components -type f -path '**' -print
+find src/styles src/assets -type f -path '**' -print
 ```
 
-`dist/` はビルド前の古いファイルが残ることがあるため、クリーンな出力ディレクトリでビルドして確認する。Basic認証下で外部利用されていない `/renewal/` URLは、301設定を残さず削除する。
+`dist/` はビルド前の古いファイルが残ることがあるため、クリーンな出力ディレクトリでビルドして確認する。Basic認証下で外部利用されていない `/` URLは、301設定を残さず削除する。
 
 ## 実施手順
 
@@ -120,13 +114,13 @@ find dist -type f | sort
 次を記録する。
 
 - 現在の旧URL一覧
-- `/renewal/` 配下の新URL一覧
+- `/` 配下の新URL一覧
 - CMS APIが参照しているページ設定のパス
 - 外部リンク、SNSプロフィール、広告、Search Consoleに登録しているURL
 
-### 2. 旧ルートページを退避する
+### 2. 旧ルートページを削除する
 
-現在の旧ルートページを `docs/legacy/old-pages/` に移す。対象例:
+現在の旧ルートページを削除する。対象例:
 
 ```text
 src/pages/index.astro
@@ -142,11 +136,11 @@ src/pages/setlist.astro
 
 旧ページが参照する専用CSSや画像を新ページが使っていない場合も、同じ退避ディレクトリまたはGit履歴に残す。ただし `src/assets/` から移す場合は、新ページのimportがないことを `rg` で確認する。
 
-### 3. Renewalページをルートへ移す
+### 3. ページをルートへ移す
 
-`src/pages/renewal/` のページを `src/pages/` 直下へ移す。移動後は相対importの階層が1つ浅くなるため、次を修正する。
+`src/pages/` のページを `src/pages/` 直下へ移す。移動後は相対importの階層が1つ浅くなるため、次を修正する。
 
-- `../../components/renewal/` → `../components/renewal/`
+- `../../components/` → `../components/`
 - `../../layouts/` → `../layouts/`
 - `../../lib/` → `../lib/`
 - `../../styles/` → `../styles/`
@@ -156,35 +150,35 @@ src/pages/setlist.astro
 
 ### 4. パス依存の実装を更新する
 
-次を検索して、`/renewal/` 前提を新ルートに直す。
+次を検索して、`/` 前提を新ルートに直す。
 
 ```sh
-rg -n '(/renewal/|renewal/application|renewal/archive|Astro\.url\.pathname)' src public astro.config.mjs
+rg -n '(/|/application|/archive|Astro\.url\.pathname)' src public astro.config.mjs
 ```
 
 特に確認する箇所:
 
 - 共通ヘッダー・サイドバーのリンク
 - フッター、CTA、パンくず
-- `RenewalLayout.astro` の `/renewal/application/` 判定
+- `Layout.astro` の `/application/` 判定
 - Canonical URLとCMSの `page_settings` のパス
 - SEO descriptionのページ判定
 - APIエンドポイントのURL
 - `404.astro` のホームリンク
 
-### 5. 旧 `/renewal/` URLを削除する
+### 5. 旧 `/` URLを削除する
 
-`/renewal/` はBasic認証下で外部利用されておらず、アクセスされていない前提のため、新URLへの301リダイレクトは設定しない。`src/pages/renewal/` を削除または退避し、`/renewal/*` はファイルが存在しない状態にする。
+`/` はBasic認証下で外部利用されておらず、アクセスされていない前提のため、新URLへの301リダイレクトは設定しない。`src/pages/` を削除または退避し、`/*` はファイルが存在しない状態にする。
 
 ```text
-/renewal/                    → 404
-/renewal/application/        → 404
-/renewal/faq/                → 404
-/renewal/archive/            → 404
-/renewal/archive/[id]/      → 404
+/                    → 404
+/application/        → 404
+/faq/                → 404
+/archive/            → 404
+/archive/[id]/      → 404
 ```
 
-移行後にBasic認証の設定から `/renewal` 用ルールも削除する。ホスティング側に古い静的ファイルが残っている場合は、デプロイ時に削除する。
+移行後にBasic認証の設定から `/` 用ルールも削除する。ホスティング側に古い静的ファイルが残っている場合は、デプロイ時に削除する。
 
 ### 6. `/old/` を公開しない
 
@@ -214,12 +208,12 @@ git diff --check
 
 デプロイ後は、次を確認する。
 
-- `/` がRenewalホームになる
+- `/` がホームになる
 - 新ルートの全ページが200で表示される
-- `/renewal/` と `/renewal/*` が404になる
+- `/` と `/*` が404になる
 - `/old/` と `/old/*` が404または403になる
 - Canonical、sitemap、robots.txtに旧URLが残っていない
-- 内部リンクに `/renewal/` が残っていない
+- 内部リンクに `/` が残っていない
 - PCとSPの表示が移行前と同じである
 
 ## ロールバック
@@ -231,6 +225,6 @@ git diff --check
 - 新ページがルートで表示される
 - 旧ページのソースはGit上に保管されている
 - `/old/` は公開されていない
-- 旧 `/renewal/` URLが削除されている
+- 旧 `/` URLが削除されている
 - sitemap、canonical、内部リンクが新ルートに揃っている
 - `npm run build` とURL検証が成功している

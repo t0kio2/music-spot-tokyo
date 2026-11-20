@@ -1,0 +1,38 @@
+---
+import type { Recruiting } from "../lib/api";
+import { APPLICATION_FORM_URL } from "../lib/links";
+import ActionLink from "./ActionLink.astro";
+import styles from "./RecruitCta.module.css";
+
+interface Props {
+  recruiting: Recruiting;
+  applicationPage?: boolean;
+}
+
+const { recruiting, applicationPage = false } = Astro.props;
+const style = recruiting.image
+  ? `--recruit-image: url("${recruiting.image.url}");`
+  : undefined;
+---
+
+<footer
+  class:list={[
+    "home__panel",
+    "home__cta",
+    "recruit-cta",
+    styles.cta,
+    { [styles.hasImage]: Boolean(recruiting.image) },
+  ]}
+  aria-label="メンバー募集"
+  style={style}
+>
+  <p>{recruiting.message}</p>
+  <ActionLink
+    href={applicationPage ? APPLICATION_FORM_URL : "/application/"}
+    label={applicationPage ? "申込フォームへ" : "募集状況・申込み"}
+    variant="warm"
+    icon="person"
+    target={applicationPage ? "_blank" : undefined}
+    rel={applicationPage ? "noopener noreferrer" : undefined}
+  />
+</footer>

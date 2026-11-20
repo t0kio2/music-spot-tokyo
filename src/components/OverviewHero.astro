@@ -1,0 +1,45 @@
+---
+import Breadcrumb from "./Breadcrumb.astro";
+import sharedStyles from "./PageHero.module.css";
+import styles from "./OverviewHero.module.css";
+import { getPageSettings } from "../lib/api";
+
+const pageSettings = await getPageSettings(Astro.url.pathname);
+const heroImages = pageSettings?.hero_images ?? [];
+const title = pageSettings?.title ?? "";
+const subTitle = pageSettings?.sub_title ?? "";
+const description = pageSettings?.description ?? "";
+const breadcrumbTitle = pageSettings?.sidemenu_page_title ?? "";
+---
+
+<section
+  class:list={["overview__hero", sharedStyles.hero, styles.hero]}
+  id="about"
+  aria-labelledby="overview-title"
+>
+  {heroImages.length > 0 && (
+    <div
+      class:list={[sharedStyles.slideshow, { [sharedStyles.slideshowAnimated]: heroImages.length > 1 }]}
+      style={`--hero-slide-count: ${heroImages.length}`}
+      aria-hidden="true"
+    >
+      {heroImages.map((image, index) => (
+        <img src={image.url} alt="" style={`--hero-slide-index: ${index}`} />
+      ))}
+    </div>
+  )}
+  <Breadcrumb title={breadcrumbTitle} className={sharedStyles.breadcrumb} />
+  <h1 class={styles.title} id="overview-title">
+    {title}
+  </h1>
+  <h2 class={styles.heading}>
+    {subTitle.split("\n").map((line, index) => (
+      <Fragment>{index > 0 && <br />}{line}</Fragment>
+    ))}
+  </h2>
+  <p class={styles.lead}>
+    {description.split("\n").map((line, index) => (
+      <Fragment>{index > 0 && <br />}{line}</Fragment>
+    ))}
+  </p>
+</section>

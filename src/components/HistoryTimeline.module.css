@@ -1,0 +1,266 @@
+.timeline {
+  width: calc(100% - (2 * var(--content-gutter)));
+  margin: 1rem auto 0;
+  padding-bottom: 1rem;
+}
+
+:global(.activity__photo-control) {
+  display: none;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+@media (max-width: 760px) {
+  :global(.activity__photo-control) {
+    display: none !important;
+  }
+  :global(.activity__year-photos.has-multiple .activity__photo-control) {
+    display: none !important;
+  }
+  :global(.activity__photo-control--prev) {
+    left: 0.15rem;
+  }
+  :global(.activity__photo-control--next) {
+    right: 0.35rem;
+  }
+}
+
+@media (min-width: 761px) {
+  :global(.activity__year-photos.has-carousel) {
+    position: relative;
+  }
+  :global(.activity__year-photos.has-carousel .activity__photo-track) {
+    display: block;
+  }
+  :global(.activity__year-photos.has-carousel img) {
+    display: none;
+  }
+  :global(.activity__year-photos.has-carousel img.is-visible) {
+    display: block !important;
+  }
+  :global(.activity__year-photos.has-carousel .activity__photo-control) {
+    position: absolute;
+    top: 50%;
+    display: grid;
+    width: 1.6rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 0.25rem;
+    color: #fff;
+    background: #00131dcc !important;
+    font-size: 1.35rem;
+    line-height: 1;
+    transform: translateY(-50%);
+  }
+  :global(.activity__photo-control--prev) {
+    left: 0.2rem;
+  }
+  :global(.activity__photo-control--next) {
+    right: 0.2rem;
+  }
+}
+
+.timeline > h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  font:
+    600 1.7rem "Noto Sans JP",
+    sans-serif;
+}
+.years {
+  display: grid;
+  gap: 0.6rem;
+}
+.year {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) 15rem;
+  min-width: 0;
+  min-height: 5.8rem;
+  overflow: hidden;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+}
+.yearLabel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0.7rem 0.8rem;
+  border-right: 1px solid var(--border-neutral);
+  text-align: center;
+}
+.yearLabel::after {
+  content: "";
+  position: absolute;
+  top: 1.2rem;
+  right: -0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: #ff9e88;
+  box-shadow: 0 0 7px #ff9e8888;
+}
+.yearLabel strong {
+  color: #ff9d82;
+  font:
+    600 var(--heading-md)/1.2 "Noto Sans JP",
+    sans-serif;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 0.7rem 1rem;
+  overflow-wrap: anywhere;
+  font-size: var(--font-md);
+  line-height: 1.65;
+}
+.copy > b {
+  color: var(--cyan);
+  font-size: var(--font-lg);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.copy ul {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.75rem;
+  row-gap: 0.2rem;
+  margin: 0.15rem 0 0.3rem;
+  padding: 0;
+  list-style: none;
+  line-height: 1.45;
+}
+.copy li {
+  position: relative;
+  min-width: 0;
+  padding-left: 0.8rem;
+  overflow-wrap: anywhere;
+}
+.copy li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+}
+.copy p {
+  margin: auto 0 0;
+}
+.copy p strong {
+  color: #55e6ff;
+  font-size: var(--heading-sm);
+}
+.photos {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  min-width: 0;
+  padding: 0.8rem 1rem 0.8rem 0;
+}
+.photoTrack {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+  min-width: 0;
+  width: 100%;
+  direction: rtl;
+}
+.photos img {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  border: 0;
+  border-radius: 0.35rem;
+  object-fit: cover;
+  opacity: 0.9;
+  cursor: zoom-in;
+}
+
+@media (min-width: 761px) {
+  .year {
+    grid-template-columns: 7.5rem minmax(0, 1fr) 20rem;
+  }
+
+  .photos img {
+    height: 6rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .year {
+    grid-template-columns: 7.5rem minmax(0, 1fr) 25rem;
+    min-height: 7.2rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .timeline {
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+  .timeline > h2 {
+    padding-inline: var(--content-gutter);
+    font-size: 1.15rem;
+  }
+  .years {
+    width: 100%;
+    gap: 0;
+  }
+  .year {
+    grid-template-columns: 4.25rem minmax(0, 1fr) 6rem;
+    grid-template-rows: 1fr;
+    min-height: 8.5rem;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+  .year + .year {
+    border-top: 0;
+  }
+  .yearLabel {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 0.6rem 0.35rem;
+    border-right: 1px solid var(--border-neutral);
+  }
+  .yearLabel::after {
+    display: none;
+  }
+  .yearLabel strong {
+    font-size: var(--heading-sm);
+  }
+  .copy {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0.6rem 0.45rem;
+    font-size: var(--font-md);
+  }
+  .copy > b {
+    font-size: calc(var(--font-md) - 0.1rem);
+  }
+  .copy ul {
+    column-gap: 0.6rem;
+    row-gap: 0.1rem;
+  }
+  .photos {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: stretch;
+    padding: 0.6rem 0.4rem 0.6rem 0;
+  }
+  .photoTrack {
+    display: block;
+  }
+  .photos img {
+    display: none !important;
+    height: 100%;
+    min-height: 7.3rem;
+  }
+  .photos img:global(.is-active) {
+    display: block !important;
+  }
+}

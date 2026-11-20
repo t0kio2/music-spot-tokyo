@@ -1,0 +1,92 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import "../../components/ArchiveDetail.css";
+import {
+  Api,
+  formatDate,
+  getEventTypeLabel,
+  getYoutubeThumbnail,
+  type Archive,
+} from "../../lib/api";
+
+export async function getStaticPaths() {
+  const archives = await Api.getArchives();
+  return archives.map((archive) => ({ params: { id: archive.id }, props: { archive } }));
+}
+
+interface Props {
+  archive: Archive;
+}
+const { archive } = Astro.props;
+const formatDate = (date: string) =>
+  formatDate(date, {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    weekday: "short",
+  });
+---
+
+<Layout
+  useCmsContent={false}
+  title={`${archive.title} 演奏曲`}
+  description={`${archive.title}の開催情報と演奏曲をご紹介します。${getEventTypeLabel(archive.event_type)}として開催されたライブの曲目や演奏動画、会場情報をご確認いただけます。`}
+>
+  <div class="archive-detail">
+    <PageHero
+      title={archive.title}
+      className="archive-detail__hero"
+      breadcrumbTitle="演奏曲"
+      parentTitle="過去のライブ"
+      parentHref="/archive/"
+      id="archive-title"
+      compact
+      useCmsContent={false}
+      style={`--archive-detail-image: url("${archive.cover_image.url}")`}
+    >
+      <p slot="eyebrow" class="archive-detail__eyebrow">
+        {formatDate(archive.event_date)} {getEventTypeLabel(archive.event_type)}
+      </p>
+      <p class="archive-detail__place">
+        <Icon name="pin" />
+        {archive.place}
+      </p>
+    </PageHero>
+    <main class="archive-detail__content">
+      <div class="archive-detail__heading">
+        <h2>演奏曲</h2>
+      </div>
+      {archive.setlist.length > 0 ? (
+        <ol class="archive-detail__setlist">
+          {archive.setlist.map((song, index) => (
+            <li class:list={{ "has-video": Boolean(song.youtube_url) }}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <b>{song.song_title}</b>
+                <small>{song.artist}</small>
+              </div>
+              {song.youtube_url && (
+                <a
+                  class="archive-detail__thumbnail"
+                  href={song.youtube_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${song.song_title}の演奏動画`}
+                >
+                  {getYoutubeThumbnail(song.youtube_url) && (
+                    <img src={getYoutubeThumbnail(song.youtube_url)} alt="" />
+                  )}
+                  <i aria-hidden="true">▶</i>
+                </a>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="archive-detail__empty">演奏曲は準備中です。</p>
+      )}
+    </main>
+  </div>
+</Layout>

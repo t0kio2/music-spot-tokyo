@@ -1,0 +1,70 @@
+---
+import Icon from "./Icon.astro";
+import styles from "./OverviewStats.module.css";
+type IconName = "pin" | "users" | "music";
+interface StatItem {
+  icon: IconName;
+  label: string;
+  value: string | number;
+  suffix?: string;
+  detail?: string;
+  date?: string;
+  large?: boolean;
+}
+interface Props {
+  items: StatItem[];
+  ariaLabel?: string;
+  className?: string;
+}
+const { items, ariaLabel = "MuSTの概要", className } = Astro.props;
+---
+
+<section class:list={["overview__stats", styles.stats, className]} aria-label={ariaLabel}>
+  {items.map((item) => (
+    <div class:list={["overview__stat", styles.stat, { [styles.large]: item.large }]}>
+      <span class={styles.icon}>
+        <Icon name={item.icon} />
+      </span>
+      <div>
+        <span class={styles.label}>{item.label}</span>
+        <strong class={styles.value}>
+          {item.value}
+          <small>{item.suffix}</small>
+        </strong>
+        {item.detail && <small class={styles.detail}>{item.detail}</small>}
+        {item.date === "today" ? (
+          <time class={styles.date} data-current-date>
+            —
+          </time>
+        ) : (
+          item.date && (
+            <time class={styles.date} datetime={item.date}>
+              {new Date(item.date).toLocaleDateString("ja-JP")}時点
+            </time>
+          )
+        )}
+      </div>
+    </div>
+  ))}
+</section>
+
+<script>
+  const currentDateFormatter = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  const currentDateParts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  document.querySelectorAll("[data-current-date]").forEach((element) => {
+    const now = new Date();
+    element.textContent = `${currentDateFormatter.format(now)}時点`;
+    element.setAttribute("datetime", currentDateParts.format(now));
+  });
+</script>

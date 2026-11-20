@@ -1,0 +1,256 @@
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.65rem clamp(1rem, 2.2vw, 2rem) 0.9rem;
+}
+
+.step {
+  position: relative;
+  min-height: 15rem;
+  padding: 0.8rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--cyan);
+  border-radius: 0.8rem;
+  background: var(--surface-card-soft);
+}
+
+.alternate {
+  border-color: var(--pink);
+}
+
+.toggle {
+  display: grid;
+  grid-template-columns: var(--icon-box) minmax(0, 1fr) 1.35rem;
+  grid-template-rows: 3.2rem 5.5rem;
+  grid-template-areas:
+    "number title chevron"
+    "icon icon icon";
+  column-gap: 0.7rem;
+  align-items: center;
+  width: 100%;
+  height: 8.7rem;
+  padding: 0 0 0.55rem;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  list-style: none;
+}
+
+.toggle::-webkit-details-marker {
+  display: none;
+}
+
+.number {
+  grid-area: number;
+  display: grid;
+  width: var(--icon-box);
+  height: var(--icon-box);
+  place-items: center;
+  border: 1px solid var(--cyan);
+  border-radius: 50%;
+  color: var(--text);
+  font:
+    600 0.9rem/1 "Noto Sans JP",
+    sans-serif;
+}
+
+.alternate .number {
+  border-color: var(--pink);
+}
+
+.toggle h2 {
+  grid-area: title;
+  min-width: 0;
+  margin: 0;
+  font:
+    700 clamp(0.85rem, 1.35vw, 1.15rem) / 1.45 "Noto Sans JP",
+    serif;
+  white-space: nowrap;
+}
+
+.toggle h2 small {
+  display: block;
+  margin-left: -0.15rem;
+  color: var(--gold);
+  font:
+    600 0.58rem "Noto Sans JP",
+    sans-serif;
+}
+
+.icon {
+  position: relative;
+  grid-area: icon;
+  display: grid;
+  height: 5.5rem;
+  place-items: center;
+  color: var(--cyan);
+  font-size: 2.8rem;
+  line-height: 1;
+  text-shadow: 0 0 13px #04d8ff55;
+}
+
+.iconSvg {
+  width: 4.5rem;
+  height: 4.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.stageIcon {
+  width: 4.5rem;
+  height: 4.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+  transform: scale(0.95);
+}
+
+.guitarIcon {
+  display: block;
+  --guitar-icon-size: 4.5rem;
+}
+
+.alternate .icon {
+  color: var(--pink);
+}
+
+.toggle > i {
+  display: block;
+  grid-area: chevron;
+  color: var(--cyan);
+  font-size: 1.35rem;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.alternate .toggle > i {
+  color: var(--pink);
+}
+
+.step[open] .toggle > i {
+  transform: rotate(45deg);
+}
+
+.body {
+  display: block;
+  padding: 0.8rem 0.2rem 0.9rem;
+  border-top: 0;
+}
+
+.body p {
+  color: #edf5ff;
+  font-size: var(--font-md);
+  line-height: 1.8;
+}
+
+.body aside {
+  margin-top: 0.55rem;
+  padding: 0;
+  border: 0;
+  color: var(--gold);
+  font-size: 0.64rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) and (min-width: 761px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 761px) {
+  .steps {
+    width: min(100%, 1120px);
+    box-sizing: border-box;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.8rem 0.7rem;
+  }
+
+  .step {
+    min-height: 0;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .toggle {
+    grid-template-columns: var(--icon-box) var(--icon-box) minmax(0, 1fr) 1.35rem;
+    grid-template-rows: none;
+    grid-template-areas: "number icon title chevron";
+    column-gap: 0.45rem;
+    height: auto;
+    min-height: 2.8rem;
+    padding: 0;
+    border-bottom: 0;
+  }
+
+  .number {
+    width: var(--icon-box);
+    height: var(--icon-box);
+  }
+
+  .icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 2rem;
+  }
+
+  .iconSvg {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .stageIcon {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+
+  .guitarIcon {
+    --guitar-icon-size: 1.9rem;
+  }
+
+  .body {
+    display: none;
+    padding: 0.65rem 0.75rem 0.8rem 3.3rem;
+  }
+
+  .step[open] .body {
+    display: block;
+  }
+
+  .body p {
+    display: block;
+    font-size: var(--font-md);
+  }
+
+  .body aside {
+    margin-top: 0.5rem;
+    font-size: 0.62rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .mobileOnly .toggle {
+    pointer-events: none;
+  }
+
+  .mobileOnly .toggle > i {
+    display: none;
+  }
+}

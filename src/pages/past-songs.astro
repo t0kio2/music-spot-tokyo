@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import PastSongsList from "../components/PastSongsList.astro";
+import { Api } from "../lib/api";
+
+const archives = (await Api.getArchives()).filter(
+  (archive) => archive.event_type === "regular",
+);
+const songs = new Map<
+  string,
+  {
+    artist: string;
+    title: string;
+    events: { id: string; title: string; eventDate: string; youtubeUrl?: string }[];
+  }
+>();
+
+archives.forEach((archive) => {
+  archive.setlist.forEach((song) => {
+    const artist = song.artist.trim();
+    const title = song.song_title.trim();
+    if (!artist && !title) return;
+    const key = `${artist.toLocaleLowerCase()}\u0000${title.toLocaleLowerCase()}`;
+    const existing = songs.get(key) ?? { artist, title, events: [] };
+    if (!existing.events.some((event) => event.id === archive.id)) {
+      existing.events.push({
+        id: archive.id,
+        title: archive.title,
+        eventDate: archive.event_date,
+        youtubeUrl: song.youtube_url,
+      });
+    }
+    songs.set(key, existing);
+  });
+});
+
+const pastSongs = [...songs.values()].sort((a, b) => a.title.localeCompare(b.title, "ja"));
+---
+
+<Layout>
+  <div class="setlist">
+    <PageHero
+      className="setlist__hero past-songs__hero"
+      id="past-songs-title"
+      compact
+    />
+    <PastSongsList songs={pastSongs} />
+  </div>
+</Layout>

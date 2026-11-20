@@ -1,0 +1,344 @@
+.hero {
+  position: relative;
+  min-height: 13.5rem;
+  padding: 1.45rem var(--content-gutter) 1.4rem;
+  border-bottom: 0;
+  --hero-image: var(--page-hero-image, none);
+  background-image:
+    linear-gradient(90deg, #010811ed, #01081170 55%, #01081112),
+    linear-gradient(0deg, #010811aa, transparent 45%), var(--hero-image);
+  background-position: center;
+  background-size: cover;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(0deg, #010711b8, transparent);
+}
+
+.slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.slideshow::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 42%;
+  pointer-events: none;
+  background: linear-gradient(0deg, #010711e8, transparent);
+}
+
+.slideshow img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.slideshowAnimated img {
+  opacity: 0;
+  animation: page-hero-fade calc(var(--hero-slide-count) * 6s) ease-in-out infinite;
+  animation-delay: calc(var(--hero-slide-index) * -6s);
+}
+
+@keyframes page-hero-fade {
+  0%,
+  28% {
+    opacity: 1;
+  }
+  36%,
+  94% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+:global(.breadcrumb).breadcrumb {
+  display: flex;
+  gap: 0.7rem;
+  width: fit-content;
+  margin-bottom: 1.55rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+:global(.breadcrumb).breadcrumb :global(a) {
+  color: #fff;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero > .slideshow {
+  position: absolute;
+  z-index: 0;
+}
+
+.compact {
+  min-height: 10.5rem;
+}
+
+.title {
+  color: #f5f8ff;
+  font:
+    700 clamp(1.65rem, 3.2vw, 2.75rem) / 1.2 "Noto Sans JP",
+    sans-serif;
+  letter-spacing: 0.04em;
+}
+
+.description {
+  max-width: 42rem;
+  margin-top: 0.35rem;
+  color: #fff;
+  font-size: var(--font-md);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+.subtitle {
+  margin-left: 0.8rem;
+  color: var(--pink);
+  font:
+    400 0.48em "Caveat",
+    cursive;
+  letter-spacing: 0;
+}
+
+:global(.flow__hero).hero,
+:global(.faq-page__hero).hero,
+:global(.precautions__hero).hero,
+:global(.application__hero).hero,
+:global(.schedule__hero).hero,
+:global(.setlist__hero).hero {
+  min-height: 11.5rem;
+  overflow: hidden;
+  padding: 1.8rem var(--content-gutter) 1.4rem;
+  background-image:
+    linear-gradient(90deg, #010811ed 0%, #01081170 55%, #01081112 100%),
+    linear-gradient(0deg, #010811aa, transparent 45%), var(--hero-image);
+}
+
+:global(.archive__hero) .title,
+:global(.flow__hero) .title,
+:global(.application__hero) .title,
+:global(.faq-page__hero) .title,
+:global(.precautions__hero) .title {
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+}
+
+:global(.archive-detail__hero) .title {
+  font-size: clamp(1.9rem, 3.8vw, 3.05rem);
+}
+
+:global(.archive__hero) .description,
+:global(.setlist__hero) .description,
+:global(.flow__hero) .description,
+:global(.application__hero) .description,
+:global(.faq-page__hero) .description,
+:global(.precautions__hero) .description {
+  max-width: 43rem;
+  margin-top: 0.8rem;
+  color: inherit;
+}
+
+:global(.archive__hero).hero {
+  min-height: var(--feature-hero-height);
+  overflow: hidden;
+  padding: 1.8rem var(--content-gutter) 1.8rem;
+  background-image:
+    linear-gradient(90deg, #010a11f2, #010a1199 38%, #010a1110 76%),
+    linear-gradient(0deg, #010a1144, transparent 60%), var(--hero-image);
+}
+
+:global(.activity__hero).hero {
+  min-height: 11.5rem;
+}
+
+:global(.archive__hero).hero::after {
+  height: 30%;
+  background: linear-gradient(0deg, var(--bg), transparent);
+}
+
+:global(.activity__hero).hero {
+  min-height: var(--feature-hero-height);
+  overflow: hidden;
+  padding: 1.8rem var(--content-gutter) 2rem;
+  background-image:
+    linear-gradient(90deg, #010a13ed, #010a1388 45%, #010a1322),
+    linear-gradient(0deg, #010a13c4, transparent 62%), var(--hero-image);
+  background-position: center 52%;
+}
+
+:global(.activity__hero).hero::after {
+  background: linear-gradient(0deg, var(--bg), transparent);
+}
+
+:global(.activity__hero) h1 {
+  margin: 0;
+  font:
+    600 clamp(2.1rem, 4.2vw, 3.35rem) / 1.2 "Noto Sans JP",
+    sans-serif;
+}
+
+:global(.activity__hero) > p {
+  max-width: 43rem;
+  margin-top: 0.8rem;
+  color: inherit;
+  font-size: var(--font-md);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+:global(.setlist__hero).hero {
+  overflow: hidden;
+  background-image:
+    linear-gradient(90deg, #010912dc, #01091270 48%, #01091218),
+    linear-gradient(0deg, #010912a6, transparent 75%), var(--hero-image);
+  background-position: center 33%;
+}
+
+@media (min-width: 761px) {
+  :global(.setlist__hero) .slideshow img {
+    object-position: center 33%;
+  }
+}
+
+:global(.setlist__hero) h1 {
+  margin: 0;
+  font:
+    700 clamp(2rem, 4.2vw, 3.25rem) / 1.2 "Noto Sans JP",
+    sans-serif;
+  letter-spacing: 0.03em;
+}
+
+:global(.setlist__hero) h1 span {
+  color: inherit;
+}
+
+:global(.setlist__hero) p {
+  max-width: 43rem;
+  margin-top: 0.8rem;
+  font-size: var(--font-md);
+  font-weight: 500;
+  line-height: 1.8;
+}
+
+:global(.archive-detail__hero).hero {
+  min-height: var(--feature-hero-height);
+  padding: 1.8rem var(--content-gutter) 1.8rem;
+  background-image:
+    linear-gradient(90deg, #010a11f2, #010a1199 38%, #010a1110 76%),
+    linear-gradient(0deg, #010a1144, transparent 60%),
+    var(--archive-detail-image, var(--page-hero-image));
+  background-position: center;
+  background-size: cover;
+}
+
+:global(.archive-detail__hero).hero::after {
+  height: 30%;
+  background: linear-gradient(0deg, var(--bg), transparent);
+}
+
+:global(.archive-detail__hero) h1 {
+  margin-top: 0.35rem;
+}
+
+:global(.archive-detail__hero) > p {
+  color: #fff;
+  font-size: var(--font-md);
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 13rem;
+    padding: 1.2rem var(--content-gutter) 1.5rem;
+    background-position: center;
+  }
+
+  .compact {
+    min-height: 10rem;
+  }
+
+  :global(.breadcrumb).breadcrumb {
+    margin-bottom: 1.1rem;
+    font-size: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    display: block;
+    margin: 0.25rem 0 0;
+    font-size: 0.7em;
+  }
+
+  :global(.activity__hero).hero {
+    min-height: 10rem;
+    padding: 1.2rem var(--content-gutter) 1.5rem;
+  }
+
+  :global(.activity__hero) h1 {
+    font-size: clamp(1.65rem, 8vw, 2.25rem);
+  }
+
+  :global(.setlist__hero) h1 {
+    font-size: clamp(1.6rem, 8vw, 2.3rem);
+  }
+
+  :global(.setlist__hero) p {
+    font-size: var(--font-md);
+  }
+
+  :global(.archive-detail__hero).hero {
+    min-height: 10rem;
+    padding: 1.2rem var(--content-gutter) 1.5rem;
+  }
+
+  :global(.flow__hero).hero,
+  :global(.faq-page__hero).hero,
+  :global(.precautions__hero).hero,
+  :global(.application__hero).hero,
+  :global(.schedule__hero).hero,
+  :global(.setlist__hero).hero {
+    min-height: 8.5rem;
+    padding: 1.2rem var(--content-gutter) 1.5rem;
+  }
+
+  :global(.archive__hero).hero {
+    min-height: 10rem;
+    padding: 1.2rem var(--content-gutter) 1.5rem;
+  }
+
+  :global(.archive__hero) .title,
+  :global(.flow__hero) .title,
+  :global(.application__hero) .title,
+  :global(.faq-page__hero) .title,
+  :global(.precautions__hero) .title {
+    font-size: clamp(1.6rem, 8vw, 2.3rem);
+  }
+
+  :global(.archive-detail__hero) .title {
+    font-size: clamp(1.5rem, 7.5vw, 2.1rem);
+  }
+}

@@ -1,134 +1,63 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPageBySlug, getScheduleAndArchive } from "../lib/microcms";
-
-const [page, data] = await Promise.all([getPageBySlug("schedule"), getScheduleAndArchive()]);
-
-const now = new Date();
-const upcoming = data.schedules
-	.filter((s) => new Date(s.event_date) >= now)
-	.sort((a, b) => new Date(a.event_date).getTime() - new Date(b.event_date).getTime());
-
-const eventStructuredData = upcoming.map((event) => ({
-	"@type": "Event",
-	name: event.title,
-	startDate: event.event_date,
-	description: event.content.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim(),
-	eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-	eventStatus: "https://schema.org/EventScheduled",
-	organizer: {
-		"@type": "Organization",
-		name: "MuST-Music Spot Tokyo-",
-		url: "https://must-music-spot-tokyo.com/",
-	},
-	url: "https://must-music-spot-tokyo.com/schedule/",
-}));
+import PageHero from "../components/PageHero.astro";
+import {
+  Api,
+  getEventTypeLabel,
+  formatEventDate,
+  getDateValue,
+  getToday,
+} from "../lib/api";
+const applications = await Api.getApplication();
+const today = getToday().getTime();
+const upcoming = applications
+  .filter(
+    (event) =>
+      event.event_date && getDateValue(event.event_date) >= today,
+  )
+  .sort(
+    (a, b) =>
+      getDateValue(a.event_date as string) - getDateValue(b.event_date as string) ||
+      a.sort_order - b.sort_order,
+  );
 ---
 
-<Layout
-	title={page?.title ?? "スケジュール"}
-	description="東京都内の社会人軽音サークルMuST（マスト）の今後のスケジュールをご案内します。開催予定のイベント情報や詳細を確認し、参加の予定にお役立てください。"
-	structuredData={eventStructuredData}
->
-	<h1 class="prose-title">{page?.title ?? "スケジュール"}</h1>
-
-	<section class="section">
-		<div class="container event-list">
-			{
-				upcoming.map((ev) => (
-					<details class="schedule-item">
-						<summary>{ev.title}</summary>
-						<div class="prose schedule-content" set:html={ev.content} />
-					</details>
-				))
-			}
-			{upcoming.length === 0 && <p class="empty">現在予定されているスケジュールはありません。</p>}
-		</div>
-	</section>
+<Layout>
+  <div class="schedule">
+    <PageHero
+      className="schedule__hero"
+    />
+    <section class="schedule__content" aria-label="開催予定のライブ">
+      <div class="schedule__heading">
+        <p>Upcoming Live</p>
+        <h2>これからのライブ</h2>
+      </div>
+      <div class="schedule__list">
+        {upcoming.map((event) => (
+          <article>
+            <time datetime={event.event_date}>{formatEventDate(event.event_date)}</time>
+            <div>
+              <h3>{event.title}</h3>
+              <p class="schedule__body">
+                {getEventTypeLabel(event.event_type)}
+                {event.place && ` / ${event.place}`}
+                <br />
+                {event.status_message}
+              </p>
+            </div>
+            <a href={event.application_url ?? "/application/"}>募集状況を見る →</a>
+          </article>
+        ))}
+        {upcoming.length === 0 && (
+          <p class="empty">現在予定されているスケジュールはありません。</p>
+        )}
+      </div>
+    </section>
+    <section class="schedule__apply">
+      <p>参加するライブが決まったら、募集状況をご確認ください。</p>
+      <a href="/application/">
+        募集状況・申込み <span>→</span>
+      </a>
+    </section>
+  </div>
 </Layout>
-
-<style>
-	.prose-title {
-		text-align: center;
-		font-size: 1.9rem;
-		margin: 1rem 0 2rem;
-	}
-
-	.event-list {
-		max-width: 800px;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 0.9rem;
-	}
-
-	.schedule-item {
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius);
-		padding: 1.1rem 1.5rem;
-		interpolate-size: allow-keywords;
-	}
-
-	.schedule-item::details-content {
-		block-size: 0;
-		overflow: hidden;
-		opacity: 0;
-		transition:
-			block-size 0.3s ease,
-			opacity 0.2s ease,
-			content-visibility 0.3s allow-discrete;
-	}
-
-	.schedule-item[open]::details-content {
-		block-size: auto;
-		opacity: 1;
-	}
-
-	.schedule-item summary {
-		cursor: pointer;
-		font-weight: 600;
-		display: flex;
-		align-items: baseline;
-		list-style: none;
-	}
-
-	.schedule-item summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.schedule-item summary::after {
-		content: "+";
-		margin-left: auto;
-		color: var(--color-accent);
-		font-size: 1.2rem;
-	}
-
-	.schedule-item[open] summary::after {
-		content: "−";
-	}
-
-	.schedule-content {
-		margin-top: 0.9rem;
-		padding-top: 0.9rem;
-		border-top: 1px dashed var(--color-border);
-		font-size: 0.92rem;
-	}
-
-	.empty {
-		text-align: center;
-		color: var(--color-muted);
-	}
-
-	@media (max-width: 640px) {
-		.prose-title {
-			font-size: 1.4rem;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.schedule-item::details-content {
-			transition: none;
-		}
-	}
-</style>
