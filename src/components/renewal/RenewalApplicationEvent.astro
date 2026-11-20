@@ -22,6 +22,7 @@ const statusLabel = (status: string) =>
 const eventDate = event.event_date ? parseRenewalDate(event.event_date) : undefined;
 const formatMonth = (month: number) =>
   month < 10 ? String.fromCharCode("０".charCodeAt(0) + month) : String(month);
+const recruitmentAge = "1987〜1999年生まれ";
 ---
 
 <article class:list={["renewal-application__event", { "renewal-application__event--band": isBand }]}>
@@ -64,13 +65,21 @@ const formatMonth = (month: number) =>
     {event.event_date || event.place || event.fee ? (
       <>
         <dl class="renewal-application__details-list">
-          <div>
+          <div class={styles.dateDetail}>
             <dt>
               <RenewalIcon name="calendar" />
             </dt>
             <dd>
               <b>日時</b>
-              <span>{formatEventDate(event.event_date)}</span>
+              <span>
+                {formatEventDate(event.event_date)}
+                {event.event_time && (
+                  <>
+                    <br />
+                    {event.event_time}
+                  </>
+                )}
+              </span>
             </dd>
           </div>
           <div>
@@ -89,9 +98,18 @@ const formatMonth = (month: number) =>
               <span>{event.fee ?? "未定"}</span>
             </dd>
           </div>
+          {!isBand && (
+            <div class={styles.ageDetail}>
+              <dt aria-hidden="true"></dt>
+              <dd>
+                <b>対象年齢</b>
+                <span>{recruitmentAge}</span>
+              </dd>
+            </div>
+          )}
         </dl>
         {isBand && (
-          <p class="renewal-application__audience-only renewal-application__audience-only--details">
+          <p class="renewal-application__recruitment-note renewal-application__recruitment-note--details">
             観覧者のみの募集です。<br />出演者の募集は行なっておりません。
           </p>
         )}
@@ -224,6 +242,9 @@ const formatMonth = (month: number) =>
       ) : (
         <p>{event.status_message}</p>
       )}
+      <p class="renewal-application__recruitment-note renewal-application__recruitment-note--status">
+        ※ボーカルのみ音源の提出をご準備いただいております。1分30秒ほどのものを２曲分でカラオケや弾き語りの録音など形式は問いません。
+      </p>
     </details>
   )}
 </article>

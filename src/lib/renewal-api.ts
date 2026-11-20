@@ -182,6 +182,7 @@ export interface RenewalApplication {
   title: string;
   event_type: ArchiveEventType;
   event_date?: string;
+  event_time?: string;
   place?: string;
   fee?: string;
   status_message: string;
@@ -239,6 +240,7 @@ interface RenewalApplicationRecord {
   title?: string;
   flyer?: RenewalMedia;
   event_date?: string;
+  event_time?: string;
   event_type?: string;
   place?: string;
   fee?: string;
@@ -428,6 +430,7 @@ async function getApplicationFromMicrocms(): Promise<RenewalApplication[]> {
       title: item.title ?? "",
       event_type: toApplicationEventType(item.event_type),
       event_date: item.event_date,
+      event_time: item.event_time?.trim() || undefined,
       place: item.place,
       fee: item.fee,
       status_message: isClosed ? "現在募集していません。" : "パートごとの募集状況",

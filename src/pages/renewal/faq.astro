@@ -4,7 +4,7 @@ import RenewalPageHero from "../../components/renewal/RenewalPageHero.astro";
 import RenewalFaqList from "../../components/renewal/RenewalFaqList.astro";
 import { getFaqList } from "../../lib/microcms";
 const currentYear = new Date().getFullYear();
-const youngestAge = currentYear - 2000;
+const youngestAge = currentYear - 1999;
 const oldestAge = currentYear - 1987;
 const faqs = (await getFaqList()).map((faq) => {
   if (!faq.question.includes("年齢層")) return faq;
