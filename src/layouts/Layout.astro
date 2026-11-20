@@ -12,12 +12,7 @@ interface Props {
   useCmsContent?: boolean;
 }
 
-const {
-  title,
-  description,
-  home = false,
-  useCmsContent = true,
-} = Astro.props;
+const { title, description, home = false, useCmsContent = true } = Astro.props;
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
 const overview = await Api.getOverview();
@@ -33,6 +28,7 @@ const documentTitle = resolvedPageTitle
   ? `${resolvedPageTitle} | MuST Music Spot Tokyo`
   : "MuST | Music Spot Tokyo";
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 
 <!doctype html>
@@ -53,6 +49,53 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{documentTitle}</title>
+    <script is:inline>
+      const isGaDisabled = new URLSearchParams(window.location.search).has("no_ga");
+
+      if (isGaDisabled) {
+        const preserveNoGa = (anchor) => {
+          const href = anchor.getAttribute("href");
+          if (!href || href.startsWith("#")) return;
+
+          const destination = new URL(href, window.location.href);
+          if (
+            destination.origin !== window.location.origin ||
+            destination.searchParams.has("no_ga")
+          ) {
+            return;
+          }
+
+          destination.search += `${destination.search ? "&" : "?"}no_ga`;
+          anchor.href = destination.href;
+        };
+
+        document.addEventListener("click", (event) => {
+          if (!(event.target instanceof Element)) return;
+          const anchor = event.target.closest("a[href]");
+          if (anchor) preserveNoGa(anchor);
+        });
+        document.addEventListener("auxclick", (event) => {
+          if (!(event.target instanceof Element)) return;
+          const anchor = event.target.closest("a[href]");
+          if (anchor) preserveNoGa(anchor);
+        });
+      }
+    </script>
+    {gaMeasurementId && <script is:inline define:vars={{ gaMeasurementId }}>
+      if (!new URLSearchParams(window.location.search).has("no_ga")) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", gaMeasurementId);
+
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`;
+        document.head.append(script);
+      }
+    </script>}
   </head>
   <body class="site">
     <div class:list={["shell", { "shell--home": home }]}>
@@ -61,10 +104,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
         <slot />
       </main>
       {hasRecruitCta && overview.recruiting && (
-        <RecruitCta
-          recruiting={overview.recruiting}
-          applicationPage={isApplicationPage}
-        />
+        <RecruitCta recruiting={overview.recruiting} applicationPage={isApplicationPage} />
       )}
       {!hasRecruitCta && <Footer />}
     </div>
