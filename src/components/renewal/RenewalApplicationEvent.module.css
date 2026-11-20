@@ -36,16 +36,25 @@
 }
 
 .dateDetail dt {
-  align-items: flex-start;
-}
-
-.dateDetail dd b {
+  display: flex;
+  align-items: center;
   align-self: start;
+  grid-column: 1 / span 2;
+  justify-content: flex-start;
+  gap: 5px;
+  transform: translateY(0.2rem);
+}
+
+.dateDetail dt b {
+  color: var(--renewal-cyan);
+  font-size: var(--renewal-font-md);
   line-height: 1.35;
 }
 
-.dateDetail dd span {
-  line-height: 1.35;
+.dateDetail dd {
+  display: block;
+  grid-column: 3;
+  align-self: start;
 }
 
 .ageDetail dt {
@@ -78,12 +87,23 @@
   margin-right: 0;
 }
 
+.scheduleLine .metaIcon {
+  margin-top: 0.2rem;
+}
+
 .titleContent .eventType {
   margin-top: 4px;
   border: 1px solid var(--renewal-cyan);
   border-radius: 20px;
   color: var(--renewal-cyan);
   font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .dateDetail dd {
+    grid-template-columns: 35px minmax(0, 1fr);
+    gap: 4px;
+  }
 }
 
 :global(.renewal-application__title small) {
