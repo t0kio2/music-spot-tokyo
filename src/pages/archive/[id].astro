@@ -5,7 +5,7 @@ import Icon from "../../components/Icon.astro";
 import "../../components/ArchiveDetail.css";
 import {
   Api,
-  formatDate,
+  formatDate as formatDateValue,
   getEventTypeLabel,
   getYoutubeThumbnail,
   type Archive,
@@ -21,7 +21,7 @@ interface Props {
 }
 const { archive } = Astro.props;
 const formatDate = (date: string) =>
-  formatDate(date, {
+  formatDateValue(date, {
     year: "numeric",
     month: "numeric",
     day: "numeric",

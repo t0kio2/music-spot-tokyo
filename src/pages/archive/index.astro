@@ -9,7 +9,7 @@ import "../../components/Archive.css";
 import {
   Api,
   formatEventDate,
-  formatDate,
+  formatDate as formatDateValue,
   getEventTypeLabel,
   getDateYear,
 } from "../../lib/api";
@@ -17,7 +17,7 @@ import {
 const archives = await Api.getArchives();
 const formatDate = (date: string) => formatEventDate(date);
 const formatMonth = (date: string) =>
-  formatDate(date, {
+  formatDateValue(date, {
     year: "numeric",
     month: "long",
   });
