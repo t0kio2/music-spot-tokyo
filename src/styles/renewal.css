@@ -494,7 +494,7 @@
     padding-left: 19px;
   }
   .renewal-application__details-list > div {
-    grid-template-columns: 15px 35px 1fr;
+    grid-template-columns: 15px 42px 1fr;
     gap: 4px;
   }
   .renewal-application__details-list dt {
