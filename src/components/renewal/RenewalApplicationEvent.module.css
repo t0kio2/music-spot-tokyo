@@ -99,13 +99,6 @@
   font-weight: 700;
 }
 
-@media (max-width: 760px) {
-  .dateDetail dd {
-    grid-template-columns: 35px minmax(0, 1fr);
-    gap: 4px;
-  }
-}
-
 :global(.renewal-application__title small) {
   display: inline-block;
   padding: 3px 10px;
@@ -304,6 +297,16 @@
 }
 
 @media (min-width: 761px) {
+  :global(.renewal-application__event--project) .schedule {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+
+  :global(.renewal-application__event--project) :global(.renewal-application__status) {
+    grid-column: 3 / -1;
+    grid-row: 1;
+  }
+
   :global(.renewal-application__event--band) .renewal-application__poster {
     grid-row: 1 / span 2;
   }
@@ -357,7 +360,12 @@
     column-gap: 0.75rem;
   }
 
-  .selectionItem {
-    grid-column: 1 / -1;
+  :global(.renewal-application__event--status-only) :global(.renewal-application__status) {
+    border-color: transparent;
   }
+
+  :global(.renewal-application__event--project) .schedule {
+    border-top: 0;
+  }
+
 }

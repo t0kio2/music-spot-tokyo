@@ -169,7 +169,6 @@ export interface RenewalApplicationSchedule {
   practice_date?: string;
   practice_place?: string;
   practice_fee?: string;
-  live_date?: string;
   setlist_select_msg?: string;
 }
 
