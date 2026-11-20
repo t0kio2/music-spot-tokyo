@@ -1,0 +1,1230 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap");
+@import "./site-tokens.css";
+
+.site {
+  --layout-max-width: 1280px;
+  --layout-offset: max(
+    0px,
+    calc((100vw - var(--layout-max-width)) / 2)
+  );
+  margin: 0;
+  background: radial-gradient(circle at 70% 0%, #00345418, transparent 42%), var(--bg);
+  color: var(--text);
+  font-family: "Noto Sans JP", sans-serif;
+  line-height: 1.8;
+}
+.site *,
+.site *::before,
+.site *::after {
+  box-sizing: border-box;
+}
+.site a {
+  color: inherit;
+  text-decoration: none;
+}
+.site img {
+  display: block;
+  max-width: 100%;
+}
+.site h1,
+.site h2,
+.site h3,
+.site p {
+  margin: 0;
+}
+.shell {
+  min-height: 100vh;
+}
+
+.not-found {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 3rem var(--content-gutter);
+  background: linear-gradient(135deg, #00050b, #011522 58%, #00050b);
+  text-align: center;
+}
+
+.not-found__content {
+  width: min(100%, 34rem);
+}
+
+.not-found__code {
+  color: var(--cyan);
+  font:
+    600 clamp(4rem, 14vw, 7rem)/0.9 "Zen Old Mincho",
+    serif;
+  letter-spacing: 0.08em;
+}
+
+.not-found h1 {
+  margin-top: 1rem;
+  font-size: var(--heading-sm);
+}
+
+.not-found__message {
+  margin: 0.75rem 0 1.5rem !important;
+  color: #fff;
+  font-size: var(--font-md);
+}
+
+.main {
+  min-height: 100vh;
+  margin-right: var(--layout-offset);
+  margin-left: calc(var(--sidebar) + var(--layout-offset));
+}
+.breadcrumb {
+  display: flex;
+  gap: 0.7rem;
+  width: fit-content;
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  color: #fff;
+  font-size: 0.75rem;
+}
+.breadcrumb a,
+.breadcrumb > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.breadcrumb__home-icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.breadcrumb a {
+  color: #fff;
+}
+.breadcrumb > span:last-child {
+  color: var(--text);
+  font-weight: 600;
+}
+.eyebrow {
+  margin-bottom: 0.35rem;
+  color: var(--cyan);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+}
+.container,
+.content {
+  width: min(100% - 3rem, 1080px);
+  margin-inline: auto;
+}
+.content {
+  padding-block: 2.5rem 4rem;
+}
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+.section-heading p {
+  color: var(--pink);
+  font:
+    1.2rem "Caveat",
+    cursive;
+}
+.section-heading h2 {
+  font:
+    600 clamp(1.5rem, 3vw, 2.2rem) "Noto Sans JP",
+    serif;
+}
+.section-heading > span {
+  color: var(--cyan);
+  font-size: 2.5rem;
+}
+.prose {
+  color: #fff;
+}
+.prose h1,
+.prose h2,
+.prose h3 {
+  margin: 2rem 0 0.7rem;
+  color: var(--text);
+}
+.prose h2 {
+  color: var(--cyan);
+}
+.prose p {
+  margin: 0.7rem 0;
+}
+.prose a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+}
+.prose img {
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+}
+.event-list {
+  display: grid;
+  gap: 1rem;
+}
+.event-card {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: var(--surface-card-soft);
+}
+.event-card__date {
+  display: grid;
+  place-items: center;
+  min-height: 7rem;
+  border: 2px solid var(--cyan);
+  border-radius: 0.7rem;
+  color: var(--cyan);
+  font:
+    600 1.4rem/1.2 "Noto Sans JP",
+    serif;
+  text-align: center;
+}
+.event-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font:
+    600 1.3rem "Noto Sans JP",
+    serif;
+}
+.empty {
+  padding: 2rem;
+  border: 1px dashed var(--border);
+  color: #fff;
+  text-align: center;
+}
+@media (max-width: 760px) {
+  .main {
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: 0;
+  }
+  .breadcrumb {
+    margin-bottom: 1.2rem;
+    font-size: 0.65rem;
+  }
+  .eyebrow {
+    font-size: 0.6rem;
+  }
+  .container,
+  .content {
+    width: min(100% - 2rem, 40rem);
+  }
+  .content {
+    padding-block: 1.5rem 2.5rem;
+  }
+  .event-card {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0.9rem;
+  }
+  .event-card__date {
+    min-height: 3rem;
+    justify-content: start;
+    padding-inline: 1rem;
+    border-width: 1px;
+    border-radius: 0.4rem;
+    font-size: 1rem;
+  }
+  .event-card h3 {
+    font-size: 1.05rem;
+  }
+}
+
+/* 募集状況・申込み: /09_募集状況・申込み.html 準拠 */
+.application__event {
+  display: grid;
+  grid-template-columns: 166px minmax(225px, 1fr) minmax(175px, 0.8fr) minmax(210px, 0.9fr);
+  gap: 13px;
+  align-items: stretch;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-card);
+  box-shadow: var(--panel-glow);
+}
+.application__poster {
+  min-height: 164px;
+  border: 0;
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 65% 28%, #29abff9c, transparent 24%),
+    radial-gradient(ellipse at 72% 50%, #f743d377, transparent 40%),
+    linear-gradient(160deg, #081b3c, #090f29 50%, #291136) center / cover;
+}
+.application__poster--orange {
+  background:
+    radial-gradient(ellipse at 58% 30%, #ffc03caa, transparent 30%),
+    linear-gradient(160deg, #371b10, #160f16 60%, #070d19) center / cover;
+}
+.application__poster--empty {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: var(--font-md);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.application__poster--empty::after {
+  content: "Coming soon";
+}
+.application__title {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+}
+.application__title time {
+  display: flex;
+  align-self: start;
+  width: 67px;
+  height: 67px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.08;
+}
+.application__title time span {
+  font-size: var(--font-md);
+}
+.application__title time b {
+  font-size: var(--font-lg);
+}
+.application__title h2 {
+  margin-top: 6px;
+  font:
+    700 1.1rem/1.4 "Noto Sans JP",
+    serif;
+  overflow-wrap: anywhere;
+}
+.application__details-list {
+  display: grid;
+  gap: 6px;
+  margin: 13px 0 0;
+  font-size: var(--font-md);
+}
+.application__details-list > div {
+  display: grid;
+  grid-template-columns: 20px 42px 1fr;
+  gap: 5px;
+  align-items: center;
+}
+.application__details-list dt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: var(--font-lg);
+  text-align: center;
+}
+.application__details-list dt svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+.application__details-list dd {
+  display: contents;
+  margin: 0;
+}
+.application__details-list dd b {
+  color: var(--cyan);
+  font-size: var(--font-md);
+}
+.application__details-list dd span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.application__undecided {
+  margin-top: 1rem;
+  font-size: var(--font-md);
+}
+.application__status {
+  align-self: start;
+  min-height: 120px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface-card-soft);
+}
+.application__status--closed {
+  border-color: var(--pink);
+}
+.application__status p {
+  margin: 6px 1rem;
+  color: #fff;
+  font-size: var(--font-md);
+  line-height: 1.7;
+}
+.application__status--closed p {
+  padding: 11px;
+  border: 1px solid var(--pink);
+  border-radius: 8px;
+  color: #ffd5f4;
+  background: #59104c88;
+  font-size: var(--font-md);
+}
+.application__status > a {
+  display: block;
+  margin-top: 7px;
+  padding: 8px 14px;
+  border: 1px solid var(--gold);
+  border-radius: 7px;
+  color: var(--gold);
+  font-size: var(--font-md);
+  text-align: center;
+}
+.application__vacancies {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px 1rem;
+  margin-inline: 1rem;
+}
+.application__recruitment-note {
+  color: #ffd5f4 !important;
+}
+.application__recruitment-note--details {
+  margin: 0;
+  padding-top: 0.35rem;
+  padding-left: 25px;
+  color: var(--gold) !important;
+  font-size: var(--font-md);
+  line-height: 1.6;
+}
+.application__recruitment-note--status {
+  margin: 0.7rem 1rem 0 !important;
+  color: var(--gold) !important;
+  font-size: var(--font-md);
+  line-height: 1.6;
+}
+.application__status--closed .application__recruitment-note--status {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.application__vacancies span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  min-width: 0;
+  overflow: hidden;
+  font-size: var(--font-md);
+  white-space: nowrap;
+}
+.application__vacancies b {
+  margin-left: auto;
+  color: var(--cyan);
+  font-size: var(--font-md);
+  white-space: nowrap;
+}
+.application__vacancies .is-wait {
+  color: var(--gold);
+}
+.application__vacancies .is-closed {
+  color: var(--muted);
+}
+@media (max-width: 1000px) and (min-width: 761px) {
+  .application__event {
+    grid-template-columns: 8rem minmax(13rem, 1fr) minmax(10rem, 0.8fr) minmax(10rem, 0.8fr);
+  }
+  .application__event .application__status {
+    grid-column: auto;
+  }
+  .application__event .application__poster {
+    grid-row: auto;
+  }
+}
+@media (max-width: 760px) {
+  .application__events {
+    width: calc(100% - 1.1rem);
+    gap: 8px;
+    padding: 10px 0 8px;
+  }
+  .application__event {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 9px;
+    border-radius: 13px;
+  }
+  .application__poster {
+    display: none;
+  }
+  .application__title {
+    grid-template-columns: 62px 1fr;
+    gap: 9px;
+  }
+  .application__title time {
+    width: 59px;
+    height: 59px;
+    border-width: 1px;
+  }
+  .application__title h2 {
+    font-size: 0.94rem;
+    min-height: 1.316rem;
+    white-space: normal;
+    width: calc(100% + 7.2rem + 7px);
+  }
+  .application__details-list {
+    margin: 0.65rem 1rem 0;
+    gap: 2px;
+  }
+  .application__recruitment-note--details {
+    margin-left: 1rem;
+    padding-left: 19px;
+  }
+  .application__details-list > div {
+    grid-template-columns: 15px 42px 1fr;
+    gap: 4px;
+  }
+  .application__details-list dt {
+    font-size: var(--font-lg);
+  }
+  .application__details-list dd b {
+    font-size: var(--font-md);
+  }
+}
+
+/* 演奏曲ページ: /03_演奏曲について.html の構成 */
+.setlist {
+  --setlist-line: #087aa4;
+  --setlist-line-strong: #00c7d5;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text);
+}
+.site:has(.setlist) {
+  background: var(--page-bg);
+}
+.setlist__content {
+  width: calc(100% - (2 * var(--content-gutter)));
+  max-width: none;
+  margin-inline: auto;
+  padding: 2rem 0 4rem;
+}
+.setlist__archive {
+  margin-top: 2rem;
+}
+.setlist__archive-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+.setlist__archive-heading h2 {
+  font:
+    600 1.8rem "Noto Sans JP",
+    serif;
+}
+.setlist__archive-heading a {
+  color: var(--gold);
+  font-size: 0.75rem;
+}
+.setlist__archive-list {
+  display: grid;
+  gap: 0.6rem;
+}
+.setlist__archive-list details {
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  background: var(--panel);
+}
+.setlist__archive-list summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 700;
+}
+.setlist__archive-list summary::-webkit-details-marker {
+  display: none;
+}
+.setlist__archive-list summary span {
+  color: var(--cyan);
+  font-size: 0.75rem;
+}
+.setlist__archive-list > details > div {
+  padding: 0 1rem 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* 活動実績: /org_html/04_活動実績.html の構成 */
+.activity {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 72% 0%, #00345418, transparent 42%), var(--bg);
+}
+
+@media (max-width: 760px) {
+  .setlist__content {
+    width: calc(100% - (2 * var(--content-gutter)));
+    padding-top: 1rem;
+  }
+  .setlist__archive-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .setlist__archive-heading h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site *,
+  .site *::before,
+  .site *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+
+/* ホームは /01_ホーム.html の構成を、同じDOMのままレスポンシブ化する。 */
+.shell--home {
+  --sidebar: 232px;
+  --cyan: #00c7d5;
+  --border: rgba(0, 174, 191, 0.42);
+  --panel: #010a14;
+}
+.home {
+  min-height: 100vh;
+  color: var(--text);
+  background: radial-gradient(ellipse at 70% 0%, #00345418, transparent 42%), #010711;
+  font-family: "Noto Sans JP", sans-serif;
+}
+.home__hero {
+  position: relative;
+  min-height: 375px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #01060fe8, #010811b8 39%, #01081130 73%, #01081178),
+    linear-gradient(0deg, #01060fd9, transparent 46%);
+}
+.home__hero::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  height: 34%;
+  pointer-events: none;
+  background: linear-gradient(0deg, #010711, transparent);
+}
+.home__hero-actions,
+.home__hero-copy {
+  position: relative;
+  z-index: 2;
+}
+.home__hero-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.1rem 1.1rem 0;
+}
+.home__hero-copy {
+  max-width: 650px;
+  padding: 1.5rem 0 1.7rem 4.2%;
+}
+.home__hero h1 {
+  max-width: 610px;
+  margin-bottom: 0.8rem;
+  color: var(--text);
+  font:
+    400 clamp(1.7rem, 3.4vw, 2.5rem)/1.5 "Noto Sans JP",
+    sans-serif;
+  letter-spacing: 0.025em;
+  text-shadow: 0 2px 12px #000a;
+}
+.home__hero-copy p {
+  max-width: 440px;
+  margin-bottom: 0.75rem;
+  font-size: var(--font-md);
+  font-weight: 500;
+  text-shadow: 0 2px 5px #000;
+}
+.home__feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+.home__panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background:
+    var(--panel-fill) padding-box,
+    var(--panel-edge) border-box;
+  box-shadow: var(--panel-glow);
+}
+.home__cta {
+  display: grid;
+  grid-template-columns: 1fr 1.45fr auto;
+  align-items: center;
+  gap: 1.1rem;
+  min-height: 6.5rem;
+  margin-top: 0.65rem;
+  padding: 0.9rem 1.6rem;
+  border: 1px solid transparent;
+  box-shadow:
+    0 0 0 1px #00baca1a,
+    0 0 8px #00baca22,
+    0 0 18px #087bb012;
+}
+.home__cta p {
+  grid-column: 2;
+  font-size: var(--font-md);
+  font-weight: 600;
+  line-height: 1.7;
+  text-shadow: 0 2px 4px #000;
+}
+.home__cta a {
+  grid-column: 3;
+  white-space: nowrap;
+}
+.shell:has(.recruit-cta) .main {
+  padding-bottom: 7rem;
+}
+@media (max-width: 1000px) and (min-width: 761px) {
+  .shell--home {
+    --sidebar: 116px;
+  }
+}
+
+@media (max-width: 760px) {
+  .home__hero {
+    min-height: 18rem;
+  }
+  .home__hero-actions {
+    display: none;
+  }
+  .home__hero-copy {
+    padding: 2.2rem 1rem 1.5rem;
+  }
+  .home__hero h1 {
+    margin-bottom: 0.8rem;
+    font-size: 1.5rem;
+  }
+  .home__hero-copy p {
+    font-size: var(--font-md);
+  }
+  .home__feature-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+  .home__cta {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    text-align: center;
+    padding: 1.3rem 1rem;
+  }
+  .home__cta p,
+  .home__cta a {
+    grid-column: auto;
+  }
+  .home__cta a {
+    justify-self: center;
+  }
+  .shell:has(.recruit-cta) .main {
+    padding-bottom: 8rem;
+  }
+}
+
+/* MuSTについて: /02_MuSTについて.html のデスクトップ構成を、同じDOMでレスポンシブ化する。 */
+.overview {
+  min-height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 70% 0%, #00345418, transparent 42%), #010711;
+}
+.overview__slogan {
+  position: absolute;
+  right: 7%;
+  bottom: 2rem;
+  color: #70dfff;
+  font:
+    italic clamp(2rem, 4vw, 3.2rem)/0.85 "Caveat",
+    cursive;
+  text-align: center;
+  transform: rotate(-10deg);
+  text-shadow: 0 0 12px #00baff;
+}
+.overview__slogan::after {
+  content: "";
+  display: block;
+  width: 86%;
+  height: 2px;
+  margin: 0.55rem auto;
+  background: var(--cyan);
+  transform: rotate(-10deg);
+}
+.overview__content {
+  width: min(100% - 3rem, 1120px);
+  margin: 0 auto;
+  padding: 1rem 0 2.5rem;
+}
+@media (max-width: 760px) {
+  .overview__slogan {
+    right: 1rem;
+    bottom: 1.4rem;
+    font-size: 1.9rem;
+  }
+  .overview__content {
+    width: calc(100% - 1.4rem);
+    padding: 1rem 0 2rem;
+  }
+}
+
+/* 残りのページも、元HTMLのPC構成を同一DOMのままレスポンシブ化する。 */
+.flow,
+.faq-page,
+.precautions,
+.application,
+.schedule {
+  min-height: 100vh;
+  background: var(--page-bg);
+}
+.site:has(.flow),
+.site:has(.faq-page),
+.site:has(.precautions),
+.site:has(.application),
+.site:has(.schedule) {
+  background: var(--page-bg);
+}
+.schedule__apply {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.7rem 1rem 1.2rem;
+  padding: 1rem 1.35rem;
+  border: 1px solid var(--cyan);
+  border-radius: 0.75rem;
+  background: var(--surface-card-soft);
+}
+.schedule__apply p {
+  font-size: var(--font-md);
+}
+.schedule__apply a {
+  padding: 0.65rem 1rem;
+  border-radius: 0.4rem;
+  color: #151216;
+  background: var(--gold);
+  font-size: var(--font-md);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.schedule__apply a span {
+  margin-left: 0.5rem;
+}
+
+.faq-page__content,
+.precautions__content,
+.schedule__content {
+  width: min(100% - 3rem, 1080px);
+  margin: 0 auto;
+  padding: 1.5rem 0 2.5rem;
+}
+.precautions__content {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 1rem;
+}
+.precautions__panel {
+  align-self: start;
+  overflow: hidden;
+  border: 1px solid var(--cyan);
+  border-radius: 0.8rem;
+  background: var(--surface-card-soft);
+}
+.precautions__panel:nth-child(even) {
+  border-color: var(--pink);
+}
+.precautions__panel summary {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  list-style: none;
+}
+.precautions__panel summary::-webkit-details-marker {
+  display: none;
+}
+.precautions__panel summary > span {
+  color: var(--cyan);
+  font-size: 1.7rem;
+}
+.precautions__panel summary > span svg {
+  width: 1.7rem;
+  height: 1.7rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+.precautions__panel summary > span .precautions__guitar-icon {
+  --guitar-icon-size: 1.7rem;
+}
+.precautions__panel:nth-child(even) summary > span {
+  color: var(--pink);
+}
+.precautions__panel summary h2 {
+  flex: 1;
+  font-size: 1rem;
+}
+.precautions__panel summary small {
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 400;
+}
+.precautions__panel summary i {
+  color: var(--cyan);
+  font-size: 1.35rem;
+  font-style: normal;
+  transition: transform 0.2s;
+}
+.precautions__panel:nth-child(even) summary i {
+  color: var(--pink);
+}
+.precautions__panel[open] summary i {
+  transform: rotate(45deg);
+}
+.precautions__intro {
+  margin: 0;
+  padding: 1rem 1rem 0;
+  border-top: 1px solid var(--cyan);
+  color: #fff;
+  font-size: var(--font-md);
+  line-height: 1.75;
+}
+.precautions__panel:nth-child(even) .precautions__intro {
+  border-top-color: var(--pink);
+}
+.precautions__panel ol {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 1rem 1rem 1.1rem 2.8rem;
+  border-top: 1px solid var(--cyan);
+}
+.precautions__panel:nth-child(even) ol {
+  border-top-color: var(--pink);
+}
+.precautions__intro + ol {
+  padding-top: 0.55rem;
+  border-top: 0;
+}
+.precautions__panel li {
+  padding-left: 0.2rem;
+  color: #fff;
+  font-size: var(--font-md);
+  line-height: 1.75;
+}
+.precautions__panel li b {
+  font-weight: 400;
+}
+.precautions__panel li::marker {
+  color: var(--cyan);
+  font-weight: 700;
+}
+.precautions__panel:nth-child(even) li::marker {
+  color: var(--pink);
+}
+.precautions__fee {
+  margin: 0 1rem 1rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--cyan);
+  border-radius: 0.45rem;
+  color: #fff;
+  font-size: 0.66rem;
+  line-height: 1.7;
+}
+.precautions__panel:nth-child(even) .precautions__fee {
+  border-color: var(--pink);
+}
+
+.schedule__heading {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.schedule__heading p {
+  color: var(--pink);
+  font:
+    1.4rem "Caveat",
+    cursive;
+}
+.schedule__heading h2 {
+  font:
+    600 1.8rem "Noto Sans JP",
+    serif;
+}
+.schedule__list {
+  display: grid;
+  gap: 0.75rem;
+}
+.schedule__list article {
+  display: grid;
+  grid-template-columns: 9rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--cyan);
+  border-radius: 0.7rem;
+  background: var(--surface-card-soft);
+}
+.schedule__list article > time {
+  display: grid;
+  place-items: center;
+  min-height: 5rem;
+  border: 1px solid var(--cyan);
+  border-radius: 0.45rem;
+  color: var(--cyan);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.schedule__list h3 {
+  margin-bottom: 0.3rem;
+  font:
+    600 1.1rem "Noto Sans JP",
+    serif;
+}
+.schedule__body {
+  color: var(--muted);
+  font-size: var(--font-md);
+}
+.schedule__list article > a {
+  color: var(--gold);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+.empty {
+  padding: 1.5rem;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .schedule__apply {
+    align-items: stretch;
+    flex-direction: column;
+    margin: 0.5rem 0.7rem 1rem;
+    padding: 0.9rem;
+  }
+  .schedule__apply a {
+    text-align: center;
+  }
+  .faq-page__content,
+  .precautions__content,
+  .schedule__content {
+    width: calc(100% - 1.4rem);
+    padding: 1rem 0 1.5rem;
+  }
+  .precautions__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .precautions__panel summary {
+    padding: 0.7rem 0.8rem;
+  }
+  .precautions__panel summary h2 {
+    font-size: 0.85rem;
+  }
+  .precautions__panel ol {
+    padding-left: 2.3rem;
+  }
+  .schedule__heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .schedule__heading h2 {
+    font-size: 1.45rem;
+  }
+  .schedule__list article {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0.75rem;
+  }
+  .schedule__list article > time {
+    min-height: 2.5rem;
+    justify-content: start;
+    padding: 0 0.7rem;
+  }
+  .schedule__list h3 {
+    font-size: 1rem;
+  }
+  .schedule__list article > a {
+    text-align: right;
+  }
+}
+
+@media (min-width: 761px) {
+  .container,
+  .content,
+  .setlist__content,
+  .overview__stats,
+  .overview__content,
+  .faq-page__content,
+  .precautions__content,
+  .schedule__content {
+    width: min(calc(100% - (2 * var(--content-gutter))), 1200px);
+    max-width: 1200px;
+  }
+}
+
+@media (max-width: 760px) {
+  .content,
+  .setlist__content,
+  .overview__stats,
+  .overview__content,
+  .faq-page__content,
+  .precautions__content,
+  .schedule__content {
+    width: calc(100% - (2 * var(--content-gutter)));
+  }
+}
+
+.application__poster {
+  display: block;
+}
+.application__poster--empty {
+  display: grid;
+}
+.application__poster[style] {
+  background-position: center;
+  background-size:
+    100% 100%,
+    contain !important;
+  background-repeat: no-repeat;
+  background-color: #081b3c;
+}
+.application__poster[data-lightbox-src] {
+  padding: 0;
+  cursor: zoom-in;
+}
+.application__poster[data-lightbox-src]:disabled {
+  opacity: 1;
+}
+@media (max-width: 1000px) and (min-width: 761px) {
+  .application__event {
+    grid-template-columns: 8rem minmax(13rem, 1fr) minmax(10rem, 0.8fr) minmax(14rem, 0.9fr);
+  }
+  .application__event .application__status {
+    grid-column: auto;
+  }
+  .application__event .application__poster {
+    grid-row: auto;
+  }
+}
+@media (max-width: 760px) {
+  .application__event {
+    grid-template-columns: minmax(0, 1fr) 7.2rem;
+    gap: 7px;
+    padding: 9px;
+    border-radius: 13px;
+  }
+  .application__poster {
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    width: 7.2rem;
+    min-height: 10rem;
+    align-self: start;
+    margin-top: 3.2rem;
+    justify-self: end;
+    transform: translateX(-0.5rem);
+  }
+  .application__poster--empty {
+    display: grid;
+  }
+  .application__info {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+  }
+  .application__roster,
+  .application__schedule,
+  .application__status {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .application {
+    padding-bottom: 1rem;
+  }
+}
+
+/* の文字をNoto Sans JPに統一する。 */
+.site * {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+@media (max-width: 760px) {
+  .site {
+    --font-md: 0.85rem;
+    --font-lg: 1rem;
+    --font-xl: 1.1rem;
+    --heading-sm: 1.1rem;
+    --heading-md: 1.35rem;
+  }
+
+  .overview__stats,
+  .flow__steps,
+  .faq-page__content,
+  .schedule__content,
+  .application__events {
+    margin-top: 0.6rem;
+  }
+
+  .overview__content,
+  .faq-page__content,
+  .schedule__content {
+    padding-top: 0.6rem;
+  }
+
+  .precautions__content,
+  .setlist__content {
+    margin-top: 0.2rem;
+    padding-top: 0.2rem;
+  }
+
+  .archive__filters {
+    margin-top: 0;
+  }
+
+  .archive__grid {
+    margin-top: 0.35rem;
+  }
+}
+
+/* End of  page overrides. */

@@ -1,0 +1,39 @@
+---
+import Icon from "./Icon.astro";
+import styles from "./FeaturePanel.module.css";
+import ActionLink from "./ActionLink.astro";
+
+type IconName = "music" | "chart";
+
+interface Props {
+  variant: "song" | "activity";
+  title: string;
+  icon: IconName;
+  href?: string;
+  linkLabel?: string;
+}
+
+const { variant, title, icon, href, linkLabel } = Astro.props;
+const hasActions = Astro.slots.has("actions");
+---
+
+<section class:list={[styles.panel, styles.feature, styles[variant]]}>
+  <div class={styles.panelContent}>
+    <h2 class={styles.heading}>
+      <span class={styles.icon} aria-hidden="true">
+        <Icon name={icon} className={icon === "chart" ? styles.chartIcon : undefined} />
+      </span>
+      {title}
+    </h2>
+    <p class={styles.description}>
+      <slot name="description" />
+    </p>
+    {hasActions ? (
+      <div class={styles.actions}>
+        <slot name="actions" />
+      </div>
+    ) : (
+      href && linkLabel && <ActionLink href={href} label={linkLabel} />
+    )}
+  </div>
+</section>

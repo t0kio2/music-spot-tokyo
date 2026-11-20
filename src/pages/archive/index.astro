@@ -1,0 +1,183 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import Icon from "../../components/Icon.astro";
+import TabNav from "../../components/TabNav.astro";
+import ImageLightbox from "../../components/ImageLightbox.astro";
+import styles from "../../components/Archive.module.css";
+import "../../components/Archive.css";
+import {
+  Api,
+  formatEventDate,
+  formatDate,
+  getEventTypeLabel,
+  getDateYear,
+} from "../../lib/api";
+
+const archives = await Api.getArchives();
+const formatDate = (date: string) => formatEventDate(date);
+const formatMonth = (date: string) =>
+  formatDate(date, {
+    year: "numeric",
+    month: "long",
+  });
+const years = [...new Set(archives.map((live) => getDateYear(live.event_date)))].sort(
+  (a, b) => Number(b) - Number(a),
+);
+const archivePageSize = 6;
+---
+
+<Layout>
+  <div class="archive">
+    <PageHero
+      className="archive__hero"
+      id="archive-title"
+      compact
+    />
+    <TabNav
+      className="archive__filters"
+      items={["all", ...years].map((year) => ({
+        value: year,
+        label: year === "all" ? "すべて" : year,
+      }))}
+      activeValue="all"
+      ariaLabel="ライブ開催年で絞り込み"
+      scope="archive"
+    />
+    <section
+      class="archive__grid"
+      aria-label="過去のライブ一覧"
+      data-page-size={archivePageSize}
+    >
+      {archives.map((live, index) => (
+        <article
+          class:list={[
+            "archive__card",
+            { "archive__card--extra": index >= archivePageSize },
+          ]}
+          hidden={index >= archivePageSize}
+          data-year={getDateYear(live.event_date)}
+        >
+          <button
+            class:list={["archive__photo", styles.photo]}
+            type="button"
+            data-lightbox-src={live.cover_image.url}
+            aria-label={`${live.title}のライブ写真を拡大表示`}
+          >
+            <img
+              class={styles.image}
+              src={live.cover_image.url}
+              alt={live.cover_image.alt ?? `${live.title}のライブ写真`}
+            />
+          </button>
+          <div class="archive__details">
+            <div class="archive__meta">
+              <span>
+                {formatMonth(live.event_date)}
+              </span>
+              <b
+                class:list={{
+                  pink: live.event_type === "band",
+                  gold: live.event_type === "project",
+                }}
+              >
+                {getEventTypeLabel(live.event_type)}
+              </b>
+            </div>
+            <h2>{live.title}</h2>
+            {live.subtitle && <p class="archive__subtitle">{live.subtitle}</p>}
+            <p class="archive__line">
+              <Icon name="calendar" />
+              {formatDate(live.event_date)}　{live.event_time}
+            </p>
+            <p class="archive__line">
+              <Icon name="pin" />
+              {live.place}
+            </p>
+            <div class="archive__numbers">
+              {[
+                ["出演者", live.performer_count],
+                ["観覧者", live.audience_count],
+                ["合計", live.total_count],
+              ].map(([label, count]) => (
+                <span>
+                  {label}
+                  <strong>{count}名</strong>
+                </span>
+              ))}
+            </div>
+            <div class="archive__actions">
+              {live.setlist.length > 0 && (
+                <a class="archive__setlist" href={`/archive/${live.id}/`}>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z" />
+                    <path class="archive__youtube-play" d="m9.6 8.5 6.3 3.5-6.3 3.5Z" />
+                  </svg>
+                  <span>演奏曲を見る</span> <b>→</b>
+                </a>
+              )}
+              {live.youtube_url && (
+                <a
+                  class="archive__video"
+                  href={live.youtube_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z" />
+                    <path class="archive__youtube-play" d="m9.6 8.5 6.3 3.5-6.3 3.5Z" />
+                  </svg>
+                  演奏動画を見る <b>→</b>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </section>
+    {archives.length > archivePageSize && (
+      <button class="archive__more" type="button">
+        さらに過去のライブを見る <span>→</span>
+      </button>
+    )}
+  </div>
+</Layout>
+
+<ImageLightbox label="ライブ写真を拡大表示" />
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-tab-nav="archive"] button');
+  const cards = document.querySelectorAll<HTMLElement>(".archive__card");
+  const moreButton = document.querySelector<HTMLButtonElement>(".archive__more");
+  const pageSize = Number(
+    document.querySelector<HTMLElement>(".archive__grid")?.dataset.pageSize ?? cards.length,
+  );
+  let showAll = false;
+  let currentYear = "all";
+  const applyFilter = (year = currentYear) => {
+    currentYear = year;
+    const matchingCards = [...cards].filter((card) => year === "all" || card.dataset.year === year);
+    const shouldPaginate = !showAll && matchingCards.length > pageSize;
+    cards.forEach((card) => {
+      card.hidden =
+        (year !== "all" && card.dataset.year !== year) ||
+        (shouldPaginate && card.classList.contains("archive__card--extra"));
+    });
+    if (moreButton) moreButton.hidden = !shouldPaginate;
+  };
+  filters.forEach((filter) =>
+    filter.addEventListener("click", () => {
+      const year = filter.dataset.tabValue;
+      filters.forEach((button) => {
+        const active = button === filter;
+        button.setAttribute("aria-pressed", String(active));
+      });
+      showAll = false;
+      applyFilter(year);
+    }),
+  );
+  moreButton?.addEventListener("click", () => {
+    showAll = true;
+    applyFilter(currentYear);
+  });
+</script>

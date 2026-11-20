@@ -1,0 +1,17 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+	title: string;
+	className?: string;
+	home?: boolean;
+	parentTitle?: string;
+	parentHref?: string;
+}
+
+const { title, className = "breadcrumb", home = false, parentTitle, parentHref } = Astro.props;
+---
+
+<nav class={`breadcrumb ${className}`} aria-label="パンくずリスト">
+	{home ? <span><Icon name="home" className="breadcrumb__home-icon" />{title}</span> : <><a href="/"><Icon name="home" className="breadcrumb__home-icon" />ホーム</a><span>›</span>{parentTitle && parentHref ? <><a href={parentHref}>{parentTitle}</a><span>›</span></> : null}<span>{title}</span></>}
+</nav>

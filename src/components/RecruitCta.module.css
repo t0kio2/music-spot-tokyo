@@ -1,0 +1,53 @@
+.cta {
+  position: fixed;
+  right: var(--layout-offset, 0px);
+  bottom: 0;
+  left: calc(var(--sidebar) + var(--layout-offset, 0px));
+  z-index: 15;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 -8px 24px #000b;
+  background: var(--panel-fill);
+}
+
+.hasImage {
+  background:
+    linear-gradient(90deg, #00050ddd, #00070db8),
+    var(--recruit-image, none) center 52% / cover;
+}
+
+.cta p {
+  text-align: center;
+  white-space: pre-line;
+}
+
+@media (min-width: 761px) {
+  .cta:global(.recruit-cta) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .cta:global(.recruit-cta) p {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 760px) {
+  .cta {
+    right: 0;
+    left: 0;
+    min-height: 0;
+    gap: 0.45rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  .cta:global(.recruit-cta) p {
+    line-height: 1.4;
+  }
+}

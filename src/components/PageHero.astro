@@ -1,0 +1,89 @@
+---
+import Breadcrumb from "./Breadcrumb.astro";
+import styles from "./PageHero.module.css";
+import { getPageSettings, type Media } from "../lib/api";
+
+interface Props {
+  title?: string;
+  description?: string;
+  className: string;
+  breadcrumbTitle?: string;
+  subTitle?: string;
+  parentTitle?: string;
+  parentHref?: string;
+  id?: string;
+  compact?: boolean;
+  style?: string;
+  heroImage?: Media;
+  useCmsContent?: boolean;
+}
+
+const {
+  title,
+  description,
+  className,
+  breadcrumbTitle,
+  subTitle,
+  parentTitle,
+  parentHref,
+  id,
+  compact = false,
+  style,
+  heroImage,
+  useCmsContent = true,
+} = Astro.props;
+const pageSettings = await getPageSettings(Astro.url.pathname);
+const resolvedTitle = useCmsContent ? pageSettings?.title : title;
+const resolvedDescription = useCmsContent ? pageSettings?.description : description;
+const resolvedSubTitle = useCmsContent ? pageSettings?.sub_title : subTitle;
+const resolvedBreadcrumbTitle = useCmsContent
+  ? pageSettings?.sidemenu_page_title
+  : breadcrumbTitle;
+const heroImages = useCmsContent ? pageSettings?.hero_images ?? [] : [];
+const resolvedHeroImage = useCmsContent ? undefined : heroImage;
+const heroStyle = [
+  resolvedHeroImage ? `--page-hero-image: url("${resolvedHeroImage.url}")` : "",
+  style ?? "",
+]
+  .filter(Boolean)
+  .join(";");
+---
+
+<section
+  class:list={[className, styles.hero, { [styles.compact]: compact }]}
+  style={heroStyle || undefined}
+  aria-labelledby={id}
+>
+  {heroImages.length > 0 && (
+    <div
+      class:list={[styles.slideshow, { [styles.slideshowAnimated]: heroImages.length > 1 }]}
+      style={`--hero-slide-count: ${heroImages.length}`}
+      aria-hidden="true"
+    >
+      {heroImages.map((image, index) => (
+        <img
+          src={image.url}
+          alt=""
+          style={`--hero-slide-index: ${index}`}
+        />
+      ))}
+    </div>
+  )}
+  <Breadcrumb
+    title={resolvedBreadcrumbTitle ?? ""}
+    parentTitle={parentTitle}
+    parentHref={parentHref}
+    className={styles.breadcrumb}
+  />
+  <slot name="eyebrow" />
+  {Astro.slots.has("title") ? (
+    <slot name="title" />
+  ) : (
+    <h1 class={styles.title} id={id}>
+      {resolvedTitle}
+      {resolvedSubTitle && <span class={styles.subtitle}>{resolvedSubTitle}</span>}
+    </h1>
+  )}
+  {resolvedDescription && <p class={styles.description}>{resolvedDescription}</p>}
+  <slot />
+</section>

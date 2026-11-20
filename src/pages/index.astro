@@ -1,28 +1,111 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPageBySlug } from "../lib/microcms";
+import ImageLightbox from "../components/ImageLightbox.astro";
+import FeaturePanel from "../components/FeaturePanel.astro";
+import ActionLink from "../components/ActionLink.astro";
+import HomeSchedule from "../components/HomeSchedule.astro";
+import homeHeroStyles from "./index.module.css";
+import {
+  getPageSettings,
+  Api,
+  selectNextApplication,
+} from "../lib/api";
 
-const page = await getPageBySlug("home");
+const applications = await Api.getApplication();
+const homePageSettings = await getPageSettings("/");
+const nextLive = selectNextApplication(applications);
+const homeHeroImages = homePageSettings?.hero_images ?? [];
+const homeSubTitle = homePageSettings?.sub_title ?? "";
+const homeDescription = homePageSettings?.description ?? "";
 ---
 
-<Layout description="MuST（マスト）は、「気軽」に「気の合う仲間」とライブハウスで演奏できる、東京都内の社会人軽音セッションサークルです。「久しぶりにライブに出たい」「音楽を通じて同世代の友達を作りたい」「初心者・ライブ未経験だけどステージに立ってみたい」という方々、ぜひお気軽にご参加ください！">
-	<div class="container home prose" set:html={page?.content ?? ""} />
+<Layout
+  home
+>
+  <div class="home" id="home">
+    <section class="home__hero" aria-labelledby="home-title">
+      <div
+        class={homeHeroStyles.slideshow}
+        data-slide-count={homeHeroImages.length}
+        aria-hidden="true"
+      >
+        {homeHeroImages.map((image, index) => (
+          <img src={image.url} alt="" style={`--home-slide-index: ${index}`} />
+        ))}
+      </div>
+      <div class="home__hero-actions">
+        <ActionLink
+          href="/application/"
+          label="募集状況・申込み"
+          variant="warm"
+          icon="person"
+        />
+      </div>
+      <div class="home__hero-copy">
+        <h1 id="home-title">
+          {homeSubTitle.split("\n").map((line, index) => (
+            <Fragment>{index > 0 && <br />}{line}</Fragment>
+          ))}
+        </h1>
+        <p>
+          {homeDescription.split("\n").map((line, index) => (
+            <Fragment>{index > 0 && <br />}{line}</Fragment>
+          ))}
+        </p>
+        <ActionLink
+          href="/overview/"
+          label="MuSTについて詳しく見る"
+          variant="primary"
+        />
+      </div>
+    </section>
+
+    <div class="home__content">
+      <div class="home__feature-grid">
+        <FeaturePanel
+          variant="song"
+          title="演奏曲について"
+          icon="music"
+          href="/music-selection/"
+          linkLabel="演奏曲について詳しく見る"
+        >
+          <Fragment slot="description">
+            <span data-home-music-year>—</span>年以降のJ-POP・邦ロックを中心に、
+            <br />
+            話題のアーティストやフェスで盛り上がる
+            <br />
+            人気の曲を演奏します。
+          </Fragment>
+        </FeaturePanel>
+        <FeaturePanel variant="activity" title="活動実績・過去のライブ" icon="chart">
+          <Fragment slot="description">
+            2023年の立ち上げから、ライブやセッションを
+            <br />
+            重ねてきました。
+          </Fragment>
+          <Fragment slot="actions">
+            <ActionLink href="/history/" label="活動実績を見る" />
+            <ActionLink href="/archive/" label="過去のライブを見る" />
+          </Fragment>
+        </FeaturePanel>
+      </div>
+
+      <HomeSchedule nextLive={nextLive} />
+    </div>
+  </div>
 </Layout>
 
-<style>
-	.home {
-		padding-top: 1rem;
-	}
+<ImageLightbox label="チラシを拡大表示" />
 
-	.home :global(figure) {
-		max-width: none;
-	}
+<script>
+  const homeMusicYear =
+    Number(
+      new Intl.DateTimeFormat("en-US", { year: "numeric", timeZone: "Asia/Tokyo" }).format(
+        new Date(),
+      ),
+    ) - 9;
 
-	.home :global(figure img) {
-		width: auto;
-		max-width: 100%;
-		height: auto;
-		max-height: calc(100svh - 8rem);
-		margin-inline: auto;
-	}
-</style>
+  document.querySelectorAll("[data-home-music-year]").forEach((element) => {
+    element.textContent = String(homeMusicYear);
+  });
+</script>

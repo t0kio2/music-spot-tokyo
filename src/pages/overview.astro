@@ -1,20 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getPageBySlug } from "../lib/microcms";
+import OverviewHero from "../components/OverviewHero.astro";
+import OverviewStats from "../components/OverviewStats.astro";
+import OverviewFeatures from "../components/OverviewFeatures.astro";
+import { Api } from "../lib/api";
 
-const page = await getPageBySlug("overview");
+const overview = await Api.getOverview();
 ---
 
-<Layout
-	title={page?.title ?? "サークル概要"}
-	description="東京都内の社会人軽音サークルMuST（マスト）の概要をご紹介します。サークルの特徴や活動について知りたい方、参加を検討している方はこちらをご覧ください。"
->
-	<div class="container prose" set:html={page?.content ?? ""} />
-</Layout>
+<Layout>
+  <div class="overview">
+    <OverviewHero />
+    <OverviewStats
+      items={[
+        { icon: "pin", label: "活動場所", value: "東京23区内" },
+        {
+          icon: "users",
+          label: "参加人数",
+          value: overview.participant_count,
+          suffix: `名（女性${overview.female_count}名・男性${overview.male_count}名）`,
+          date: "today",
+          large: true,
+        },
+      ]}
+    />
 
-<style>
-	.container {
-		padding-top: 1rem;
-		padding-bottom: 3rem;
-	}
-</style>
+    <section class="overview__content" id="activities" aria-label="MuSTの特徴">
+      <OverviewFeatures />
+    </section>
+
+  </div>
+</Layout>

@@ -1,0 +1,107 @@
+---
+import ActionLink from "./ActionLink.astro";
+import Icon from "./Icon.astro";
+import styles from "./HomeSchedule.module.css";
+import { formatEventDate, getEventTypeLabel, type Application } from "../lib/api";
+
+interface Props {
+  nextLive?: Application;
+}
+
+const { nextLive } = Astro.props;
+---
+
+<section class={styles.schedule} aria-labelledby="home-schedule-title">
+  <div class={styles.intro}>
+    <h2>
+      <Icon name="calendar" />
+      MuSTのライブ
+    </h2>
+    <p>
+      ３か月ごとに、異なる形式でライブを開催しています。それぞれ違う楽しさがある４つのライブを楽しめます。
+    </p>
+    <div class={styles.actions}>
+      <ActionLink href="/flow/" label="参加までの流れ" />
+      <ActionLink
+        href="/application/"
+        label="募集状況・申込み"
+        variant="warm"
+        icon="person"
+      />
+    </div>
+  </div>
+  <div class={styles.main}>
+    <h2 id="home-schedule-title">今後のスケジュール</h2>
+    <div class={styles.cards}>
+      <article>
+        <header>
+          <span>
+            <Icon name="users" />
+          </span>
+          <div>
+            <b>３月・９月</b>
+            <strong>定期セッションライブ</strong>
+          </div>
+        </header>
+        <ul>
+          <li>曲ごとにメンバーが変わるセッション形式で演奏。</li>
+          <li>練習会を２回実施(参加必須)。</li>
+          <li>初心者にも安心のライブです。</li>
+        </ul>
+      </article>
+      <article>
+        <header>
+          <span>
+            <Icon name="star" />
+          </span>
+          <div>
+            <b>６月</b>
+            <strong>企画セッションライブ</strong>
+          </div>
+        </header>
+        <p>
+          アーティストやテーマを決めたセッション。 これまでにKing
+          Gnu、ずとまよ、ヨルシカなどのアーティスト縛りで開催。
+          「一発合わせ」のセッションです。
+        </p>
+      </article>
+      <article>
+        <header>
+          <span>
+            <Icon name="calendar" />
+          </span>
+          <div>
+          <b>12月</b>
+            <strong>対バンライブ</strong>
+          </div>
+        </header>
+        <p>
+          定期セッションライブのメンバーを中心にバンドを組んで出演。メンバーの組み合わせや日程は運営がサポートします。バンドは基本的に１回限りなので、固定メンバーに縛られる心配もありません。
+        </p>
+      </article>
+    </div>
+  </div>
+  {nextLive && (
+    <aside class={styles.next}>
+      <h2>次回のライブ</h2>
+      <div class={styles.nextCard}>
+        {nextLive.flyer && (
+          <button
+            class={styles.nextFlyer}
+            type="button"
+            data-lightbox-src={nextLive.flyer.url}
+            aria-label="次回ライブのチラシを拡大表示"
+          >
+            <img src={nextLive.flyer.url} alt={nextLive.flyer.alt ?? "ライブチラシ"} />
+          </button>
+        )}
+        <h3>
+          {formatEventDate(nextLive.event_date)}
+          <br />
+          {getEventTypeLabel(nextLive.event_type)}
+        </h3>
+        <p>{nextLive.place ?? "会場未定"}</p>
+      </div>
+    </aside>
+  )}
+</section>
