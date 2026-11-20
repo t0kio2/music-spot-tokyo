@@ -402,16 +402,28 @@
   gap: 5px 1rem;
   margin-inline: 1rem;
 }
-.renewal-application__audience-only {
+.renewal-application__recruitment-note {
   color: #ffd5f4 !important;
 }
-.renewal-application__audience-only--details {
+.renewal-application__recruitment-note--details {
   margin: 0;
   padding-top: 0.35rem;
   padding-left: 25px;
   color: var(--renewal-gold) !important;
   font-size: var(--renewal-font-md);
   line-height: 1.6;
+}
+.renewal-application__recruitment-note--status {
+  margin: 0.7rem 1rem 0 !important;
+  color: var(--renewal-gold) !important;
+  font-size: var(--renewal-font-md);
+  line-height: 1.6;
+}
+.renewal-application__status--closed .renewal-application__recruitment-note--status {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
 }
 .renewal-application__vacancies span {
   display: flex;
@@ -477,7 +489,7 @@
     margin: 0.65rem 1rem 0;
     gap: 2px;
   }
-  .renewal-application__audience-only--details {
+  .renewal-application__recruitment-note--details {
     margin-left: 1rem;
     padding-left: 19px;
   }

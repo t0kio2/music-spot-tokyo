@@ -119,8 +119,13 @@
 .legend i {
   width: 1.35rem;
   height: 1.35rem;
+  margin-top: 0.2rem;
+  align-self: start;
   border-radius: 50%;
   background: var(--renewal-pink);
+}
+.legend > div > span {
+  line-height: 1.6;
 }
 .legend > div:nth-child(2) i {
   background: #249eff;

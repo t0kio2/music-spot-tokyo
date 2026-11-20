@@ -31,6 +31,36 @@
   vertical-align: baseline;
 }
 
+.dateDetail {
+  align-items: start;
+}
+
+.dateDetail dt {
+  align-items: flex-start;
+}
+
+.dateDetail dd b {
+  align-self: start;
+  line-height: 1.35;
+}
+
+.dateDetail dd span {
+  line-height: 1.35;
+}
+
+.ageDetail dt {
+  display: none;
+}
+
+.ageDetail dd b {
+  grid-column: 1 / span 2;
+  white-space: nowrap;
+}
+
+.ageDetail dd span {
+  grid-column: 3;
+}
+
 .scheduleLine {
   display: flex;
   align-items: flex-start;
