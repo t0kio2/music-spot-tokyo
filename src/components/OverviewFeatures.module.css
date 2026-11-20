@@ -44,22 +44,22 @@
 }
 
 .one {
-  --feature-photo: url("../assets/materials_webp/sachi.webp");
+  --feature-photo: url("../assets/materials_webp/photo-11.webp");
 }
 .two {
-  --feature-photo: url("../assets/materials_webp/saku.webp");
+  --feature-photo: url("../assets/materials_webp/photo-12.webp");
 }
 .three {
-  --feature-photo: url("../assets/materials_webp/keyboard.webp");
+  --feature-photo: url("../assets/materials_webp/photo-07.webp");
 }
 .four {
-  --feature-photo: url("../assets/materials_webp/guitar.webp");
+  --feature-photo: url("../assets/materials_webp/photo-04.webp");
 }
 .five {
-  --feature-photo: url("../assets/materials_webp/akina.webp");
+  --feature-photo: url("../assets/materials_webp/photo-01.webp");
 }
 .six {
-  --feature-photo: url("../assets/materials_webp/bass.webp");
+  --feature-photo: url("../assets/materials_webp/photo-02.webp");
 }
 
 .feature > * {
