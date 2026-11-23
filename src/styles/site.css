@@ -270,6 +270,8 @@
 }
 .application__poster {
   min-height: 164px;
+  aspect-ratio: 3 / 4;
+  align-self: start;
   border: 0;
   border-radius: 8px;
   background:
