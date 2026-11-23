@@ -322,7 +322,7 @@
 .application__title h2 {
   margin-top: 6px;
   font:
-    700 1.1rem/1.4 "Noto Sans JP",
+    700 1.25rem/1.4 "Noto Sans JP",
     serif;
   overflow-wrap: anywhere;
 }
@@ -457,17 +457,6 @@
 }
 .application__vacancies .is-closed {
   color: var(--muted);
-}
-@media (max-width: 1000px) and (min-width: 761px) {
-  .application__event {
-    grid-template-columns: 8rem minmax(13rem, 1fr) minmax(10rem, 0.8fr) minmax(10rem, 0.8fr);
-  }
-  .application__event .application__status {
-    grid-column: auto;
-  }
-  .application__event .application__poster {
-    grid-row: auto;
-  }
 }
 @media (max-width: 760px) {
   .application__events {
@@ -1148,12 +1137,6 @@
 @media (max-width: 1000px) and (min-width: 761px) {
   .application__event {
     grid-template-columns: 8rem minmax(13rem, 1fr) minmax(10rem, 0.8fr) minmax(14rem, 0.9fr);
-  }
-  .application__event .application__status {
-    grid-column: auto;
-  }
-  .application__event .application__poster {
-    grid-row: auto;
   }
 }
 @media (max-width: 760px) {
