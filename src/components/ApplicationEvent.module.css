@@ -96,7 +96,7 @@
   border: 1px solid var(--cyan);
   border-radius: 20px;
   color: var(--cyan);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 :global(.application__title small) {
@@ -106,7 +106,7 @@
   border-radius: 20px;
   color: #ffa5e9;
   font-size: var(--font-md);
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -197,6 +197,7 @@
 @media (max-width: 760px) {
   :global(.application__title small) {
     padding: 2px 8px;
+    font-size: 0.72rem;
   }
 
   :global(.application__status) {
@@ -244,10 +245,13 @@
   color: #ff90db;
 }
 
-.roster,
-.schedule {
+.roster {
   border-left: 1px solid var(--line-soft);
   padding-left: 13px;
+  font-size: var(--font-md);
+}
+
+.schedule {
   font-size: var(--font-md);
 }
 
@@ -296,30 +300,6 @@
   text-overflow: ellipsis;
 }
 
-@media (min-width: 761px) {
-  :global(.application__event--project) .schedule {
-    grid-column: 2 / -1;
-    grid-row: 2;
-  }
-
-  :global(.application__event--project) :global(.application__status) {
-    grid-column: 3 / -1;
-    grid-row: 1;
-  }
-
-  :global(.application__event--band) .application__poster {
-    grid-row: 1 / span 2;
-  }
-
-  :global(.application__event--band) .roster {
-    grid-column: 3 / -1;
-  }
-
-  :global(.application__event--band) .schedule {
-    grid-column: 2 / -1;
-  }
-}
-
 .performerTime {
   color: var(--gold);
   white-space: nowrap;
@@ -332,6 +312,58 @@
 .schedule p {
   margin: 0 0 7px;
   line-height: 1.65;
+}
+
+@media (min-width: 761px) {
+  .scheduleLine + .scheduleLine {
+    margin-top: 0.35rem;
+  }
+
+  :global(.application__event) :global(.application__info) {
+    display: contents;
+  }
+
+  :global(.application__event) :global(.application__title) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  :global(.application__event) :global(.application__poster) {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+  }
+
+  :global(.application__event) :global(.application__details-list),
+  :global(.application__event) :global(.application__undecided) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  :global(.application__event) :global(.application__status) {
+    grid-column: 3 / -1;
+    grid-row: 2 / span 2;
+  }
+
+  :global(.application__event) :global(.application__roster),
+  :global(.application__event) :global(.application__schedule) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  :global(.application__event--project) .schedule {
+    grid-column: 2 / -1;
+    grid-row: 3;
+  }
+
+  :global(.application__event--band) .roster {
+    grid-column: 3 / -1;
+    grid-row: 2;
+  }
+
+  :global(.application__event--band) .schedule {
+    grid-column: 2 / -1;
+    grid-row: 3;
+  }
 }
 
 @media (max-width: 760px) {
@@ -360,12 +392,12 @@
     column-gap: 0.75rem;
   }
 
-  :global(.application__event--status-only) :global(.application__status) {
-    border-color: transparent;
-  }
-
   :global(.application__event--project) .schedule {
     border-top: 0;
+  }
+
+  :global(.application__event--project) :global(.application__status) {
+    margin-top: 8px;
   }
 
 }

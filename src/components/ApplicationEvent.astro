@@ -13,7 +13,11 @@ interface Props {
 }
 
 const { event } = Astro.props;
-const schedule = event.regular_session_info[0];
+const rawSchedule = event.regular_session_info[0];
+const schedule =
+  rawSchedule?.setlist_select_msg || rawSchedule?.practice_date
+    ? rawSchedule
+    : undefined;
 const isClosed = event.is_closed;
 const isBand = event.event_type === "band";
 const isStatusOnly = !isBand && !schedule;
