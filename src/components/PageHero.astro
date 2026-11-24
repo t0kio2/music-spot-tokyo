@@ -33,7 +33,7 @@ const {
   useCmsContent = true,
 } = Astro.props;
 const pageSettings = await getPageSettings(Astro.url.pathname);
-const resolvedTitle = useCmsContent ? pageSettings?.title : title;
+const resolvedTitle = useCmsContent ? pageSettings?.page_title : title;
 const resolvedDescription = useCmsContent ? pageSettings?.description : description;
 const resolvedSubTitle = useCmsContent ? pageSettings?.sub_title : subTitle;
 const resolvedBreadcrumbTitle = useCmsContent

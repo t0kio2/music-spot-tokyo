@@ -205,7 +205,8 @@
     box-sizing: border-box;
     min-height: unset;
     padding: 6px 8px;
-    border-radius: 8px;
+    border: 0;
+    border-radius: 0;
   }
 
   :global(.application__status > summary) {

@@ -11,6 +11,7 @@ export interface PageSettings {
   path: string;
   hero_images: Media[];
   sidemenu_page_title?: string;
+  page_title?: string;
   title?: string;
   sub_title?: string;
   description?: string;
@@ -229,6 +230,7 @@ interface PageSettingsRecord {
   path?: string;
   hero_images?: Media[];
   sidemenu_page_title?: string;
+  page_title?: string;
   title?: string;
   sub_title?: string;
   description?: string;
@@ -295,6 +297,7 @@ function fetchPageSettingsList(): Promise<PageSettings[]> {
         path: normalizePagePath(item.path ?? "/"),
         hero_images: (item.hero_images ?? []).map(toBrowserMedia),
         sidemenu_page_title: item.sidemenu_page_title,
+        page_title: item.page_title,
         title: item.title,
         sub_title: item.sub_title,
         description: item.description,
