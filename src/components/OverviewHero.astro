@@ -6,7 +6,7 @@ import { getPageSettings } from "../lib/api";
 
 const pageSettings = await getPageSettings(Astro.url.pathname);
 const heroImages = pageSettings?.hero_images ?? [];
-const title = pageSettings?.title ?? "";
+const title = pageSettings?.page_title ?? "";
 const subTitle = pageSettings?.sub_title ?? "";
 const description = pageSettings?.description ?? "";
 const breadcrumbTitle = pageSettings?.sidemenu_page_title ?? "";

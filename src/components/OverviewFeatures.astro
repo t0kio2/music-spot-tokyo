@@ -4,6 +4,20 @@ import styles from "./OverviewFeatures.module.css";
 
 type FeatureIcon = "users" | "calendar" | "line" | "music" | "refresh";
 
+const currentYear = new Date().getFullYear();
+const youngestAge = currentYear - 1999;
+const oldestAge = currentYear - 1987;
+const formatAgeGroup = (age: number) => {
+  const decade = Math.floor(age / 10) * 10;
+  const remainder = age % 10;
+
+  if (age >= 30) return `${decade}代`;
+  if (remainder < 3) return `${decade}代前半`;
+  if (remainder < 7) return `${decade}代半ば`;
+  return `${decade}代後半`;
+};
+const ageGroup = `${formatAgeGroup(youngestAge)}〜${formatAgeGroup(oldestAge)}`;
+
 const features: Array<{
   variant: "one" | "two" | "three" | "four" | "five" | "six";
   icon?: FeatureIcon;
@@ -37,9 +51,9 @@ const features: Array<{
     variant: "three",
     icon: "users",
     number: "３",
-    title: "同世代（1987〜1999年生まれ）が中心",
+    title: "同世代が中心",
     description: [
-      "趣味や価値観が近く、音楽を通じて自然と友達になれます。",
+      `${ageGroup}（1987年〜1999年生まれ）が所属しているため、趣味や価値観が近く、音楽を通じて自然と友達になれます。`,
       "10年後、20年後も一緒に演奏できる仲間づくりを大切にしています。",
     ],
   },

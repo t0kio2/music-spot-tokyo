@@ -711,12 +711,6 @@
 .shell:has(.recruit-cta) .main {
   padding-bottom: 7rem;
 }
-@media (max-width: 1000px) and (min-width: 761px) {
-  .shell--home {
-    --sidebar: 116px;
-  }
-}
-
 @media (max-width: 760px) {
   .home__hero {
     min-height: 18rem;
