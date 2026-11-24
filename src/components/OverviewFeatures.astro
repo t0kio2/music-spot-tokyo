@@ -13,7 +13,7 @@ const formatAgeGroup = (age: number) => {
 
   if (age >= 30) return `${decade}代`;
   if (remainder < 3) return `${decade}代前半`;
-  if (remainder < 7) return `${decade}代半ば`;
+  if (remainder < 8) return `${decade}代半ば`;
   return `${decade}代後半`;
 };
 const ageGroup = `${formatAgeGroup(youngestAge)}〜${formatAgeGroup(oldestAge)}`;
