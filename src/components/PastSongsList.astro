@@ -77,6 +77,8 @@ const groups = [
   const input = document.querySelector<HTMLInputElement>("#past-songs-search");
   const count = document.querySelector<HTMLElement>("[data-song-count]");
   const empty = document.querySelector<HTMLElement>("[data-song-empty]");
+  const track = (name: string, params: Record<string, string | number>) =>
+    window.gtag?.("event", name, params);
 
   const apply = () => {
     const query = input?.value.trim().toLocaleLowerCase() ?? "";
@@ -96,6 +98,22 @@ const groups = [
     if (empty) empty.hidden = visibleCount > 0;
   };
   input?.addEventListener("input", apply);
+  input?.addEventListener("change", () => {
+    apply();
+    track("past_songs_search", {
+      search_term: input.value.trim(),
+      result_count: count?.textContent ?? "0",
+    });
+  });
+  document.querySelectorAll<HTMLDetailsElement>("[data-song-group]").forEach((group) => {
+    group.addEventListener("toggle", () => {
+      if (group.open) {
+        track("past_songs_artist_open", {
+          artist_name: group.querySelector("summary")?.textContent?.trim() ?? "",
+        });
+      }
+    });
+  });
   document.querySelectorAll<HTMLElement>("[data-song-video]").forEach((gallery) => {
     const videos = [...gallery.querySelectorAll<HTMLElement>("[data-song-video-item]")];
     let index = 0;
@@ -104,10 +122,26 @@ const groups = [
     gallery.querySelector("[data-song-video-prev]")?.addEventListener("click", () => {
       index = (index - 1 + videos.length) % videos.length;
       render();
+      track("past_song_video_navigation", {
+        direction: "previous",
+        song_title: gallery.dataset.songTitle ?? "",
+      });
     });
     gallery.querySelector("[data-song-video-next]")?.addEventListener("click", () => {
       index = (index + 1) % videos.length;
       render();
+      track("past_song_video_navigation", {
+        direction: "next",
+        song_title: gallery.dataset.songTitle ?? "",
+      });
     });
+    videos.forEach((video) =>
+      video.addEventListener("click", () => {
+        track("past_song_video_click", {
+          song_title: gallery.dataset.songTitle ?? "",
+          event_title: video.dataset.songVideoTitle ?? "",
+        });
+      }),
+    );
   });
 </script>

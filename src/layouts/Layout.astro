@@ -84,11 +84,11 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     {gaMeasurementId && <script is:inline define:vars={{ gaMeasurementId }}>
       if (!new URLSearchParams(window.location.search).has("no_ga")) {
         window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
-        gtag("config", gaMeasurementId);
+        window.gtag = window.gtag || function (...args) {
+          window.dataLayer.push(args);
+        };
+        window.gtag("js", new Date());
+        window.gtag("config", gaMeasurementId, { send_page_view: true });
 
         const script = document.createElement("script");
         script.async = true;
