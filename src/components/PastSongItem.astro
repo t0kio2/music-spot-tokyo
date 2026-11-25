@@ -21,12 +21,13 @@ const videoEvents = song.events.filter((event) => event.youtubeUrl);
     <span>演奏回数 {song.events.length}回</span>
   </div>
   {videoEvents.length > 0 && (
-    <div class={styles.videoGallery} data-song-video>
+    <div class={styles.videoGallery} data-song-video data-song-title={song.title}>
       <div class={styles.videoTrack}>
         {videoEvents.map((event, index) => (
           <a
             class:list={[styles.youtube, { "video-active": index === 0 }]}
             data-song-video-item
+            data-song-video-title={event.title}
             href={event.youtubeUrl}
             target="_blank"
             rel="noopener noreferrer"
