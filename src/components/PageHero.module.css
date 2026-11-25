@@ -127,7 +127,6 @@
 :global(.faq-page__hero).hero,
 :global(.precautions__hero).hero,
 :global(.application__hero).hero,
-:global(.schedule__hero).hero,
 :global(.setlist__hero).hero {
   min-height: 11.5rem;
   overflow: hidden;
@@ -319,7 +318,6 @@
   :global(.faq-page__hero).hero,
   :global(.precautions__hero).hero,
   :global(.application__hero).hero,
-  :global(.schedule__hero).hero,
   :global(.setlist__hero).hero {
     min-height: 8.5rem;
     padding: 1.2rem var(--content-gutter) 1.5rem;

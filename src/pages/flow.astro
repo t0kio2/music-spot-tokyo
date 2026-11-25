@@ -7,10 +7,20 @@ const steps = [
     "１",
     "document",
     "参加申込",
-    "本サイト内の「募集状況・申込み」から必要事項を入力しご応募ください。",
+    "本サイト内の",
     "",
+    [{ href: "/application/", label: "募集状況・申込み" }],
+    "から必要事項を入力しご応募ください。",
   ],
-  ["２", "warning", "注意事項の確認", "当サークルの注意事項について、ご確認いただきます。", ""],
+  [
+    "２",
+    "warning",
+    "注意事項の確認",
+    "当サークルの",
+    "",
+    [{ href: "/precautions/", label: "注意事項" }],
+    "について、ご確認いただきます。",
+  ],
   [
     "３",
     "line",
@@ -22,8 +32,13 @@ const steps = [
     "４",
     "music",
     "希望曲のリクエスト",
-    "募集期間に希望曲をリクエストします。その後、運営者が選曲します。",
+    "募集期間に希望曲をリクエストします。その後、運営者が選曲します。詳しくは",
     "※企画ライブは企画内容によります。",
+    [
+      { href: "/music-selection/", label: "演奏曲について" },
+      { href: "/past-songs/", label: "過去の演奏曲一覧" },
+    ],
+    "をご覧ください。",
   ],
   [
     "５",
@@ -58,12 +73,14 @@ const steps = [
     />
     <FlowSteps
       mobileOnlyAccordion
-      steps={steps.map(([number, icon, title, text, note]) => ({
+      steps={steps.map(([number, icon, title, text, note, links, linkSuffix]) => ({
         number,
         icon,
         title,
         text,
         note,
+        links,
+        linkSuffix,
       }))}
     />
   </div>

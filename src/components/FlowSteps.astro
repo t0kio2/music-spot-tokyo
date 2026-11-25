@@ -9,6 +9,11 @@ interface FlowStep {
   title: string;
   text: string;
   note: string;
+  links?: Array<{
+    href: string;
+    label: string;
+  }>;
+  linkSuffix?: string;
 }
 
 interface Props {
@@ -50,7 +55,20 @@ const { steps, mobileOnlyAccordion = true } = Astro.props;
         <i aria-hidden="true">＋</i>
       </summary>
       <div class={styles.body}>
-        <p>{step.text}</p>
+        <p>
+          {step.text}
+          {step.links && (
+            <>
+              {step.links.map((link, index) => (
+                <Fragment>
+                  {index > 0 && "、"}
+                  <a class={styles.inlineLink} href={link.href}>{link.label}</a>
+                </Fragment>
+              ))}
+              {step.linkSuffix}
+            </>
+          )}
+        </p>
         {step.note && step.title !== "練習会" && <aside>{step.note}</aside>}
       </div>
     </details>
