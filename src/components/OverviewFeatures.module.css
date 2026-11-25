@@ -121,6 +121,12 @@
   line-height: 1.55;
   white-space: pre-line;
 }
+
+.feature p a.descriptionLink {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 .feature p {
   margin-top: 0.65rem;
   color: #fff;

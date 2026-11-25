@@ -25,6 +25,11 @@ const features: Array<{
   title: string;
   description: string[];
   link?: string;
+  descriptionLink?: {
+    href: string;
+    label: string;
+    suffix: string;
+  };
   id?: string;
 }> = [
   {
@@ -84,6 +89,11 @@ const features: Array<{
     description: [
       "お一人でのご参加も、初心者・ライブ未経験の方も歓迎です。「ライブハウスのステージに立ってみたい」という気持ちがあれば、お気軽にご参加できます。",
     ],
+    descriptionLink: {
+      href: "/faq/",
+      label: "よくある質問",
+      suffix: "もご確認ください。",
+    },
     id: "members",
   },
 ];
@@ -113,6 +123,15 @@ const features: Array<{
             {index < feature.description.length - 1 && <br />}
           </Fragment>
         ))}
+        {feature.descriptionLink && (
+          <>
+            <br />
+            <a class={styles.descriptionLink} href={feature.descriptionLink.href}>
+              {feature.descriptionLink.label}
+            </a>
+            {feature.descriptionLink.suffix}
+          </>
+        )}
       </p>
       {feature.link && (
         <a
