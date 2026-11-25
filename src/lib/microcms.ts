@@ -12,3 +12,12 @@ export function getMicrocmsClient(): MicroCMSClient {
 
 	return createClient({ serviceDomain, apiKey });
 }
+
+export function getArticleMicrocmsClient(): MicroCMSClient | undefined {
+  const serviceDomain = import.meta.env.MICROCMS_ARTICLE_SERVICE_DOMAIN;
+  const apiKey = import.meta.env.MICROCMS_ARTICLE_API_KEY;
+
+  if (!serviceDomain || !apiKey) return undefined;
+
+  return createClient({ serviceDomain, apiKey });
+}

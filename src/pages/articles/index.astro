@@ -1,0 +1,72 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+import { getArticleCategories, getArticles } from "../../lib/api";
+import styles from "./articles.module.css";
+
+const articles = await getArticles();
+const categories = await getArticleCategories();
+const waveformBars = [
+  8, 12, 18, 24, 32, 42, 56, 72, 88, 96, 78, 62, 48, 34, 22, 14, 10, 16, 26, 40, 58, 76, 90, 70, 52,
+  36, 24, 16, 10, 7,
+];
+---
+
+<Layout
+  useCmsContent={false}
+  title="MuSTの読みもの"
+  description="音楽をもっと楽しむためのヒントと、MuSTの日々をお届けします。"
+>
+  <div class={styles.page}>
+    <header class={styles.hero}>
+      <div class={styles.waveform} aria-hidden="true">
+        <div class={styles.waveformSide}>
+          {waveformBars.map((height) => (
+            <i style={`--bar-height: ${height}%`} />
+          ))}
+        </div>
+        <div class:list={[styles.waveformSide, styles.waveformSideRight]}>
+          {[...waveformBars].reverse().map((height) => (
+            <i style={`--bar-height: ${height}%`} />
+          ))}
+        </div>
+      </div>
+      <p class={styles.eyebrow}>MuST COLUMN</p>
+      <h1>MuSTの読みもの</h1>
+      <p>音楽をもっと楽しむためのヒントと、MuSTの日々をお届けします。</p>
+    </header>
+
+    <nav class={styles.categories} aria-label="コラムカテゴリー">
+      {categories.map((category, index) => (
+        <a href={`/articles/?category=${encodeURIComponent(category.id)}`}>
+          <span class={styles.categoryNumber}>{String(index + 1).padStart(2, "0")}</span>
+          <span>{category.name}</span>
+          <b aria-hidden="true">›</b>
+        </a>
+      ))}
+    </nav>
+
+    <section class={styles.list} aria-labelledby="latest-articles">
+      <div class={styles.sectionHeading}>
+        <h2 id="latest-articles">新着記事</h2>
+        <span>{articles.length} ARTICLES</span>
+        <a href="/articles/">すべての記事を見る ›</a>
+      </div>
+      <div class={styles.grid} data-article-list>
+        {articles.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
+      {articles.length === 0 && <p class={styles.empty}>現在公開されている記事はありません。</p>}
+    </section>
+  </div>
+</Layout>
+
+<script>
+  const category = new URLSearchParams(window.location.search).get("category");
+  if (category) {
+    document.querySelectorAll<HTMLElement>("[data-article-list] article").forEach((card) => {
+      card.hidden = card.dataset.category !== category;
+    });
+  }
+</script>

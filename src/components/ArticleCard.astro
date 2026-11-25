@@ -1,0 +1,39 @@
+---
+import type { Article } from "../lib/api";
+import styles from "./ArticleCard.module.css";
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+    .format(new Date(value))
+    .replaceAll("/", ".");
+const publishedDate = article.publishedAt ?? article.createdAt;
+---
+
+<article class={styles.card} data-category={article.category.id}>
+  <a class={styles.link} href={`/articles/${article.id}/`}>
+    {article.eyeCatch && (
+      <div class={styles.eyeCatch}>
+        <img src={article.eyeCatch.url} alt={article.eyeCatch.alt ?? ""} loading="lazy" />
+      </div>
+    )}
+    <div class={styles.meta}>
+      <span>{article.category.name}</span>
+      <time datetime={publishedDate}>{formatDate(publishedDate)}</time>
+    </div>
+    <h2>{article.title}</h2>
+    <p class={styles.updated}>更新日：{formatDate(article.updatedAt)}</p>
+    <span class={styles.arrow} aria-hidden="true">
+      ›
+    </span>
+  </a>
+</article>

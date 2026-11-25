@@ -1,4 +1,4 @@
-import { getMicrocmsClient } from "./microcms";
+import { getArticleMicrocmsClient, getMicrocmsClient } from "./microcms";
 
 export interface Media {
   url: string;
@@ -31,6 +31,94 @@ export interface Recruiting {
   message?: string;
   is_recruiting: boolean;
   image?: Media;
+}
+
+export interface ArticleCategory {
+  id: string;
+  name: string;
+}
+
+export interface Article {
+  id: string;
+  title: string;
+  category: ArticleCategory;
+  body: string;
+  eyeCatch?: Media;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
+interface ArticleCategoryRecord {
+  id: string;
+  name?: string;
+}
+
+interface ArticleRecord {
+  id: string;
+  title?: string;
+  category?: ArticleCategoryRecord;
+  body?: string;
+  eye_catch?: Media;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
+function toArticleCategory(category?: ArticleCategoryRecord): ArticleCategory {
+  return {
+    id: category?.id ?? "uncategorized",
+    name: category?.name ?? "未分類",
+  };
+}
+
+function normalizeArticle(item: ArticleRecord): Article {
+  return {
+    id: item.id,
+    title: item.title ?? "無題の記事",
+    category: toArticleCategory(item.category),
+    body: item.body ?? "",
+    eyeCatch: item.eye_catch,
+    createdAt: item.createdAt,
+    updatedAt: item.updatedAt,
+    publishedAt: item.publishedAt,
+  };
+}
+
+export async function getArticles(): Promise<Article[]> {
+  const client = getArticleMicrocmsClient();
+  if (!client) return [];
+
+  const response = await client.getList<ArticleRecord>({
+    endpoint: "articles",
+    queries: { depth: 1, limit: 100, orders: "-publishedAt,-createdAt" },
+  });
+
+  return response.contents.map(normalizeArticle);
+}
+
+export async function getArticleCategories(): Promise<ArticleCategory[]> {
+  const client = getArticleMicrocmsClient();
+  if (!client) return [];
+
+  const response = await client.getList<ArticleCategoryRecord>({
+    endpoint: "categories",
+    queries: { limit: 100 },
+  });
+
+  return response.contents.map(toArticleCategory);
+}
+
+export async function getArticle(id: string): Promise<Article | undefined> {
+  const client = getArticleMicrocmsClient();
+  if (!client) return undefined;
+
+  try {
+    const item = await client.getListDetail<ArticleRecord>({ endpoint: "articles", contentId: id });
+    return normalizeArticle(item);
+  } catch {
+    return undefined;
+  }
 }
 
 export interface ActivityDetail {

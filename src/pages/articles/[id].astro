@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getArticle, getArticles, type Article } from "../../lib/api";
+import styles from "./article.module.css";
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article: pathArticle } = Astro.props;
+const article = Astro.params.id
+  ? (await getArticle(Astro.params.id)) ?? pathArticle
+  : pathArticle;
+if (!article) Astro.redirect("/articles/");
+
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+    .format(new Date(value))
+    .replaceAll("/", ".");
+const publishedDate = article?.publishedAt ?? article?.createdAt;
+---
+
+<Layout
+  useCmsContent={false}
+  title={article?.title ?? "MuSTの読みもの"}
+  description={article?.title}
+>
+  {article && (
+    <article class={styles.page}>
+      <header class={styles.header}>
+        <a href="/articles/" class={styles.back}>
+          ← MuSTの読みもの
+        </a>
+        <p class={styles.category}>{article.category.name}</p>
+        <h1>{article.title}</h1>
+        <div class={styles.meta}>
+          <time datetime={publishedDate}>公開日：{formatDate(publishedDate)}</time>
+          <time datetime={article.updatedAt}>更新日：{formatDate(article.updatedAt)}</time>
+        </div>
+      </header>
+      <div class={styles.body} set:html={article.body} />
+    </article>
+  )}
+</Layout>
